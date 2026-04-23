@@ -16,7 +16,7 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 
 ## Stack technique
 
-- **Framework** : Next.js 15 (App Router) + TypeScript strict
+- **Framework** : Next.js 16 (App Router) + TypeScript strict + React 19
 - **Styling** : Tailwind CSS v4
 - **DB + Auth + Storage** : Supabase (Postgres managé)
 - **ORM** : Drizzle
@@ -36,6 +36,14 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 - **Accessibilité sérieuse** dès le départ : ARIA, contrastes WCAG AA minimum, focus visible, navigation clavier.
 - **i18n-ready** dans la structure mais 100% français au MVP.
 - **Simplicité > cleverness**. Ne pas sur-architecturer. Pas de monorepo, pas de microservices, pas de GraphQL.
+
+## Spécificités Next.js 16 à garder en tête
+
+- **`proxy.ts` remplace `middleware.ts`** à la racine (fonction exportée `proxy`, runtime `nodejs`). Pas de `middleware.ts` dans ce projet.
+- **APIs async** : `cookies()`, `headers()`, `params`, `searchParams` sont toutes `Promise` et requièrent `await`.
+- **Turbopack** est activé par défaut en dev et en build. Pas besoin de flag.
+- **Server Actions** : pattern `useActionState((prevState, formData) => ...)` côté client.
+- Avant d'utiliser une API Next qui a l'air de bouger, vérifier dans `node_modules/next/dist/docs/` (doc embarquée fait foi).
 
 ## Structure de dossiers
 
@@ -58,3 +66,134 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 /content                # Livres en JSON (versionnés git au MVP)
 /public                 # Assets statiques
 /drizzle                # Migrations générées
+proxy.ts                # Proxy racine (ex-middleware, patterns Next 16)
+
+## Modèle de données — Livre interactif
+
+Un livre est un **graphe dirigé avec état partagé**. Je charge le livre complet en JSON côté client et le moteur navigue localement. Le serveur stocke uniquement la progression utilisateur.
+
+```typescript
+// lib/reader/types.ts
+
+export type Book = {
+  id: string
+  slug: string
+  title: string
+  author: string
+  coverImage: string
+  synopsis: string
+  genre: string
+  tags: string[]
+  estimatedMinutes: number
+  tier: 'free' | 'premium'
+  publishedAt: Date
+  content: BookContent
+}
+
+export type BookContent = {
+  startNodeId: string
+  variablesSchema: VariableDef[]
+  nodes: Record<string, Node>
+  endings: Record<string, Ending>
+}
+
+export type VariableDef = {
+  name: string
+  type: 'number' | 'boolean' | 'string'
+  initial: number | boolean | string
+}
+
+export type Node =
+  | { id: string; type: 'scene'; text: string; illustration?: string; next: string }
+  | { id: string; type: 'choice'; text: string; illustration?: string; choices: Choice[] }
+  | { id: string; type: 'ending'; endingId: string }
+
+export type Choice = {
+  id: string
+  label: string
+  nextNode: string
+  conditions?: Condition[]
+  effects?: Effect[]
+  isPremium?: boolean
+}
+
+export type Condition = {
+  variable: string
+  op: '==' | '!=' | '>' | '<' | '>=' | '<='
+  value: number | boolean | string
+}
+
+export type Effect = {
+  variable: string
+  op: 'set' | 'add' | 'sub'
+  value: number | boolean | string
+}
+
+export type Ending = {
+  id: string
+  type: 'good' | 'bad' | 'neutral' | 'secret'
+  title: string
+  text: string
+  illustration?: string
+}
+```
+
+Progression utilisateur :
+
+```typescript
+export type UserProgress = {
+  userId: string
+  bookId: string
+  currentNodeId: string
+  variables: Record<string, number | boolean | string>
+  history: string[]         // IDs des nodes visités, dans l'ordre
+  reachedEndings: string[]  // pour afficher "3/7 fins trouvées"
+  updatedAt: Date
+}
+```
+
+## Conventions de code
+
+- **Nommage** : `camelCase` pour variables/fonctions, `PascalCase` pour types/composants, `kebab-case` pour fichiers, `SCREAMING_SNAKE` pour constantes
+- **Fichiers** : 1 composant React non-primitif par fichier
+- **Async** : `async/await` toujours, jamais `.then()` en code applicatif
+- **Erreurs** : jamais de `try/catch` vide. Soit on gère, soit on laisse remonter.
+- **Commentaires** : pour le **pourquoi**, pas le **quoi**. Pas de commentaires qui paraphrasent le code.
+- **CSS** : Tailwind only. Pas de CSS inline sauf nécessité visuelle dynamique (ex: variable CSS calculée).
+- **Tests** : unitaires obligatoires sur le moteur de lecture (critique). Le reste : au cas par cas.
+- **Imports** : alias `@/*` pour tout ce qui est dans le projet. Ordre : externes, puis internes, puis relatifs.
+
+## Ce qu'il NE FAUT PAS faire au MVP
+
+Explicitement hors scope :
+
+- App native iOS/Android (web + PWA suffit)
+- Éditeur de livres côté utilisateur (publication admin manuelle seulement)
+- Notifications push
+- Features sociales (commentaires, partages, amis)
+- Multi-langue (FR uniquement)
+- Système de recommandation complexe (liste + filtre simple suffit)
+- A/B testing framework
+- Dark mode (ajouté plus tard si demandé)
+- CI/CD sophistiqué (lint + build sur PR suffit)
+- Microservices, queue system, cache Redis
+
+## Conformité France / légal
+
+À prévoir avant la mise en paiement :
+
+- **Mentions légales** (obligatoire loi LCEN)
+- **CGU / CGV** distinctes
+- **Politique de confidentialité** (RGPD)
+- **Bandeau cookies** conforme CNIL (Plausible ne pose pas de cookie donc le bandeau peut rester simple)
+- **TVA OSS** gérée via Stripe Tax
+- Pas de contenu pour moins de 13 ans au MVP (évite les contraintes RGPD-K / COPPA)
+
+## Interaction Claude Code ↔ moi
+
+- **Avant une décision d'archi importante**, propose-moi les options et demande confirmation.
+- **Commits granulaires** : un commit par étape logique, pas un mega-commit.
+- **Messages de commit** en français, impératif : "ajoute X", "corrige Y".
+- **PR descriptions** (si je demande) en français, liste des changements + tests effectués.
+- **TODO** : tout laissé de côté exprès doit être marqué `// TODO:` avec une note claire.
+- Si un truc te semble bizarre dans ce fichier ou dans mes demandes, **remets-le en cause**, ne fais pas aveuglément.
