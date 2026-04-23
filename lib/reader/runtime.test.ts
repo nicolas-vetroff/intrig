@@ -6,6 +6,7 @@ import {
   checkAllConditions,
   createInitialState,
   pickChoice,
+  restartPreservingEndings,
 } from './runtime'
 
 const fixture: BookContent = {
@@ -213,5 +214,30 @@ describe('pickChoice', () => {
     // Simule un second run qui retombe sur le meme ending
     const replayed = pickChoice({ ...s2, currentNodeId: 'porte' }, fixture, 'ouvrir')
     expect(replayed.reachedEndings).toEqual(['e-success'])
+  })
+})
+
+describe('restartPreservingEndings', () => {
+  it('remet l\'etat courant a zero mais conserve les endings atteints', () => {
+    const s0 = createInitialState(fixture)
+    const atPorte = pickChoice(s0, fixture, 'c1')
+    const afterGood = pickChoice(atPorte, fixture, 'ouvrir')
+    expect(afterGood.reachedEndings).toEqual(['e-success'])
+
+    const restarted = restartPreservingEndings(afterGood, fixture)
+    expect(restarted.currentNodeId).toBe(fixture.startNodeId)
+    expect(restarted.variables).toEqual({ courage: 0, aClef: false })
+    expect(restarted.history).toEqual([fixture.startNodeId])
+    expect(restarted.reachedEndings).toEqual(['e-success'])
+  })
+
+  it('cumule les endings a travers plusieurs parties', () => {
+    const s0 = createInitialState(fixture)
+    const afterGood = pickChoice(pickChoice(s0, fixture, 'c1'), fixture, 'ouvrir')
+
+    const secondRun = restartPreservingEndings(afterGood, fixture)
+    const afterAbandon = pickChoice(pickChoice(secondRun, fixture, 'c2'), fixture, 'partir')
+
+    expect(afterAbandon.reachedEndings.sort()).toEqual(['e-abandon', 'e-success'])
   })
 })

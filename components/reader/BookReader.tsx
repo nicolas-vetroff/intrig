@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { resetProgress, saveProgress } from '@/app/(app)/livres/_actions/progress'
+import { saveProgress } from '@/app/(app)/livres/_actions/progress'
 import {
   advanceScene,
   availableChoices,
-  createInitialState,
   pickChoice,
+  restartPreservingEndings,
   type ReaderState,
 } from '@/lib/reader/runtime'
 import type { Book } from '@/lib/reader/types'
@@ -36,9 +36,10 @@ export function BookReader({ book, initialState }: Props) {
     })
   }
 
-  async function handleRestart() {
-    await resetProgress(book.id)
-    setState(createInitialState(book.content))
+  function handleRestart() {
+    // Conserve les fins deja decouvertes : c'est un compteur
+    // inter-parties, pas un etat de la partie courante.
+    persist(restartPreservingEndings(state, book.content))
   }
 
   return (
