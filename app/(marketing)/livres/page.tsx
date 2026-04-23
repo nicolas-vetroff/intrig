@@ -1,29 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { db } from '@/lib/db/client'
-import { books } from '@/lib/db/schema'
-import { requireProfile } from '@/lib/supabase/profile'
+import { listPublishedSummaries } from '@/lib/db/books'
 
 export const metadata: Metadata = {
   title: 'Catalogue',
 }
 
-// Lit la DB a chaque requete : pas de prerender au build.
 export const dynamic = 'force-dynamic'
 
 export default async function LivresPage() {
-  await requireProfile('/livres')
-
-  const catalog = await db
-    .select({
-      slug: books.slug,
-      title: books.title,
-      author: books.author,
-      synopsis: books.synopsis,
-      estimatedMinutes: books.estimatedMinutes,
-    })
-    .from(books)
-    .orderBy(books.createdAt)
+  const catalog = await listPublishedSummaries()
 
   if (catalog.length === 0) {
     return (
@@ -50,6 +36,7 @@ export default async function LivresPage() {
               <p className="text-muted mt-1 text-xs tracking-widest uppercase">
                 {book.author}
                 {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
+                {book.tier === 'premium' ? ' · premium' : ''}
               </p>
               {book.synopsis ? <p className="mt-3 leading-relaxed">{book.synopsis}</p> : null}
             </Link>
