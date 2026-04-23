@@ -9,6 +9,7 @@ import {
   timestamp,
   uuid,
 } from 'drizzle-orm/pg-core'
+import type { BookContent, VariableValue } from '@/lib/reader/types'
 
 // TODO: profiles.id refere `auth.users(id)` (schema Supabase Auth). La FK
 // inter-schema ne peut pas etre declaree depuis Drizzle ; a ajouter via une
@@ -44,9 +45,7 @@ export const books = pgTable(
     estimatedMinutes: integer(),
     tier: text().notNull(),
     publishedAt: timestamp({ withTimezone: true }),
-    // TODO: typer `content` avec BookContent depuis lib/reader/types.ts
-    // des que le moteur est en place : .$type<BookContent>()
-    content: jsonb().notNull(),
+    content: jsonb().notNull().$type<BookContent>(),
     createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
   },
   (t) => [check('books_tier_check', sql`${t.tier} in ('free', 'premium')`)],
@@ -60,7 +59,7 @@ export const userProgress = pgTable(
       .notNull()
       .references(() => books.id, { onDelete: 'cascade' }),
     currentNodeId: text().notNull(),
-    variables: jsonb().notNull().default({}),
+    variables: jsonb().notNull().$type<Record<string, VariableValue>>().default({}),
     history: text()
       .array()
       .notNull()
