@@ -8,53 +8,24 @@ Voir [`CLAUDE.md`](./CLAUDE.md) pour la vision produit et l'architecture.
 
 - **Next.js 16** (App Router) + **React 19** + **TypeScript strict**
 - **Tailwind CSS v4**
-- **Supabase** (Postgres + Auth) via `@supabase/ssr`
+- **Supabase** (Postgres + Auth + Storage) via `@supabase/ssr` et le CLI local
 - **Drizzle ORM** pour le schéma et les migrations
 - **Zod** pour la validation
+- **Vitest** pour les tests unitaires
 - **Vercel** pour l'hébergement
 
 ## Prérequis
 
 - **Node.js ≥ 20** (Next 16 officiellement requis)
-- Un compte **Supabase** (gratuit) — <https://supabase.com>
+- **Docker** (utilisé en sous-main par le CLI Supabase)
 - Un compte **Vercel** (gratuit) — <https://vercel.com>
 - `git` et `npm`
 
 ## Installation locale
 
-Deux chemins possibles selon ce que tu veux exercer :
+Stack complète (Postgres + Auth + Studio + Inbucket SMTP-catcher) lancée localement via le CLI Supabase.
 
-- **[Docker](#dev-avec-docker-postgres-local)** — tout en local (Postgres + app), pour itérer sur le moteur de lecture et les requêtes DB sans dépendre de Supabase.
-- **[Sans Docker](#dev-sans-docker-avec-supabase)** — connexion directe à un projet Supabase (nécessaire pour l'auth et les uploads plus tard).
-
-### Dev avec Docker (Postgres local)
-
-Prérequis : Docker + Docker Compose.
-
-```bash
-# 1) Lancer la stack (Postgres + app)
-docker compose up --build
-
-# 2) Dans un autre terminal, appliquer les migrations une fois
-docker compose exec app npm run db:migrate
-
-# 3) Insérer le livre de test "La Chambre secrète"
-docker compose exec app npm run db:seed
-```
-
-L'app est alors servie sur <http://localhost:3030> (port configurable dans `docker-compose.yml`, service `app.ports`). Pages utiles :
-
-- `/` — landing + waitlist
-- `/livres` — catalogue (liste les livres de la DB)
-- `/livres/la-chambre-secrete` — lecture du livre de test
-
-Au premier choix, un cookie anonyme `reader-session-id` est créé ; ta progression survit aux reloads et à la navigation.
-
-Pour arrêter : `docker compose down` (les données Postgres restent dans le volume `db-data`). `docker compose down -v` efface tout.
-
-### Dev sans Docker (avec Supabase)
-
-#### 1. Cloner et installer
+### 1. Cloner et installer
 
 ```bash
 git clone <url-du-repo> intrigue
@@ -62,56 +33,63 @@ cd intrigue
 npm install
 ```
 
-#### 2. Créer le projet Supabase
+### 2. Lancer le stack Supabase local
 
-1. Créer un projet sur <https://supabase.com/dashboard/projects>.
-2. Dans **Settings → API**, récupérer :
-   - l'**URL du projet** → `NEXT_PUBLIC_SUPABASE_URL`
-   - la **clé anon / public** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - la **clé service role** → `SUPABASE_SERVICE_ROLE_KEY` (côté serveur uniquement)
-3. Dans **Settings → Database → Connection string**, copier l'URL du **transaction pooler** (port 6543) → `DATABASE_URL`. Remplacer `[YOUR-PASSWORD]` par le mot de passe de la base.
+```bash
+npx supabase start
+```
 
-#### 3. Variables d'environnement
+Le premier démarrage tire les images Docker (~2 min). Une fois prêt, la commande affiche les URLs et les clés générées :
 
-Copier le gabarit puis remplir :
+```
+API URL:        http://127.0.0.1:54321
+DB URL:         postgresql://postgres:postgres@127.0.0.1:54322/postgres
+Studio URL:     http://127.0.0.1:54323
+Inbucket URL:   http://127.0.0.1:54324
+anon key:       eyJhbGc...
+service_role:   eyJhbGc...
+```
+
+### 3. Variables d'environnement
 
 ```bash
 cp .env.example .env.local
 ```
 
+Remplir `.env.local` avec les clés affichées par `supabase start` :
+
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=...
-SUPABASE_SERVICE_ROLE_KEY=...
-DATABASE_URL=postgresql://postgres.xxxx:password@aws-0-eu-west-3.pooler.supabase.com:6543/postgres
+NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key>
+SUPABASE_SERVICE_ROLE_KEY=<service_role key>
+DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
 ```
 
 > `.env.local` est git-ignoré. Ne jamais commiter de vraies clés.
 
-#### 4. Appliquer la migration initiale à la base
-
-La migration SQL est déjà générée dans `drizzle/0000_initial.sql`. Pour l'appliquer :
+### 4. Appliquer les migrations et seed
 
 ```bash
-npm run db:migrate
+npm run db:migrate   # cree les tables (profiles, waitlist, books, user_progress)
+npm run db:seed      # insere "La Chambre secrete"
 ```
 
-Cela crée les tables `profiles`, `waitlist`, `books` et `user_progress`.
-
-> **À faire manuellement** (hors Drizzle, non inclus dans la migration) :
-> les clés étrangères `profiles.id → auth.users(id)` et
-> `user_progress.user_id → auth.users(id)` doivent être ajoutées via
-> une migration SQL directe dans le dashboard Supabase, avec un
-> trigger `on_auth_user_created` qui crée automatiquement une ligne
-> `profiles` à l'inscription. À coder dans une session dédiée auth.
-
-#### 5. Lancer le serveur de développement
+### 5. Lancer le serveur de développement
 
 ```bash
 npm run dev
 ```
 
-Ouvrir <http://localhost:3000>.
+Ouvrir <http://127.0.0.1:3000>. Le site doit matcher le `site_url` de `supabase/config.toml` (sinon les magic links ne marchent pas).
+
+### 6. Tester l'authentification (magic link)
+
+1. Aller sur `/connexion`, saisir n'importe quelle adresse email
+2. Ouvrir **Inbucket** <http://127.0.0.1:54324> pour lire le mail intercepté
+3. Cliquer sur le lien → session active, redirection vers `/livres`
+4. Seuls les utilisateurs connectés peuvent accéder au catalogue et à la lecture
+
+Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no-backup` efface tout.
 
 ## Commandes utiles
 
@@ -130,18 +108,30 @@ Ouvrir <http://localhost:3000>.
 | `npm run db:migrate` | Applique les migrations en attente à la base |
 | `npm run db:seed` | Insère les livres de `content/` dans la base |
 | `npm run db:studio` | UI web Drizzle pour inspecter la base |
+| `npx supabase start` | Lance le stack local Supabase (DB + Auth + Studio + Inbucket) |
+| `npx supabase stop` | Arrête le stack local |
+| `npx supabase status` | Affiche les URLs et clés du stack local |
+
+## Auth — comment ça marche
+
+- **Magic link uniquement** : pas de mot de passe. `/connexion` envoie un lien par email, cliquer connecte.
+- **Lecture = auth obligatoire**. `/livres` et `/livres/[slug]` redirigent vers `/connexion?next=...` si pas connecté.
+- **Progression** (`user_progress.user_id`) est indexée sur l'`auth.users.id` Supabase. Un utilisateur retrouve ses parties, ses variables et ses fins à chaque connexion.
+- En dev, tous les mails partent dans **Inbucket** (<http://127.0.0.1:54324>) — pas de vraie boîte à configurer.
+- En prod, configurer un SMTP dans Supabase (dashboard → Auth → SMTP Settings).
 
 ## Déploiement sur Vercel
 
 1. **Pousser le repo** sur GitHub / GitLab.
 2. Sur <https://vercel.com/new>, importer le repo. Vercel détecte Next.js automatiquement.
-3. **Ajouter les variables d'environnement** (Settings → Environment Variables) — les quatre mêmes que `.env.local` :
+3. **Ajouter les variables d'environnement** avec les valeurs d'un **projet Supabase cloud** (pas le local) :
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
-   - `DATABASE_URL`
+   - `DATABASE_URL` (transaction pooler, port 6543)
+   - `NEXT_PUBLIC_SITE_URL` (l'URL publique de l'app, ex `https://intrigue.app`) — utilisée comme origine pour l'`emailRedirectTo` des magic links
 4. **Déployer**. Le premier build doit passer en ~2 minutes.
-5. Pour les déploiements suivants, chaque push sur `main` déclenche un build. Les pull requests génèrent des preview deployments.
+5. Dans le dashboard Supabase cloud, ajouter l'URL publique Vercel dans **Auth → URL Configuration → Site URL et Redirect URLs**.
 
 ### Migrations en prod
 
@@ -158,21 +148,23 @@ Voir [`CLAUDE.md`](./CLAUDE.md) pour les conventions de code, la vision produit 
 
 ```
 app/
-  (marketing)/        Landing, mentions légales, CGU, confidentialité
-  (app)/livres/       Catalogue + lecture (page [slug])
-  (app)/compte/       Profil utilisateur (à venir)
-  api/                Route handlers (webhooks Stripe, cron)
-  admin/              Interface de publication (à venir)
+  (marketing)/        Landing, connexion, pages légales
+    connexion/        Formulaire magic link + "vérifier email"
+  (app)/              Auth gated (requireUser dans chaque page)
+    livres/           Catalogue + lecture ([slug])
+    compte/           Profil minimal + logout
+  api/auth/           Route handlers (confirm magic link, signout)
 lib/
   db/                 Client Drizzle + schéma + seed
-  supabase/           Clients server/client + session proxy
-  reader/             Types + runtime (pur, testé) + cookie de session
+  supabase/           Clients server/client, proxy de session, auth helpers
+  reader/             Types + runtime pur (testé)
   stripe/             Helpers Stripe (à venir)
-  utils/              Helpers divers
+  utils/              Helpers divers (sanitizeNext, …)
 components/
   ui/                 Primitives réutilisables
   reader/             BookReader (client component)
 content/              Livres TypeScript (versionnés git, insérés via db:seed)
 drizzle/              Migrations SQL générées
-proxy.ts              Proxy Next 16 (ex-middleware) — refresh session Supabase
+supabase/             Config CLI local (config.toml)
+proxy.ts              Proxy Next 16 — refresh session Supabase
 ```

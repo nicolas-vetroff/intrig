@@ -45,6 +45,15 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 - **Server Actions** : pattern `useActionState((prevState, formData) => ...)` côté client.
 - Avant d'utiliser une API Next qui a l'air de bouger, vérifier dans `node_modules/next/dist/docs/` (doc embarquée fait foi).
 
+## Authentification
+
+- **Magic link Supabase uniquement** (pas de mot de passe, pas de provider social au MVP).
+- **Lecture = auth obligatoire** : `/livres` et `/livres/[slug]` redirigent vers `/connexion?next=...` si pas connecté. Pas de mode lecture anonyme.
+- `user_progress.user_id` est directement l'`auth.users.id` Supabase. Pas de table `profiles` synchronisée pour l'instant (sera ajoutée quand on aura un champ custom, pseudo/avatar par exemple).
+- Dev local : stack complet via `npx supabase start` (Postgres + Auth + Studio + Inbucket pour intercepter les mails). Le `.env.local` pointe sur les ports `54321` (API) et `54322` (DB).
+- Helpers : `getCurrentUser()` (null si déconnecté) et `requireUser(next)` (redirect si déconnecté) dans `lib/supabase/auth.ts`.
+- Callback magic link : `/api/auth/confirm?token_hash=...&next=...`. Le `next` est passé à `sanitizeNext` pour empêcher les open redirects.
+
 ## Structure de dossiers
 
 /app
