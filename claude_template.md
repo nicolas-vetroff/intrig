@@ -14,8 +14,10 @@ Tâches :
 Ce que je veux à la fin :
 - [livrable vérifiable]
 - [livrable vérifiable]
-- Mise à jour de CLAUDE.md
+- Des tests toujours verts
+- Une mise à jour CLAUDE.md et README.md
 
 Points d'attention :
-- [piège à éviter]
-- [décision à me soumettre]
+- [pièges à éviter]
+- Les anciens tests doivent toujours être verts
+- Si tu as un doute, demande-moi plutôt que de faire une erreur
