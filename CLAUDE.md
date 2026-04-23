@@ -48,11 +48,14 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 ## Authentification
 
 - **Magic link Supabase uniquement** (pas de mot de passe, pas de provider social au MVP).
-- **Lecture = auth obligatoire** : `/livres` et `/livres/[slug]` redirigent vers `/connexion?next=...` si pas connecté. Pas de mode lecture anonyme.
-- `user_progress.user_id` est directement l'`auth.users.id` Supabase. Pas de table `profiles` synchronisée pour l'instant (sera ajoutée quand on aura un champ custom, pseudo/avatar par exemple).
+- **Lecture = auth obligatoire + pseudo obligatoire** : `/livres` et `/livres/[slug]` redirigent vers `/connexion` si pas connecté, ou vers `/compte/choisir-pseudo` si le profil n'a pas encore de pseudo.
+- **Table `profiles`** est synchronisée avec `auth.users` via FK + trigger `on_auth_user_created` (migration `0002_profiles_sync.sql`). Colonnes : `id`, `email`, `username` (nullable au signup, à choisir au 1er login), `created_at`.
+- `user_progress.user_id` reste directement l'`auth.users.id` Supabase (pas de passage par `profiles`). La table `profiles` sert uniquement aux champs custom (pseudo, plus tard avatar).
 - Dev local : stack complet via `npx supabase start` (Postgres + Auth + Studio + Inbucket pour intercepter les mails). Le `.env.local` pointe sur les ports `54321` (API) et `54322` (DB).
-- Helpers : `getCurrentUser()` (null si déconnecté) et `requireUser(next)` (redirect si déconnecté) dans `lib/supabase/auth.ts`.
-- Callback magic link : `/api/auth/confirm?token_hash=...&next=...`. Le `next` est passé à `sanitizeNext` pour empêcher les open redirects.
+- Helpers auth (`lib/supabase/auth.ts`) : `getCurrentUser()` lit, `requireUser(next)` redirect vers `/connexion`.
+- Helpers profil (`lib/supabase/profile.ts`) : `getCurrentProfile()` lit, `requireProfile(next)` compose `requireUser` + redirect vers `/compte/choisir-pseudo` si `username` nul.
+- Callback magic link : `/api/auth/confirm?code=...&next=...` (PKCE par défaut) ou `?token_hash=...&type=...` (legacy OTP). Le `next` passe par `sanitizeNext` pour empêcher les open redirects.
+- **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule après normalisation). Unique. Validation pure dans `lib/utils/username.ts` (testée).
 
 ## Structure de dossiers
 

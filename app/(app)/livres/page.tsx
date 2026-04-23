@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { db } from '@/lib/db/client'
 import { books } from '@/lib/db/schema'
-import { requireUser } from '@/lib/supabase/auth'
+import { requireProfile } from '@/lib/supabase/profile'
 
 export const metadata: Metadata = {
   title: 'Catalogue',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function LivresPage() {
-  await requireUser('/livres')
+  await requireProfile('/livres')
 
   const catalog = await db
     .select({

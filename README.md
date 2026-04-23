@@ -115,7 +115,9 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 ## Auth — comment ça marche
 
 - **Magic link uniquement** : pas de mot de passe. `/connexion` envoie un lien par email, cliquer connecte.
-- **Lecture = auth obligatoire**. `/livres` et `/livres/[slug]` redirigent vers `/connexion?next=...` si pas connecté.
+- **Lecture = auth obligatoire + pseudo obligatoire**. `/livres` redirige vers `/connexion` si déconnecté ; si connecté mais sans pseudo, redirige vers `/compte/choisir-pseudo`.
+- **Table `profiles`** synchronisée avec `auth.users` via trigger `on_auth_user_created` (migration `0002_profiles_sync.sql`). Chaque nouveau compte a automatiquement une ligne `profiles` avec `username` nul — à choisir au premier login.
+- **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule). Unique. Modifiable depuis `/compte`.
 - **Progression** (`user_progress.user_id`) est indexée sur l'`auth.users.id` Supabase. Un utilisateur retrouve ses parties, ses variables et ses fins à chaque connexion.
 - En dev, tous les mails partent dans **Inbucket** (<http://127.0.0.1:54324>) — pas de vraie boîte à configurer.
 - En prod, configurer un SMTP dans Supabase (dashboard → Auth → SMTP Settings).
