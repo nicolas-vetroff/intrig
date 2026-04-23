@@ -3,5 +3,6 @@ node_modules
 out
 build
 drizzle
+.claude
 package-lock.json
 *.md
