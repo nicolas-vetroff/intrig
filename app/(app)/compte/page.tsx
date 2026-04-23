@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { isAdminEmail } from '@/lib/supabase/admin'
 import { requireUser } from '@/lib/supabase/auth'
 import { getCurrentProfile } from '@/lib/supabase/profile'
 
@@ -12,6 +13,7 @@ export const dynamic = 'force-dynamic'
 export default async function ComptePage() {
   const user = await requireUser('/compte')
   const profile = await getCurrentProfile()
+  const isAdmin = isAdminEmail(user.email)
 
   return (
     <section className="mx-auto flex max-w-2xl flex-col gap-8 px-6 py-20 sm:px-10">
@@ -40,13 +42,21 @@ export default async function ComptePage() {
         </Link>
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
         <Link
           href="/livres"
           className="bg-foreground text-background rounded-md px-5 py-3 text-center text-sm font-medium transition-opacity hover:opacity-90"
         >
           Parcourir les livres
         </Link>
+        {isAdmin ? (
+          <Link
+            href="/dashboard"
+            className="border-foreground hover:bg-foreground hover:text-background rounded-md border px-5 py-3 text-center text-sm transition-colors"
+          >
+            Dashboard admin
+          </Link>
+        ) : null}
         <form action="/api/auth/signout" method="post">
           <button
             type="submit"

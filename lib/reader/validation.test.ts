@@ -125,7 +125,7 @@ describe('validateBookContent', () => {
     if (!r.ok) expect(r.errors.some((e) => e.includes('fantome'))).toBe(true)
   })
 
-  it('rejette un node dont l\'id interne ne matche pas la cle du Record', () => {
+  it("rejette un node dont l'id interne ne matche pas la cle du Record", () => {
     const r = validateBookContent({
       ...minimal,
       nodes: {

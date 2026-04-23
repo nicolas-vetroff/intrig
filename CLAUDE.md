@@ -57,6 +57,21 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 - Callback magic link : `/api/auth/confirm?code=...&next=...` (PKCE par défaut) ou `?token_hash=...&type=...` (legacy OTP). Le `next` passe par `sanitizeNext` pour empêcher les open redirects.
 - **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule après normalisation). Unique. Validation pure dans `lib/utils/username.ts` (testée).
 
+## Admin et gestion du catalogue
+
+- **Gating admin** : env var `ADMIN_EMAILS` (liste d'emails séparés par virgule). Helpers `isAdminEmail(email)` et `requireAdmin(next)` dans `lib/supabase/admin.ts`. Pas de colonne DB : quand la création sera ouverte aux lecteurs, on retirera juste `requireAdmin` des pages concernées — sans migration.
+- **Arborescence `/livres/*`** :
+  - `/livres` (publique, `(marketing)`) : catalogue des livres publiés
+  - `/livres/[slug]` (publique, `(marketing)`) : page détail / pitch avec CTA "Lire"
+  - `/livres/[slug]/lire` (auth + pseudo requis, `(app)`) : le reader
+  - `/livres/create` (admin, `(app)`) : formulaire nouveau livre
+  - `/livres/[slug]/edit` (admin, `(app)`) : formulaire d'édition
+  - `/dashboard` (admin, `(app)`) : liste tous les livres (drafts + publiés)
+- **Drafts vs publiés** : un livre avec `published_at = null` est un brouillon, invisible du catalogue public mais visible depuis le dashboard. Le toggle se fait via la checkbox "Publier" du formulaire.
+- **Form upload** : `components/admin/BookForm.tsx` (client). Métadonnées en champs + textarea JSON pour le `content` (BookContent). Import de fichier `.json` qui pré-remplit soit tous les champs (fichier = `Book` complet), soit juste le content (fichier = `BookContent` seul).
+- **Validation server-side** : `lib/db/books-form.ts` (Zod + `parseBookForm`) valide les métadonnées et `lib/reader/validation.ts` valide le `content` structurellement (références internes cohérentes).
+- **Slugs réservés** : `create`, `edit`, `lire` interdits pour éviter les collisions d'URL.
+
 ## Structure de dossiers
 
 /app

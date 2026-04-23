@@ -119,6 +119,15 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 - **Table `profiles`** synchronisée avec `auth.users` via trigger `on_auth_user_created` (migration `0002_profiles_sync.sql`). Chaque nouveau compte a automatiquement une ligne `profiles` avec `username` nul — à choisir au premier login.
 - **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule). Unique. Modifiable depuis `/compte`.
 - **Progression** (`user_progress.user_id`) est indexée sur l'`auth.users.id` Supabase. Un utilisateur retrouve ses parties, ses variables et ses fins à chaque connexion.
+
+## Admin — créer / modifier des livres
+
+- Mets ton email dans `ADMIN_EMAILS` (`.env.local`), format CSV, puis redémarre `npm run dev`.
+- `/dashboard` liste tous les livres (publiés + brouillons) avec lien vers `/livres/[slug]/edit`.
+- `/livres/create` : formulaire métadonnées + textarea JSON pour le `content`. Le bouton **Importer un fichier .json** pré-remplit automatiquement les champs à partir d'un export (`Book` complet → tout est rempli, `BookContent` seul → seul le content est rempli).
+- Validation côté serveur : `lib/reader/validation.ts` (intégrité du graphe) + `lib/db/books-form.ts` (métadonnées). Les erreurs sont affichées en bloc sous le formulaire.
+- Un livre sans `publishedAt` reste brouillon, invisible du catalogue public mais accessible depuis `/dashboard`.
+- Les routes admin (`/dashboard`, `/livres/create`, `/livres/[slug]/edit`) seront plus tard ouvertes à tous les utilisateurs connectés — c'est pour ça qu'elles ne sont pas sous `/admin/*`. Il suffira de remplacer `requireAdmin` par `requireProfile` dans ces pages.
 - En dev, tous les mails partent dans **Inbucket** (<http://127.0.0.1:54324>) — pas de vraie boîte à configurer.
 - En prod, configurer un SMTP dans Supabase (dashboard → Auth → SMTP Settings).
 
@@ -150,21 +159,27 @@ Voir [`CLAUDE.md`](./CLAUDE.md) pour les conventions de code, la vision produit 
 
 ```
 app/
-  (marketing)/        Landing, connexion, pages légales
+  (marketing)/        Publique : landing, catalogue, page détail livre, légales
     connexion/        Formulaire magic link + "vérifier email"
-  (app)/              Auth gated (requireUser dans chaque page)
-    livres/           Catalogue + lecture ([slug])
-    compte/           Profil minimal + logout
+    livres/           Catalogue + détail ([slug]) — publics
+  (app)/              Auth gated (requireUser / requireProfile / requireAdmin par page)
+    compte/           Profil minimal + choisir-pseudo
+    dashboard/        Liste admin de tous les livres
+    livres/           Reader + pages admin
+      create/         Formulaire nouveau livre (admin)
+      [slug]/lire/    Reader (auth + pseudo)
+      [slug]/edit/    Formulaire d'édition (admin)
   api/auth/           Route handlers (confirm magic link, signout)
 lib/
-  db/                 Client Drizzle + schéma + seed
-  supabase/           Clients server/client, proxy de session, auth helpers
-  reader/             Types + runtime pur (testé)
+  db/                 Client Drizzle + schéma + seed + helpers (books.ts) + books-form.ts
+  supabase/           Clients server/client, proxy de session, auth/profile/admin helpers
+  reader/             Types + runtime pur (testé) + validation Zod (testée)
   stripe/             Helpers Stripe (à venir)
-  utils/              Helpers divers (sanitizeNext, …)
+  utils/              sanitizeNext, validateUsername, …
 components/
   ui/                 Primitives réutilisables
-  reader/             BookReader (client component)
+  reader/             BookReader (client)
+  admin/              BookForm (client, partagé entre create et edit)
 content/              Livres TypeScript (versionnés git, insérés via db:seed)
 drizzle/              Migrations SQL générées
 supabase/             Config CLI local (config.toml)

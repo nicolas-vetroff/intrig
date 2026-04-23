@@ -101,9 +101,7 @@ export function validateBookContent(input: unknown): BookContentValidation {
 
   for (const [nodeKey, node] of Object.entries(book.nodes)) {
     if (node.id !== nodeKey) {
-      errors.push(
-        `Node "${nodeKey}" : id interne "${node.id}" different de la clef du Record.`,
-      )
+      errors.push(`Node "${nodeKey}" : id interne "${node.id}" different de la clef du Record.`)
     }
 
     if (node.type === 'scene') {
@@ -134,9 +132,7 @@ export function validateBookContent(input: unknown): BookContentValidation {
       }
     } else if (node.type === 'ending') {
       if (!endingIds.has(node.endingId)) {
-        errors.push(
-          `Ending node "${nodeKey}" reference "${node.endingId}" inexistant.`,
-        )
+        errors.push(`Ending node "${nodeKey}" reference "${node.endingId}" inexistant.`)
       }
     }
   }
