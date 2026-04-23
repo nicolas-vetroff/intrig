@@ -48,9 +48,7 @@ export default async function LivresPage() {
                 {book.author}
                 {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
               </p>
-              {book.synopsis ? (
-                <p className="mt-3 leading-relaxed">{book.synopsis}</p>
-              ) : null}
+              {book.synopsis ? <p className="mt-3 leading-relaxed">{book.synopsis}</p> : null}
             </Link>
           </li>
         ))}

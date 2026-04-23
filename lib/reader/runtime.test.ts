@@ -95,7 +95,7 @@ describe('applyEffects', () => {
     expect(vars.courage).toBe(3)
   })
 
-  it('combine plusieurs effets dans l\'ordre', () => {
+  it("combine plusieurs effets dans l'ordre", () => {
     const vars = applyEffects(
       [
         { variable: 'courage', op: 'add', value: 1 },
@@ -106,13 +106,13 @@ describe('applyEffects', () => {
     expect(vars.courage).toBe(3)
   })
 
-  it('ne mute pas l\'objet source', () => {
+  it("ne mute pas l'objet source", () => {
     const source = { courage: 0 }
     applyEffects([{ variable: 'courage', op: 'add', value: 1 }], source)
     expect(source.courage).toBe(0)
   })
 
-  it('renvoie la reference d\'origine sans effets', () => {
+  it("renvoie la reference d'origine sans effets", () => {
     const source = { courage: 0 }
     expect(applyEffects(undefined, source)).toBe(source)
     expect(applyEffects([], source)).toBe(source)
@@ -120,7 +120,7 @@ describe('applyEffects', () => {
 })
 
 describe('checkAllConditions', () => {
-  it('est vrai quand il n\'y a pas de conditions', () => {
+  it("est vrai quand il n'y a pas de conditions", () => {
     expect(checkAllConditions(undefined, {})).toBe(true)
     expect(checkAllConditions([], {})).toBe(true)
   })
@@ -148,9 +148,9 @@ describe('checkAllConditions', () => {
   })
 
   it('refuse les comparaisons ordinales entre types incompatibles', () => {
-    expect(
-      checkAllConditions([{ variable: 'aClef', op: '>', value: true }], { aClef: true }),
-    ).toBe(false)
+    expect(checkAllConditions([{ variable: 'aClef', op: '>', value: true }], { aClef: true })).toBe(
+      false,
+    )
   })
 
   it('est faux si la variable est inconnue', () => {
@@ -170,7 +170,7 @@ describe('availableChoices', () => {
     expect(ids({ aClef: false })).toEqual(['partir'])
   })
 
-  it('renvoie une liste vide sur un node qui n\'est pas un choix', () => {
+  it("renvoie une liste vide sur un node qui n'est pas un choix", () => {
     const ending = fixture.nodes['end-good']
     if (!ending) throw new Error('fixture cassee')
     expect(availableChoices(ending, {})).toEqual([])
@@ -198,7 +198,7 @@ describe('pickChoice', () => {
     expect(() => pickChoice(atPorteSansClef, fixture, 'ouvrir')).toThrow()
   })
 
-  it('enregistre l\'ending atteint dans reachedEndings', () => {
+  it("enregistre l'ending atteint dans reachedEndings", () => {
     const s0 = createInitialState(fixture)
     const s1 = pickChoice(s0, fixture, 'c1')
     const s2 = pickChoice(s1, fixture, 'ouvrir')

@@ -1,11 +1,4 @@
-import type {
-  BookContent,
-  Choice,
-  Condition,
-  Effect,
-  Node,
-  VariableValue,
-} from './types'
+import type { BookContent, Choice, Condition, Effect, Node, VariableValue } from './types'
 
 export type ReaderState = {
   currentNodeId: string
@@ -27,10 +20,7 @@ export function createInitialState(book: BookContent): ReaderState {
   }
 }
 
-function checkCondition(
-  condition: Condition,
-  variables: Record<string, VariableValue>,
-): boolean {
+function checkCondition(condition: Condition, variables: Record<string, VariableValue>): boolean {
   if (!Object.prototype.hasOwnProperty.call(variables, condition.variable)) {
     return false
   }
@@ -92,19 +82,12 @@ export function applyEffects(
   )
 }
 
-export function availableChoices(
-  node: Node,
-  variables: Record<string, VariableValue>,
-): Choice[] {
+export function availableChoices(node: Node, variables: Record<string, VariableValue>): Choice[] {
   if (node.type !== 'choice') return []
   return node.choices.filter((c) => checkAllConditions(c.conditions, variables))
 }
 
-export function pickChoice(
-  state: ReaderState,
-  book: BookContent,
-  choiceId: string,
-): ReaderState {
+export function pickChoice(state: ReaderState, book: BookContent, choiceId: string): ReaderState {
   const node = book.nodes[state.currentNodeId]
   if (!node) throw new Error(`Node inconnu : ${state.currentNodeId}`)
   if (node.type !== 'choice') {

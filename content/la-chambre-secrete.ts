@@ -9,8 +9,7 @@ export const laChambreSecrete: Book = {
   title: 'La Chambre secrète',
   author: 'Anonyme',
   coverImage: null,
-  synopsis:
-    'Une vieille maison abandonnée. Une porte close. Un choix simple qui n’en est pas un.',
+  synopsis: 'Une vieille maison abandonnée. Une porte close. Un choix simple qui n’en est pas un.',
   genre: 'mystère',
   tags: ['test', 'court'],
   estimatedMinutes: 3,
@@ -32,7 +31,7 @@ export const laChambreSecrete: Book = {
       salon: {
         id: 'salon',
         type: 'choice',
-        text: "Dans le salon, tout est figé sous la poussière. Sur le guéridon, une petite clef en laiton capte le peu de lumière qui passe encore entre les volets.",
+        text: 'Dans le salon, tout est figé sous la poussière. Sur le guéridon, une petite clef en laiton capte le peu de lumière qui passe encore entre les volets.',
         choices: [
           {
             id: 'prendre-clef',

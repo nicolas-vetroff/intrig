@@ -46,11 +46,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function BookPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function BookPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const book = await getBook(slug)
   if (!book) notFound()

@@ -1,10 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import {
-  resetProgress,
-  saveProgress,
-} from '@/app/(app)/livres/_actions/progress'
+import { resetProgress, saveProgress } from '@/app/(app)/livres/_actions/progress'
 import {
   advanceScene,
   availableChoices,
@@ -161,9 +158,7 @@ function EndingView({
         <p className="text-muted text-xs tracking-widest uppercase">Fin</p>
         <h2 className="font-serif text-3xl">{ending?.title ?? 'Fin'}</h2>
       </div>
-      <p className="font-serif text-lg leading-relaxed sm:text-xl">
-        {ending?.text ?? '…'}
-      </p>
+      <p className="font-serif text-lg leading-relaxed sm:text-xl">{ending?.text ?? '…'}</p>
       <p className="text-muted text-sm">
         {reachedEndings} / {totalEndings} fins découvertes.
       </p>

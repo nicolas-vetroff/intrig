@@ -22,7 +22,39 @@ Voir [`CLAUDE.md`](./CLAUDE.md) pour la vision produit et l'architecture.
 
 ## Installation locale
 
-### 1. Cloner et installer
+Deux chemins possibles selon ce que tu veux exercer :
+
+- **[Docker](#dev-avec-docker-postgres-local)** — tout en local (Postgres + app), pour itérer sur le moteur de lecture et les requêtes DB sans dépendre de Supabase.
+- **[Sans Docker](#dev-sans-docker-avec-supabase)** — connexion directe à un projet Supabase (nécessaire pour l'auth et les uploads plus tard).
+
+### Dev avec Docker (Postgres local)
+
+Prérequis : Docker + Docker Compose.
+
+```bash
+# 1) Lancer la stack (Postgres + app)
+docker compose up --build
+
+# 2) Dans un autre terminal, appliquer les migrations une fois
+docker compose exec app npm run db:migrate
+
+# 3) Insérer le livre de test "La Chambre secrète"
+docker compose exec app npm run db:seed
+```
+
+L'app est alors servie sur <http://localhost:3000>. Pages utiles :
+
+- `/` — landing + waitlist
+- `/livres` — catalogue (liste les livres de la DB)
+- `/livres/la-chambre-secrete` — lecture du livre de test
+
+Au premier choix, un cookie anonyme `reader-session-id` est créé ; ta progression survit aux reloads et à la navigation.
+
+Pour arrêter : `docker compose down` (les données Postgres restent dans le volume `db-data`). `docker compose down -v` efface tout.
+
+### Dev sans Docker (avec Supabase)
+
+#### 1. Cloner et installer
 
 ```bash
 git clone <url-du-repo> intrigue
@@ -30,7 +62,7 @@ cd intrigue
 npm install
 ```
 
-### 2. Créer le projet Supabase
+#### 2. Créer le projet Supabase
 
 1. Créer un projet sur <https://supabase.com/dashboard/projects>.
 2. Dans **Settings → API**, récupérer :
@@ -39,7 +71,7 @@ npm install
    - la **clé service role** → `SUPABASE_SERVICE_ROLE_KEY` (côté serveur uniquement)
 3. Dans **Settings → Database → Connection string**, copier l'URL du **transaction pooler** (port 6543) → `DATABASE_URL`. Remplacer `[YOUR-PASSWORD]` par le mot de passe de la base.
 
-### 3. Variables d'environnement
+#### 3. Variables d'environnement
 
 Copier le gabarit puis remplir :
 
@@ -56,7 +88,7 @@ DATABASE_URL=postgresql://postgres.xxxx:password@aws-0-eu-west-3.pooler.supabase
 
 > `.env.local` est git-ignoré. Ne jamais commiter de vraies clés.
 
-### 4. Appliquer la migration initiale à la base
+#### 4. Appliquer la migration initiale à la base
 
 La migration SQL est déjà générée dans `drizzle/0000_initial.sql`. Pour l'appliquer :
 
@@ -73,7 +105,7 @@ Cela crée les tables `profiles`, `waitlist`, `books` et `user_progress`.
 > trigger `on_auth_user_created` qui crée automatiquement une ligne
 > `profiles` à l'inscription. À coder dans une session dédiée auth.
 
-### 5. Lancer le serveur de développement
+#### 5. Lancer le serveur de développement
 
 ```bash
 npm run dev
@@ -92,8 +124,11 @@ Ouvrir <http://localhost:3000>.
 | `npm run lint` | ESLint |
 | `npm run format` | Formate avec Prettier |
 | `npm run format:check` | Vérifie le formatage (CI) |
+| `npm test` | Tests unitaires (Vitest) |
+| `npm run test:watch` | Tests en mode watch |
 | `npm run db:generate` | Génère une migration Drizzle depuis `lib/db/schema.ts` |
 | `npm run db:migrate` | Applique les migrations en attente à la base |
+| `npm run db:seed` | Insère les livres de `content/` dans la base |
 | `npm run db:studio` | UI web Drizzle pour inspecter la base |
 
 ## Déploiement sur Vercel
