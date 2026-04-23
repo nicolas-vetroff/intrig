@@ -42,7 +42,7 @@ docker compose exec app npm run db:migrate
 docker compose exec app npm run db:seed
 ```
 
-L'app est alors servie sur <http://localhost:3000>. Pages utiles :
+L'app est alors servie sur <http://localhost:3030> (port configurable dans `docker-compose.yml`, service `app.ports`). Pages utiles :
 
 - `/` — landing + waitlist
 - `/livres` — catalogue (liste les livres de la DB)
@@ -159,20 +159,20 @@ Voir [`CLAUDE.md`](./CLAUDE.md) pour les conventions de code, la vision produit 
 ```
 app/
   (marketing)/        Landing, mentions légales, CGU, confidentialité
-  (app)/livres/       Catalogue (placeholder)
+  (app)/livres/       Catalogue + lecture (page [slug])
   (app)/compte/       Profil utilisateur (à venir)
   api/                Route handlers (webhooks Stripe, cron)
   admin/              Interface de publication (à venir)
 lib/
-  db/                 Client Drizzle + schéma
+  db/                 Client Drizzle + schéma + seed
   supabase/           Clients server/client + session proxy
-  reader/             Moteur de lecture (à venir)
+  reader/             Types + runtime (pur, testé) + cookie de session
   stripe/             Helpers Stripe (à venir)
   utils/              Helpers divers
 components/
   ui/                 Primitives réutilisables
-  reader/             Composants du moteur de lecture
-content/              Livres en JSON (versionnés git)
+  reader/             BookReader (client component)
+content/              Livres TypeScript (versionnés git, insérés via db:seed)
 drizzle/              Migrations SQL générées
 proxy.ts              Proxy Next 16 (ex-middleware) — refresh session Supabase
 ```

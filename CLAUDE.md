@@ -75,18 +75,20 @@ Un livre est un **graphe dirigé avec état partagé**. Je charge le livre compl
 ```typescript
 // lib/reader/types.ts
 
+// Les champs nullable permettent un brouillon avant publication
+// (pas de cover / synopsis / publishedAt tant que le livre n'est pas pret).
 export type Book = {
   id: string
   slug: string
   title: string
   author: string
-  coverImage: string
-  synopsis: string
-  genre: string
-  tags: string[]
-  estimatedMinutes: number
+  coverImage: string | null
+  synopsis: string | null
+  genre: string | null
+  tags: string[] | null
+  estimatedMinutes: number | null
   tier: 'free' | 'premium'
-  publishedAt: Date
+  publishedAt: Date | null
   content: BookContent
 }
 
