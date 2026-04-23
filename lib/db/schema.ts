@@ -11,12 +11,14 @@ import {
 } from 'drizzle-orm/pg-core'
 import type { BookContent, VariableValue } from '@/lib/reader/types'
 
-// TODO: profiles.id refere `auth.users(id)` (schema Supabase Auth). La FK
-// inter-schema ne peut pas etre declaree depuis Drizzle ; a ajouter via une
-// migration SQL manuelle + trigger de creation automatique a l'inscription.
+// profiles.id refere `auth.users(id)` (schema Supabase Auth). La FK
+// inter-schema et le trigger de synchronisation sont poses dans la
+// migration 0002_profiles_sync.sql (hors scope Drizzle). Nullable
+// username : doit etre choisi au premier login via /compte/choisir-pseudo.
 export const profiles = pgTable('profiles', {
   id: uuid().primaryKey(),
   email: text().notNull(),
+  username: text().unique(),
   createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
 })
 
