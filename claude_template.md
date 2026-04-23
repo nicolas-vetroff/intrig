@@ -14,6 +14,7 @@ Tâches :
 Ce que je veux à la fin :
 - [livrable vérifiable]
 - [livrable vérifiable]
+- Mise à jour de CLAUDE.md
 
 Points d'attention :
 - [piège à éviter]
