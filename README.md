@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Intrigue
 
-## Getting Started
+Romans interactifs modernes pour le marché francophone. Web app mobile-first, lecture courte, mécanique de choix qui modifient l'histoire.
 
-First, run the development server:
+Voir [`CLAUDE.md`](./CLAUDE.md) pour la vision produit et l'architecture.
+
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript strict**
+- **Tailwind CSS v4**
+- **Supabase** (Postgres + Auth) via `@supabase/ssr`
+- **Drizzle ORM** pour le schéma et les migrations
+- **Zod** pour la validation
+- **Vercel** pour l'hébergement
+
+## Prérequis
+
+- **Node.js ≥ 20** (Next 16 officiellement requis)
+- Un compte **Supabase** (gratuit) — <https://supabase.com>
+- Un compte **Vercel** (gratuit) — <https://vercel.com>
+- `git` et `npm`
+
+## Installation locale
+
+### 1. Cloner et installer
+
+```bash
+git clone <url-du-repo> intrigue
+cd intrigue
+npm install
+```
+
+### 2. Créer le projet Supabase
+
+1. Créer un projet sur <https://supabase.com/dashboard/projects>.
+2. Dans **Settings → API**, récupérer :
+   - l'**URL du projet** → `NEXT_PUBLIC_SUPABASE_URL`
+   - la **clé anon / public** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - la **clé service role** → `SUPABASE_SERVICE_ROLE_KEY` (côté serveur uniquement)
+3. Dans **Settings → Database → Connection string**, copier l'URL du **transaction pooler** (port 6543) → `DATABASE_URL`. Remplacer `[YOUR-PASSWORD]` par le mot de passe de la base.
+
+### 3. Variables d'environnement
+
+Copier le gabarit puis remplir :
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
+DATABASE_URL=postgresql://postgres.xxxx:password@aws-0-eu-west-3.pooler.supabase.com:6543/postgres
+```
+
+> `.env.local` est git-ignoré. Ne jamais commiter de vraies clés.
+
+### 4. Appliquer la migration initiale à la base
+
+La migration SQL est déjà générée dans `drizzle/0000_initial.sql`. Pour l'appliquer :
+
+```bash
+npm run db:migrate
+```
+
+Cela crée les tables `profiles`, `waitlist`, `books` et `user_progress`.
+
+> **À faire manuellement** (hors Drizzle, non inclus dans la migration) :
+> les clés étrangères `profiles.id → auth.users(id)` et
+> `user_progress.user_id → auth.users(id)` doivent être ajoutées via
+> une migration SQL directe dans le dashboard Supabase, avec un
+> trigger `on_auth_user_created` qui crée automatiquement une ligne
+> `profiles` à l'inscription. À coder dans une session dédiée auth.
+
+### 5. Lancer le serveur de développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commandes utiles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Commande | Effet |
+|---|---|
+| `npm run dev` | Serveur de dev (Turbopack par défaut en Next 16) |
+| `npm run build` | Build production |
+| `npm start` | Serveur production (après `build`) |
+| `npm run typecheck` | Vérifie les types sans compiler |
+| `npm run lint` | ESLint |
+| `npm run format` | Formate avec Prettier |
+| `npm run format:check` | Vérifie le formatage (CI) |
+| `npm run db:generate` | Génère une migration Drizzle depuis `lib/db/schema.ts` |
+| `npm run db:migrate` | Applique les migrations en attente à la base |
+| `npm run db:studio` | UI web Drizzle pour inspecter la base |
 
-## Learn More
+## Déploiement sur Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. **Pousser le repo** sur GitHub / GitLab.
+2. Sur <https://vercel.com/new>, importer le repo. Vercel détecte Next.js automatiquement.
+3. **Ajouter les variables d'environnement** (Settings → Environment Variables) — les quatre mêmes que `.env.local` :
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `DATABASE_URL`
+4. **Déployer**. Le premier build doit passer en ~2 minutes.
+5. Pour les déploiements suivants, chaque push sur `main` déclenche un build. Les pull requests génèrent des preview deployments.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Migrations en prod
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Vercel ne lance pas automatiquement `db:migrate`. Deux options :
 
-## Deploy on Vercel
+- **Manuel** (recommandé au MVP) : lancer `npm run db:migrate` en local avec la `DATABASE_URL` de prod après avoir vérifié la migration.
+- **Automatique** : ajouter `npm run db:migrate && next build` dans le build command Vercel. Attention aux migrations destructives.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Conventions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Voir [`CLAUDE.md`](./CLAUDE.md) pour les conventions de code, la vision produit et ce qui est hors scope au MVP.
+
+## Structure principale
+
+```
+app/
+  (marketing)/        Landing, mentions légales, CGU, confidentialité
+  (app)/livres/       Catalogue (placeholder)
+  (app)/compte/       Profil utilisateur (à venir)
+  api/                Route handlers (webhooks Stripe, cron)
+  admin/              Interface de publication (à venir)
+lib/
+  db/                 Client Drizzle + schéma
+  supabase/           Clients server/client + session proxy
+  reader/             Moteur de lecture (à venir)
+  stripe/             Helpers Stripe (à venir)
+  utils/              Helpers divers
+components/
+  ui/                 Primitives réutilisables
+  reader/             Composants du moteur de lecture
+content/              Livres en JSON (versionnés git)
+drizzle/              Migrations SQL générées
+proxy.ts              Proxy Next 16 (ex-middleware) — refresh session Supabase
+```
