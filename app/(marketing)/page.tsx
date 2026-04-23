@@ -7,20 +7,16 @@ export default function LandingPage() {
         Des livres qui vous&nbsp;répondent.
       </h1>
 
-      <p className="max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
-        Intrigue publie des romans interactifs à lire en une soirée. À chaque
-        tournant, vos choix orientent l’histoire vers l’une de ses fins —
-        certaines ne se laissent pas trouver du premier coup.
+      <p className="text-muted max-w-xl text-lg leading-relaxed sm:text-xl">
+        Intrigue publie des romans interactifs à lire en une soirée. À chaque tournant, vos choix
+        orientent l’histoire vers l’une de ses fins — certaines ne se laissent pas trouver du
+        premier coup.
       </p>
 
       <div className="flex flex-col gap-3">
-        <p className="text-sm uppercase tracking-widest text-muted">
-          Rejoindre la liste d’attente
-        </p>
+        <p className="text-muted text-sm tracking-widest uppercase">Rejoindre la liste d’attente</p>
         <WaitlistForm />
-        <p className="text-xs text-muted">
-          Pas de spam, uniquement l’annonce du lancement.
-        </p>
+        <p className="text-muted text-xs">Pas de spam, uniquement l’annonce du lancement.</p>
       </div>
     </section>
   )

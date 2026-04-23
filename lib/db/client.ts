@@ -10,7 +10,7 @@ function getClient(): Database {
   if (cached) return cached
   const url = process.env.DATABASE_URL
   if (!url) {
-    throw new Error('DATABASE_URL manquante dans l\'environnement')
+    throw new Error("DATABASE_URL manquante dans l'environnement")
   }
   // prepare: false est requis sur le pooler transactionnel Supabase (PgBouncer).
   cached = drizzle(postgres(url, { prepare: false }), {

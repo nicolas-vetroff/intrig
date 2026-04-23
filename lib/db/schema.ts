@@ -20,7 +20,9 @@ export const profiles = pgTable('profiles', {
 })
 
 export const waitlist = pgTable('waitlist', {
-  id: uuid().primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid()
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   email: text().notNull().unique(),
   source: text(),
   createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
@@ -29,7 +31,9 @@ export const waitlist = pgTable('waitlist', {
 export const books = pgTable(
   'books',
   {
-    id: uuid().primaryKey().default(sql`gen_random_uuid()`),
+    id: uuid()
+      .primaryKey()
+      .default(sql`gen_random_uuid()`),
     slug: text().notNull().unique(),
     title: text().notNull(),
     author: text().notNull(),
@@ -57,8 +61,14 @@ export const userProgress = pgTable(
       .references(() => books.id, { onDelete: 'cascade' }),
     currentNodeId: text().notNull(),
     variables: jsonb().notNull().default({}),
-    history: text().array().notNull().default(sql`'{}'::text[]`),
-    reachedEndings: text().array().notNull().default(sql`'{}'::text[]`),
+    history: text()
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
+    reachedEndings: text()
+      .array()
+      .notNull()
+      .default(sql`'{}'::text[]`),
     updatedAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
   },
   (t) => [primaryKey({ columns: [t.userId, t.bookId] })],

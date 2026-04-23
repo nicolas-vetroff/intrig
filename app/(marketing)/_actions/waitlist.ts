@@ -34,9 +34,7 @@ export async function joinWaitlist(
     email: String(formData.get('email') ?? '')
       .trim()
       .toLowerCase(),
-    source: formData.get('source')
-      ? String(formData.get('source'))
-      : undefined,
+    source: formData.get('source') ? String(formData.get('source')) : undefined,
   })
 
   if (!parsed.success) {
@@ -54,7 +52,7 @@ export async function joinWaitlist(
     return {
       success: false,
       message:
-        'Impossible d\'enregistrer votre inscription pour le moment. Réessayez dans un instant.',
+        "Impossible d'enregistrer votre inscription pour le moment. Réessayez dans un instant.",
     }
   }
 
