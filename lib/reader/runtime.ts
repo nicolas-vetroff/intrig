@@ -23,10 +23,7 @@ export function createInitialState(book: BookContent): ReaderState {
 // Recommencer le livre : variables / history / node courant remis a zero,
 // mais les fins deja decouvertes sont conservees (c'est un compteur
 // inter-parties, pas un etat de la partie courante).
-export function restartPreservingEndings(
-  state: ReaderState,
-  book: BookContent,
-): ReaderState {
+export function restartPreservingEndings(state: ReaderState, book: BookContent): ReaderState {
   return {
     ...createInitialState(book),
     reachedEndings: state.reachedEndings,

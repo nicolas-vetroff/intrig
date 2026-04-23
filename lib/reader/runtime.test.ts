@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { BookContent } from './types'
 import {
+  advanceScene,
   applyEffects,
   availableChoices,
   checkAllConditions,
@@ -217,8 +218,182 @@ describe('pickChoice', () => {
   })
 })
 
+describe('applyEffects (cas supplementaires)', () => {
+  it('set remplace la valeur quel que soit le type initial', () => {
+    const vars = applyEffects([{ variable: 'nom', op: 'set', value: 'Alice' }], { nom: 'Bob' })
+    expect(vars.nom).toBe('Alice')
+  })
+
+  it("set cree la variable si elle n'existait pas", () => {
+    const vars = applyEffects([{ variable: 'nouveau', op: 'set', value: 42 }], {})
+    expect(vars.nouveau).toBe(42)
+  })
+
+  it('add et sub sont silencieux sur une variable inconnue', () => {
+    // Contrat : seules les variables declarees dans variablesSchema peuvent etre
+    // incrementees. Un add/sub sur une var absente = no-op, pas de crash.
+    expect(applyEffects([{ variable: 'fantome', op: 'add', value: 1 }], {})).toEqual({})
+    expect(applyEffects([{ variable: 'fantome', op: 'sub', value: 1 }], {})).toEqual({})
+  })
+
+  it('add/sub ne touchent pas les non-nombres', () => {
+    const vars = applyEffects([{ variable: 'nom', op: 'add', value: 1 }], { nom: 'Alice' })
+    expect(vars.nom).toBe('Alice')
+  })
+
+  it('applique des effets sur plusieurs variables differentes', () => {
+    const vars = applyEffects(
+      [
+        { variable: 'aClef', op: 'set', value: true },
+        { variable: 'courage', op: 'add', value: 2 },
+        { variable: 'nom', op: 'set', value: 'Alice' },
+      ],
+      { aClef: false, courage: 3, nom: '' },
+    )
+    expect(vars).toEqual({ aClef: true, courage: 5, nom: 'Alice' })
+  })
+})
+
+describe('checkAllConditions (tous les operateurs)', () => {
+  const check = (op: string, current: unknown, value: unknown) =>
+    checkAllConditions([{ variable: 'v', op: op as '==', value: value as number }], {
+      v: current as number,
+    })
+
+  it.each([
+    ['==', 5, 5, true],
+    ['==', 5, 6, false],
+    ['!=', 5, 5, false],
+    ['!=', 5, 6, true],
+    ['>', 5, 4, true],
+    ['>', 5, 5, false],
+    ['<', 4, 5, true],
+    ['<', 5, 5, false],
+    ['>=', 5, 5, true],
+    ['>=', 4, 5, false],
+    ['<=', 5, 5, true],
+    ['<=', 6, 5, false],
+  ])('%s : %i vs %i -> %s (nombres)', (op, current, value, expected) => {
+    expect(check(op, current, value)).toBe(expected)
+  })
+
+  it.each([
+    ['==', 'Alice', 'Alice', true],
+    ['==', 'Alice', 'Bob', false],
+    ['!=', 'Alice', 'Alice', false],
+    ['!=', 'Alice', 'Bob', true],
+  ])('%s : %s vs %s -> %s (strings)', (op, current, value, expected) => {
+    expect(check(op, current, value)).toBe(expected)
+  })
+
+  it.each([
+    ['==', true, true, true],
+    ['==', true, false, false],
+    ['!=', true, false, true],
+  ])('%s : %s vs %s -> %s (booleens)', (op, current, value, expected) => {
+    expect(check(op, current, value)).toBe(expected)
+  })
+})
+
+describe('variables string (bout en bout)', () => {
+  const stringBook: BookContent = {
+    startNodeId: 'a',
+    variablesSchema: [{ name: 'nom', type: 'string', initial: '' }],
+    nodes: {
+      a: {
+        id: 'a',
+        type: 'choice',
+        text: 'Votre nom ?',
+        choices: [
+          {
+            id: 'alice',
+            label: 'Alice',
+            nextNode: 'b',
+            effects: [{ variable: 'nom', op: 'set', value: 'Alice' }],
+          },
+          {
+            id: 'bob',
+            label: 'Bob',
+            nextNode: 'b',
+            effects: [{ variable: 'nom', op: 'set', value: 'Bob' }],
+          },
+        ],
+      },
+      b: {
+        id: 'b',
+        type: 'choice',
+        text: 'Qui etes-vous ?',
+        choices: [
+          {
+            id: 'only-alice',
+            label: 'Pour Alice',
+            nextNode: 'fin-a',
+            conditions: [{ variable: 'nom', op: '==', value: 'Alice' }],
+          },
+          {
+            id: 'not-alice',
+            label: 'Pour tous les autres',
+            nextNode: 'fin-b',
+            conditions: [{ variable: 'nom', op: '!=', value: 'Alice' }],
+          },
+        ],
+      },
+      'fin-a': { id: 'fin-a', type: 'ending', endingId: 'ea' },
+      'fin-b': { id: 'fin-b', type: 'ending', endingId: 'eb' },
+    },
+    endings: {
+      ea: { id: 'ea', type: 'good', title: 'A', text: '' },
+      eb: { id: 'eb', type: 'neutral', title: 'B', text: '' },
+    },
+  }
+
+  it('initialise, set et filtre les choix via une variable string', () => {
+    const s0 = createInitialState(stringBook)
+    expect(s0.variables.nom).toBe('')
+
+    const chose = pickChoice(s0, stringBook, 'alice')
+    expect(chose.variables.nom).toBe('Alice')
+
+    const choixB = stringBook.nodes.b
+    if (!choixB || choixB.type !== 'choice') throw new Error('fixture cassee')
+    const visibles = availableChoices(choixB, chose.variables).map((c) => c.id)
+    expect(visibles).toEqual(['only-alice'])
+  })
+})
+
+describe('advanceScene', () => {
+  const sceneBook: BookContent = {
+    startNodeId: 's1',
+    variablesSchema: [],
+    nodes: {
+      s1: { id: 's1', type: 'scene', text: 'Premiere scene', next: 's2' },
+      s2: { id: 's2', type: 'scene', text: 'Deuxieme scene', next: 'fin' },
+      fin: { id: 'fin', type: 'ending', endingId: 'e' },
+    },
+    endings: {
+      e: { id: 'e', type: 'good', title: 'Fin', text: '' },
+    },
+  }
+
+  it('avance sur le node suivant et alimente history', () => {
+    const s0 = createInitialState(sceneBook)
+    const s1 = advanceScene(s0, sceneBook)
+    expect(s1.currentNodeId).toBe('s2')
+    expect(s1.history).toEqual(['s1', 's2'])
+
+    const s2 = advanceScene(s1, sceneBook)
+    expect(s2.currentNodeId).toBe('fin')
+    expect(s2.reachedEndings).toEqual(['e'])
+  })
+
+  it("throw si le node courant n'est pas une scene", () => {
+    const atChoice = createInitialState(fixture)
+    expect(() => advanceScene(atChoice, fixture)).toThrow(/scene/)
+  })
+})
+
 describe('restartPreservingEndings', () => {
-  it('remet l\'etat courant a zero mais conserve les endings atteints', () => {
+  it("remet l'etat courant a zero mais conserve les endings atteints", () => {
     const s0 = createInitialState(fixture)
     const atPorte = pickChoice(s0, fixture, 'c1')
     const afterGood = pickChoice(atPorte, fixture, 'ouvrir')
