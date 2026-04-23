@@ -7,6 +7,7 @@ import { db } from '@/lib/db/client'
 import { books } from '@/lib/db/schema'
 import { createInitialState } from '@/lib/reader/runtime'
 import type { Book } from '@/lib/reader/types'
+import { requireUser } from '@/lib/supabase/auth'
 
 // Lit la DB + cookies de progression : pas de prerender.
 export const dynamic = 'force-dynamic'
@@ -48,6 +49,8 @@ export async function generateMetadata({
 
 export default async function BookPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  await requireUser(`/livres/${slug}`)
+
   const book = await getBook(slug)
   if (!book) notFound()
 

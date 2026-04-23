@@ -1,15 +1,29 @@
 import Link from 'next/link'
+import { getCurrentUser } from '@/lib/supabase/auth'
 
-export default function MarketingLayout({ children }: { children: React.ReactNode }) {
+export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
+  const user = await getCurrentUser()
+
   return (
     <>
-      <header className="px-6 py-6 sm:px-10 sm:py-8">
+      <header className="flex items-center justify-between px-6 py-6 sm:px-10 sm:py-8">
         <Link
           href="/"
           className="text-foreground font-serif text-2xl tracking-tight transition-opacity hover:opacity-80"
         >
           Intrigue
         </Link>
+        <nav className="flex items-center gap-6 text-sm">
+          {user ? (
+            <Link href="/compte" className="hover:text-muted transition-colors">
+              Mon compte
+            </Link>
+          ) : (
+            <Link href="/connexion" className="hover:text-muted transition-colors">
+              Connexion
+            </Link>
+          )}
+        </nav>
       </header>
 
       <main className="flex-1">{children}</main>

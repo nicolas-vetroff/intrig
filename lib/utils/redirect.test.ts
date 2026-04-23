@@ -16,7 +16,7 @@ describe('sanitizeNext', () => {
     expect(sanitizeNext('/compte')).toBe('/compte')
   })
 
-  it('refuse les URLs absolues (prevention d\'open redirect)', () => {
+  it("refuse les URLs absolues (prevention d'open redirect)", () => {
     expect(sanitizeNext('http://evil.com')).toBe(FALLBACK)
     expect(sanitizeNext('https://evil.com/livres')).toBe(FALLBACK)
     expect(sanitizeNext('ftp://server/file')).toBe(FALLBACK)

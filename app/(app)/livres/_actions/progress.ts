@@ -4,16 +4,16 @@ import { and, eq } from 'drizzle-orm'
 import { db } from '@/lib/db/client'
 import { userProgress } from '@/lib/db/schema'
 import type { ReaderState } from '@/lib/reader/runtime'
-import { readSessionId, requireSessionId } from '@/lib/reader/session'
+import { getCurrentUser } from '@/lib/supabase/auth'
 
 export async function loadProgress(bookId: string): Promise<ReaderState | null> {
-  const userId = await readSessionId()
-  if (!userId) return null
+  const user = await getCurrentUser()
+  if (!user) return null
 
   const rows = await db
     .select()
     .from(userProgress)
-    .where(and(eq(userProgress.userId, userId), eq(userProgress.bookId, bookId)))
+    .where(and(eq(userProgress.userId, user.id), eq(userProgress.bookId, bookId)))
     .limit(1)
 
   const row = rows[0]
@@ -28,13 +28,15 @@ export async function loadProgress(bookId: string): Promise<ReaderState | null> 
 }
 
 export async function saveProgress(bookId: string, state: ReaderState): Promise<void> {
-  const userId = await requireSessionId()
+  const user = await getCurrentUser()
+  if (!user) throw new Error('Non authentifié')
+
   const now = new Date()
 
   await db
     .insert(userProgress)
     .values({
-      userId,
+      userId: user.id,
       bookId,
       currentNodeId: state.currentNodeId,
       variables: state.variables,
@@ -55,9 +57,9 @@ export async function saveProgress(bookId: string, state: ReaderState): Promise<
 }
 
 export async function resetProgress(bookId: string): Promise<void> {
-  const userId = await readSessionId()
-  if (!userId) return
+  const user = await getCurrentUser()
+  if (!user) return
   await db
     .delete(userProgress)
-    .where(and(eq(userProgress.userId, userId), eq(userProgress.bookId, bookId)))
+    .where(and(eq(userProgress.userId, user.id), eq(userProgress.bookId, bookId)))
 }
