@@ -1,0 +1,571 @@
+{
+  "slug": "entre-les-lignes",
+  "title": "Entre les lignes",
+  "author": "nv-dev",
+  "coverImage": null,
+  "synopsis": "Une annotation au crayon dans un vieux roman de la bibliothèque du lycée. Une réponse. Puis une autre. Quelqu'un vous écrit, et vous ne lisez plus tout à fait comme avant.",
+  "genre": "romance",
+  "tags": [
+    "young adult",
+    "lycée",
+    "épistolaire",
+    "premier amour"
+  ],
+  "estimatedMinutes": 30,
+  "tier": "free",
+  "publishedAt": "2025-11-01T00:00:00.000Z",
+  "content": {
+    "startNodeId": "intro",
+    "variablesSchema": [
+      {
+        "name": "confiance",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "notes",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "sincerite",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "traditionRevelee",
+        "type": "boolean",
+        "initial": false
+      }
+    ],
+    "nodes": {
+      "intro": {
+        "id": "intro",
+        "type": "scene",
+        "text": "Mardi, seize heures vingt. La bibliothèque du lycée Camille-Claudel sent le papier, la cire à parquet et, vaguement, la pluie qu'il a fait ce matin. Vous longez le rayonnage de littérature classique, à la recherche d'un exemplaire de Bel-Ami pour le commentaire de vendredi. Vos doigts hésitent, glissent le long des dos, puis se posent sur un volume relié en toile grise, plus ancien que les autres, le titre à demi effacé. Vous l'ouvrez au hasard. Et dans la marge, au crayon fin, presque timide : « Il n'aime pas Clotilde. Il aime ce qu'il ne possède pas encore, et le jour où il l'aura, il ne l'aimera plus. » L'écriture est petite, appliquée. Aucune signature. Aucune date. Quelque chose dans la manière dont le trait finit chaque lettre vous retient : une légère fatigue, comme si la phrase avait coûté. Vous regardez par-dessus votre épaule. Personne ne vous a vu·e. Et pourtant, vous avez l'impression d'avoir surpris quelqu'un.",
+        "next": "decouverte"
+      },
+      "decouverte": {
+        "id": "decouverte",
+        "type": "choice",
+        "text": "Vous feuilletez le livre. D'autres annotations, partout. Quelqu'un a lu ce roman comme on tient une conversation : avec soi-même, avec Maupassant, avec un lecteur à venir. À la fin du premier chapitre, une demi-page blanche : on dirait un silence laissé exprès, une porte entrouverte. Au rayon, personne. Madame Mathieu, la documentaliste, prépare les retours à l'accueil, lunettes relevées sur le front. La cloche ne sonnera pas avant quarante minutes. Le crayon dans votre trousse vous semble, tout à coup, peser une tonne.",
+        "choices": [
+          {
+            "id": "ecrire",
+            "label": "Écrire quelque chose, au crayon, dans la marge",
+            "nextNode": "premiere_note",
+            "effects": [
+              {
+                "variable": "notes",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "confiance",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "emporter-silence",
+            "label": "Emporter le livre à la maison, sans y toucher",
+            "nextNode": "emprunt_silencieux"
+          },
+          {
+            "id": "reposer",
+            "label": "Remettre le volume à sa place et en choisir un autre",
+            "nextNode": "end-regret"
+          }
+        ]
+      },
+      "premiere_note": {
+        "id": "premiere_note",
+        "type": "scene",
+        "text": "Vous sortez votre crayon. Il y a quelque chose d'enfantin dans le geste : écrire dans un livre, comme on glisserait un mot dans un casier. Vous réfléchissez, deux secondes, trois, puis vous tracez, sous l'annotation : « Alors il est comme nous tous. Il aime jusqu'à ce que ça existe vraiment. » Vous relisez. Vous hésitez. Vous rayez « nous tous », vous remplacez par « la plupart », puis vous rayez « la plupart » et vous reposez « nous tous ». Tant pis. Vous refermez le livre. Vous le rapportez à l'accueil sans vous presser, l'air le plus désinvolte possible, et pourtant, quand vous tendez votre carte à Madame Mathieu, vous vous apercevez que votre main tremble un peu. Elle tamponne la fiche sans lever les yeux. Dehors, il a recommencé à pleuvoir. Dans le bus qui vous ramène, vous ouvrez le livre, vous relisez la phrase (la vôtre, à côté de la sienne), et vous vous dites que c'est stupide d'avoir fait ça. Puis vous vous dites que non, pas stupide. Juste un peu étrange. Et que, peut-être, personne ne répondra jamais.",
+        "next": "lendemain"
+      },
+      "emprunt_silencieux": {
+        "id": "emprunt_silencieux",
+        "type": "scene",
+        "text": "Vous emportez le livre à la maison. Ce soir-là, dans votre chambre, vous lisez les annotations une par une. Certaines sont drôles : un petit « ah ! » en marge d'une réplique de Georges. D'autres sont tristes, presque douloureuses : à la page 217, en dessous d'un passage sur l'ambition, il est écrit seulement : *On peut vouloir quelque chose par défaut. On peut vouloir quelque chose parce qu'on ne sait pas ce qu'on voudrait vraiment.* Vous posez le livre, vous regardez votre plafond. Vous pensez à répondre. Vous n'osez pas, et plus les jours passent, moins vous osez. Le livre reste trois semaines sur votre bureau, intact dans ses marges blanches. Quand vous le rapportez, vous avez cette idée, une seconde, d'écrire encore quelque chose avant de le rendre. Vous n'écrivez rien. Madame Mathieu vous dit, en tamponnant la carte : « Il est très emprunté, celui-là. Vous avez de la chance de l'avoir gardé aussi longtemps. » Le mardi d'après, il n'est plus au rayon. Vous vérifiez tous les mardis, pendant un mois. Il ne revient pas. Vous ne savez pas qui l'a emprunté. Vous ne saurez jamais à qui répondait, dans le silence, la personne qui y écrivait.",
+        "next": "end-solitude"
+      },
+      "lendemain": {
+        "id": "lendemain",
+        "type": "scene",
+        "text": "Le lendemain, en cours de philosophie, vous pensez à votre annotation. Monsieur Rochefort parle de Spinoza et de la joie ; vous n'écoutez qu'à moitié. À seize heures vingt, vous traînez devant la bibliothèque avant d'oser y entrer, comme si vous aviez quelque chose à vous reprocher. Le rayon littérature classique. Le volume gris. Il est toujours là. Vous l'ouvrez, fébrile, à la page où vous aviez écrit. Votre phrase est là. Seule. Rien n'a été ajouté. Évidemment : vingt-quatre heures, c'est rien. Vous riez intérieurement d'avoir espéré. Vous remettez le livre à sa place, très exactement, comme si le bon millimètre changeait quelque chose. Vous rentrez chez vous. Le soir, votre mère vous demande si ça va. Vous dites oui, très bien, très bien. Vous vous couchez tôt. Vous vous relevez, vous regardez par la fenêtre. La nuit est claire. Vous pensez à la personne qui a écrit la première phrase, quelque part dans le lycée, quelque part dans la ville, peut-être en ce moment précis, peut-être sans savoir que vous avez répondu.",
+        "next": "attente"
+      },
+      "attente": {
+        "id": "attente",
+        "type": "scene",
+        "text": "Trois jours passent. Vous repassez chaque soir. Rien. Vous commencez à vous dire que vous êtes un peu ridicule : écrire à un inconnu dans la marge d'un vieux roman, et attendre comme on attend un texto d'un garçon ou d'une fille qui ne répondra pas. Vendredi, vous rendez le commentaire sur Bel-Ami. Monsieur Farel, votre professeur de français, vous met 14, avec un « Bonne lecture fine. Soyez moins prudente dans vos interprétations : les livres vous répondent mieux quand vous leur parlez franchement. » Prudent·e. Vous rangez la copie. Au déjeuner, vous regardez autour de vous comme si vous aviez, pour la première fois, besoin de savoir : qui, ici, écrit dans les livres ? Personne n'a l'air, évidemment. Tout le monde a toujours l'air de rien. Le week-end passe, sans grand-chose. Le lundi d'après, vous entrez dans la bibliothèque sans vraiment y penser, comme par habitude, et vous vous dirigez vers le rayon classique, comme si vous y aviez laissé un objet et pas juste une question.",
+        "next": "reponse_trouvee"
+      },
+      "reponse_trouvee": {
+        "id": "reponse_trouvee",
+        "type": "scene",
+        "text": "Vous prenez le livre. Il pèse un peu plus lourd que dans votre souvenir. Vous l'ouvrez à la page, très vite, presque en vous préparant à ne rien trouver. Votre phrase. Et en dessous, nouvelle, au même crayon fin : « On pourrait aussi dire l'inverse : qu'on ne commence à aimer vraiment qu'à partir du moment où l'autre existe pour de bon. Mais c'est peut-être seulement ce que j'ai envie de croire. » Vous relisez trois fois. Vous souriez malgré vous. Vous regardez autour de vous : personne, vraiment personne, que les habitués du lundi après-midi, le nez dans leurs cours. Ce pourrait être n'importe qui dans ce lycée de huit cents élèves. Un·e inconnu à quelques mètres, peut-être. Ou quelqu'un qui, à cette heure, est dans un bus, loin, et qui ne sait pas que vous avez trouvé sa réponse. L'écriture est la même, un peu plus appuyée, comme si la phrase avait été écrite plus vite, ou plus franchement. Vous glissez votre crayon dans votre trousse et vous décidez de ne pas répondre tout de suite. Vous voulez garder ça, cette ligne, rien qu'à vous, au moins une nuit.",
+        "next": "echange_ton"
+      },
+      "echange_ton": {
+        "id": "echange_ton",
+        "type": "choice",
+        "text": "Le lendemain, vous revenez, décidé·e à écrire. Vous vous asseyez à la petite table qui donne sur le rayon, vous posez le livre à plat. Une question vous trotte dans la tête depuis la veille : comment répondre ? Vous pouvez poursuivre le débat, rester dans le roman, dans l'idée, élégant·e, protégé·e par le texte. Vous pouvez glisser une pique, un clin d'œil, transformer ça en jeu : ce sera plus léger, plus vivant, aussi plus risqué. Ou vous pouvez risquer quelque chose de plus direct, qui sorte du livre : une question qui vous concerne, vous, et il.",
+        "choices": [
+          {
+            "id": "intello",
+            "label": "Rester sur le texte et prolonger la discussion",
+            "nextNode": "semaines",
+            "effects": [
+              {
+                "variable": "notes",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "leger",
+            "label": "Plaisanter, glisser un mot d'esprit",
+            "nextNode": "semaines",
+            "effects": [
+              {
+                "variable": "notes",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "confiance",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "direct",
+            "label": "Risquer une question plus personnelle",
+            "nextNode": "semaines",
+            "effects": [
+              {
+                "variable": "notes",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "sincerite",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "semaines": {
+        "id": "semaines",
+        "type": "scene",
+        "text": "Les semaines s'installent. Mars devient avril. Vous prenez l'habitude de passer à la bibliothèque trois fois par semaine, toujours vers seize heures vingt, toujours en jetant un coup d'œil au rayon classique comme on regarde une boîte aux lettres. Les annotations s'allongent. Vous parlez de livres, d'abord. Puis, par contrebande, d'autre chose. La personne qui écrit (vous avez fini par l'appeler, dans votre tête, « l'autre », avec un article défini qui, à force, veut dire beaucoup) a une façon de poser les questions qui vous désarme. Un jour, dans la marge d'un passage sur Madeleine Forestier, il écrit : « Est-ce que vous aimez votre prénom ? » Vous répondez : « Non. Vous ? » Et l'échange qui suit vous occupe trois soirées entières. Il a dit : « Le mien, j'ai mis longtemps à l'aimer. Je l'aime certains jours. » Vous avez répondu : « Je trouve que c'est déjà énorme. » Vous ne savez rien d'il. Vous savez tout, pourtant, de la façon dont il articule une phrase, retient un adjectif, hésite. Un soir, votre mère vous demande pourquoi vous souriez à votre assiette. Vous dites : « Pour rien. » Ce n'est pas un mensonge complet : pour pas grand-chose, c'est vrai. Juste pour trois lignes dans un livre qui ne vous appartient pas.",
+        "next": "question_identite"
+      },
+      "question_identite": {
+        "id": "question_identite",
+        "type": "choice",
+        "text": "Un samedi matin, vous êtes allongé·e sur votre lit, volets à peine entrouverts. Vous réalisez que vous ignorez tout d'il. Son visage. Sa classe. Son emploi du temps. Si il déjeune au réfectoire ou dehors. Si il prend le bus ou le tram. Vous pourriez chercher. Le lycée n'est pas immense. Trois ou quatre personnes, à vous creuser la tête, correspondent vaguement à l'idée (encore très floue, encore très vous) que vous vous êtes faite d'il. Ou vous pourriez ne pas chercher. Laisser durer ce qui dure, justement, parce qu'aucun corps ne s'interpose encore entre les mots.",
+        "choices": [
+          {
+            "id": "chercher",
+            "label": "Essayer de savoir qui c'est",
+            "nextNode": "observation"
+          },
+          {
+            "id": "anonymat",
+            "label": "Préserver l'anonymat, ne rien tenter",
+            "nextNode": "lettre_belle",
+            "effects": [
+              {
+                "variable": "sincerite",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "observation": {
+        "id": "observation",
+        "type": "scene",
+        "text": "Le lundi, vous arrivez plus tôt au lycée. Dans la cour, vous regardez autrement. Vous remarquez des choses que vous n'aviez jamais vues : qui lit au fond du réfectoire, qui note dans un carnet à spirales, qui a les doigts tachés de crayon, qui tient ses livres comme s'ils étaient fragiles. Trois visages finissent par s'imposer. Léo, en terminale S comme vous, brillant·e, moqueur·se, toujours entouré·e, dont on dit qu'il écrit des critiques de films sur un blog qu'il ne nomme à personne. Sacha, de votre classe, discret·e, presque silencieux·se, que vous croisez parfois dans la salle d'étude, toujours à la même place, toujours avec un livre dont vous n'arrivez jamais à lire le titre. Noa, arrivé·e en décembre, encore un peu à côté, avec une façon de sourire qui n'engage à rien, et qu'on a vu·e, plusieurs fois, glisser des mots dans les pages des bouquins de français de ses camarades. L'un des trois, peut-être. Ou personne d'entre eux·elles. Vous ne savez pas. Vous vous donnez une semaine.",
+        "next": "choix_suspect"
+      },
+      "choix_suspect": {
+        "id": "choix_suspect",
+        "type": "choice",
+        "text": "Par où commencer ? Les trois vous intriguent, pour des raisons différentes, mais vous sentez que, si vous essayez d'observer tout le monde en même temps, vous allez devenir folle et vous ne verrez plus rien du tout. Il faut choisir, et accepter, peut-être, de se tromper.",
+        "choices": [
+          {
+            "id": "leo",
+            "label": "Léo, l'élève brillant·e, celui·celle qui parle fort",
+            "nextNode": "enquete_leo"
+          },
+          {
+            "id": "sacha",
+            "label": "Sacha, l'élève silencieux·se de la salle d'étude",
+            "nextNode": "enquete_sacha"
+          },
+          {
+            "id": "noa",
+            "label": "Noa, le·la nouvel·le arrivé·e en décembre",
+            "nextNode": "enquete_noa"
+          }
+        ]
+      },
+      "enquete_leo": {
+        "id": "enquete_leo",
+        "type": "scene",
+        "text": "Vous avez cours d'anglais avec Léo le mardi. Vous l'observez mieux. Il répond toujours sans lever le doigt, tranche vite, fait rire. Jamais un livre dans la main en dehors des cours ; toujours un téléphone. Le jeudi, vous la·le croisez à la bibliothèque, une fois : il vient imprimer un sujet de TPE, dit bonjour à Madame Mathieu en souriant, demande si le wifi remarche, et repart en quatre minutes. Il passe devant le rayon classique sans ralentir. Vous testez une chose : en cours, juste avant la sonnerie, vous laissez traîner votre exemplaire de Bel-Ami sur la table, ouvert à une page annotée. Léo y jette un œil. « Ça se lit encore, ce truc ? » Puis il rit. Il ne s'arrête pas sur les marges. Il ne fait pas un geste de reconnaissance, pas un tressaillement. Il ne vous regarde pas une seconde de trop. Rien. Dans les annotations que vous avez relues cent fois, il y a une hésitation, une prudence, presque de la tendresse. Léo ne vous semble hésiter sur rien. Vous rayez son nom, sans trop savoir pourquoi, avec un petit pincement : vous auriez presque voulu que ce soit lui·elle, pour l'étonnement.",
+        "next": "doute"
+      },
+      "enquete_sacha": {
+        "id": "enquete_sacha",
+        "type": "scene",
+        "text": "Sacha est dans votre classe depuis la seconde. Vous ne lui avez peut-être jamais adressé la parole autrement que pour demander une feuille. Il s'installe toujours à la même place en salle d'étude, au fond, près de la fenêtre, et il tient son stylo d'une façon un peu étrange, presque à la pointe, comme si il avait peur de faire trop de bruit. Cette semaine-là, en arrivant plus tôt que d'habitude, vous passez derrière son bureau, et sur son cahier, avant qu'il ne le referme, vous apercevez une citation en exergue, tracée au crayon fin : *Ce que nous aimons, c'est souvent ce que nous n'avons pas encore.* L'écriture ressemble. Ou c'est vous qui la faites ressembler, parce que vous voulez qu'elle ressemble. Votre cœur fait un geste étrange. Vous détournez les yeux, vite. Il lève la tête une seconde, vous regarde sans vraiment vous voir, et replonge dans ses notes. Le lendemain, en cours de physique, vous vous retournez deux fois de trop. La troisième fois, il soutient votre regard un instant de plus, puis détourne les yeux. Vous ne dites rien. Vous ne pouvez rien dire. Pas encore.",
+        "next": "doute"
+      },
+      "enquete_noa": {
+        "id": "enquete_noa",
+        "type": "scene",
+        "text": "Noa est arrivé·e en décembre, et depuis, il reste un peu en marge, à côté des groupes sans en faire partie, souriant·e à tout le monde sans s'accrocher à personne. Il déjeune souvent seule, un livre à la main. Vous avez remarqué, les dernières semaines, qu'il lit beaucoup. Parfois des poches, parfois des éditions usées comme celles de la bibliothèque. Vous essayez de vous asseoir non loin, au CDI, un jeudi. Il referme son livre (un roman russe, vous reconnaissez la couverture d'une vieille édition Folio), vous adresse un petit signe de tête distant, et s'en va sans traîner. Plus tard, vous en parlez, mine de rien, à Léa, qui a fait un exposé avec il. « Noa ? Il écrit tout à l'ordinateur, jamais à la main. On a fait un exposé ensemble, c'était l'enfer pour se relire : son écriture est immonde, il le dit il-même, il refuse même de prendre des notes sur papier. » Vous notez. Vous rentrez chez vous. Il, sans doute, n'est pas la personne que vous cherchez. Sans doute. Mais pendant une soirée entière, vous vous demandez si ce « sans doute » ne sert pas, aussi, à vous rassurer.",
+        "next": "doute"
+      },
+      "doute": {
+        "id": "doute",
+        "type": "choice",
+        "text": "Vous rentrez chez vous, le soir, un peu éreinté·e. Vous avez passé la semaine à regarder, à deviner, à rayer. Et plus vous cherchez, plus le mystère vous échappe, ou plutôt, plus il se déplace. Peut-être que la question « qui est-ce ? » n'est pas la bonne. Peut-être qu'elle gâche quelque chose. Vous ouvrez votre cahier, celui où vous recopiez vos passages préférés, et vous y notez, pour vous : *Il est d'abord une voix. Le visage, si on en a un, peut venir après.* Puis, ce même soir, une autre pensée vous traverse : Madame Mathieu, peut-être, saurait. C'est elle qui gère les livres. Elle saurait peut-être qui emprunte ce volume-là, et depuis quand.",
+        "choices": [
+          {
+            "id": "laisser",
+            "label": "Laisser faire le temps, ne rien demander",
+            "nextNode": "revelation_vulnerable",
+            "effects": [
+              {
+                "variable": "sincerite",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "demander",
+            "label": "Aller discrètement interroger Madame Mathieu",
+            "nextNode": "interrogation_mme_mathieu",
+            "effects": [
+              {
+                "variable": "traditionRevelee",
+                "op": "set",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "interrogation_mme_mathieu": {
+        "id": "interrogation_mme_mathieu",
+        "type": "scene",
+        "text": "Vous entrez dans la bibliothèque le mercredi suivant, plus tôt que d'habitude. Madame Mathieu sort une pile de livres à étiqueter, un feutre à la main, ses lunettes sur le nez. Vous approchez, et, d'un ton que vous avez voulu désinvolte mais qui, manifestement, ne l'est pas : « J'ai remarqué un livre, dans les classiques (l'exemplaire de Bel-Ami, l'édition grise), il y a des annotations au crayon dedans. Je les trouve… bien écrites. Vous savez qui écrit ? » Elle ne répond pas tout de suite. Elle pose son feutre. Elle vous regarde, longuement, comme si elle cherchait une réponse à une autre question que la vôtre. Son sourire change, s'élargit, un peu ailleurs, un peu plus loin. « Venez. » Elle jette un coup d'œil autour d'elle (la bibliothèque est presque vide), se lève, et vous fait signe de la suivre. Vous la suivez, un peu surpris·e, jusqu'à la petite porte derrière l'accueil, celle qui mène à la réserve où, d'habitude, on ne laisse pas entrer les élèves.",
+        "next": "tradition_revelee"
+      },
+      "tradition_revelee": {
+        "id": "tradition_revelee",
+        "type": "scene",
+        "text": "Elle referme la porte derrière vous. La réserve est une toute petite pièce, sentant le carton et l'encre fraîche. Sur une étagère du bas, cinq ou six volumes reliés, tous avec le même aspect usé que votre Bel-Ami. Elle en sort un, *Le Grand Meaulnes*, et l'ouvre. Des annotations, de plusieurs mains, à des encres et crayons différents. Certaines sont datées. 1997. 2003. 2011. « Quand j'étais élève ici, en 1995, je lisais *Le Grand Meaulnes*, et un soir, par accident, j'ai écrit dans la marge. Je ne pensais pas qu'on me répondrait. Trois mois plus tard, quelqu'un l'avait fait. Nous nous sommes écrit toute l'année scolaire. Nous ne nous sommes jamais rencontré·e·s : il est parti·e en Allemagne à la fin de seconde, et nous n'avions même pas échangé nos prénoms. Depuis, ce livre-là, et quatre ou cinq autres, circulent. Je ne dis jamais rien, je les laisse accessibles. À peu près tous les trois ans, quelqu'un y répond à quelqu'un d'autre. Parfois, ils se retrouvent. Parfois non. C'est une tradition qui n'a pas de nom et qui ne tient qu'à ça : que je continue à remettre ces livres sur les rayons, et que des élèves comme vous continuent à y écrire. » Elle referme doucement le volume. Elle ne vous regarde pas quand elle ajoute : « Je ne vous dirai pas qui vous écrit. Ce n'est pas à moi de le faire. Mais vous n'êtes ni le premier. C'est plus ancien que vous. Et, j'espère, plus long que vous aussi. »",
+        "next": "revelation_vulnerable"
+      },
+      "lettre_belle": {
+        "id": "lettre_belle",
+        "type": "scene",
+        "text": "Vous prenez une décision, ce samedi : vous n'irez pas chercher. Pas encore. Quelque chose dans cet échange tient, précisément, à ne pas savoir, à ce que les mots soient la seule matière. Le lundi, vous écrivez une annotation plus longue qu'à l'ordinaire. Vous y parlez de votre grand-mère, qui est morte il y a un an, et qui vous laissait, elle aussi, des mots dans les livres qu'elle vous prêtait : des petits commentaires au bic bleu dans la marge des romans de la Pléiade, des points d'exclamation, des soulignements, une fois un « Hum ! » solennel à côté d'une phrase de Proust qui, disait-elle, était « trop élégante pour être tout à fait honnête ». Vous n'avez jamais dit ça à personne. Vous écrivez tout au crayon, sans vous relire. Quand vous arrivez au bout, vous vous apercevez que vous avez utilisé trois fois la page. Vous rapportez le livre à l'accueil, vous le rendez sans le regarder. Madame Mathieu vous sourit, un peu surprise. Vous sortez. Vous marchez jusqu'au bus. Vous avez l'impression d'avoir trop parlé. Et aussi d'avoir, peut-être, enfin parlé.",
+        "next": "reflexion"
+      },
+      "reflexion": {
+        "id": "reflexion",
+        "type": "scene",
+        "text": "Trois jours plus tard, la réponse est là, longue, délicate. Il vous parle de son père, qui lit toujours avec un crayon à côté : il souligne, il annote, il ajoute parfois des notes à la fin des livres. Il raconte comment, petit·e, il croyait que les écrivains et les lecteurs se parlaient vraiment, de page à page, et comment, en grandissant, il s'est demandé·e si ce n'était pas, au fond, un peu vrai : que lire, c'est un peu répondre, même en silence. À la fin, il écrit : *Je n'avais pas prévu d'écrire tout ça. Je ne sais pas pourquoi je l'ai fait. Mais je suis content·e de l'avoir fait.* Vous lisez, debout, au milieu du rayon. Vous avez la gorge serrée. Une fille de première passe, vous regarde un peu bizarrement. Vous refermez le livre en souriant. Ce jour-là, vous ne répondez rien. Vous n'avez pas besoin. Juste la certitude, nouvelle, qu'il y a quelqu'un qui vous a lu·e. Vraiment lu·e. Pour la première fois peut-être depuis longtemps.",
+        "next": "revelation_vulnerable"
+      },
+      "revelation_vulnerable": {
+        "id": "revelation_vulnerable",
+        "type": "scene",
+        "text": "Début mai. Les après-midi sont plus longs, la lumière change dans la bibliothèque : elle arrive par le haut, désormais, dorée, et se pose sur les rayons comme si elle les choisissait. Un mardi, vous ouvrez le livre, comme d'habitude. La nouvelle annotation est longue. Vous la lisez une première fois sans bien comprendre, puis une deuxième fois, plus lentement. « Je déménage cet été. Mes parents se séparent. Ils ont attendu que je finisse la terminale pour le dire, ce qui, au fond, est à la fois délicat et très lâche, les deux à la fois. Ma mère est mutée à Lyon. Je pars avec elle. Je ne le dis à personne au lycée. Je ne sais pas très bien pourquoi je vous le dis à vous. Peut-être parce que, vous, vous n'avez pas de visage à changer quand vous l'apprendrez. Je voulais juste que quelqu'un le sache. Et aussi (je peux bien l'écrire, puisque vous ne saurez jamais qui je suis), parce que, depuis deux mois, c'est à vous que je pense le plus souvent. Voilà. C'est dit. » Vous restez debout, le livre à la main. La bibliothèque bourdonne, loin. Vous pensez : à peine trouvé·e, déjà à perdre. Vous pensez aussi : ce n'est pas « à peine trouvé·e ». On s'est trouvé·e·s, c'est tout. La suite n'y change rien. Ou si. Peut-être.",
+        "next": "reponse_coeur"
+      },
+      "reponse_coeur": {
+        "id": "reponse_coeur",
+        "type": "choice",
+        "text": "Vous rentrez chez vous. Vous tournez la phrase d'il dans votre tête toute la soirée (*c'est à vous que je pense le plus souvent*), et ça fait quelque chose d'étrange, entre la chaleur et le serrement. Vous voudriez bien répondre. Il faut répondre. Vous ne voulez pas mal répondre.",
+        "choices": [
+          {
+            "id": "grave",
+            "label": "Écrire une réponse grave, à la hauteur du secret reçu",
+            "nextNode": "decision_rdv",
+            "effects": [
+              {
+                "variable": "sincerite",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "confiance",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "leger",
+            "label": "Écrire avec légèreté, pour ne pas l'enfoncer",
+            "nextNode": "decision_rdv",
+            "effects": [
+              {
+                "variable": "confiance",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "attendre",
+            "label": "Ne pas répondre tout de suite, prendre un jour ou deux",
+            "nextNode": "decision_rdv",
+            "effects": [
+              {
+                "variable": "sincerite",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "decision_rdv": {
+        "id": "decision_rdv",
+        "type": "choice",
+        "text": "Les jours qui suivent, vous écrivez et il écrit. Plus serré·e·s qu'avant. Plus vrai·e·s aussi, peut-être. Mais le temps file. Il est fin mai. Si il part en juillet, il vous reste peut-être six semaines. Un soir, vous tournez dans votre chambre. Vous ouvrez deux fois votre téléphone, mais aucun texto ne s'y trouvera. Vous vous décidez. Enfin, vous essayez.",
+        "choices": [
+          {
+            "id": "proposer-rdv",
+            "label": "Proposer, dans la prochaine annotation, qu'on se rencontre",
+            "nextNode": "proposition_faite",
+            "effects": [
+              {
+                "variable": "confiance",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "id": "continuer",
+            "label": "Ne rien proposer, continuer par écrit",
+            "nextNode": "continuer_ecrit"
+          },
+          {
+            "id": "prenoms",
+            "label": "Proposer seulement d'échanger vos prénoms, rien d'autre",
+            "nextNode": "prenoms_echanges",
+            "effects": [
+              {
+                "variable": "sincerite",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "proposition_faite": {
+        "id": "proposition_faite",
+        "type": "scene",
+        "text": "Vous y passez la soirée. Vous écrivez, vous raturez, vous recommencez. Trois feuilles de brouillon. Au final, la phrase que vous recopiez au crayon dans le livre tient en quatre lignes : « Je sais que ça va peut-être tout changer. Peut-être tout casser aussi. Mais avant Lyon, est-ce qu'on se voit ? Samedi, quinze heures, au kiosque vert du parc Monceau. J'y serai. Si vous n'y êtes pas, je comprendrai, et on continuera d'écrire, ou on n'écrira plus, comme vous voudrez. » Vous glissez le livre à sa place, sur l'étagère, très exactement. Vous sortez de la bibliothèque. Vous marchez jusqu'à l'arrêt de bus en vous disant que vous venez peut-être de faire la plus belle erreur de votre année. Ou le contraire.",
+        "next": "attente_rdv"
+      },
+      "continuer_ecrit": {
+        "id": "continuer_ecrit",
+        "type": "scene",
+        "text": "Vous choisissez de ne pas rompre le charme. Il y a quelque chose dans cet échange qui, vous le sentez confusément, ne survivrait pas à la lumière directe d'une rencontre. Les six semaines qui restent avant l'été, vous écrivez plus qu'avant, plus profondément aussi. Les annotations débordent presque du livre. Parfois, vous glissez un petit papier plié entre deux pages pour faire de la place. Il fait pareil. Vous savez qu'il part. Il sait que vous savez. Ni l'un ni l'autre ne propose de rencontre. Il y a, dans ce silence partagé, un accord que vous ne sauriez pas nommer, et qui tient. Le dernier jour avant les vacances, vous trouvez, glissée dans le livre, une enveloppe à votre attention, sans nom, juste « pour vous » au crayon. À l'intérieur, une adresse à Lyon, un numéro, et une phrase : *Si un jour vous passez par là. Pas avant. Je veux qu'on s'écrive encore. Vraiment s'écrire. Sur du vrai papier. À la main.* Vous refermez l'enveloppe. Vous rentrez chez vous. Vous souriez dans le bus. C'est l'été, maintenant. Et vous avez, dans votre sac, la trace d'une voix que vous ne connaîtrez peut-être jamais, et qui, peut-être, durera plus longtemps que beaucoup d'autres.",
+        "next": "end-correspondance"
+      },
+      "prenoms_echanges": {
+        "id": "prenoms_echanges",
+        "type": "scene",
+        "text": "Vous décidez d'une demi-mesure. Vous écrivez, tout simplement : « Je m'appelle ___. Si vous voulez, écrivez-moi le vôtre. Ou pas. » (Vous inscrivez votre prénom sans trembler, c'est déjà beaucoup.) Trois jours plus tard, un prénom unique, en lettres un peu tremblées, est dans la marge : *Sacha.* Vous fermez le livre, lentement. Sacha. Votre classe, depuis la seconde. La fenêtre de la salle d'étude. La citation sur le cahier : vous aviez failli le voir. Le lundi, en cours de physique, vous la regardez. Enfin. Vraiment. Il relève les yeux, vos regards se croisent un court instant et ne se lâchent pas tout de suite cette fois. Il esquisse un sourire, à peine, juste un coin de la bouche, et replonge dans ses notes. Le sourire reste dessiné sur ses lèvres pendant encore quelques secondes, pour vous, puis s'efface. Vous savez. Il sait. Vous ne direz rien, ni l'un ni l'autre, jusqu'à la fin de l'année. Vous ne vous rencontrerez pas hors du lycée. Mais chaque fois que, dans un couloir, vos regards se croiseront, il y aura ce petit signal silencieux, cette reconnaissance sans mot. Et c'est peut-être, étrangement, la plus belle manière de garder un secret : le garder ensemble.",
+        "next": "end-secret-partage"
+      },
+      "attente_rdv": {
+        "id": "attente_rdv",
+        "type": "scene",
+        "text": "Quatre jours. Quatre jours où vous passez, chaque matin, chaque soir, ouvrir le livre. Rien. Vous commencez à imaginer toutes les catastrophes possibles : il a déménagé plus tôt, il a eu peur, il est vexé·e d'une chose que vous avez écrite sans faire attention, il ne veut pas que ça devienne réel. Le jeudi soir, vous avez presque décidé de ne pas y aller samedi, pour vous éviter la honte d'y être seule, assis·e sur un banc avec un livre jaune qui ne viendrait jamais. Vendredi matin, dernier passage avant le week-end. Vous tournez la page. Rien. Vous tournez la suivante. Rien. Vous tournez la suivante, plus par habitude que par espoir, et sur celle-ci, plus bas, en travers, en lettres plus appuyées que toutes les précédentes, nouvelle, toute neuve : « J'y serai. » Deux mots. C'est tout. Vous les relisez dix fois. Vous refermez le livre très lentement. Vous sortez de la bibliothèque. Vous avez le reste de la journée à tenir, et puis la nuit, et puis le lendemain matin.",
+        "next": "jour_j"
+      },
+      "jour_j": {
+        "id": "jour_j",
+        "type": "scene",
+        "text": "Samedi, quatorze heures trente. Vous êtes dans le métro. Vous avez changé de tenue trois fois : la première trop formelle, la deuxième trop décontractée, la troisième probablement absurde aussi, mais il faut bien arrêter. Vous avez relu les annotations recopiées dans votre cahier pendant une demi-heure ce matin, pour vous donner du courage ou pour vous en enlever, vous ne savez plus bien. Vous avez décidé d'arriver un peu en avance, pas pour attendre, juste pour ne pas arriver en retard. Le parc Monceau est presque vide à cette heure. Il fait beau. Un vent tiède fait trembler les platanes et soulève un peu la poussière. Vous repérez le kiosque de loin : vert, désuet, joli, entouré d'une petite grille blanche. Il n'y a personne dessous. Vous vous asseyez sur un banc à dix mètres, face au kiosque, sans trop savoir pourquoi. Peut-être pour laisser un peu d'espace. Peut-être pour avoir le temps de la voir, ou de le voir, arriver. Quatorze heures cinquante-huit. Quatorze heures cinquante-neuf. Votre cœur bat si fort que vous l'entendez presque dans vos oreilles.",
+        "next": "rencontre"
+      },
+      "rencontre": {
+        "id": "rencontre",
+        "type": "scene",
+        "text": "Quinze heures. Vous levez les yeux. Quelqu'un arrive par l'allée de gauche, lentement, un livre jaune à la main. Vous reconnaissez la silhouette bien avant le visage : la façon de marcher, un peu penchée en avant, comme si elle portait quelque chose de fragile. Et c'est Sacha. Sacha de votre classe, Sacha de la salle d'étude, Sacha dont vous aviez peut-être déjà croisé, un jour, la citation sur un cahier, et vous vous souvenez, à la seconde, de l'écriture fine, appliquée, et vous comprenez que, quelque part en vous, vous saviez déjà, sans vouloir vous le dire. Il vous aperçoit, ralentit, s'arrête à trois mètres du banc. Il tient le livre jaune à deux mains, comme un bouclier, ou comme une preuve. Il dit, doucement : « C'était vous. » Vous dites : « C'était vous. » Le silence, une seconde. Il rit à moitié, d'un rire petit, presque embarrassé, et il s'assied sur le banc, à un bras d'écart. Le soleil passe entre les feuilles, taches mouvantes sur le gravier. Vous êtes dans la même classe depuis deux ans et vous ne saviez pas. Vous avez rendu à peu près soixante copies au même professeur qu'il. Vous avez pris les mêmes bus, le même lycée, le même escalier B. Et c'est ici, sur ce banc, un samedi de fin mai, que vous vous voyez pour la première fois vraiment.",
+        "next": "conclusion_choice"
+      },
+      "conclusion_choice": {
+        "id": "conclusion_choice",
+        "type": "choice",
+        "text": "Sacha vous regarde. Il y a dans ses yeux quelque chose qui ressemble à de la reconnaissance : pas celle qu'on a en reconnaissant quelqu'un, l'autre, celle de se sentir enfin vu·e. Il prend une inspiration et dit : « Je vais vous demander une chose, et vous répondrez ce que vous voulez. Après, on aura les quelques semaines qui nous restent, ou rien, ou autre chose encore. À vous de décider. » Il pose sa main à plat sur le banc, la paume ouverte, à mi-chemin entre vous deux. Ce n'est pas un geste pour toucher : c'est une offre, juste là, posée, qui attend que vous la regardiez, ou pas, que vous y répondiez, ou pas.",
+        "choices": [
+          {
+            "id": "main-a-cote",
+            "label": "Poser votre main à côté de la sienne, sans la toucher",
+            "nextNode": "end-rencontre-belle"
+          },
+          {
+            "id": "main-prise",
+            "label": "Prendre sa main et serrer ses doigts",
+            "nextNode": "end-rencontre-lumineuse",
+            "conditions": [
+              {
+                "variable": "confiance",
+                "op": ">=",
+                "value": 4
+              }
+            ]
+          },
+          {
+            "id": "amitie",
+            "label": "Lui dire, honnêtement, que vous voulez d'abord être ami·e·s",
+            "nextNode": "end-amitie-sincere"
+          },
+          {
+            "id": "partir",
+            "label": "Vous lever, dire que c'était une erreur, et partir",
+            "nextNode": "end-rencontre-ratee"
+          },
+          {
+            "id": "tradition",
+            "label": "Lui raconter ce que Madame Mathieu vous a montré",
+            "nextNode": "end-tradition",
+            "conditions": [
+              {
+                "variable": "traditionRevelee",
+                "op": "==",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "end-regret": {
+        "id": "end-regret",
+        "type": "ending",
+        "endingId": "regret"
+      },
+      "end-solitude": {
+        "id": "end-solitude",
+        "type": "ending",
+        "endingId": "solitude"
+      },
+      "end-correspondance": {
+        "id": "end-correspondance",
+        "type": "ending",
+        "endingId": "correspondance"
+      },
+      "end-secret-partage": {
+        "id": "end-secret-partage",
+        "type": "ending",
+        "endingId": "secret-partage"
+      },
+      "end-rencontre-belle": {
+        "id": "end-rencontre-belle",
+        "type": "ending",
+        "endingId": "rencontre-belle"
+      },
+      "end-rencontre-lumineuse": {
+        "id": "end-rencontre-lumineuse",
+        "type": "ending",
+        "endingId": "rencontre-lumineuse"
+      },
+      "end-amitie-sincere": {
+        "id": "end-amitie-sincere",
+        "type": "ending",
+        "endingId": "amitie-sincere"
+      },
+      "end-rencontre-ratee": {
+        "id": "end-rencontre-ratee",
+        "type": "ending",
+        "endingId": "rencontre-ratee"
+      },
+      "end-tradition": {
+        "id": "end-tradition",
+        "type": "ending",
+        "endingId": "tradition"
+      }
+    },
+    "endings": {
+      "regret": {
+        "id": "regret",
+        "type": "neutral",
+        "title": "Une page non écrite",
+        "text": "Vous remettez le livre à sa place et vous en choisissez un autre. Vous rendez le commentaire de Bel-Ami sans éclat, vous passez vos lundis dans d'autres rayons, et la bibliothèque redevient, comme avant, une simple bibliothèque. Plus tard, bien plus tard (en licence, peut-être), vous repenserez à cette annotation au crayon, à la petite écriture appliquée que vous aviez rangée dans une boîte dans votre tête et sur laquelle vous aviez écrit « trop tard ». Vous vous demanderez ce qu'elle aurait pu devenir. Mais vous ne saurez pas. Certaines portes se referment parce qu'on les repousse, et pas parce qu'elles se ferment d'elles-mêmes. Celle-là, vous la laisserez, dans votre souvenir, éternellement entrouverte."
+      },
+      "solitude": {
+        "id": "solitude",
+        "type": "bad",
+        "title": "Le livre perdu",
+        "text": "Le livre est parti. Vous ne saurez jamais à qui appartenait l'écriture, ni ce qu'il pouvait bien espérer en laissant, chapitre après chapitre, ces petits morceaux d'elle ou de lui au crayon fin. Pendant des mois, vous revenez à la bibliothèque, vous cherchez dans les rayons voisins, vous feuilletez d'autres romans (Stendhal, Zola, Flaubert) pour y trouver la même écriture. Rien. L'hiver arrive. Vous ne savez même plus, à un moment, si vous n'avez pas inventé toute l'histoire. C'est peut-être la pire des choses : que le silence finisse par effacer jusqu'au souvenir de ce qu'il a tu. Vous en parlez, une fois, à votre meilleure amie, en un soir d'hiver trop lent. Elle vous dit : « C'était peut-être rien. » Vous dites : « Oui. Sûrement. » Mais au fond, vous savez que c'était quelque chose. Vous ne saurez juste jamais quoi."
+      },
+      "correspondance": {
+        "id": "correspondance",
+        "type": "good",
+        "title": "Une voix, longtemps",
+        "text": "L'été s'étend. Vous écrivez pour la première fois à l'adresse laissée dans l'enveloppe, à la main, sur du beau papier. La réponse arrive onze jours plus tard, à la main elle aussi, dans une enveloppe bleu pâle. Vous vous écrirez comme ça pendant trois ans, moins souvent qu'au lycée, plus profondément, peut-être. Vous vous rencontrerez enfin, à vingt et un ans, dans un café près de la gare Part-Dieu, et ce jour-là, ni l'un ni l'autre ne sera très sûr·e que c'était une bonne idée de se voir. Vous ne serez pas surpris·e : vous connaissez déjà ses silences, ses hésitations, sa façon d'appuyer sur certains mots et d'en laisser passer d'autres. Vous boirez un café. Vous parlerez moins bien que dans vos lettres. Vous vous embrasserez sur la joue en vous quittant, et, dans le train du retour, vous écrirez la lettre suivante. La voix, elle, aura tenu. Vous aurez eu quelqu'un à qui écrire, pendant tout ce temps, vraiment. Peu de gens peuvent en dire autant."
+      },
+      "secret-partage": {
+        "id": "secret-partage",
+        "type": "good",
+        "title": "Ce qu'on ne dit pas",
+        "text": "Vous finissez l'année sans un mot de plus. Pas un rendez-vous, pas un numéro, pas un mail. Seulement ces regards, une ou deux fois par semaine, dans les couloirs du lycée : un bref accord silencieux, comme un clin d'œil entre deux personnes qui sauraient seules une même chose drôle, ou importante. En juin, pendant les épreuves du bac, vous la·le croisez à la sortie de l'épreuve d'histoire. Il vous sourit, presque imperceptiblement, et lève une main, pas un adieu, pas non plus un vrai au revoir. Juste un signe. Un an plus tard, un mot vous parviendra, transmis par Madame Mathieu : une simple carte postale de Lyon, sans texte, avec, au dos, une phrase au crayon fin : *Je lis toujours avec quelqu'un en tête. C'est vous.* Vous la rangerez dans votre exemplaire personnel de Bel-Ami. Vous la retrouverez plusieurs fois par hasard, dans les années suivantes, et à chaque fois, vous sourirez tout seule. Des secrets, on en a parfois toute une vie. Celui-là, vous l'aurez choisi."
+      },
+      "rencontre-belle": {
+        "id": "rencontre-belle",
+        "type": "good",
+        "title": "À un souffle",
+        "text": "Vous posez votre main à plat sur le banc, à quelques centimètres de la sienne. Sans la toucher. Juste là. Sacha regarde vos deux mains, côte à côte, et il sourit, d'un vrai sourire cette fois, plus large, presque incrédule. Il dit : « D'accord. » Vous passez le reste de l'après-midi au parc. Vous parlez pour la première fois à voix haute, et c'est étrangement facile, comme si, finalement, vous saviez déjà vous écouter. Vous marchez jusqu'au soir. Au moment de vous séparer, devant la bouche de métro, il hésite, puis il pose ses lèvres, très vite, sur votre joue. Juillet est dans trois semaines. Lyon est à deux heures de train. Rien n'est réglé, rien n'est promis, mais quand vous rentrez chez vous, ce soir-là, vous avez, dans la poitrine, cette certitude nouvelle : que quelque chose a commencé, et qu'il tiendra ce qu'il pourra. Vous pensez à la prochaine annotation que vous écrirez, la semaine prochaine, dans le livre gris. Pour la première fois, vous savez à qui elle s'adresse."
+      },
+      "rencontre-lumineuse": {
+        "id": "rencontre-lumineuse",
+        "type": "good",
+        "title": "Le geste juste",
+        "text": "Vous prenez sa main, directement, sans hésiter : vos doigts se glissent entre les siens comme s'ils connaissaient déjà le chemin. Sacha rit, d'un rire surpris, presque soulagé. Il dit : « D'accord. D'accord. » Vous restez comme ça, longtemps, sans parler, à regarder le kiosque et les enfants qui courent autour, et la lumière qui tombe doucement dans les feuilles. Plus tard, vous marchez. Il vous raconte Lyon, la maison qu'il n'a pas choisie, l'école qu'il ne voulait pas, et vous l'écoutez, et vous lui promettez, sans avoir besoin de le promettre, que vous serez là. Pas tous les week-ends, pas toujours. Mais là. Vous vous quittez très tard, devant chez il. Il vous embrasse cette fois vraiment, sur la bouche, brièvement, mais sans timidité, comme quelqu'un qui a attendu longtemps et qui ne veut pas perdre plus de temps. En rentrant, vous riez tout·e seule dans le métro. Vous avez dix-sept ans, l'été commence, et pour une fois, vous savez exactement où est votre place."
+      },
+      "amitie-sincere": {
+        "id": "amitie-sincere",
+        "type": "good",
+        "title": "Plus vrai que ça",
+        "text": "Vous prenez une inspiration. Vous dites : « Je crois que je préfère qu'on soit ami·e·s, d'abord. Pour de vrai. Sans se forcer à autre chose. » Sacha vous regarde. Il hoche la tête, lentement. Il dit : « Oui. Oui, c'est sûrement mieux. » Il y a un moment de silence, un peu tendu, où vous craignez d'avoir tout cassé. Puis il sourit, un vrai sourire, et il dit : « De toute façon, c'est ce qu'on était déjà, non ? » Vous passez l'après-midi à marcher dans le parc, sans vous toucher la main, mais en parlant plus franchement que depuis deux mois d'annotations. L'été vient, il part à Lyon, vous restez ici. Vous vous écrivez, vous vous voyez deux, trois fois par an. Il assistera à votre remise de diplôme, dans deux ans, en souriant au fond de la salle. Vous n'aurez jamais été amoureux·ses, pas au sens où on l'entend d'habitude. Vous aurez été, l'un pour l'autre, quelque chose d'autre, peut-être de plus rare : la personne à qui on peut écrire n'importe quoi, à toute heure, et qui répondra toujours avec la même écriture fine, appliquée, qui ne ment pas."
+      },
+      "rencontre-ratee": {
+        "id": "rencontre-ratee",
+        "type": "bad",
+        "title": "Un banc vide",
+        "text": "La panique vous prend à la gorge, d'un coup. Vous vous levez. Vous dites, trop vite, d'une voix qui n'est pas la vôtre : « Je suis désolé·e. Je crois que c'était une erreur. Je n'aurais pas dû proposer. » Vous ne regardez pas Sacha. Vous marchez, puis vous courez presque, jusqu'à la sortie du parc. Dans le métro, vous tremblez. Le lundi, au lycée, il ne cherche pas votre regard. Vous non plus. Le livre, au rayon classique, reste à sa place, intact, sans nouvelle annotation ni de sa main, ni de la vôtre. Vous passez devant plusieurs fois, vous n'osez pas l'ouvrir. En juillet, il part à Lyon. Vous ne recevez pas de lettre. Vous n'en écrirez pas. Des années plus tard, vous vous direz que, ce jour-là, vous n'avez pas eu peur de Sacha, ni de l'amour, ni du rendez-vous. Vous avez eu peur de quelque chose de plus simple : que tout ça devienne vrai. Et vous vous direz aussi, sans savoir si c'est vrai, que certaines peurs coûtent plus cher que d'autres."
+      },
+      "tradition": {
+        "id": "tradition",
+        "type": "secret",
+        "title": "Une phrase qui continue",
+        "text": "Vous prenez une grande inspiration, et vous racontez. Les livres dans la réserve. Madame Mathieu en seconde, 1995. *Le Grand Meaulnes*. Les mains anonymes qui se sont succédé, à travers les années, dans les marges. Sacha écoute, ne vous interrompt pas. À la fin, il reste silencieux·se un long moment. Puis il dit, doucement : « Alors on n'est pas les premier·s. » Vous dites : « Non. » Il rit, un tout petit rire qui tient plus du souffle. Il dit : « C'est mieux comme ça. On n'invente rien. On continue, juste. » Vous restez assis·e·s sur le banc, sans plus dire grand-chose, pendant un long moment. Plus tard, vous marchez, vous prenez sa main sans lui demander. Mais, à côté de ce qui s'ouvre ce jour-là entre vous deux, il y a autre chose : plus grand, plus vieux, plus calme. Vous savez déjà, tou·te·s les deux, que ce qui est en train de naître n'aura pas à tenir tout seul. Il y avait quelqu'un avant vous. Il y aura quelqu'un après. À la rentrée prochaine, vous laisserez, d'un commun accord, une annotation dans un autre livre : Le Rouge et le Noir, peut-être, ou Belle du Seigneur. Vous ne saurez pas qui la trouvera. Vous ne saurez pas non plus, et c'est peut-être ça, le plus beau, si c'est vous que cette tradition a trouvé·e·s, ou vous qui l'avez trouvée. Une phrase peut durer longtemps quand elle passe de main en main."
+      }
+    }
+  }
+}
