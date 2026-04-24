@@ -1,13 +1,13 @@
 import { z } from 'zod'
 import type { BookContent } from './types'
 
-// Schema Zod qui reflete lib/reader/types.ts. Deux niveaux de validation :
-//  1) shape (Zod) : types primitifs, champs requis, unions discriminees
-//  2) integrite structurelle (code) : references internes (startNodeId,
-//     choice.nextNode, scene.next, ending.endingId, variables referencees)
-// Les deux passes sont utiles separemment : le premier message d'erreur
-// Zod aide a diagnostiquer un format de JSON invalide, le second detecte
-// un livre "syntaxiquement correct" mais incoherent.
+// Zod schema that mirrors lib/reader/types.ts. Two validation passes:
+//  1) shape (Zod): primitive types, required fields, discriminated unions
+//  2) structural integrity (code): internal references (startNodeId,
+//     choice.nextNode, scene.next, ending.endingId, referenced variables)
+// Both passes are useful independently: Zod's first error helps diagnose
+// an invalid JSON format; the second catches a "syntactically correct"
+// but inconsistent book.
 
 const VariableValueSchema = z.union([z.number(), z.boolean(), z.string()])
 
@@ -83,7 +83,7 @@ export function validateBookContent(input: unknown): BookContentValidation {
   const parsed = BookContentSchema.safeParse(input)
   if (!parsed.success) {
     const errors = parsed.error.issues.map((i) => {
-      const path = i.path.length ? i.path.join('.') : '<racine>'
+      const path = i.path.length ? i.path.join('.') : '<root>'
       return `${path} : ${i.message}`
     })
     return { ok: false, errors }
@@ -96,52 +96,50 @@ export function validateBookContent(input: unknown): BookContentValidation {
   const varNames = new Set(book.variablesSchema.map((v) => v.name))
 
   if (!nodeIds.has(book.startNodeId)) {
-    errors.push(`startNodeId "${book.startNodeId}" ne correspond à aucun node.`)
+    errors.push(`startNodeId "${book.startNodeId}" does not match any node.`)
   }
 
   for (const [nodeKey, node] of Object.entries(book.nodes)) {
     if (node.id !== nodeKey) {
-      errors.push(`Node "${nodeKey}" : id interne "${node.id}" different de la clef du Record.`)
+      errors.push(`Node "${nodeKey}": internal id "${node.id}" differs from the Record key.`)
     }
 
     if (node.type === 'scene') {
       if (!nodeIds.has(node.next)) {
-        errors.push(`Scene "${nodeKey}" : next "${node.next}" inexistant.`)
+        errors.push(`Scene "${nodeKey}": next "${node.next}" does not exist.`)
       }
     } else if (node.type === 'choice') {
       for (const choice of node.choices) {
         if (!nodeIds.has(choice.nextNode)) {
           errors.push(
-            `Choice "${choice.id}" (dans "${nodeKey}") : nextNode "${choice.nextNode}" inexistant.`,
+            `Choice "${choice.id}" (in "${nodeKey}"): nextNode "${choice.nextNode}" does not exist.`,
           )
         }
         for (const cond of choice.conditions ?? []) {
           if (!varNames.has(cond.variable)) {
             errors.push(
-              `Condition sur "${cond.variable}" (choice "${choice.id}") : variable non declaree.`,
+              `Condition on "${cond.variable}" (choice "${choice.id}"): variable not declared.`,
             )
           }
         }
         for (const eff of choice.effects ?? []) {
           if (!varNames.has(eff.variable)) {
             errors.push(
-              `Effet sur "${eff.variable}" (choice "${choice.id}") : variable non declaree.`,
+              `Effect on "${eff.variable}" (choice "${choice.id}"): variable not declared.`,
             )
           }
         }
       }
     } else if (node.type === 'ending') {
       if (!endingIds.has(node.endingId)) {
-        errors.push(`Ending node "${nodeKey}" reference "${node.endingId}" inexistant.`)
+        errors.push(`Ending node "${nodeKey}" references "${node.endingId}" which does not exist.`)
       }
     }
   }
 
   for (const [endingKey, ending] of Object.entries(book.endings)) {
     if (ending.id !== endingKey) {
-      errors.push(
-        `Ending "${endingKey}" : id interne "${ending.id}" different de la clef du Record.`,
-      )
+      errors.push(`Ending "${endingKey}": internal id "${ending.id}" differs from the Record key.`)
     }
   }
 

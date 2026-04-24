@@ -20,9 +20,9 @@ export function createInitialState(book: BookContent): ReaderState {
   }
 }
 
-// Recommencer le livre : variables / history / node courant remis a zero,
-// mais les fins deja decouvertes sont conservees (c'est un compteur
-// inter-parties, pas un etat de la partie courante).
+// Restart the book: variables / history / current node reset, but the
+// already-discovered endings are kept (that's a cross-playthrough
+// counter, not part of the current run's state).
 export function restartPreservingEndings(state: ReaderState, book: BookContent): ReaderState {
   return {
     ...createInitialState(book),
@@ -39,7 +39,7 @@ function checkCondition(condition: Condition, variables: Record<string, Variable
   if (condition.op === '==') return current === condition.value
   if (condition.op === '!=') return current !== condition.value
 
-  // Ordinaux : uniquement valides sur des nombres des deux cotes.
+  // Ordinal comparisons: only valid when both sides are numbers.
   if (typeof current !== 'number' || typeof condition.value !== 'number') {
     return false
   }
@@ -74,7 +74,7 @@ function applyEffect(
   }
   const current = next[effect.variable]
   if (typeof current !== 'number' || typeof effect.value !== 'number') {
-    // add/sub uniquement sur nombres ; sinon no-op silencieux.
+    // add/sub only on numbers; silent no-op otherwise.
     return next
   }
   next[effect.variable] = effect.op === 'add' ? current + effect.value : current - effect.value
@@ -99,14 +99,14 @@ export function availableChoices(node: Node, variables: Record<string, VariableV
 
 export function pickChoice(state: ReaderState, book: BookContent, choiceId: string): ReaderState {
   const node = book.nodes[state.currentNodeId]
-  if (!node) throw new Error(`Node inconnu : ${state.currentNodeId}`)
+  if (!node) throw new Error(`Unknown node: ${state.currentNodeId}`)
   if (node.type !== 'choice') {
-    throw new Error(`Le node ${node.id} n'est pas un choix`)
+    throw new Error(`Node ${node.id} is not a choice`)
   }
   const choice = node.choices.find((c) => c.id === choiceId)
-  if (!choice) throw new Error(`Choix inconnu : ${choiceId}`)
+  if (!choice) throw new Error(`Unknown choice: ${choiceId}`)
   if (!checkAllConditions(choice.conditions, state.variables)) {
-    throw new Error(`Choix indisponible : ${choiceId}`)
+    throw new Error(`Unavailable choice: ${choiceId}`)
   }
   const variables = applyEffects(choice.effects, state.variables)
   return advance(state, book, choice.nextNode, variables)
@@ -114,9 +114,9 @@ export function pickChoice(state: ReaderState, book: BookContent, choiceId: stri
 
 export function advanceScene(state: ReaderState, book: BookContent): ReaderState {
   const node = book.nodes[state.currentNodeId]
-  if (!node) throw new Error(`Node inconnu : ${state.currentNodeId}`)
+  if (!node) throw new Error(`Unknown node: ${state.currentNodeId}`)
   if (node.type !== 'scene') {
-    throw new Error(`Le node ${node.id} n'est pas une scene`)
+    throw new Error(`Node ${node.id} is not a scene`)
   }
   return advance(state, book, node.next, state.variables)
 }
@@ -128,7 +128,7 @@ function advance(
   variables: Record<string, VariableValue>,
 ): ReaderState {
   const nextNode = book.nodes[nextNodeId]
-  if (!nextNode) throw new Error(`Node inconnu : ${nextNodeId}`)
+  if (!nextNode) throw new Error(`Unknown node: ${nextNodeId}`)
 
   let reachedEndings = state.reachedEndings
   if (nextNode.type === 'ending' && !state.reachedEndings.includes(nextNode.endingId)) {

@@ -1,13 +1,13 @@
 import type { Book } from '@/lib/reader/types'
 
-// UUID fige pour permettre des seeds idempotents sur la base locale.
+// Fixed UUID so seeding is idempotent on the local database.
 export const LA_CHAMBRE_SECRETE_ID = '00000000-0000-0000-0000-0000000b0001'
 
 export const laChambreSecrete: Book = {
   id: LA_CHAMBRE_SECRETE_ID,
   slug: 'la-chambre-secrete',
   title: 'La Chambre secrète',
-  author: 'Anonyme',
+  author: 'nv-dev',
   coverImage: null,
   synopsis: 'Une vieille maison abandonnée. Une porte close. Un choix simple qui n’en est pas un.',
   genre: 'mystère',

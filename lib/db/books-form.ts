@@ -2,10 +2,10 @@ import { z } from 'zod'
 import { validateBookContent, type BookContentValidation } from '@/lib/reader/validation'
 import type { BookContent } from '@/lib/reader/types'
 
-// Regles slug : minuscules / chiffres / tirets, 1+ caracteres. Pas de
-// trailing/leading tiret. Pratique d'URL + eviter les collisions avec
-// `create`, `edit`, `lire` reserves.
-const SLUG_RESERVED = new Set(['create', 'edit', 'lire'])
+// Slug rules: lowercase / digits / hyphens, 1+ characters. No leading
+// or trailing hyphen. Makes nice URLs and avoids collisions with the
+// reserved segments `create`, `edit`, `read`.
+const SLUG_RESERVED = new Set(['create', 'edit', 'read'])
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 export const BookMetadataSchema = z.object({
@@ -18,7 +18,8 @@ export const BookMetadataSchema = z.object({
       message: `Slug réservé : ${Array.from(SLUG_RESERVED).join(', ')}.`,
     }),
   title: z.string().min(1, 'Titre requis.').max(200),
-  author: z.string().min(1, 'Auteur requis.').max(120),
+  // `author` intentionally absent: it is derived from the admin profile
+  // at creation time and immutable on edit. See _actions/admin.ts.
   synopsis: z
     .string()
     .max(2000)
@@ -72,16 +73,15 @@ export type BookFormParseResult =
   | { ok: true; metadata: ParsedMetadata; content: BookContent; publishedAt: Date | null }
   | { ok: false; errors: string[] }
 
-// Parse + valide FormData. Un seul tableau d'erreurs pour que l'UI les
-// affiche en bloc (plus parlant qu'une seule erreur a la fois sur un
-// formulaire a plusieurs champs).
+// Parse + validate FormData. A single error array so the UI can display
+// them as a block (more useful than one error at a time on a form with
+// many fields).
 export function parseBookForm(formData: FormData): BookFormParseResult {
   const raw = {
     slug: String(formData.get('slug') ?? '')
       .trim()
       .toLowerCase(),
     title: String(formData.get('title') ?? '').trim(),
-    author: String(formData.get('author') ?? '').trim(),
     synopsis: String(formData.get('synopsis') ?? '').trim(),
     genre: String(formData.get('genre') ?? '').trim(),
     tags: String(formData.get('tags') ?? '').trim(),

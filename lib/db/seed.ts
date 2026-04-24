@@ -1,4 +1,4 @@
-// A lancer avec DATABASE_URL dans l'env (via docker compose ou shell local).
+// Run with DATABASE_URL in the env (via docker compose or local shell).
 import { laChambreSecrete } from '@/content/la-chambre-secrete'
 import { db } from './client'
 import { books } from './schema'
@@ -39,12 +39,12 @@ async function main() {
       },
     })
 
-  console.log(`[seed] OK : ${values.slug}`)
+  console.log(`[seed] OK: ${values.slug}`)
 }
 
 main()
   .then(() => process.exit(0))
   .catch((err) => {
-    console.error('[seed] erreur :', err)
+    console.error('[seed] error:', err)
     process.exit(1)
   })

@@ -10,9 +10,9 @@ function getClient(): Database {
   if (cached) return cached
   const url = process.env.DATABASE_URL
   if (!url) {
-    throw new Error("DATABASE_URL manquante dans l'environnement")
+    throw new Error('DATABASE_URL missing from the environment')
   }
-  // prepare: false est requis sur le pooler transactionnel Supabase (PgBouncer).
+  // prepare: false is required on Supabase's transaction pooler (PgBouncer).
   cached = drizzle(postgres(url, { prepare: false }), {
     schema,
     casing: 'snake_case',
@@ -20,8 +20,8 @@ function getClient(): Database {
   return cached
 }
 
-// Proxy lazy : importer `db` ne touche pas a l'env tant qu'on n'appelle pas
-// une methode (permet le prerender statique sans DATABASE_URL en CI/build).
+// Lazy proxy: importing `db` does not touch the env until a method is
+// called (lets the static prerender succeed without DATABASE_URL in CI/build).
 export const db = new Proxy({} as Database, {
   get(_target, prop, receiver) {
     return Reflect.get(getClient(), prop, receiver)

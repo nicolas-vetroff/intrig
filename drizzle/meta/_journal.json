@@ -22,6 +22,20 @@
       "when": 1776943900000,
       "tag": "0002_profiles_sync",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1776948535661,
+      "tag": "0003_drop_waitlist",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1776951756388,
+      "tag": "0004_books_author_id",
+      "breakpoints": true
     }
   ]
 }

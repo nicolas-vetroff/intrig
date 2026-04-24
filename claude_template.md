@@ -14,6 +14,7 @@ Tâches :
 Ce que je veux à la fin :
 - [livrable vérifiable]
 - [livrable vérifiable]
+- Un ou plusieurs commits
 - Une mise à jour CLAUDE.md et README.md
 
 Points d'attention :

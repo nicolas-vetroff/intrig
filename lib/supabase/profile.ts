@@ -6,9 +6,9 @@ import { getCurrentUser, requireUser } from './auth'
 
 export type ProfileRow = typeof profiles.$inferSelect
 
-// Lecture silencieuse : renvoie le profil si connecte ET que la ligne
-// existe (elle doit exister grace au trigger on_auth_user_created), null
-// sinon. Pas de redirect -- utilisable depuis un layout.
+// Silent read: returns the profile if signed in AND the row exists (it
+// should, thanks to the on_auth_user_created trigger), null otherwise.
+// No redirect — safe to call from a layout.
 export async function getCurrentProfile(): Promise<ProfileRow | null> {
   const user = await getCurrentUser()
   if (!user) return null
@@ -17,20 +17,20 @@ export async function getCurrentProfile(): Promise<ProfileRow | null> {
   return rows[0] ?? null
 }
 
-// Garde stricte : requiert auth + username defini. Redirige sinon.
-//  - pas connecte -> /connexion?next=...
-//  - connecte mais pas de username -> /compte/choisir-pseudo?next=...
+// Strict guard: requires auth + defined username. Redirects otherwise.
+//  - not signed in                 -> /login?next=...
+//  - signed in but no username     -> /account/choose-username?next=...
 export async function requireProfile(next: string): Promise<ProfileRow> {
   await requireUser(next)
   const profile = await getCurrentProfile()
   if (!profile) {
-    // Edge case : user existe dans auth.users mais pas de ligne profiles
-    // (trigger pas encore applique ou erreur DB). On envoie quand meme sur
-    // la page pseudo, l'action saura creer la ligne.
-    redirect(`/compte/choisir-pseudo?next=${encodeURIComponent(next)}`)
+    // Edge case: user exists in auth.users but no profiles row yet
+    // (trigger not run yet or DB error). Still send them to the
+    // choose-username page; the action will create the row.
+    redirect(`/account/choose-username?next=${encodeURIComponent(next)}`)
   }
   if (!profile.username) {
-    redirect(`/compte/choisir-pseudo?next=${encodeURIComponent(next)}`)
+    redirect(`/account/choose-username?next=${encodeURIComponent(next)}`)
   }
   return profile
 }

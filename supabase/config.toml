@@ -90,7 +90,7 @@ enabled = true
 # Port to use for Supabase Studio.
 port = 54323
 # External URL of the API server that frontend connects to.
-api_url = "http://127.0.0.1"
+api_url = "http://localhost"
 # OpenAI API Key to use for Supabase AI in the Supabase Studio.
 openai_api_key = "env(OPENAI_API_KEY)"
 
@@ -151,16 +151,16 @@ max_indexes = 5
 enabled = true
 # The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
 # in emails.
-site_url = "http://127.0.0.1:3000"
-# Allowlist pour les emailRedirectTo passes depuis l'app. Le wildcard /**
-# permet /api/auth/confirm?next=... sans lister chaque chemin.
+site_url = "http://localhost:3030"
+# Allowlist for the emailRedirectTo values passed from the app. The /**
+# wildcard allows /api/auth/confirm?next=... without listing every path.
 additional_redirect_urls = [
-  "http://127.0.0.1:3000/**",
-  "http://localhost:3000/**",
+  "http://localhost:3030/**",
+  "http://localhost:3030/**",
 ]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
-# JWT issuer URL. If not set, defaults to the local API URL (http://127.0.0.1:<port>/auth/v1).
+# JWT issuer URL. If not set, defaults to the local API URL (http://localhost:<port>/auth/v1).
 # jwt_issuer = ""
 # Path to JWT signing key. DO NOT commit your signing keys file to git.
 # signing_keys_path = "./signing_keys.json"
@@ -189,7 +189,7 @@ password_requirements = ""
 # [auth.webauthn]
 # rp_display_name = "Supabase"
 # rp_id = "localhost"
-# rp_origins = ["http://127.0.0.1:3000"]
+# rp_origins = ["http://localhost:3000"]
 
 [auth.rate_limit]
 # Number of emails that can be sent per hour. Requires auth.email.smtp to be enabled.
@@ -369,10 +369,10 @@ authorization_url_path = "/oauth/consent"
 allow_dynamic_registration = false
 
 [edge_runtime]
-# Desactive en dev local : pas de Edge Functions au MVP et Deno ne trust pas
-# la CA d'entreprise (Cato) qui signe le proxy HTTPS, ce qui fait echouer
-# l'import des deps `deno.land/std/*`. A reactiver + mounter la CA dans le
-# container si on attaque les Edge Functions plus tard.
+# Disabled in local dev: no Edge Functions at MVP, and Deno does not
+# trust the corporate CA (Cato) that signs the HTTPS proxy, which breaks
+# `deno.land/std/*` imports. Re-enable + mount the CA into the container
+# when we start writing Edge Functions.
 enabled = false
 # Supported request policies: `oneshot`, `per_worker`.
 # `per_worker` (default) — enables hot reload during local development.

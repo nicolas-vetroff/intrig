@@ -1,6 +1,6 @@
-// Regles pseudo : 3-32 caracteres, lettres / chiffres / _ / - uniquement.
-// On normalise en minuscules avant de stocker : uniformise la comparaison
-// cote unique constraint DB, et garde l'affichage coherent.
+// Username rules: 3-32 characters, letters / digits / _ / - only. We
+// normalize to lowercase before storing: uniform comparison on the DB
+// UNIQUE constraint and consistent display.
 const USERNAME_PATTERN = /^[a-z0-9_-]{3,32}$/
 
 export type UsernameValidation = { ok: true; value: string } | { ok: false; message: string }

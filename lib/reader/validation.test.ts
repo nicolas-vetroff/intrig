@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { validateBookContent } from './validation'
 
-// Helpers pour construire des fixtures concises.
+// Helpers for concise fixtures.
 const minimal = {
   startNodeId: 'a',
   variablesSchema: [],
@@ -9,44 +9,44 @@ const minimal = {
     a: { id: 'a', type: 'ending', endingId: 'e1' },
   },
   endings: {
-    e1: { id: 'e1', type: 'good', title: 'Fin', text: 'Fin atteinte.' },
+    e1: { id: 'e1', type: 'good', title: 'End', text: 'Reached an ending.' },
   },
 }
 
 describe('validateBookContent', () => {
-  it('accepte un livre minimal valide', () => {
+  it('accepts a minimal valid book', () => {
     const r = validateBookContent(minimal)
     expect(r.ok).toBe(true)
     if (r.ok) expect(r.value.startNodeId).toBe('a')
   })
 
-  it('rejette les entrees non-objet avec une erreur Zod', () => {
+  it('rejects non-object inputs with a Zod error', () => {
     expect(validateBookContent(null).ok).toBe(false)
     expect(validateBookContent('hello').ok).toBe(false)
     expect(validateBookContent(42).ok).toBe(false)
     expect(validateBookContent([]).ok).toBe(false)
   })
 
-  it('rejette un startNodeId qui ne matche aucun node', () => {
-    const r = validateBookContent({ ...minimal, startNodeId: 'fantome' })
+  it('rejects a startNodeId that matches no node', () => {
+    const r = validateBookContent({ ...minimal, startNodeId: 'ghost' })
     expect(r.ok).toBe(false)
     if (!r.ok) expect(r.errors.some((e) => e.includes('startNodeId'))).toBe(true)
   })
 
-  it('rejette un scene.next qui pointe vers un node inexistant', () => {
+  it('rejects a scene.next pointing to a non-existent node', () => {
     const r = validateBookContent({
       startNodeId: 'a',
       variablesSchema: [],
       nodes: {
-        a: { id: 'a', type: 'scene', text: 'Debut', next: 'fantome' },
+        a: { id: 'a', type: 'scene', text: 'Start', next: 'ghost' },
       },
       endings: {},
     })
     expect(r.ok).toBe(false)
-    if (!r.ok) expect(r.errors.some((e) => e.includes('fantome'))).toBe(true)
+    if (!r.ok) expect(r.errors.some((e) => e.includes('ghost'))).toBe(true)
   })
 
-  it('rejette un choice.nextNode qui pointe vers un node inexistant', () => {
+  it('rejects a choice.nextNode pointing to a non-existent node', () => {
     const r = validateBookContent({
       startNodeId: 'a',
       variablesSchema: [],
@@ -54,26 +54,26 @@ describe('validateBookContent', () => {
         a: {
           id: 'a',
           type: 'choice',
-          text: 'Choix ?',
-          choices: [{ id: 'c', label: 'x', nextNode: 'fantome' }],
+          text: 'Choose?',
+          choices: [{ id: 'c', label: 'x', nextNode: 'ghost' }],
         },
       },
       endings: {},
     })
     expect(r.ok).toBe(false)
-    if (!r.ok) expect(r.errors.some((e) => e.includes('fantome'))).toBe(true)
+    if (!r.ok) expect(r.errors.some((e) => e.includes('ghost'))).toBe(true)
   })
 
-  it('rejette un ending node qui pointe vers un endingId inexistant', () => {
+  it('rejects an ending node pointing to a non-existent endingId', () => {
     const r = validateBookContent({
       ...minimal,
-      nodes: { a: { id: 'a', type: 'ending', endingId: 'fantome' } },
+      nodes: { a: { id: 'a', type: 'ending', endingId: 'ghost' } },
     })
     expect(r.ok).toBe(false)
-    if (!r.ok) expect(r.errors.some((e) => e.includes('fantome'))).toBe(true)
+    if (!r.ok) expect(r.errors.some((e) => e.includes('ghost'))).toBe(true)
   })
 
-  it('rejette une variable utilisee en condition mais non declaree dans variablesSchema', () => {
+  it('rejects a variable used in a condition but not declared in variablesSchema', () => {
     const r = validateBookContent({
       startNodeId: 'a',
       variablesSchema: [],
@@ -87,19 +87,19 @@ describe('validateBookContent', () => {
               id: 'c',
               label: 'x',
               nextNode: 'b',
-              conditions: [{ variable: 'fantome', op: '==', value: 1 }],
+              conditions: [{ variable: 'ghost', op: '==', value: 1 }],
             },
           ],
         },
         b: { id: 'b', type: 'ending', endingId: 'e1' },
       },
-      endings: { e1: { id: 'e1', type: 'good', title: 'Fin', text: '…' } },
+      endings: { e1: { id: 'e1', type: 'good', title: 'End', text: '…' } },
     })
     expect(r.ok).toBe(false)
-    if (!r.ok) expect(r.errors.some((e) => e.includes('fantome'))).toBe(true)
+    if (!r.ok) expect(r.errors.some((e) => e.includes('ghost'))).toBe(true)
   })
 
-  it('rejette une variable utilisee en effect mais non declaree', () => {
+  it('rejects a variable used in an effect but not declared', () => {
     const r = validateBookContent({
       startNodeId: 'a',
       variablesSchema: [],
@@ -113,19 +113,19 @@ describe('validateBookContent', () => {
               id: 'c',
               label: 'x',
               nextNode: 'b',
-              effects: [{ variable: 'fantome', op: 'set', value: 1 }],
+              effects: [{ variable: 'ghost', op: 'set', value: 1 }],
             },
           ],
         },
         b: { id: 'b', type: 'ending', endingId: 'e1' },
       },
-      endings: { e1: { id: 'e1', type: 'good', title: 'Fin', text: '…' } },
+      endings: { e1: { id: 'e1', type: 'good', title: 'End', text: '…' } },
     })
     expect(r.ok).toBe(false)
-    if (!r.ok) expect(r.errors.some((e) => e.includes('fantome'))).toBe(true)
+    if (!r.ok) expect(r.errors.some((e) => e.includes('ghost'))).toBe(true)
   })
 
-  it("rejette un node dont l'id interne ne matche pas la cle du Record", () => {
+  it('rejects a node whose internal id does not match the Record key', () => {
     const r = validateBookContent({
       ...minimal,
       nodes: {
@@ -136,7 +136,7 @@ describe('validateBookContent', () => {
     if (!r.ok) expect(r.errors.some((e) => e.toLowerCase().includes('id'))).toBe(true)
   })
 
-  it('rejette un type de node inconnu', () => {
+  it('rejects an unknown node type', () => {
     const r = validateBookContent({
       ...minimal,
       nodes: { a: { id: 'a', type: 'wtf', text: 'x' } as unknown as object },
@@ -144,7 +144,7 @@ describe('validateBookContent', () => {
     expect(r.ok).toBe(false)
   })
 
-  it('rejette un champ manquant (scene.text)', () => {
+  it('rejects a missing field (scene.text)', () => {
     const r = validateBookContent({
       startNodeId: 'a',
       variablesSchema: [],
@@ -154,40 +154,40 @@ describe('validateBookContent', () => {
     expect(r.ok).toBe(false)
   })
 
-  it('accepte un graphe avec variables / conditions / effets coherents', () => {
+  it('accepts a graph with consistent variables / conditions / effects', () => {
     const r = validateBookContent({
       startNodeId: 'start',
-      variablesSchema: [{ name: 'cle', type: 'boolean', initial: false }],
+      variablesSchema: [{ name: 'key', type: 'boolean', initial: false }],
       nodes: {
         start: {
           id: 'start',
           type: 'choice',
-          text: 'Prendre la cle ?',
+          text: 'Take the key?',
           choices: [
             {
-              id: 'oui',
-              label: 'Oui',
-              nextNode: 'porte',
-              effects: [{ variable: 'cle', op: 'set', value: true }],
+              id: 'yes',
+              label: 'Yes',
+              nextNode: 'door',
+              effects: [{ variable: 'key', op: 'set', value: true }],
             },
           ],
         },
-        porte: {
-          id: 'porte',
+        door: {
+          id: 'door',
           type: 'choice',
-          text: 'Porte',
+          text: 'Door',
           choices: [
             {
-              id: 'ouvrir',
-              label: 'Ouvrir',
-              nextNode: 'fin',
-              conditions: [{ variable: 'cle', op: '==', value: true }],
+              id: 'open',
+              label: 'Open',
+              nextNode: 'end',
+              conditions: [{ variable: 'key', op: '==', value: true }],
             },
           ],
         },
-        fin: { id: 'fin', type: 'ending', endingId: 'success' },
+        end: { id: 'end', type: 'ending', endingId: 'success' },
       },
-      endings: { success: { id: 'success', type: 'good', title: 'Gagne', text: 'Bravo.' } },
+      endings: { success: { id: 'success', type: 'good', title: 'Won', text: 'Well done.' } },
     })
     expect(r.ok).toBe(true)
   })

@@ -14,44 +14,44 @@ const fixture: BookContent = {
   startNodeId: 'start',
   variablesSchema: [
     { name: 'courage', type: 'number', initial: 0 },
-    { name: 'aClef', type: 'boolean', initial: false },
+    { name: 'hasKey', type: 'boolean', initial: false },
   ],
   nodes: {
     start: {
       id: 'start',
       type: 'choice',
-      text: 'Prendre ou non la clef ?',
+      text: 'Take the key or not?',
       choices: [
         {
           id: 'c1',
-          label: 'Prendre la clef',
-          nextNode: 'porte',
+          label: 'Take the key',
+          nextNode: 'door',
           effects: [
-            { variable: 'aClef', op: 'set', value: true },
+            { variable: 'hasKey', op: 'set', value: true },
             { variable: 'courage', op: 'add', value: 1 },
           ],
         },
         {
           id: 'c2',
-          label: 'Ignorer la clef',
-          nextNode: 'porte',
+          label: 'Ignore the key',
+          nextNode: 'door',
         },
       ],
     },
-    porte: {
-      id: 'porte',
+    door: {
+      id: 'door',
       type: 'choice',
-      text: 'Devant la porte close.',
+      text: 'In front of the locked door.',
       choices: [
         {
-          id: 'ouvrir',
-          label: 'Ouvrir',
+          id: 'open',
+          label: 'Open',
           nextNode: 'end-good',
-          conditions: [{ variable: 'aClef', op: '==', value: true }],
+          conditions: [{ variable: 'hasKey', op: '==', value: true }],
         },
         {
-          id: 'partir',
-          label: 'Partir',
+          id: 'leave',
+          label: 'Leave',
           nextNode: 'end-neutral',
         },
       ],
@@ -60,44 +60,44 @@ const fixture: BookContent = {
     'end-neutral': { id: 'end-neutral', type: 'ending', endingId: 'e-abandon' },
   },
   endings: {
-    'e-success': { id: 'e-success', type: 'good', title: 'Succès', text: '...' },
+    'e-success': { id: 'e-success', type: 'good', title: 'Success', text: '...' },
     'e-abandon': { id: 'e-abandon', type: 'neutral', title: 'Abandon', text: '...' },
   },
 }
 
 describe('createInitialState', () => {
-  it('initialise les variables depuis le schema', () => {
+  it('initializes variables from the schema', () => {
     const s = createInitialState(fixture)
     expect(s.currentNodeId).toBe('start')
-    expect(s.variables).toEqual({ courage: 0, aClef: false })
+    expect(s.variables).toEqual({ courage: 0, hasKey: false })
     expect(s.history).toEqual(['start'])
     expect(s.reachedEndings).toEqual([])
   })
 })
 
 describe('applyEffects', () => {
-  it('gere set sur booleen', () => {
-    const vars = applyEffects([{ variable: 'aClef', op: 'set', value: true }], {
-      aClef: false,
+  it('handles set on a boolean', () => {
+    const vars = applyEffects([{ variable: 'hasKey', op: 'set', value: true }], {
+      hasKey: false,
     })
-    expect(vars.aClef).toBe(true)
+    expect(vars.hasKey).toBe(true)
   })
 
-  it('gere add sur nombre', () => {
+  it('handles add on a number', () => {
     const vars = applyEffects([{ variable: 'courage', op: 'add', value: 2 }], {
       courage: 3,
     })
     expect(vars.courage).toBe(5)
   })
 
-  it('gere sub sur nombre', () => {
+  it('handles sub on a number', () => {
     const vars = applyEffects([{ variable: 'courage', op: 'sub', value: 2 }], {
       courage: 5,
     })
     expect(vars.courage).toBe(3)
   })
 
-  it("combine plusieurs effets dans l'ordre", () => {
+  it('combines multiple effects in order', () => {
     const vars = applyEffects(
       [
         { variable: 'courage', op: 'add', value: 1 },
@@ -108,13 +108,13 @@ describe('applyEffects', () => {
     expect(vars.courage).toBe(3)
   })
 
-  it("ne mute pas l'objet source", () => {
+  it('does not mutate the source object', () => {
     const source = { courage: 0 }
     applyEffects([{ variable: 'courage', op: 'add', value: 1 }], source)
     expect(source.courage).toBe(0)
   })
 
-  it("renvoie la reference d'origine sans effets", () => {
+  it('returns the original reference when there are no effects', () => {
     const source = { courage: 0 }
     expect(applyEffects(undefined, source)).toBe(source)
     expect(applyEffects([], source)).toBe(source)
@@ -122,19 +122,19 @@ describe('applyEffects', () => {
 })
 
 describe('checkAllConditions', () => {
-  it("est vrai quand il n'y a pas de conditions", () => {
+  it('is true when there are no conditions', () => {
     expect(checkAllConditions(undefined, {})).toBe(true)
     expect(checkAllConditions([], {})).toBe(true)
   })
 
-  it('combine les conditions en AND', () => {
+  it('combines conditions with AND', () => {
     expect(
       checkAllConditions(
         [
           { variable: 'courage', op: '>=', value: 1 },
-          { variable: 'aClef', op: '==', value: true },
+          { variable: 'hasKey', op: '==', value: true },
         ],
-        { courage: 1, aClef: true },
+        { courage: 1, hasKey: true },
       ),
     ).toBe(true)
 
@@ -142,119 +142,119 @@ describe('checkAllConditions', () => {
       checkAllConditions(
         [
           { variable: 'courage', op: '>=', value: 1 },
-          { variable: 'aClef', op: '==', value: true },
+          { variable: 'hasKey', op: '==', value: true },
         ],
-        { courage: 1, aClef: false },
+        { courage: 1, hasKey: false },
       ),
     ).toBe(false)
   })
 
-  it('refuse les comparaisons ordinales entre types incompatibles', () => {
-    expect(checkAllConditions([{ variable: 'aClef', op: '>', value: true }], { aClef: true })).toBe(
-      false,
-    )
+  it('rejects ordinal comparisons between incompatible types', () => {
+    expect(
+      checkAllConditions([{ variable: 'hasKey', op: '>', value: true }], { hasKey: true }),
+    ).toBe(false)
   })
 
-  it('est faux si la variable est inconnue', () => {
-    expect(checkAllConditions([{ variable: 'fantome', op: '==', value: 1 }], {})).toBe(false)
+  it('is false when the variable is unknown', () => {
+    expect(checkAllConditions([{ variable: 'ghost', op: '==', value: 1 }], {})).toBe(false)
   })
 })
 
 describe('availableChoices', () => {
-  it('filtre les choix dont les conditions echouent', () => {
-    const porte = fixture.nodes.porte
-    if (!porte || porte.type !== 'choice') throw new Error('fixture cassee')
+  it('filters out choices whose conditions fail', () => {
+    const door = fixture.nodes.door
+    if (!door || door.type !== 'choice') throw new Error('fixture broken')
 
     const ids = (vars: Record<string, unknown>) =>
-      availableChoices(porte, vars as never).map((c) => c.id)
+      availableChoices(door, vars as never).map((c) => c.id)
 
-    expect(ids({ aClef: true })).toEqual(['ouvrir', 'partir'])
-    expect(ids({ aClef: false })).toEqual(['partir'])
+    expect(ids({ hasKey: true })).toEqual(['open', 'leave'])
+    expect(ids({ hasKey: false })).toEqual(['leave'])
   })
 
-  it("renvoie une liste vide sur un node qui n'est pas un choix", () => {
+  it('returns an empty list when the node is not a choice', () => {
     const ending = fixture.nodes['end-good']
-    if (!ending) throw new Error('fixture cassee')
+    if (!ending) throw new Error('fixture broken')
     expect(availableChoices(ending, {})).toEqual([])
   })
 })
 
 describe('pickChoice', () => {
-  it('avance vers nextNode en appliquant les effets', () => {
+  it('advances to nextNode and applies effects', () => {
     const state = createInitialState(fixture)
     const next = pickChoice(state, fixture, 'c1')
-    expect(next.currentNodeId).toBe('porte')
-    expect(next.variables.aClef).toBe(true)
+    expect(next.currentNodeId).toBe('door')
+    expect(next.variables.hasKey).toBe(true)
     expect(next.variables.courage).toBe(1)
-    expect(next.history).toEqual(['start', 'porte'])
+    expect(next.history).toEqual(['start', 'door'])
   })
 
-  it('throw sur un choix inconnu', () => {
+  it('throws on an unknown choice', () => {
     const state = createInitialState(fixture)
     expect(() => pickChoice(state, fixture, 'xxx')).toThrow()
   })
 
-  it('throw sur un choix dont les conditions ne sont pas satisfaites', () => {
+  it('throws on a choice whose conditions are not met', () => {
     const s0 = createInitialState(fixture)
-    const atPorteSansClef = pickChoice(s0, fixture, 'c2')
-    expect(() => pickChoice(atPorteSansClef, fixture, 'ouvrir')).toThrow()
+    const atDoorWithoutKey = pickChoice(s0, fixture, 'c2')
+    expect(() => pickChoice(atDoorWithoutKey, fixture, 'open')).toThrow()
   })
 
-  it("enregistre l'ending atteint dans reachedEndings", () => {
+  it('records the reached ending in reachedEndings', () => {
     const s0 = createInitialState(fixture)
     const s1 = pickChoice(s0, fixture, 'c1')
-    const s2 = pickChoice(s1, fixture, 'ouvrir')
+    const s2 = pickChoice(s1, fixture, 'open')
     expect(s2.currentNodeId).toBe('end-good')
     expect(s2.reachedEndings).toEqual(['e-success'])
   })
 
-  it('ne duplique pas un ending deja atteint', () => {
+  it('does not duplicate an already-reached ending', () => {
     const s0 = createInitialState(fixture)
     const s1 = pickChoice(s0, fixture, 'c1')
-    const s2 = pickChoice(s1, fixture, 'ouvrir')
-    // Simule un second run qui retombe sur le meme ending
-    const replayed = pickChoice({ ...s2, currentNodeId: 'porte' }, fixture, 'ouvrir')
+    const s2 = pickChoice(s1, fixture, 'open')
+    // Simulate a second run that lands on the same ending
+    const replayed = pickChoice({ ...s2, currentNodeId: 'door' }, fixture, 'open')
     expect(replayed.reachedEndings).toEqual(['e-success'])
   })
 })
 
-describe('applyEffects (cas supplementaires)', () => {
-  it('set remplace la valeur quel que soit le type initial', () => {
-    const vars = applyEffects([{ variable: 'nom', op: 'set', value: 'Alice' }], { nom: 'Bob' })
-    expect(vars.nom).toBe('Alice')
+describe('applyEffects (additional cases)', () => {
+  it('set replaces the value regardless of initial type', () => {
+    const vars = applyEffects([{ variable: 'name', op: 'set', value: 'Alice' }], { name: 'Bob' })
+    expect(vars.name).toBe('Alice')
   })
 
-  it("set cree la variable si elle n'existait pas", () => {
-    const vars = applyEffects([{ variable: 'nouveau', op: 'set', value: 42 }], {})
-    expect(vars.nouveau).toBe(42)
+  it('set creates the variable when it did not exist', () => {
+    const vars = applyEffects([{ variable: 'new', op: 'set', value: 42 }], {})
+    expect(vars.new).toBe(42)
   })
 
-  it('add et sub sont silencieux sur une variable inconnue', () => {
-    // Contrat : seules les variables declarees dans variablesSchema peuvent etre
-    // incrementees. Un add/sub sur une var absente = no-op, pas de crash.
-    expect(applyEffects([{ variable: 'fantome', op: 'add', value: 1 }], {})).toEqual({})
-    expect(applyEffects([{ variable: 'fantome', op: 'sub', value: 1 }], {})).toEqual({})
+  it('add and sub are silent on an unknown variable', () => {
+    // Contract: only variables declared in variablesSchema can be
+    // incremented. An add/sub on an absent var is a no-op, not a crash.
+    expect(applyEffects([{ variable: 'ghost', op: 'add', value: 1 }], {})).toEqual({})
+    expect(applyEffects([{ variable: 'ghost', op: 'sub', value: 1 }], {})).toEqual({})
   })
 
-  it('add/sub ne touchent pas les non-nombres', () => {
-    const vars = applyEffects([{ variable: 'nom', op: 'add', value: 1 }], { nom: 'Alice' })
-    expect(vars.nom).toBe('Alice')
+  it('add/sub do not touch non-numbers', () => {
+    const vars = applyEffects([{ variable: 'name', op: 'add', value: 1 }], { name: 'Alice' })
+    expect(vars.name).toBe('Alice')
   })
 
-  it('applique des effets sur plusieurs variables differentes', () => {
+  it('applies effects across multiple different variables', () => {
     const vars = applyEffects(
       [
-        { variable: 'aClef', op: 'set', value: true },
+        { variable: 'hasKey', op: 'set', value: true },
         { variable: 'courage', op: 'add', value: 2 },
-        { variable: 'nom', op: 'set', value: 'Alice' },
+        { variable: 'name', op: 'set', value: 'Alice' },
       ],
-      { aClef: false, courage: 3, nom: '' },
+      { hasKey: false, courage: 3, name: '' },
     )
-    expect(vars).toEqual({ aClef: true, courage: 5, nom: 'Alice' })
+    expect(vars).toEqual({ hasKey: true, courage: 5, name: 'Alice' })
   })
 })
 
-describe('checkAllConditions (tous les operateurs)', () => {
+describe('checkAllConditions (all operators)', () => {
   const check = (op: string, current: unknown, value: unknown) =>
     checkAllConditions([{ variable: 'v', op: op as '==', value: value as number }], {
       v: current as number,
@@ -273,7 +273,7 @@ describe('checkAllConditions (tous les operateurs)', () => {
     ['>=', 4, 5, false],
     ['<=', 5, 5, true],
     ['<=', 6, 5, false],
-  ])('%s : %i vs %i -> %s (nombres)', (op, current, value, expected) => {
+  ])('%s : %i vs %i -> %s (numbers)', (op, current, value, expected) => {
     expect(check(op, current, value)).toBe(expected)
   })
 
@@ -290,56 +290,56 @@ describe('checkAllConditions (tous les operateurs)', () => {
     ['==', true, true, true],
     ['==', true, false, false],
     ['!=', true, false, true],
-  ])('%s : %s vs %s -> %s (booleens)', (op, current, value, expected) => {
+  ])('%s : %s vs %s -> %s (booleans)', (op, current, value, expected) => {
     expect(check(op, current, value)).toBe(expected)
   })
 })
 
-describe('variables string (bout en bout)', () => {
+describe('string variables (end to end)', () => {
   const stringBook: BookContent = {
     startNodeId: 'a',
-    variablesSchema: [{ name: 'nom', type: 'string', initial: '' }],
+    variablesSchema: [{ name: 'name', type: 'string', initial: '' }],
     nodes: {
       a: {
         id: 'a',
         type: 'choice',
-        text: 'Votre nom ?',
+        text: 'Your name?',
         choices: [
           {
             id: 'alice',
             label: 'Alice',
             nextNode: 'b',
-            effects: [{ variable: 'nom', op: 'set', value: 'Alice' }],
+            effects: [{ variable: 'name', op: 'set', value: 'Alice' }],
           },
           {
             id: 'bob',
             label: 'Bob',
             nextNode: 'b',
-            effects: [{ variable: 'nom', op: 'set', value: 'Bob' }],
+            effects: [{ variable: 'name', op: 'set', value: 'Bob' }],
           },
         ],
       },
       b: {
         id: 'b',
         type: 'choice',
-        text: 'Qui etes-vous ?',
+        text: 'Who are you?',
         choices: [
           {
             id: 'only-alice',
-            label: 'Pour Alice',
-            nextNode: 'fin-a',
-            conditions: [{ variable: 'nom', op: '==', value: 'Alice' }],
+            label: 'For Alice',
+            nextNode: 'end-a',
+            conditions: [{ variable: 'name', op: '==', value: 'Alice' }],
           },
           {
             id: 'not-alice',
-            label: 'Pour tous les autres',
-            nextNode: 'fin-b',
-            conditions: [{ variable: 'nom', op: '!=', value: 'Alice' }],
+            label: 'For everyone else',
+            nextNode: 'end-b',
+            conditions: [{ variable: 'name', op: '!=', value: 'Alice' }],
           },
         ],
       },
-      'fin-a': { id: 'fin-a', type: 'ending', endingId: 'ea' },
-      'fin-b': { id: 'fin-b', type: 'ending', endingId: 'eb' },
+      'end-a': { id: 'end-a', type: 'ending', endingId: 'ea' },
+      'end-b': { id: 'end-b', type: 'ending', endingId: 'eb' },
     },
     endings: {
       ea: { id: 'ea', type: 'good', title: 'A', text: '' },
@@ -347,17 +347,17 @@ describe('variables string (bout en bout)', () => {
     },
   }
 
-  it('initialise, set et filtre les choix via une variable string', () => {
+  it('initializes, sets and filters choices via a string variable', () => {
     const s0 = createInitialState(stringBook)
-    expect(s0.variables.nom).toBe('')
+    expect(s0.variables.name).toBe('')
 
-    const chose = pickChoice(s0, stringBook, 'alice')
-    expect(chose.variables.nom).toBe('Alice')
+    const picked = pickChoice(s0, stringBook, 'alice')
+    expect(picked.variables.name).toBe('Alice')
 
-    const choixB = stringBook.nodes.b
-    if (!choixB || choixB.type !== 'choice') throw new Error('fixture cassee')
-    const visibles = availableChoices(choixB, chose.variables).map((c) => c.id)
-    expect(visibles).toEqual(['only-alice'])
+    const choiceB = stringBook.nodes.b
+    if (!choiceB || choiceB.type !== 'choice') throw new Error('fixture broken')
+    const visible = availableChoices(choiceB, picked.variables).map((c) => c.id)
+    expect(visible).toEqual(['only-alice'])
   })
 })
 
@@ -366,52 +366,52 @@ describe('advanceScene', () => {
     startNodeId: 's1',
     variablesSchema: [],
     nodes: {
-      s1: { id: 's1', type: 'scene', text: 'Premiere scene', next: 's2' },
-      s2: { id: 's2', type: 'scene', text: 'Deuxieme scene', next: 'fin' },
-      fin: { id: 'fin', type: 'ending', endingId: 'e' },
+      s1: { id: 's1', type: 'scene', text: 'First scene', next: 's2' },
+      s2: { id: 's2', type: 'scene', text: 'Second scene', next: 'end' },
+      end: { id: 'end', type: 'ending', endingId: 'e' },
     },
     endings: {
-      e: { id: 'e', type: 'good', title: 'Fin', text: '' },
+      e: { id: 'e', type: 'good', title: 'End', text: '' },
     },
   }
 
-  it('avance sur le node suivant et alimente history', () => {
+  it('advances to the next node and feeds history', () => {
     const s0 = createInitialState(sceneBook)
     const s1 = advanceScene(s0, sceneBook)
     expect(s1.currentNodeId).toBe('s2')
     expect(s1.history).toEqual(['s1', 's2'])
 
     const s2 = advanceScene(s1, sceneBook)
-    expect(s2.currentNodeId).toBe('fin')
+    expect(s2.currentNodeId).toBe('end')
     expect(s2.reachedEndings).toEqual(['e'])
   })
 
-  it("throw si le node courant n'est pas une scene", () => {
+  it('throws when the current node is not a scene', () => {
     const atChoice = createInitialState(fixture)
     expect(() => advanceScene(atChoice, fixture)).toThrow(/scene/)
   })
 })
 
 describe('restartPreservingEndings', () => {
-  it("remet l'etat courant a zero mais conserve les endings atteints", () => {
+  it('resets the current state but preserves reached endings', () => {
     const s0 = createInitialState(fixture)
-    const atPorte = pickChoice(s0, fixture, 'c1')
-    const afterGood = pickChoice(atPorte, fixture, 'ouvrir')
+    const atDoor = pickChoice(s0, fixture, 'c1')
+    const afterGood = pickChoice(atDoor, fixture, 'open')
     expect(afterGood.reachedEndings).toEqual(['e-success'])
 
     const restarted = restartPreservingEndings(afterGood, fixture)
     expect(restarted.currentNodeId).toBe(fixture.startNodeId)
-    expect(restarted.variables).toEqual({ courage: 0, aClef: false })
+    expect(restarted.variables).toEqual({ courage: 0, hasKey: false })
     expect(restarted.history).toEqual([fixture.startNodeId])
     expect(restarted.reachedEndings).toEqual(['e-success'])
   })
 
-  it('cumule les endings a travers plusieurs parties', () => {
+  it('accumulates endings across multiple playthroughs', () => {
     const s0 = createInitialState(fixture)
-    const afterGood = pickChoice(pickChoice(s0, fixture, 'c1'), fixture, 'ouvrir')
+    const afterGood = pickChoice(pickChoice(s0, fixture, 'c1'), fixture, 'open')
 
     const secondRun = restartPreservingEndings(afterGood, fixture)
-    const afterAbandon = pickChoice(pickChoice(secondRun, fixture, 'c2'), fixture, 'partir')
+    const afterAbandon = pickChoice(pickChoice(secondRun, fixture, 'c2'), fixture, 'leave')
 
     expect(afterAbandon.reachedEndings.sort()).toEqual(['e-abandon', 'e-success'])
   })

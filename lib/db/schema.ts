@@ -11,23 +11,14 @@ import {
 } from 'drizzle-orm/pg-core'
 import type { BookContent, VariableValue } from '@/lib/reader/types'
 
-// profiles.id refere `auth.users(id)` (schema Supabase Auth). La FK
-// inter-schema et le trigger de synchronisation sont poses dans la
-// migration 0002_profiles_sync.sql (hors scope Drizzle). Nullable
-// username : doit etre choisi au premier login via /compte/choisir-pseudo.
+// profiles.id references `auth.users(id)` (Supabase Auth schema). The
+// cross-schema FK and the sync trigger live in migration
+// 0002_profiles_sync.sql (out of Drizzle's scope). `username` is
+// nullable: it must be picked on first login via /account/choose-username.
 export const profiles = pgTable('profiles', {
   id: uuid().primaryKey(),
   email: text().notNull(),
   username: text().unique(),
-  createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
-})
-
-export const waitlist = pgTable('waitlist', {
-  id: uuid()
-    .primaryKey()
-    .default(sql`gen_random_uuid()`),
-  email: text().notNull().unique(),
-  source: text(),
   createdAt: timestamp({ withTimezone: true }).defaultNow().notNull(),
 })
 
@@ -39,7 +30,15 @@ export const books = pgTable(
       .default(sql`gen_random_uuid()`),
     slug: text().notNull().unique(),
     title: text().notNull(),
+    // `author`: frozen text snapshot of the author at creation time.
+    // Used as a fallback when `authorId` is null (seed, import without
+    // a user, deleted profile). For canonical display we JOIN on
+    // profiles and prefer `profiles.username` when available.
     author: text().notNull(),
+    // `authorId`: FK to profiles.id. NULL allowed (fallback case).
+    // ON DELETE SET NULL preserves books even when the author deletes
+    // their account — we fall back to the text snapshot.
+    authorId: uuid().references(() => profiles.id, { onDelete: 'set null' }),
     coverImage: text(),
     synopsis: text(),
     genre: text(),

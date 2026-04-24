@@ -1,16 +1,26 @@
 import { desc, eq } from 'drizzle-orm'
 import { db } from './client'
-import { books } from './schema'
+import { books, profiles } from './schema'
 import type { Book } from '@/lib/reader/types'
 
-// Le CHECK constraint en DB garantit tier in ('free','premium'). On caste
-// a la lecture pour preserver l'union TS sans double validation applicative.
-function rowToBook(row: typeof books.$inferSelect): Book {
+// The CHECK constraint in the DB guarantees tier in ('free','premium').
+// We cast on read to preserve the TS union without a second app-level
+// validation pass.
+//
+// `author` display: we prefer `profiles.username` (LEFT JOIN via
+// books.author_id) so username changes propagate automatically. If the
+// FK is null (seed without user, deleted profile), we fall back to
+// `books.author` (frozen text snapshot written at creation time).
+function resolveAuthor(authorText: string, username: string | null): string {
+  return username ?? authorText
+}
+
+function rowToBook(row: typeof books.$inferSelect, username: string | null): Book {
   return {
     id: row.id,
     slug: row.slug,
     title: row.title,
-    author: row.author,
+    author: resolveAuthor(row.author, username),
     coverImage: row.coverImage,
     synopsis: row.synopsis,
     genre: row.genre,
@@ -23,8 +33,14 @@ function rowToBook(row: typeof books.$inferSelect): Book {
 }
 
 export async function getBookBySlug(slug: string): Promise<Book | null> {
-  const rows = await db.select().from(books).where(eq(books.slug, slug)).limit(1)
-  return rows[0] ? rowToBook(rows[0]) : null
+  const rows = await db
+    .select({ book: books, username: profiles.username })
+    .from(books)
+    .leftJoin(profiles, eq(profiles.id, books.authorId))
+    .where(eq(books.slug, slug))
+    .limit(1)
+  const row = rows[0]
+  return row ? rowToBook(row.book, row.username) : null
 }
 
 export type BookSummary = Omit<Book, 'content'>
@@ -36,6 +52,7 @@ function summariesQuery() {
       slug: books.slug,
       title: books.title,
       author: books.author,
+      authorUsername: profiles.username,
       coverImage: books.coverImage,
       synopsis: books.synopsis,
       genre: books.genre,
@@ -45,18 +62,28 @@ function summariesQuery() {
       publishedAt: books.publishedAt,
     })
     .from(books)
+    .leftJoin(profiles, eq(profiles.id, books.authorId))
 }
 
-// Catalogue public : uniquement les livres publies (publishedAt non null).
+type SummaryRow = Awaited<ReturnType<ReturnType<typeof summariesQuery>['execute']>>[number]
+
+function rowToSummary(row: SummaryRow): BookSummary {
+  const { authorUsername, author, tier, ...rest } = row
+  return {
+    ...rest,
+    author: resolveAuthor(author, authorUsername),
+    tier: tier as 'free' | 'premium',
+  }
+}
+
+// Public catalog: only published books (publishedAt not null).
 export async function listPublishedSummaries(): Promise<BookSummary[]> {
   const rows = await summariesQuery().orderBy(desc(books.publishedAt))
-  return rows
-    .filter((r) => r.publishedAt !== null)
-    .map((r) => ({ ...r, tier: r.tier as 'free' | 'premium' }))
+  return rows.filter((r) => r.publishedAt !== null).map(rowToSummary)
 }
 
-// Dashboard admin : toutes les rows, brouillons inclus, plus recentes en tete.
+// Admin dashboard: all rows including drafts, newest first.
 export async function listAllSummaries(): Promise<BookSummary[]> {
   const rows = await summariesQuery().orderBy(desc(books.createdAt))
-  return rows.map((r) => ({ ...r, tier: r.tier as 'free' | 'premium' }))
+  return rows.map(rowToSummary)
 }

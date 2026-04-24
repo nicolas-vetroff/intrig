@@ -14,6 +14,8 @@ Voir [`CLAUDE.md`](./CLAUDE.md) pour la vision produit et l'architecture.
 - **Vitest** pour les tests unitaires
 - **Vercel** pour l'hébergement
 
+Le code est en anglais (fichiers, routes, variables, commentaires). Seul ce qui s'affiche à l'utilisateur final reste en français.
+
 ## Prérequis
 
 - **Node.js ≥ 20** (Next 16 officiellement requis)
@@ -70,7 +72,7 @@ DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
 ### 4. Appliquer les migrations et seed
 
 ```bash
-npm run db:migrate   # cree les tables (profiles, waitlist, books, user_progress)
+npm run db:migrate   # cree les tables (profiles, books, user_progress)
 npm run db:seed      # insere "La Chambre secrete"
 ```
 
@@ -80,14 +82,14 @@ npm run db:seed      # insere "La Chambre secrete"
 npm run dev
 ```
 
-Ouvrir <http://127.0.0.1:3000>. Le site doit matcher le `site_url` de `supabase/config.toml` (sinon les magic links ne marchent pas).
+Ouvrir <http://127.0.0.1:3030>. Le site doit matcher le `site_url` de `supabase/config.toml` (sinon les magic links ne marchent pas).
 
 ### 6. Tester l'authentification (magic link)
 
-1. Aller sur `/connexion`, saisir n'importe quelle adresse email
+1. Aller sur `/login`, saisir n'importe quelle adresse email
 2. Ouvrir **Inbucket** <http://127.0.0.1:54324> pour lire le mail intercepté
-3. Cliquer sur le lien → session active, redirection vers `/livres`
-4. Seuls les utilisateurs connectés peuvent accéder au catalogue et à la lecture
+3. Cliquer sur le lien → session active, redirection vers `/books`
+4. Seuls les utilisateurs connectés peuvent accéder à la lecture
 
 Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no-backup` efface tout.
 
@@ -114,22 +116,34 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 
 ## Auth — comment ça marche
 
-- **Magic link uniquement** : pas de mot de passe. `/connexion` envoie un lien par email, cliquer connecte.
-- **Lecture = auth obligatoire + pseudo obligatoire**. `/livres` redirige vers `/connexion` si déconnecté ; si connecté mais sans pseudo, redirige vers `/compte/choisir-pseudo`.
+- **Magic link uniquement** : pas de mot de passe. `/login` envoie un lien par email, cliquer connecte.
+- **Lecture = auth obligatoire + pseudo obligatoire**. `/books/[slug]/read` redirige vers `/login` si déconnecté ; si connecté mais sans pseudo, redirige vers `/account/choose-username`. Le catalogue `/books` et la fiche détail `/books/[slug]` restent publics.
 - **Table `profiles`** synchronisée avec `auth.users` via trigger `on_auth_user_created` (migration `0002_profiles_sync.sql`). Chaque nouveau compte a automatiquement une ligne `profiles` avec `username` nul — à choisir au premier login.
-- **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule). Unique. Modifiable depuis `/compte`.
+- **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule). Unique. Modifiable depuis `/account`.
 - **Progression** (`user_progress.user_id`) est indexée sur l'`auth.users.id` Supabase. Un utilisateur retrouve ses parties, ses variables et ses fins à chaque connexion.
 
 ## Admin — créer / modifier des livres
 
 - Mets ton email dans `ADMIN_EMAILS` (`.env.local`), format CSV, puis redémarre `npm run dev`.
-- `/dashboard` liste tous les livres (publiés + brouillons) avec lien vers `/livres/[slug]/edit`.
-- `/livres/create` : formulaire métadonnées + textarea JSON pour le `content`. Le bouton **Importer un fichier .json** pré-remplit automatiquement les champs à partir d'un export (`Book` complet → tout est rempli, `BookContent` seul → seul le content est rempli).
+- `/dashboard` (« Mes créations ») liste tous les livres (publiés + brouillons) avec lien vers `/books/[slug]/edit`.
+- `/books/create` : formulaire métadonnées + textarea JSON pour le `content`.
+  - Le champ **Slug** interroge automatiquement la base (server action `checkSlugAvailable`) pour signaler les collisions immédiatement.
+  - Le champ **Genre** est un select fermé (Mystère, Thriller, Romance, Science-fiction, Fantasy, Horreur, Aventure, Historique).
+  - Le bouton **Importer un fichier .json** pré-remplit automatiquement les champs à partir d'un export (`Book` complet → tout est rempli, `BookContent` seul → seul le content est rempli).
 - Validation côté serveur : `lib/reader/validation.ts` (intégrité du graphe) + `lib/db/books-form.ts` (métadonnées). Les erreurs sont affichées en bloc sous le formulaire.
 - Un livre sans `publishedAt` reste brouillon, invisible du catalogue public mais accessible depuis `/dashboard`.
-- Les routes admin (`/dashboard`, `/livres/create`, `/livres/[slug]/edit`) seront plus tard ouvertes à tous les utilisateurs connectés — c'est pour ça qu'elles ne sont pas sous `/admin/*`. Il suffira de remplacer `requireAdmin` par `requireProfile` dans ces pages.
+- Les routes admin (`/dashboard`, `/books/create`, `/books/[slug]/edit`) seront plus tard ouvertes à tous les utilisateurs connectés — c'est pour ça qu'elles ne sont pas sous `/admin/*`. Il suffira de remplacer `requireAdmin` par `requireProfile` dans ces pages.
 - En dev, tous les mails partent dans **Inbucket** (<http://127.0.0.1:54324>) — pas de vraie boîte à configurer.
 - En prod, configurer un SMTP dans Supabase (dashboard → Auth → SMTP Settings).
+
+## Catalogue public
+
+`/books` affiche les livres publiés avec des filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
+
+- recherche par titre,
+- sélecteur de genre, d'auteur, de tag,
+- filtre de durée (court ≤ 30 min, moyen 30-90 min, long > 90 min),
+- bouton « Réinitialiser les filtres » quand au moins un est actif.
 
 ## Déploiement sur Vercel
 
@@ -155,33 +169,44 @@ Vercel ne lance pas automatiquement `db:migrate`. Deux options :
 
 Voir [`CLAUDE.md`](./CLAUDE.md) pour les conventions de code, la vision produit et ce qui est hors scope au MVP.
 
+## UI — layouts et mode lecture
+
+- **Header global** (logo, Catalogue, Dashboard admin si applicable, Mon compte / Connexion) est rendu sur toutes les pages — publiques comme authentifiees — **sauf le reader**.
+- **Reader immersif** (`/books/[slug]/read`) : pas de header global, pas de footer. Juste une barre fine en haut avec un bouton **Retour** (vers la fiche du livre), le titre, et un compteur de fins découvertes. L'objectif est une page unique-focus pour la lecture.
+- **Organisation App Router** : les pages authentifiees qui ont besoin du header sont placées sous `app/(app)/(chrome)/…` ; le reader reste hors de ce sous-groupe pour ne pas en hériter. Voir [`CLAUDE.md`](./CLAUDE.md#ui--structure-des-layouts).
+
 ## Structure principale
 
 ```
 app/
-  (marketing)/        Publique : landing, catalogue, page détail livre, légales
-    connexion/        Formulaire magic link + "vérifier email"
-    livres/           Catalogue + détail ([slug]) — publics
-  (app)/              Auth gated (requireUser / requireProfile / requireAdmin par page)
-    compte/           Profil minimal + choisir-pseudo
-    dashboard/        Liste admin de tous les livres
-    livres/           Reader + pages admin
-      create/         Formulaire nouveau livre (admin)
-      [slug]/lire/    Reader (auth + pseudo)
-      [slug]/edit/    Formulaire d'édition (admin)
-  api/auth/           Route handlers (confirm magic link, signout)
-lib/
-  db/                 Client Drizzle + schéma + seed + helpers (books.ts) + books-form.ts
-  supabase/           Clients server/client, proxy de session, auth/profile/admin helpers
-  reader/             Types + runtime pur (testé) + validation Zod (testée)
-  stripe/             Helpers Stripe (à venir)
-  utils/              sanitizeNext, validateUsername, …
+  (marketing)/              Publique : landing, catalogue, page détail livre, légales, login
+    layout.tsx              SiteHeader + SiteFooter
+    books/                  Catalogue + détail ([slug]) — publics
+      _components/          CatalogBrowser (filtres client)
+    login/                  Magic link form + check-email
+    legal/, terms/, privacy/
+  (app)/                    Partie authentifiee
+    (chrome)/               Sous-groupe : SiteHeader + SiteFooter partagés
+      layout.tsx
+      account/              Profil minimal + choose-username
+      dashboard/            Liste admin de tous les livres
+      books/create/         Formulaire nouveau livre (admin)
+      books/[slug]/edit/    Formulaire d'édition (admin)
+    books/
+      _actions/             Server actions (progress, admin, checkSlugAvailable)
+      [slug]/read/          Reader immersif (hors chrome)
+  api/auth/                 Route handlers (confirm magic link, signout)
 components/
-  ui/                 Primitives réutilisables
-  reader/             BookReader (client)
-  admin/              BookForm (client, partagé entre create et edit)
-content/              Livres TypeScript (versionnés git, insérés via db:seed)
-drizzle/              Migrations SQL générées
-supabase/             Config CLI local (config.toml)
-proxy.ts              Proxy Next 16 — refresh session Supabase
+  ui/                       SiteHeader, SiteFooter, primitives
+  reader/                   BookReader (client)
+  admin/                    BookForm (client, partagé create / edit)
+lib/
+  db/                       Client Drizzle + schéma + seed + helpers + books-form.ts
+  supabase/                 Clients server/client, proxy session, auth/profile/admin helpers
+  reader/                   Types + runtime pur (testé) + validation Zod (testée)
+  utils/                    sanitizeNext, validateUsername, …
+content/                    Livres TypeScript (versionnés git, insérés via db:seed)
+drizzle/                    Migrations SQL générées
+supabase/                   Config CLI local (config.toml)
+proxy.ts                    Proxy Next 16 — refresh session Supabase
 ```

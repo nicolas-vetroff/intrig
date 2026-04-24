@@ -2,10 +2,9 @@ import { redirect } from 'next/navigation'
 import type { User } from '@supabase/supabase-js'
 import { requireUser } from './auth'
 
-// Gating admin par liste d'emails en env var. Simple, zero migration.
-// Quand on ouvrira la creation de livres aux lecteurs (roadmap), on
-// remplacera les `requireAdmin` des pages concernees par `requireProfile`
-// sans devoir migrer la DB.
+// Admin gating via env-var email list. Simple, zero migrations. When
+// book creation opens up to readers (roadmap), we just swap `requireAdmin`
+// for `requireProfile` on the relevant pages — no DB migration needed.
 function getAdminEmails(): Set<string> {
   const raw = process.env.ADMIN_EMAILS ?? ''
   return new Set(
@@ -21,12 +20,12 @@ export function isAdminEmail(email: string | null | undefined): boolean {
   return getAdminEmails().has(email.toLowerCase())
 }
 
-// Garde stricte : requiert auth + email dans ADMIN_EMAILS. Redirige vers
-// `/livres` (route publique) si l'utilisateur est connecte mais non admin.
+// Strict guard: requires auth + email in ADMIN_EMAILS. Redirects to
+// `/books` (public route) if the user is signed in but not admin.
 export async function requireAdmin(next: string): Promise<User> {
   const user = await requireUser(next)
   if (!isAdminEmail(user.email)) {
-    redirect('/livres')
+    redirect('/books')
   }
   return user
 }

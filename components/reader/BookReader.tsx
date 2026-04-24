@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useState, useTransition } from 'react'
-import { saveProgress } from '@/app/(app)/livres/_actions/progress'
+import { saveProgress } from '@/app/(app)/books/_actions/progress'
 import {
   advanceScene,
   availableChoices,
@@ -21,13 +22,7 @@ export function BookReader({ book, initialState }: Props) {
   const [isSaving, startTransition] = useTransition()
 
   const node = book.content.nodes[state.currentNodeId]
-  if (!node) {
-    return (
-      <p className="text-muted">
-        Noeud introuvable : <code>{state.currentNodeId}</code>. Livre corrompu ?
-      </p>
-    )
-  }
+  const totalEndings = Object.keys(book.content.endings).length
 
   function persist(next: ReaderState) {
     setState(next)
@@ -37,44 +32,92 @@ export function BookReader({ book, initialState }: Props) {
   }
 
   function handleRestart() {
-    // Conserve les fins deja decouvertes : c'est un compteur
-    // inter-parties, pas un etat de la partie courante.
+    // Preserve already-discovered endings: it's a cross-playthrough
+    // counter, not part of the current run's state.
     persist(restartPreservingEndings(state, book.content))
   }
 
   return (
-    <article className="mx-auto flex max-w-2xl flex-col gap-10 px-6 py-16 sm:px-10 sm:py-20">
-      <header>
-        <p className="text-muted text-xs tracking-widest uppercase">{book.author}</p>
-        <h1 className="mt-1 font-serif text-3xl sm:text-4xl">{book.title}</h1>
-      </header>
+    <div className="flex min-h-dvh flex-col">
+      <ReaderBar
+        backHref={`/books/${book.slug}`}
+        title={book.title}
+        reached={state.reachedEndings.length}
+        total={totalEndings}
+      />
 
-      {node.type === 'scene' ? (
-        <SceneView
-          text={node.text}
-          onNext={() => persist(advanceScene(state, book.content))}
-          disabled={isSaving}
-        />
-      ) : null}
+      <article className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-10 px-6 pt-8 pb-20 sm:px-10 sm:pt-12">
+        {!node ? (
+          <p className="text-muted">
+            Noeud introuvable : <code>{state.currentNodeId}</code>. Livre corrompu ?
+          </p>
+        ) : node.type === 'scene' ? (
+          <SceneView
+            text={node.text}
+            onNext={() => persist(advanceScene(state, book.content))}
+            disabled={isSaving}
+          />
+        ) : node.type === 'choice' ? (
+          <ChoiceView
+            text={node.text}
+            choices={availableChoices(node, state.variables)}
+            onPick={(id) => persist(pickChoice(state, book.content, id))}
+            disabled={isSaving}
+          />
+        ) : node.type === 'ending' ? (
+          <EndingView
+            ending={book.content.endings[node.endingId]}
+            totalEndings={totalEndings}
+            reachedEndings={state.reachedEndings.length}
+            onRestart={handleRestart}
+          />
+        ) : null}
+      </article>
+    </div>
+  )
+}
 
-      {node.type === 'choice' ? (
-        <ChoiceView
-          text={node.text}
-          choices={availableChoices(node, state.variables)}
-          onPick={(id) => persist(pickChoice(state, book.content, id))}
-          disabled={isSaving}
-        />
-      ) : null}
-
-      {node.type === 'ending' ? (
-        <EndingView
-          ending={book.content.endings[node.endingId]}
-          totalEndings={Object.keys(book.content.endings).length}
-          reachedEndings={state.reachedEndings.length}
-          onRestart={handleRestart}
-        />
-      ) : null}
-    </article>
+function ReaderBar({
+  backHref,
+  title,
+  reached,
+  total,
+}: {
+  backHref: string
+  title: string
+  reached: number
+  total: number
+}) {
+  return (
+    <div className="border-border bg-background/80 sticky top-0 z-10 flex items-center justify-between gap-4 border-b px-4 py-3 backdrop-blur sm:px-6">
+      <Link
+        href={backHref}
+        aria-label="Retour à la fiche du livre"
+        className="text-muted hover:text-foreground -ml-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-sm transition-colors"
+      >
+        <svg
+          aria-hidden="true"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+        <span>Retour</span>
+      </Link>
+      <p className="text-muted max-w-[55%] truncate text-center text-xs tracking-widest uppercase sm:text-sm">
+        {title}
+      </p>
+      <p className="text-muted text-xs tabular-nums sm:text-sm">
+        {reached}/{total}
+      </p>
+    </div>
   )
 }
 
@@ -88,14 +131,14 @@ function SceneView({
   disabled: boolean
 }) {
   return (
-    <section className="flex flex-col gap-8">
-      <p className="font-serif text-xl leading-relaxed sm:text-2xl">{text}</p>
+    <section className="flex flex-col gap-10">
+      <p className="font-serif text-xl leading-[1.7] sm:text-2xl sm:leading-[1.65]">{text}</p>
       <div>
         <button
           type="button"
           onClick={onNext}
           disabled={disabled}
-          className="bg-foreground text-background rounded-md px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-60"
+          className="bg-foreground text-background rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-60"
         >
           Continuer
         </button>
@@ -116,8 +159,8 @@ function ChoiceView({
   disabled: boolean
 }) {
   return (
-    <section className="flex flex-col gap-8">
-      <p className="font-serif text-xl leading-relaxed sm:text-2xl">{text}</p>
+    <section className="flex flex-col gap-10">
+      <p className="font-serif text-xl leading-[1.7] sm:text-2xl sm:leading-[1.65]">{text}</p>
       {choices.length === 0 ? (
         <p className="text-muted text-sm">
           Aucun choix disponible — chemin sans issue. (Reportez un bug au moteur.)
@@ -130,7 +173,7 @@ function ChoiceView({
                 type="button"
                 onClick={() => onPick(choice.id)}
                 disabled={disabled}
-                className="border-border hover:border-foreground w-full rounded-md border bg-white px-5 py-4 text-left text-base transition-colors disabled:opacity-60"
+                className="border-border hover:border-foreground hover:bg-subtle/40 w-full rounded-md border bg-white px-5 py-4 text-left text-base transition-colors disabled:opacity-60"
               >
                 {choice.label}
               </button>
