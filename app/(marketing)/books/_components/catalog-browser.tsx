@@ -27,9 +27,21 @@ function uniqueSorted(values: (string | null | undefined)[]): string[] {
   return Array.from(set).sort((a, b) => a.localeCompare(b, 'fr'))
 }
 
+// Hard cap on the synopsis shown in a catalog card. Keeps the card
+// height predictable so the cover can stretch to match without going
+// wild on a long synopsis.
+const SYNOPSIS_MAX_CHARS = 180
+
+function truncate(text: string, max: number): string {
+  if (text.length <= max) return text
+  return text.slice(0, max).trimEnd() + '…'
+}
+
 function CatalogCover({ book }: { book: BookSummary }) {
+  // No fixed height: the parent flex row is `items-stretch`, so the
+  // cover fills the card. w-20 / sm:w-24 keeps a book-like width.
   const className =
-    'border-border bg-subtle/60 flex h-28 w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border sm:h-32 sm:w-24'
+    'border-border bg-subtle/60 flex w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border sm:w-24'
   if (!book.coverImage) {
     return (
       <div className={className} aria-hidden>
@@ -175,7 +187,7 @@ export function CatalogBrowser({ books }: Props) {
           <ul className="divide-border flex flex-col divide-y">
             {filtered.map((book) => (
               <li key={book.slug} className="py-6 first:pt-0">
-                <Link href={`/books/${book.slug}`} className="group flex gap-5">
+                <Link href={`/books/${book.slug}`} className="group flex items-stretch gap-5">
                   <div className="min-w-0 flex-1">
                     <h2 className="group-hover:text-muted font-serif text-2xl transition-colors sm:text-3xl">
                       {book.title}
@@ -191,7 +203,9 @@ export function CatalogBrowser({ books }: Props) {
                       {book.tier === 'premium' ? ' · premium' : ''}
                     </p>
                     {book.synopsis ? (
-                      <p className="mt-3 leading-relaxed">{book.synopsis}</p>
+                      <p className="mt-3 leading-relaxed">
+                        {truncate(book.synopsis, SYNOPSIS_MAX_CHARS)}
+                      </p>
                     ) : null}
                   </div>
                   <CatalogCover book={book} />

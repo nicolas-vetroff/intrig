@@ -47,19 +47,20 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
             <span className="text-muted text-xs tracking-widest uppercase">Sans couverture</span>
           )}
         </div>
-        <div className="flex flex-col gap-3">
-          <p className="text-muted text-xs tracking-widest uppercase">
-            {book.author}
-            {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
-            {book.tier === 'premium' ? ' · premium' : ''}
-          </p>
-          <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{book.title}</h1>
+        <div className="flex min-w-0 flex-1 flex-col gap-4">
+          <div className="flex flex-col gap-3">
+            <p className="text-muted text-xs tracking-widest uppercase">
+              {book.author}
+              {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
+              {book.tier === 'premium' ? ' · premium' : ''}
+            </p>
+            <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{book.title}</h1>
+          </div>
+          {book.synopsis ? (
+            <p className="font-serif text-lg leading-relaxed sm:text-xl">{book.synopsis}</p>
+          ) : null}
         </div>
       </header>
-
-      {book.synopsis ? (
-        <p className="font-serif text-xl leading-relaxed sm:text-2xl">{book.synopsis}</p>
-      ) : null}
 
       <div className="border-border text-muted flex flex-wrap gap-x-6 gap-y-2 border-y py-4 text-sm">
         {book.genre ? <span>Genre : {book.genre}</span> : null}
