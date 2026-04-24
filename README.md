@@ -140,7 +140,7 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 
 ## Catalogue public
 
-`/books` est un **panneau à hauteur fixe** (100dvh moins le header) : le titre et les filtres restent figés, **seule la colonne livres scrolle**. Mise en page à deux colonnes sur desktop (**filtres à gauche**, **livres à droite**), deux lignes sur mobile. Chaque carte affiche le titre, le genre, l'auteur, un synopsis **tronqué à ~150 caractères** avec `…`, et une **couverture à droite qui s'étire sur toute la hauteur de la carte**. Filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
+Sur **desktop**, `/books` est un **panneau à hauteur fixe** (100dvh moins le header) : le titre et les filtres restent figés, **seule la colonne livres scrolle**. Layout à deux colonnes (**filtres à gauche**, **livres à droite**). Sur **mobile**, pas de verrou : la page scrolle d'un bloc — titre et filtres défilent avec la liste. Chaque carte affiche le titre, le genre, l'auteur, un synopsis **tronqué à ~150 caractères** avec `…`, et une **couverture à droite qui s'étire sur toute la hauteur de la carte**. Filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
 
 - recherche par titre,
 - sélecteur de genre, d'auteur, de tag,

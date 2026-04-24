@@ -96,10 +96,10 @@ export function CatalogBrowser({ books }: Props) {
   }
 
   return (
-    <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] gap-8 md:grid-cols-[minmax(220px,1fr)_3fr] md:grid-rows-1 md:gap-10">
+    <div className="grid gap-8 md:h-full md:min-h-0 md:grid-cols-[minmax(220px,1fr)_3fr] md:grid-rows-[minmax(0,1fr)] md:gap-10">
       <aside
         aria-label="Filtres du catalogue"
-        className="border-border flex shrink-0 flex-col gap-4 self-start overflow-y-auto rounded-md border bg-white p-4 sm:p-5 md:max-h-full"
+        className="border-border flex flex-col gap-4 self-start rounded-md border bg-white p-4 sm:p-5 md:max-h-full md:self-stretch md:overflow-y-auto"
       >
         <label className="flex flex-col gap-1.5 text-sm">
           <span className="text-muted text-xs tracking-widest uppercase">Titre</span>
@@ -180,7 +180,7 @@ export function CatalogBrowser({ books }: Props) {
         ) : null}
       </aside>
 
-      <div className="min-h-0 min-w-0 overflow-y-auto pr-1">
+      <div className="min-w-0 md:min-h-0 md:overflow-y-auto md:pr-1">
         {filtered.length === 0 ? (
           <p className="text-muted">Aucun livre ne correspond à ces filtres.</p>
         ) : (

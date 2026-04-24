@@ -20,19 +20,20 @@ export default async function BooksPage() {
     )
   }
 
-  // Fixed-height viewport panel: the <section> fills the visible area
-  // under the SiteHeader, the title and filters stay put, and only the
-  // books column scrolls (see CatalogBrowser). 4.5rem covers the sticky
-  // header (py-4 + pill buttons + border-b ≈ 4.5rem / 72px).
+  // Desktop only: fix the section height so the title + filters stay
+  // put and only the books column scrolls. Mobile keeps natural page
+  // flow (title and filters scroll away with the rest). The underscores
+  // in the arbitrary value are Tailwind's way to emit `calc(100dvh -
+  // 4.5rem)` with the spaces CSS calc requires.
   return (
-    <section className="mx-auto flex h-[calc(100dvh-4.5rem)] max-w-5xl flex-col px-6 sm:px-10">
-      <header className="flex shrink-0 flex-col gap-2 py-8 sm:py-10">
+    <section className="mx-auto flex max-w-5xl flex-col px-6 sm:px-10 md:h-[calc(100dvh_-_4.5rem)]">
+      <header className="flex flex-col gap-2 py-8 sm:py-10 md:shrink-0">
         <p className="text-muted text-xs tracking-widest uppercase">Catalogue</p>
         <h1 className="font-serif text-3xl sm:text-4xl">
           {catalog.length === 1 ? 'Un livre disponible' : `${catalog.length} livres disponibles`}
         </h1>
       </header>
-      <div className="flex min-h-0 flex-1 flex-col pb-8 sm:pb-10">
+      <div className="pb-8 sm:pb-10 md:flex md:min-h-0 md:flex-1 md:flex-col">
         <CatalogBrowser books={catalog} />
       </div>
     </section>
