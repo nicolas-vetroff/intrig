@@ -1,0 +1,1320 @@
+{
+  "slug": "les-cendres-d-astrea",
+  "title": "Les Cendres d’Astréa",
+  "author": "Claude",
+  "genre": "fantasy",
+  "tags": [
+    "fantasy",
+    "aventure",
+    "action",
+    "magie",
+    "destin",
+    "médiéval"
+  ],
+  "estimatedMinutes": 60,
+  "content": {
+    "startNodeId": "intro",
+    "variablesSchema": [
+      {
+        "name": "courage",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "magie",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "destin",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "epee",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "confiance_kais",
+        "type": "number",
+        "initial": 0
+      },
+      {
+        "name": "soupcon_leo",
+        "type": "number",
+        "initial": 0
+      }
+    ],
+    "nodes": {
+      "intro": {
+        "id": "intro",
+        "type": "scene",
+        "text": "Le vent portait l’odeur de la cendre bien avant que vous ne voyiez les flammes.\n\nC’était une odeur dense, grasse, qui se collait à la gorge et refusait de s’en aller. Une odeur que vous ne connaissiez que par les contes, ceux que les vieux racontaient quand la nuit tombait sur Astréa et que le feu de la cheminée devenait trop bas pour rassurer qui que ce soit.\n\nVous étiez en haut de la colline quand le village s’est embrasé.\n\nVous aviez grimpé là pour cueillir des herbes, comme chaque fin d’après-midi. Le thym sauvage, l’armoise, les petites fleurs jaunes que la guérisseuse payait trois pièces de cuivre la poignée. Un travail lent, répétitif, que vous aimiez parce qu’il ne demandait rien de vous sauf vos mains et votre patience.\n\nEt puis la lumière a changé.\n\nPas comme un coucher de soleil. Plus rouge. Plus bas. Plus proche.\n\nVous avez levé les yeux.\n\nLes toits de chaume s’effondraient les uns après les autres, avalés par une lueur irréelle. Ce n’était pas un incendie ordinaire. Le feu ne dansait pas, il dévorait, méthodique, presque vivant. Chaque flamme savait où aller. Chaque flamme choisissait sa cible.\n\nVous avez couru.\n\nVous ne vous souvenez pas d’avoir pris la décision. Vos jambes ont simplement bougé, guidées par quelque chose de plus ancien que la peur, quelque chose qui ressemblait à une promesse oubliée.\n\nLa pente était raide. Les cailloux roulaient sous vos semelles. Vous êtes tombé·e une fois, puis deux, mais vous n’avez pas ralenti. Dans votre poitrine, votre cœur battait un rythme qui n’était pas le vôtre, un rythme qui semblait répondre à celui des flammes.\n\nEn descendant, une silhouette est apparue dans la fumée.\n\nUn homme.\n\nGrand. Immobile. Les flammes semblaient l’éviter, comme si le feu lui-même le reconnaissait pour maître. Son manteau n’ondulait pas. Sa peau restait nette. Autour de lui, le chaos se pliait en silence.\n\nIl vous regardait.\n\nEt vous saviez, sans comprendre pourquoi, que tout avait commencé avec lui.\n\nVous n’aviez jamais vu cet homme de votre vie. Et pourtant, quelque part au fond de vous, une voix que vous ne connaissiez pas non plus murmurait un mot qui n’avait pas de sens.\n\n*Encore lui.*\n\nUn cri retentit derrière vous.\n\nUne enfant.\n\nVous la connaissiez. Luna, la fille du forgeron. Six ans, peut-être sept, des cheveux qui tombaient toujours devant ses yeux et un rire qui faisait rire les autres, même les jours sombres.\n\nElle était coincée quelque part dans les ruines. Vous l’entendiez. Vous la voyiez presque, derrière le voile de fumée.\n\nVous avez un instant.\n\nUn seul choix.",
+        "next": "prologue_memoire"
+      },
+      "prologue_memoire": {
+        "id": "prologue_memoire",
+        "type": "scene",
+        "text": "Vous vous êtes figé·e une seconde, le temps d’une respiration.\n\nEt dans cette seconde, quelque chose est remonté.\n\nUn souvenir qui n’était pas tout à fait un souvenir. Vous étiez petit·e, peut-être cinq ans. Votre mère vous tenait la main, fort. Trop fort. Vous traversiez une nuit que vous n’aviez jamais comprise, une nuit où les étoiles semblaient plus basses, plus proches, presque à portée de main.\n\nElle vous avait dit :\n\n« Si un jour tu vois le feu qui ne brûle pas comme il le devrait, tu cours. Tu cours, tu te caches, tu oublies. »\n\nVous aviez ri, parce que c’était la seule chose que savaient faire les enfants face aux mots trop grands pour eux.\n\nElle n’avait pas ri.\n\nElle avait serré encore plus fort.\n\n« Promets-le. »\n\nVous aviez promis.\n\nLe lendemain, elle était morte. Une fièvre, avait-on dit. Une de ces fièvres qu’on n’explique pas et qu’on n’oublie jamais.\n\nVous aviez oublié cette phrase. Vous aviez oublié sa main. Vous aviez oublié cette nuit où le ciel semblait descendre.\n\nJusqu’à cet instant, en haut de la colline, devant Astréa qui brûlait.\n\nLe souvenir vous avait rattrapé·e, comme une dette qu’on n’avait jamais voulue.\n\nEt vous compreniez, maintenant, pourquoi vos jambes couraient sans votre permission.\n\nLe feu n’était pas ordinaire. Il ne l’avait jamais été. Il vous avait cherché·e. Depuis toujours.",
+        "next": "choix_depart"
+      },
+      "choix_depart": {
+        "id": "choix_depart",
+        "type": "choice",
+        "text": "Le cri de Luna vous déchire encore. L’homme, lui, attend. Immobile dans la fumée, il semble avoir tout son temps, comme si les flammes ne pouvaient ni le gêner ni lui être pressées.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "sauver_enfant",
+            "label": "Courir vers l’enfant",
+            "nextNode": "sauvetage",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "id": "observer_homme",
+            "label": "Observer l’homme dans les flammes",
+            "nextNode": "etranger",
+            "effects": [
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "sauvetage": {
+        "id": "sauvetage",
+        "type": "scene",
+        "text": "Vous plongez dans la fumée.\n\nLa chaleur vous frappe comme un mur. Vos yeux brûlent, vos poumons se contractent. Chaque inspiration est une petite défaite, un rappel que votre corps n’est pas fait pour cet endroit, pour ce moment, pour cette lumière qui n’obéit à aucune des lois que vous connaissiez.\n\nMais vous continuez.\n\nVous connaissez ce village par cœur. Vous savez quelle ruelle mène chez la vieille Mirène, quelle pierre glisse quand il pleut, quelle porte a toujours grincé. Ce savoir vous guide à travers la fumée mieux que vos yeux, qui ne voient plus grand-chose d’utile.\n\nLuna est coincée devant la boutique du forgeron.\n\nUne poutre de la charpente s’est effondrée sur sa jambe. Elle pleure, pas fort. Les enfants qui pleurent fort ont encore de l’espoir. Ceux qui pleurent doucement savent, déjà.\n\nElle lève les yeux vers vous.\n\n« Tu es venu·e. »\n\nCe n’est pas une question. C’est une reconnaissance, comme si elle avait su que vous viendriez, comme si c’était écrit quelque part.\n\nSans réfléchir, vous vous jetez à genoux. Le bois est brûlant. Vos paumes se couvrent immédiatement d’ampoules, la peau change de texture, devient fine comme du papier mouillé.\n\nVous soulevez.\n\nVos épaules crient. Vos jambes tremblent. La poutre pèse deux fois votre poids, peut-être trois. C’est impossible. Vous le savez. Vos bras le savent. Votre dos le sait.\n\nEt pourtant, la poutre se lève.\n\nQuelque chose change alors.\n\nUn frisson traverse votre corps, parti du bas du ventre, remontant le long de votre colonne. Ce n’est pas du chaud. Ce n’est pas du froid. C’est autre chose. Une présence nouvelle, qui semble avoir toujours été là et que vous reconnaissez seulement maintenant.\n\nLa chaleur recule.\n\nAutour de vous, sur un rayon de trois pas, les flammes se retirent. Pas beaucoup. Pas totalement. Juste assez pour vous laisser respirer, pour vous laisser continuer.\n\nComme si elles vous reconnaissaient.\n\nComme si elles refusaient de vous brûler.\n\nVous dégagez la jambe de Luna. La petite ne pleure plus. Elle vous fixe, les yeux immenses dans son visage noirci de suie. Elle vous observe comme on observe quelque chose qui n’a pas de nom dans les contes.\n\n« Tu… tu es un sorcier ? »\n\nVous n’avez pas le temps de répondre. Vous ne sauriez pas quoi répondre.\n\nVous la prenez dans vos bras. Elle est légère, plus légère que vous ne l’auriez cru, comme si les enfants pesaient moins quand ils avaient peur.\n\nLe sol tremble.\n\nQuelque part au-dessus des toits, une tour s’effondre. Le fracas devrait vous assourdir. Vous l’entendez à peine. Votre sang chante trop fort dans vos oreilles.\n\nEt derrière vous, dans la ruelle que vous venez de traverser, une silhouette s’avance enfin.\n\nCalme. Sans hâte.\n\nL’homme.\n\nIl ne court pas. Il marche, et le feu s’écarte de son passage, comme des chiens qui reconnaissent leur maître.\n\nLuna serre votre cou très fort.\n\nElle chuchote, contre votre oreille :\n\n« Il est venu pour toi. »",
+        "next": "enfant_apres"
+      },
+      "enfant_apres": {
+        "id": "enfant_apres",
+        "type": "scene",
+        "text": "Vous reculez d’un pas. Puis de deux.\n\nLuna glisse de vos bras sans résistance. Elle se tient debout maintenant, sa jambe blessée semble la porter, même si cela ne devrait pas être possible. Vous n’avez pas le temps de vous en étonner. Rien, ce soir, n’est plus vraiment possible.\n\nLa petite lève la main vers vous. Sa paume est noire de suie, mais en dessous, la peau est intacte. Aucune brûlure. Aucune coupure. Comme si le feu ne l’avait jamais touchée.\n\nComme si c’était vous, et vous seul·e, qui l’aviez arrachée au feu simplement en voulant.\n\n« Il faut que tu partes », dit-elle.\n\nSa voix n’est plus une voix d’enfant. Ou plutôt, c’est une voix d’enfant qui répète des mots d’adulte, sans tout à fait les comprendre, mais en les livrant avec la précision d’un message.\n\n« Il faut que tu partes, et que tu n’oublies pas. Maman me l’a dit. Ta maman aussi, elle te l’avait dit. »\n\nVous vous immobilisez.\n\nComment sait-elle cela ?\n\nMais la petite sourit, un sourire trop ancien pour son visage, et s’éloigne en clopinant vers une ruelle qui, l’instant d’avant, était en flammes et qui, maintenant, semble épargnée. Comme si quelqu’un avait décidé, pour elle, qu’elle ne mourrait pas ce soir.\n\nL’homme, dans la ruelle d’en face, a cessé d’avancer.\n\nIl incline légèrement la tête. Vous distinguez enfin son visage. Il est plus jeune que vous ne l’auriez cru. Il n’y a pas de rides. Pas de cicatrices. Seulement des yeux très calmes, très gris, qui ont l’air d’avoir déjà tout vu, deux fois, et qui s’ennuient un peu.\n\nIl sourit sans joie.\n\n« Vous êtes rapide », dit-il.\n\nSa voix est posée. Presque douce. Pas du tout celle qu’on imagine appartenir à quelqu’un qui vient d’incendier un village entier.\n\n« Mais pas assez. »\n\nIl lève la main.\n\nVous voulez fuir, mais une chose vous retient sur place : la voix de votre mère, remontée du plus profond de votre enfance.\n\n« *Tu cours. Tu te caches. Tu oublies.* »\n\nVous obéissez, enfin. Douze ans trop tard.\n\nEt le monde bascule.",
+        "next": "rencontre"
+      },
+      "etranger": {
+        "id": "etranger",
+        "type": "scene",
+        "text": "Vous vous figez.\n\nIl y a dans cet homme quelque chose qui vous empêche de bouger. Pas de la peur, pas exactement. Plus subtil. Comme si une corde invisible passait entre vos deux poitrines et se tendait à chaque battement de votre cœur.\n\nLes flammes glissent autour de lui sans jamais le toucher. Là où ailleurs elles arrachent les poutres et font fondre les verres, autour de lui elles baissent les yeux, comme les chiens d’un loup.\n\nDerrière vous, le cri de Luna continue.\n\nVous devriez courir. Vous le savez. Votre tête le sait, votre cœur le sait, une partie ancienne de vous le sait.\n\nMais vos pieds sont plantés dans la terre.\n\nL’homme lève lentement la main.\n\nLe feu s’intensifie autour des maisons les plus proches. Les murs s’effritent plus vite. Les toits qui tenaient encore lâchent. Ce n’est pas un accident. C’est une démonstration. Il veut que vous voyiez. Il veut que vous compreniez.\n\nEt vous comprenez.\n\nCe n’est pas un survivant.\n\nC’est la cause.\n\nUn grondement sourd traverse l’air. La terre sous vos pieds vibre, comme si, très loin sous la croûte du monde, quelque chose d’immense s’était retourné dans son sommeil.\n\nPuis ses yeux se posent sur vous.\n\nEt dans cet instant, vous sentez quelque chose s’ouvrir en vous. Une porte que vous ignoriez. Une pièce que vous n’aviez jamais visitée, bien qu’elle fût au centre de votre propre maison.\n\nUne force ancienne. Dangereuse. Qui ne vous appartient pas entièrement, bien qu’elle vive en vous depuis toujours.\n\nL’homme cesse de sourire.\n\nIl cesse, aussi, de respirer. Ou peut-être n’avait-il jamais respiré, et vous ne l’aviez pas remarqué jusqu’à ce que le silence de son souffle devienne plus bruyant que tout le reste.\n\n« Enfin », murmure-t-il.\n\nUn seul mot. Un mot qu’il semble avoir attendu des années, peut-être des siècles.\n\n« Enfin tu t’es réveillé·e. »\n\nIl avance d’un pas. Une fissure traverse la terre entre vous, comme si le sol lui-même refusait de supporter ce qui était sur le point d’arriver.\n\nLe monde explose autour de vous. Pas de douleur. Pas de chaleur. Juste une lumière blanche, immense, dans laquelle vous vous sentez très petit·e, très ancien et très, très en retard.",
+        "next": "rencontre"
+      },
+      "rencontre": {
+        "id": "rencontre",
+        "type": "scene",
+        "text": "Vous reprenez conscience au milieu des ruines.\n\nLe village est silencieux. Trop silencieux. La fumée s’élève encore, mais les flammes ont disparu, ne laissant que des braises orangées et un paysage qui ressemble à l’idée qu’on se fait de l’enfer quand on est trop jeune pour savoir que l’enfer est souvent plus discret.\n\nVous êtes à genoux. Vous ne vous rappelez pas d’être tombé·e. Votre bouche a un goût de métal. Votre peau est intacte, pourtant. Aucune brûlure. Aucune cloque. Comme si la souffrance, ce soir, avait choisi d’autres victimes.\n\nDevant vous, l’homme est toujours là.\n\nPlus proche. Beaucoup plus proche.\n\nIl s’est assis sur un muret à demi écroulé, un genou replié, l’autre jambe pendante, dans la posture d’un voyageur fatigué qui attend qu’on lui serve à boire. À trois pas de lui, un cadavre. Un homme du village, méconnaissable. L’homme mystérieux ne le regarde même pas.\n\nIl vous observe comme on observe une énigme qu’on croyait avoir résolue et qui s’avère plus subtile que prévu.\n\n« Tu ne devrais pas être en vie », dit-il calmement.\n\nSa voix est étrange. Trop posée. Trop ancienne. Chaque mot semble pesé au gramme près, comme si la moindre imprécision pouvait, quelque part, faire tomber une tour.\n\nVous vous relevez lentement. Vos jambes tiennent à peine, mais elles tiennent. Votre corps tremble, mais pas de peur. Autre chose. Quelque chose qui grandit. Qui mange votre peur par l’intérieur et la remplace par une colère si calme qu’elle ressemble, de loin, à de la sérénité.\n\nIl incline légèrement la tête.\n\n« Intéressant. »\n\nIl fait tourner une petite pierre noire entre ses doigts. Elle a l’air ordinaire, et en même temps, il y a quelque chose de faux dans la façon dont la lumière s’y accroche. Comme si elle n’acceptait pas tout à fait d’être vue.\n\n« Tu as des questions », dit-il. « C’est normal. Tout le monde en a eu, avant toi. »\n\nIl lève les yeux.\n\nUn bruit attire son attention.\n\nDes voix au loin. Des ordres brefs. Des bottes qui martèlent la terre battue des chemins. Le cliquetis du métal que font les armures mal entretenues.\n\nDes soldats.\n\nIls arrivent.\n\nL’homme cesse de faire tourner la pierre. Il la remet dans une poche de son manteau, d’un geste rapide qui ne lui ressemble pas tout à fait.\n\n« Nous sommes à court de temps », dit-il. « Pas surprenant. »\n\nIl se lève.\n\n« Tu as quelques secondes. Je te les offre. Fuis. Ou affronte-moi. Je suis curieux de voir ce que tu vas choisir. »\n\nIl sourit.\n\n« Je parie sur la fuite. Ils parient toujours sur la fuite. »",
+        "next": "choix_action"
+      },
+      "choix_action": {
+        "id": "choix_action",
+        "type": "choice",
+        "text": "Les torches se rapprochent. L’homme vous observe sans bouger, comme un joueur qui attend que le pion adverse se déplace.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "fuir",
+            "label": "Fuir dans la forêt",
+            "nextNode": "foret",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "combattre",
+            "label": "Affronter l’homme",
+            "nextNode": "combat",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "foret": {
+        "id": "foret",
+        "type": "scene",
+        "text": "Vous tournez les talons.\n\nEt vous courez.\n\nLes arbres vous engloutissent. La forêt d’Astréa est ancienne. Plus ancienne que le royaume lui-même, disent les vieux. On prétend qu’elle a vu tomber trois civilisations et qu’elle a pris le deuil pour chacune d’elles, mais à sa manière, en faisant pousser une variété nouvelle de mousse, ou en changeant la couleur des feuilles au printemps.\n\nOn dit qu’elle murmure.\n\nAujourd’hui, elle hurle.\n\nLe vent dans les branches forme des mots que vous n’arrivez presque pas à saisir, des phrases qui passent à la limite de votre compréhension et qui disparaissent avant que vous puissiez les retenir. Votre nom, peut-être. Ou un autre nom. Un nom que vous auriez dû porter.\n\nDes branches craquent derrière vous.\n\nQuelque chose vous suit.\n\nPas les soldats. Ils sont trop loin, encore, et trop bruyants.\n\nLui.\n\nVous le sentez dans votre dos, à la hauteur exacte où les épaules se rejoignent, comme un doigt posé à distance. Un doigt qui vous guide. Qui vous conduit, peut-être, exactement là où il veut.\n\nVotre souffle devient court. Vous avez trop couru. Vos jambes refusent. Votre cœur essaie, mais même lui commence à hésiter.\n\nVous trébuchez sur une racine et tombez.\n\nLe sol est frais. La mousse sent l’humide, le champignon, la vie patiente.\n\nVous pourriez rester là. Fermer les yeux. Laisser la forêt vous prendre, comme elle prend tout ce qui s’y oublie assez longtemps.\n\nMais alors…\n\nUne lumière.\n\nBleue.\n\nAu cœur des arbres.\n\nCe n’est pas la lumière de la lune. Ce n’est pas le reflet d’un feu au loin. C’est une lumière qui ne cherche rien à éclairer, qui se contente d’être là, comme une réponse à une question que personne n’a encore posée.\n\nEt une voix.\n\nPas dans la forêt.\n\nDans votre tête.\n\n« Enfin… tu es revenu·e. »\n\nVous vous relevez sans savoir pourquoi.\n\nVous avancez vers la lumière sans avoir décidé de le faire.\n\nEt, pour la première fois depuis que le village brûle, vous avez l’impression d’obéir à quelque chose de plus vieux que la peur.",
+        "next": "voix_foret"
+      },
+      "voix_foret": {
+        "id": "voix_foret",
+        "type": "scene",
+        "text": "La voix ne revient pas immédiatement.\n\nElle vous laisse marcher. Elle vous laisse choisir, à chaque pas, de continuer ou de revenir en arrière. Aucune des deux options ne semble vraiment disponible, mais elle fait comme si. C’est poli, de sa part.\n\nLa forêt change autour de vous.\n\nLes arbres, d’abord normaux, deviennent plus hauts. Plus anciens. Leurs racines plongent dans la terre avec la lenteur d’un serment. Leurs écorces sont couvertes de signes qui ressemblent à des lettres, sans l’être tout à fait. Des entailles. Des spirales. Des griffures anciennes que personne n’a jamais refaites.\n\nVous comprenez, sans vous l’expliquer, que cette partie de la forêt n’a jamais vu d’humains depuis très longtemps.\n\nOu bien en a vu trop.\n\nUn cerf traverse votre chemin.\n\nIl s’arrête. Vous regarde. Il est blanc, presque transparent, et ses bois sont ramifiés comme des éclairs figés. Vous n’avez jamais vu de cerf pareil. Personne n’a jamais vu de cerf pareil.\n\nIl vous incline la tête, comme un serviteur accueille une personne attendue.\n\nPuis il s’éloigne.\n\nVous continuez.\n\nLa voix revient.\n\n« Tu ne dois pas t’arrêter. Pas ici. Pas encore. »\n\nElle n’est ni masculine ni féminine. Elle est calme, sans être douce. Ferme, sans être dure. C’est la voix qu’on aurait aimé avoir pour nous expliquer les choses difficiles de l’enfance.\n\n« Il te suit. Il sait exactement où tu vas. »\n\nVous frissonnez.\n\n« Mais ce n’est pas grave. Parce que là où tu vas, il ne peut pas te rejoindre tout de suite. »\n\nLes arbres s’écartent devant vous.\n\nUne clairière apparaît.\n\nEt vous savez, sans avoir besoin de voir, que quelque chose vous y attend depuis longtemps.",
+        "next": "mystere"
+      },
+      "combat": {
+        "id": "combat",
+        "type": "scene",
+        "text": "Vous ne bougez pas.\n\nVous le fixez.\n\nPuis vous avancez.\n\nChaque pas semble déclencher une réaction invisible. L’air devient lourd, épais. Instable. Comme si, autour de vous et lui, le monde retenait son souffle pour voir qui allait l’emporter.\n\nL’homme sourit.\n\n« Bien. »\n\nIl n’a pas l’air contrarié. Il a l’air, au contraire, d’attendre cela depuis longtemps. Il quitte le muret. Son manteau ondule, pour la première fois, à peine, comme si une brise intérieure l’animait.\n\nIl tend la main.\n\nLe feu renaît autour de vous. Pas partout. Juste un cercle parfait, un cercle tracé au sol par une autorité que vous ne comprenez pas, et qui vous enferme dans une arène. Les soldats, dehors, ne passeront pas. C’est entre vous et lui, maintenant.\n\nIl fait un pas en avant.\n\nMais cette fois…\n\nVous le sentez.\n\nVous le comprenez.\n\nCe n’est pas un pouvoir qui lui appartient. C’est un pouvoir qu’il a appris, quelque part, à grand-peine, et qu’il maîtrise aux prix d’une discipline terrible. Vous, vous n’avez rien appris. Et pourtant, dans votre sang, la même chose coule. Plus ancienne. Plus brute. Plus instinctive.\n\nEt instinctivement, vous le repoussez.\n\nVous tendez la main à votre tour, sans savoir exactement ce que vous faites. Quelque chose sort de vous. Pas du feu, non. Quelque chose comme l’absence du feu. Une négation. Un refus.\n\nLes flammes explosent en sens inverse.\n\nLe cercle s’inverse. Le feu qui vous enfermait se retourne et frappe l’homme, qui recule d’un pas, d’un seul, mais qui recule.\n\nLe silence retombe.\n\nPour la première fois, il semble surpris.\n\n« Impossible… »\n\nIl vous observe comme on observe une erreur de calcul. Pas avec colère. Avec une curiosité froide, méthodique.\n\n« Tu ne devrais pas savoir faire ça. Pas tout seul·e. »\n\nIl essuie du pouce une trace noire sur sa joue. Il regarde sa main, puis vous.\n\nLes soldats, dehors, ont fini de contourner le cercle effondré. Ils arrivent.\n\nIl sourit, soudain, d’un sourire un peu usé, un peu fatigué.\n\n« Nous reprendrons. »\n\nEt il disparaît. Non pas qu’il s’éloigne. Il disparaît vraiment. Une seconde il est là, la suivante il n’est plus.\n\nIl reste, à la place où il se tenait, une pierre noire posée dans l’herbe. La même qu’il faisait tourner entre ses doigts tout à l’heure.\n\nVous avez le temps, très court, de la voir.\n\nEt puis les soldats sont sur vous.",
+        "next": "apres_combat_premier"
+      },
+      "apres_combat_premier": {
+        "id": "apres_combat_premier",
+        "type": "scene",
+        "text": "« À terre ! »\n\nLa lame d’une épée effleure votre gorge. Vous sentez le métal frais contre votre peau. Vous sentez aussi, plus étrange, que le métal hésite. Qu’il ne trouve pas tout à fait l’angle pour trancher.\n\nVous levez les mains.\n\nL’homme d’armes qui vous tient en joue est jeune. Pas plus âgé que vous. Ses yeux sont injectés de sang, de fumée, d’ordres mal compris.\n\n« Tu bouges, t’es mort·e. »\n\nVous ne bougez pas.\n\nDerrière lui, un capitaine approche. Un homme plus vieux, plus sûr, dont la cicatrice coupe la joue du haut vers le bas comme un mauvais signe de ponctuation.\n\nIl se penche vers vous. Il sent la sueur et le mauvais vin.\n\n« C’est toi qui es resté·e debout. »\n\nIl ne demande pas.\n\nIl se redresse. Il parle à ses hommes, sans vous quitter des yeux.\n\n« On le prend vivant·e. »\n\nLe jeune soldat, au-dessus de vous, hésite.\n\n« Capitaine, les ordres étaient… »\n\n« Les ordres ont changé il y a cinq minutes. Toi tu n’étais pas là. Moi si. »\n\nIl sort, de la poche de sa tunique, un petit disque de plomb. Un sceau. Il le pose à terre, devant vous. Le sceau porte la marque de la Couronne. Et dessous, une autre marque, plus petite, que vous ne reconnaissez pas. Deux cercles croisés. Un œil au milieu.\n\nLe capitaine se penche encore.\n\n« Tu vas venir avec nous. Sans histoire. Et tu vas avoir de la chance, contrairement à ce village. »\n\nIl fait un geste au jeune soldat.\n\n« Attache-le·la. »\n\nLa corde est rêche. Elle vous brûle les poignets. Les flammes, elles, vous avaient épargné·e. Mais pas la corde.\n\nVous pensez, absurdement, à la pierre noire laissée par l’homme. Vous tournez la tête. Elle a disparu, elle aussi. Ou alors elle est cachée par la botte du soldat, à quelques pas.\n\nOn vous relève. On vous pousse. On vous fait marcher à travers les ruines encore tièdes, entre les corps que vous n’avez pas le courage de regarder.\n\nEt une voix, dans votre tête, qui n’est pas la vôtre, murmure :\n\n« Ce n’est pas là que ça s’arrête. »",
+        "next": "evasion_convoi"
+      },
+      "evasion_convoi": {
+        "id": "evasion_convoi",
+        "type": "scene",
+        "text": "Ils vous emmènent pendant des heures.\n\nLe chariot brinqueballe sur des chemins que vous ne connaissez pas. La nuit tombe. Les étoiles, lentement, recouvrent le ciel. Vous n’avez jamais eu le temps, avant, de les regarder vraiment.\n\nVos poignets sont à vif. Le capitaine, devant, ne vous adresse pas la parole. Les soldats se relaient pour vous surveiller, et tous sans exception évitent votre regard.\n\nAu bout d’un long moment, le convoi s’arrête.\n\nUne voix cadencée donne des ordres. Le jeune soldat qui vous a attrapé·e plus tôt grimpe dans le chariot.\n\n« Descends. »\n\nIl vous prend par le bras, sans brutalité. C’est étrange. Il a l’air d’avoir décidé, en route, qu’il ne vous détestait pas. Peut-être parce qu’il a eu le temps de vous regarder dormir. Peut-être parce qu’il s’est rendu compte que vous étiez, au fond, quelqu’un comme lui.\n\nIl vous aide à descendre.\n\nVous êtes au bord d’une forêt. Pas la même que celle d’Astréa. Plus sombre. Plus dense. Il n’y a pas de campement. Rien qu’un chemin qui s’enfonce dans les arbres.\n\nLe capitaine apparaît.\n\n« C’est ici. »\n\nIl sort une clé. Il défait vos liens, lui-même. Ses mains sont précises.\n\nVous le fixez.\n\n« Pourquoi ? »\n\nIl ne répond pas tout de suite. Il regarde vers la forêt, comme si la forêt pouvait l’entendre et juger ses mots.\n\n« Parce que j’ai un ordre. Et parce que cet ordre n’est pas de la Couronne. »\n\nIl vous tend une besace. Du pain. Une gourde. Une petite lame, courte. Et quelque chose d’autre, enveloppé dans un chiffon.\n\nVous ouvrez le chiffon.\n\nLa pierre noire. Celle de l’homme.\n\nLe capitaine vous fixe.\n\n« Je ne sais pas qui tu es. Et je préfère ne jamais le savoir. Mais il m’a dit de te conduire ici, et de te laisser partir. Et ce qu’il dit, je le fais. Pas parce que j’ai peur. Parce que j’ai déjà essayé, une fois, de ne pas le faire. »\n\nIl s’éloigne sans attendre.\n\nLe jeune soldat, derrière, vous fait un petit signe de la tête. Presque un salut.\n\nEt puis ils remontent dans le chariot et partent.\n\nVous restez seul·e, au bord d’une forêt que vous ne connaissez pas, avec une pierre noire dans la main.\n\nLa pierre pulse.\n\nComme un cœur.\n\nEt vous savez, à présent, qu’il y a des choses auxquelles on n’échappe pas.",
+        "next": "mystere"
+      },
+      "mystere": {
+        "id": "mystere",
+        "type": "scene",
+        "text": "La lumière bleue pulse doucement entre les arbres.\n\nVous ralentissez. Votre cœur bat trop vite, mais pas vraiment de peur. De reconnaissance. Comme si une partie de vous avait cherché cette lumière toute sa vie sans savoir qu’elle existait.\n\nVous avancez.\n\nQuelque chose vous attire. Quelque chose qui vous connaît.\n\n« Approche. »\n\nLa voix n’est pas humaine. Elle ne résonne pas dans l’air. Elle résonne en vous, dans la cage même de votre poitrine, comme si on avait sculpté des mots dans la courbe de vos côtes il y a longtemps, et qu’ils vibraient enfin.\n\nVous avancez malgré vous.\n\nAu centre d’une clairière, une lame est plantée dans la terre.\n\nUne épée.\n\nAncienne. Fine. La garde est sculptée d’un motif de cercles entrelacés que vous croyez reconnaître, sans pouvoir dire d’où. La lame est fissurée, de haut en bas, comme si elle avait brûlé de l’intérieur. À l’intérieur des fissures, la lumière bleue bouge, lente, comme un sang patient.\n\n« Tu es en retard », dit la voix.\n\nVotre main tremble.\n\nVous comprenez sans comprendre. Cette épée vous attend. Depuis longtemps. Peut-être depuis avant votre naissance, peut-être depuis des siècles.\n\nAutour de la clairière, la forêt s’est tue. Plus un insecte. Plus un souffle. Seulement la respiration lente de la lumière, comme un sommeil partagé entre toutes les racines du bois.\n\nVous remarquez, au pied de l’épée, des fleurs.\n\nBlanches. Petites. Jamais fanées. Elles ont poussé dans un cercle parfait autour de la lame, et si vous en arrachiez une, vous savez, vous savez sans savoir pourquoi, qu’une autre repousserait immédiatement à sa place.\n\n« Prends-la, ou laisse-la », dit la voix. « Mais ne fais pas semblant de ne pas avoir entendu. »\n\nVos doigts s’approchent.\n\nIls s’arrêtent à une main de la garde.\n\nVous hésitez.",
+        "next": "choix_epee"
+      },
+      "choix_epee": {
+        "id": "choix_epee",
+        "type": "choice",
+        "text": "La lame vibre doucement, comme un chat qui ronronne. Derrière vous, la forêt commence à murmurer à nouveau. Vous sentez, très loin, que quelqu’un avance.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "prendre_epee",
+            "label": "Prendre l’épée",
+            "nextNode": "lien",
+            "effects": [
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "epee",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "refuser_epee",
+            "label": "Refuser et reculer",
+            "nextNode": "refus",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "lien": {
+        "id": "lien",
+        "type": "scene",
+        "text": "Vos doigts touchent la poignée.\n\nLe monde disparaît.\n\nVous ne tombez pas. Vous ne vous évanouissez pas. Vous êtes simplement, en une seconde, ailleurs, dans un endroit qui n’a pas de nom parce qu’on ne va pas là deux fois dans une même vie.\n\nUne vision.\n\nUne ville immense en flammes.\n\nPas Astréa. Plus grande. Cent fois plus grande. Des tours aux toits pointus qui grattent le ciel, des coupoles de verre colorées qui explosent une à une, des ponts de pierre qui enjambent un fleuve dont l’eau a pris la couleur du sang sans qu’aucune goutte ne soit humaine.\n\nAu-dessus de tout cela, des flammes. Mais pas des flammes ordinaires. Des flammes qui obéissent à quelqu’un.\n\nDes tours noires se dressent dans le lointain, intactes, comme des colonnes plantées pour tenir un ciel qui menace de s’effondrer. L’une d’elles est en ruine, déchirée du haut vers le bas par un coup que vous ne voyez pas, mais que vous ressentez.\n\nEt vous.\n\nAu centre.\n\nTenant cette même épée.\n\nLe feu ne détruit pas. Il obéit. Il vous écoute. Il coule entre vos doigts comme une eau docile, il s’éloigne quand vous le repoussez, il revient quand vous l’appelez.\n\nAutour de vous, des silhouettes. Dix. Vingt. Plus. Elles tombent. Elles s’effacent. Elles vous disent des mots que vous n’entendez pas, ou que vous n’avez pas envie d’entendre, parce qu’ils ressemblent à des pardons.\n\nPuis une voix.\n\nUne voix que vous ne connaissez pas encore et qui pourtant vous est familière.\n\n« Tu es la dernière. »\n\nUn homme s’avance dans la lumière. Son visage est flou, mais vous savez qui c’est. L’homme du village. L’homme des ruines. Celui que vous venez de voir. Ou son jumeau. Ou un autre qui lui ressemble trop.\n\nIl vous regarde avec une tristesse immense, comme quelqu’un qui aurait tout perdu et continuerait à perdre par habitude.\n\n« Tu es la dernière. Et moi je suis celui qui a tout cassé. »\n\nIl pose la main sur votre épaule.\n\n« Pardonne-moi, si tu peux. Je recommencerai, sinon. »\n\nVous revenez brutalement à vous.\n\nL’épée est dans votre main.\n\nElle est chaude. Vivante. Elle pèse bien plus que son poids, parce qu’elle contient quelque chose qui ne pèse pas en grammes. Une histoire. Une colère. Un pardon déjà refusé.\n\nLa garde, vue de près, porte une inscription. Des lettres que vous ne connaissez pas, mais que vous pouvez lire.\n\n*À la dernière main.*\n\nDerrière vous, les arbres craquent.\n\nIl arrive.",
+        "next": "vision_futur"
+      },
+      "vision_futur": {
+        "id": "vision_futur",
+        "type": "scene",
+        "text": "Avant de vous retourner, vous cligneiez des yeux, et la vision revient.\n\nPas tout entière. Des morceaux.\n\nVous êtes à table. Autour de vous, neuf personnes, assises, qui mangent en silence. Vous ne les connaissez pas. Vous les connaissez toutes et tous. Votre cœur les reconnaît même si votre tête n’y arrive pas.\n\nL'un d’elles lève son verre.\n\n« À l’Ordre », dit l'un.\n\n« À ce qu’il fut », répond une autre.\n\n« À ce qu’il ne redeviendra jamais », ajoute un troisième.\n\nVous voulez parler, mais vos lèvres ne bougent pas. Vous êtes là sans être là.\n\nPuis la table devient une pierre. Les convives deviennent des statues. Les statues se fissurent.\n\nAu milieu d’elles, une seule garde son visage humain. C’est celui de l’homme des ruines. Il sourit, mais pas à vous. À quelqu’un derrière vous. Vous vous retournez.\n\nIl n’y a personne.\n\nVous comprenez que ce « personne », c’est vous.\n\nLa vision s’efface.\n\nVous êtes à nouveau dans la clairière. L’épée vibre. La voix, dans votre tête, ajoute, plus doucement :\n\n« L’Ordre est tombé. Il reste des morceaux. Tu es l’un d’eux. Celui-là, peut-être le dernier. »\n\nDerrière vous, le pas d’un homme. Lent. Pesant. Ne cherchant pas à se cacher.\n\nVous serrez la poignée.\n\nIl arrive.",
+        "next": "chasse"
+      },
+      "refus": {
+        "id": "refus",
+        "type": "scene",
+        "text": "Vous reculez.\n\nQuelque chose en vous hurle de ne pas toucher cette chose.\n\nCe n’est pas une arme. C’est une promesse. Une promesse que quelqu’un, autrefois, a faite à une époque où il pensait que toutes les promesses pouvaient être tenues. Vous savez, au plus profond de vous, que cette promesse-là, personne ne l’a tenue. Et que la tenir vous, maintenant, serait plus cruel que la trahir.\n\nLa lumière vacille. La voix devient plus dure.\n\n« Tu refuses ? »\n\nVous reculez encore.\n\n« On ne refuse pas. Pas ici. Pas après tant de temps. »\n\nLe sol tremble. Les racines se tordent sous vos pieds. Les fleurs blanches autour de la lame se referment, lentement, comme des paupières fatiguées.\n\nVous comprenez, à ce moment, que cette clairière n’est pas un lieu. C’est un serment. Un serment qu’un peuple a fait à l’avenir, et que l’avenir, pour la première fois, peut refuser.\n\nVous tombez à genoux. Vous êtes très petit·e, soudainement. La lumière se retire en vous, lentement, comme une marée qui renonce.\n\nEt soudain…\n\nle silence.\n\nDerrière vous. Une présence. Une respiration.\n\n« Mauvais choix », dit une voix que vous connaissez.\n\nL’homme est là.\n\nIl ne semble pas en colère. Il semble soulagé, presque. Comme si, en refusant l’épée, vous lui aviez retiré un poids qu’il portait depuis très longtemps.\n\nIl fait trois pas. Il se penche. Il arrache l’épée du sol. Elle ne proteste pas. Elle est inerte, entre ses mains. Une longue barre de métal fissuré.\n\n« Tu vois », dit-il doucement. « Ce n’était pas à toi. »\n\nIl range la lame dans un fourreau qui n’aurait pas dû exister sous son manteau.\n\nIl vous tend la main.\n\n« Viens. Nous avons beaucoup à nous dire. »\n\nVous levez la tête.\n\nEt vous acceptez la main, parce que c’est, à cet instant, la seule qui existe.",
+        "next": "chasse_refus"
+      },
+      "chasse_refus": {
+        "id": "chasse_refus",
+        "type": "scene",
+        "text": "Il vous aide à vous relever.\n\nSa main est tiède. Trop tiède. Comme s’il avait la fièvre depuis longtemps sans que cela le dérange.\n\n« Nous n’avons pas beaucoup de temps », dit-il. « D’autres viennent. Pas seulement les soldats. »\n\nIl lève les yeux vers la canopée. Loin au-dessus, une ombre passe. Trop grande pour être un oiseau. Trop silencieuse pour être un dragon, si de telles choses existaient encore.\n\nIl vous tire doucement vers l’ouest.\n\n« Par là. »\n\nVous obéissez. Vous n’avez plus rien d’autre à faire.\n\nEt vous avez l’impression, en marchant à ses côtés, de ne pas être à côté d’un ennemi, mais à côté d’un homme qui a beaucoup perdu et qui, pour la première fois depuis des années, a peur de reperdre.\n\nVous vous demandez si cette peur vous concerne.\n\nVous vous demandez si elle vous ressemble.\n\nIl ne parle plus, jusqu’à ce que la forêt s’ouvre sur autre chose.",
+        "next": "chasse_commune"
+      },
+      "chasse_commune": {
+        "id": "chasse_commune",
+        "type": "scene",
+        "text": "Il vous guide pendant ce qui vous paraît des heures.\n\nLa forêt est sans fin. Les arbres deviennent différents, plus sombres, plus droits. Les mousses changent de couleur, passant du vert à un violet très doux.\n\nVous finissez par parler.\n\n« Comment t’appelles-tu ? »\n\nIl ne répond pas immédiatement.\n\nPuis il sourit, de ce sourire étrange qui semble avoir été emprunté à quelqu’un d’autre.\n\n« Kaïs. »\n\nVous ne savez pas pourquoi, mais ce nom vous fait trembler.\n\n« Et toi ? »\n\nVous lui donnez votre nom, ou un morceau de votre nom. Celui que vous acceptiez qu’on vous donne, enfant, avant que tout ne change.\n\nIl hoche la tête, comme s’il le connaissait déjà.\n\n« Je crois que je t’ai déjà appelé·e, un jour », dit-il.\n\nIl ne s’explique pas.\n\nVous n’osez pas demander.\n\nAu bout du chemin, la lumière change. Elle devient bleue, comme celle de la clairière, mais en plus grand. Vous débouchez dans un endroit qui ressemble à un cimetière, ou à un jardin. Des ruines basses. De l’herbe haute. Et au centre, un feu qui ne brûle pas, qui éclaire simplement, comme s’il ne voulait rien détruire.\n\nAutour du feu, trois silhouettes.\n\nVous hésitez.\n\nKaïs continue sans vous attendre.\n\n« Ils ne te feront pas de mal. Pas encore, au moins. »\n\nIl rit, à moitié.\n\n« Pas tant que tu seras utile. »",
+        "next": "camp"
+      },
+      "chasse": {
+        "id": "chasse",
+        "type": "scene",
+        "text": "Il ne court pas.\n\nIl n’en a pas besoin.\n\nChaque pas qu’il fait déforme le monde autour de lui. Les feuilles noircissent. L’air se plie. Les oiseaux, plus haut, tombent sans crier, soudain incapables de rester suspendus au-dessus de lui.\n\nVous comprenez une chose.\n\nVous ne pouvez pas fuir éternellement. Et lui ne vous laissera jamais partir.\n\nVous vous retournez, l’épée au poing. La lame vibre doucement, comme un animal qui reconnaît un autre animal.\n\nIl s’arrête à dix pas.\n\nIl vous regarde.\n\nIl hoche la tête, lentement.\n\n« Tu l’as prise. »\n\nCe n’est pas un reproche. Ce n’est même pas une surprise. C’est une confirmation, une case cochée dans un calendrier qu’il tenait depuis trop longtemps.\n\nSes yeux brillent. Pas de colère. Pas de haine. Seulement la certitude, tranquille et totale, de quelqu’un qui a vu cette scène, peut-être, d’autres fois, avec d’autres visages.\n\n« Tu ne sais pas ce que tu es », dit-il.\n\nIl fait un pas.\n\n« Tu ne sais pas ce qu’elle est. »\n\nIl regarde la lame, presque avec tendresse.\n\n« Tu ne sais pas non plus qui je suis. »\n\nUn autre pas.\n\n« Mais nous avons le temps. Je te l’assure. »\n\nL’épée, dans votre main, chauffe. La fissure bleue pulse plus fort, plus clair. Elle semble vouloir aller vers lui. Ou peut-être est-ce vous qui le voulez, et vous ne savez plus qui dans cette association décide de quoi.",
+        "next": "choix_affrontement_2"
+      },
+      "choix_affrontement_2": {
+        "id": "choix_affrontement_2",
+        "type": "choice",
+        "text": "Il attend. Il sait qu’il n’a pas besoin de frapper le premier. Il veut voir ce que vous allez faire.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "attaquer",
+            "label": "L’attaquer",
+            "nextNode": "combat_2",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "id": "parler",
+            "label": "Essayer de comprendre",
+            "nextNode": "revelation",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "combat_2": {
+        "id": "combat_2",
+        "type": "scene",
+        "text": "Vous attaquez.\n\nPas de plan. Pas de stratégie. Juste un instinct. Survivre.\n\nL’épée, ou votre corps, réagit avant vous. Elle tranche l’air, puis la distance, puis le temps lui-même. Vous avancez à une vitesse qui n’est pas la vôtre. Vos pieds savent comment se poser. Vos épaules savent comment pivoter. Quelqu’un, quelque part, a déjà appris à faire cela à votre place.\n\nLe choc est brutal.\n\nKaïs tend la main. Le feu se forme. Le feu rencontre la lame. Le feu et la lame, pendant un instant très long, s’observent.\n\nPuis la lame gagne.\n\nUne onde traverse la forêt. Les arbres se brisent, une ligne entière d’entre eux, comme un peigne qui casserait net sur une chevelure trop épaisse. La terre se fissure sur dix pas. Un éclat bleu s’élève dans l’air, puis retombe, en cendres claires, comme une neige minérale.\n\nIl recule.\n\nUn pas.\n\nUn seul.\n\nMais c’est suffisant.\n\nVous voyez son visage, très clairement. Il n’est plus impassible. Il n’est même plus surpris. Il est, pour la première fois, concerné.\n\n« Alors c’est vrai… »\n\nSon sourire a disparu. Pour la première fois.\n\n« Tu peux me tuer. »\n\nIl baisse la main. Il baisse la garde. Il s’assoit, carrément, dans l’herbe, comme si la fatigue de plusieurs siècles venait de s’abattre sur lui.\n\n« Tue-moi, alors. C’est pour ça qu’elle t’a choisi·e. »\n\nVous pointez la lame vers lui. Vous la tenez à deux mains. Elle est lourde. Elle est lourde d’une autre manière maintenant, comme si elle hésitait avec vous.\n\nVous ne frappez pas.\n\nIl lève les yeux, lentement.\n\n« Non ? »\n\nIl soupire.\n\n« Tant mieux. Assieds-toi. Il faut que nous parlions. »",
+        "next": "revelation"
+      },
+      "revelation": {
+        "id": "revelation",
+        "type": "scene",
+        "text": "Vous ne bougez pas.\n\n« Qui êtes-vous ? »\n\nIl vous observe longtemps. Très longtemps. Puis il s’assoit. Il fait un geste pour vous inviter à en faire autant. Vous restez debout. Il ne s’en offense pas.\n\n« Je m’appelle Kaïs », dit-il.\n\nIl laisse ce nom flotter entre vous, comme s’il pesait dans l’air.\n\n« Et je suis celui qui a échoué. »\n\nLe vent tombe. Dans la forêt, les oiseaux, les insectes, tout s’est tu. Comme si la forêt, elle aussi, voulait entendre.\n\n« Il y a longtemps, très longtemps, il existait un Ordre. Neuf personnes. Neuf pouvoirs. Neuf promesses. Ensemble, nous avons maintenu ce monde debout pendant des siècles. Pas parce qu’il était beau, pas parce qu’il était juste. Parce qu’il valait mieux qu’il tienne. »\n\nIl fait tourner, à nouveau, la petite pierre noire entre ses doigts.\n\n« Nous avons été orgueilleux. Nous avons voulu faire mieux. Un seul de nous a voulu faire mieux encore. J’ai ouvert la porte. »\n\nIl sourit, amer.\n\n« J’ai laissé entrer quelque chose qui n’aurait jamais dû entrer. »\n\nIl regarde l’épée, dans votre main.\n\n« Le monde brûle depuis, à petit feu. Trop lentement pour que les humains le remarquent. Trop vite pour que nous puissions le réparer. »\n\nIl vous fixe.\n\n« Et toi, tu es celle qui va recommencer. »\n\nVous ne savez pas quoi répondre.\n\nIl continue.\n\n« Ce monde brûlera, que tu le veuilles ou non. Nous, les neuf, nous avons tout raté. Il ne reste que moi. Et toi, tu es… » il cherche le mot, « tu es une autre chance. La dernière, très probablement. »\n\nIl tend la main.\n\n« Mais tu peux choisir comment il brûle. Jusqu’au bout, ou juste un peu. En cendres, ou en graines. »",
+        "next": "choix_alliance"
+      },
+      "choix_alliance": {
+        "id": "choix_alliance",
+        "type": "choice",
+        "text": "Sa main reste tendue. Kaïs attend, sans tenter de vous presser. Il y a dans son regard quelque chose qui ressemble à l’espoir, mais en trop vieux, en trop usé pour en être encore tout à fait.\n\nQue choisissez-vous ?",
+        "choices": [
+          {
+            "id": "accepter",
+            "label": "L’écouter vraiment",
+            "nextNode": "alliance",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 3
+              },
+              {
+                "variable": "confiance_kais",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "id": "refuser",
+            "label": "Refuser et attaquer",
+            "nextNode": "combat_2"
+          }
+        ]
+      },
+      "alliance": {
+        "id": "alliance",
+        "type": "scene",
+        "text": "Vous hésitez.\n\nPuis vous vous asseyez, à quelques pas de lui. Pas à côté. Pas tout à fait en face. Entre les deux. Comme si vous ne vouliez fermer aucune des portes.\n\nIl baisse légèrement la main. Comme soulagé.\n\n« Bien. »\n\nIl regarde le ciel, à travers les branches. Les étoiles sont sorties. Elles semblent plus proches que d’habitude.\n\n« Alors écoute. »\n\nEt il vous raconte.\n\nIl vous raconte l’Ordre d’Astréa, qui a tiré son nom d’une des plus vieilles étoiles et qui, pendant six cents ans, a veillé sur ce monde comme un jardinier maladroit veille sur une plante trop fragile. Il vous raconte les neuf, leurs voix, leurs visages, leurs querelles. Il en cite certains, sans les nommer vraiment. Il évoque une femme qui savait chanter les pierres, un homme qui pouvait tenir la pluie dans sa main. Vous sentez, à la manière dont sa voix hésite sur chaque nom, qu’il les a aimés.\n\nIl vous raconte la Rupture. Le jour où l’un d’eux, lui, a voulu aller plus loin. A essayé d’ouvrir une fenêtre sur ce qui était derrière la magie elle-même. A trouvé, derrière cette fenêtre, quelque chose qui n’aurait jamais dû être regardé.\n\nDepuis ce jour, dit-il, le monde fuit. Pas tout de suite, pas tout entier, mais peu à peu. Les récoltes deviennent pâles. Les enfants naissent plus rarement. Les bêtes oublient certains de leurs chants.\n\n« Et toi », dit-il, « tu n’es pas née par hasard. »\n\nIl vous regarde droit dans les yeux.\n\n« Il y a eu des tentatives. D’autres, avant toi. Six. Peut-être sept. Aucun n’a tenu jusqu’au bout. »\n\nIl marque une pause.\n\n« Tu es la huitième. Peut-être la dernière. »\n\nPuis, plus bas :\n\n« Tu es une solution. Ou une fin. »\n\nVous restez silencieux·se.\n\nAu-dessus de vous, les feuilles bruissent, comme si la forêt, en entendant ce mot, prenait un peu de recul.\n\n« Et maintenant ? » demandez-vous enfin.\n\nKaïs sourit. Presque tendrement.\n\n« Maintenant, nous partons. Parce que les soldats approchent. Parce que d’autres personnes, qu’il faudra te présenter, attendent que nous arrivions. Et parce que toi et moi, nous avons six cents ans de retard. »",
+        "next": "serment"
+      },
+      "serment": {
+        "id": "serment",
+        "type": "scene",
+        "text": "Il se relève.\n\nIl tend la main une seconde fois. Vous la prenez. Sa peau, de près, est étrangement lisse. Pas de veines. Pas d’imperfections. Une peau qui a oublié comment on vieillit.\n\nIl vous aide à vous lever.\n\n« Avant de partir », dit-il, « je voudrais te demander une chose. »\n\nVous hochez la tête.\n\n« Je ne te promets pas de ne jamais te trahir », dit-il. « Nous avons, dans l’Ordre, tous trahi. Certains par erreur. D’autres par amour. Un par ennui. Ce serait trop facile de jurer. »\n\nIl plonge ses yeux dans les vôtres.\n\n« Mais je te promets une chose. Tant que tu porteras cette épée, je n’agirai pas contre toi. Et quand tu ne la porteras plus, je te préviendrai avant de le faire. »\n\nC’est un serment étrange. Qui ressemble à un aveu. Qui ressemble à une menace polie.\n\nVous ne savez pas si c’est beaucoup, ou si c’est très peu.\n\nVous hochez la tête.\n\nDans votre tête, la voix qui vous avait menée à la clairière murmure, une dernière fois :\n\n« Il dit vrai. Et c’est à la fois rassurant et terrifiant. »\n\nVous rangez l’épée, tant bien que mal, dans une ceinture que Kaïs vous a tendue.\n\nVous partez avec lui, dans une direction que vous ne connaissez pas, et qui pourtant vous semble vaguement familière.\n\nDerrière, la forêt se referme.\n\nElle avale votre passage comme on avale un secret qu’on a promis de garder.",
+        "next": "suite_majeure"
+      },
+      "suite_majeure": {
+        "id": "suite_majeure",
+        "type": "scene",
+        "text": "La nuit tombe lentement.\n\nLa forêt s’assombrit. Mais une chose est claire désormais. Votre vie, telle que vous la connaissiez, n’existe plus.\n\nIl n’y a plus de retour possible.\n\nPlus de village. Plus de cueillette. Plus de soirées à écouter la vieille Mirène ronchonner contre le vent. Plus de pain à la fraîche, le matin, quand la boulangère ouvrait ses volets.\n\nPlus de passé.\n\nSeulement un choix. Et ses conséquences.\n\nAu loin, des torches apparaissent. Les soldats, encore. Ou d’autres. Le royaume a mis plus d’hommes sur votre trace que sur celle d’un déserteur royal.\n\nKaïs s’arrête. Il lève la tête. Il écoute le vent d’une manière que vous n’aviez jamais vue quelqu’un écouter le vent.\n\n« Plus nombreux qu’avant », dit-il.\n\nIl sourit.\n\n« C’est bon signe. Ça veut dire qu’ils ont peur. »\n\nIl se tourne vers vous.\n\n« Cette fois, ce n’est plus une fuite. C’est le début d’une guerre. »",
+        "next": "fin_acte_1"
+      },
+      "fin_acte_1": {
+        "id": "fin_acte_1",
+        "type": "scene",
+        "text": "Vous inspirez profondément.\n\nLe monde vous attend. Et il ne survivra pas à vos choix. Pas entièrement. Pas intact. Mais peut-être, quelque part, pas détruit non plus.\n\nTout dépendra de vous. Et de ce que vous êtes prêt·e à devenir.\n\nVous serrez le poing.\n\nVous n’avez jamais été aussi peu sûr·e de qui vous étiez, et pourtant, quelque chose en vous semble, enfin, en paix.\n\nPas parce que la peur est partie.\n\nParce que vous la regardez en face.\n\nAu loin, les torches grandissent.",
+        "next": "acte2_depart"
+      },
+      "acte2_depart": {
+        "id": "acte2_depart",
+        "type": "scene",
+        "text": "Les torches se rapprochent.\n\nLe métal des armures s’entrechoque. Les voix se coordonnent avec cette froide efficacité qui, chez les soldats, remplace le courage. Vous distinguez les silhouettes dans l’ombre des arbres. Trente, peut-être quarante hommes. Deux archers dans les flancs.\n\nLes soldats du royaume.\n\nTrop nombreux. Trop organisés. Trop décidés.\n\nCette fois, vous ne pourrez pas disparaître dans la forêt. Ils viennent avec des chiens. Vous les entendez, très bas, très loin. Ils ne donnent pas de la voix. Ils sont dressés pour chasser en silence.\n\nKaïs tourne légèrement la tête.\n\n« Ils viennent pour toi. »\n\nIl marque une pause. Il fait un petit geste de la main, comme un salut ironique envers la nuit.\n\n« Ou pour ce que tu es devenu·e. »\n\nVous sentez l’épée vibrer, si vous l’avez prise. Ou un vide étrange dans votre poitrine, si vous l’avez refusée. Une absence qui ressemble à un aimant sans fer à portée, à une porte ouverte sur une pièce qu’on n’a jamais meublée.\n\nDans les deux cas, une chose est certaine.\n\nIls ne vous laisseront pas partir librement.\n\nKaïs se tourne vers vous. Dans la pénombre, ses yeux gris ont pris la couleur de l’étain.\n\n« On reste et on les affronte. Ou on disparaît. »\n\nIl sort, de nulle part, une seconde lame courte, et la fait tourner une fois dans sa main. Le geste est ancien. Hérité. Pas quelque chose qu’on apprend en une vie.\n\n« Je ferai ce que tu décides. »\n\nC’est la première fois qu’il dit cela. Vous l’entendez. Lui aussi, sans doute.",
+        "next": "choix_faction"
+      },
+      "choix_faction": {
+        "id": "choix_faction",
+        "type": "choice",
+        "text": "Les premiers soldats percent la ligne des arbres. Kaïs attend votre décision. Il semble sincèrement ne pas avoir d’avis.",
+        "choices": [
+          {
+            "id": "affronter_soldats",
+            "label": "Affronter les soldats",
+            "nextNode": "combat_soldats",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "id": "suivre_homme",
+            "label": "Suivre Kaïs et disparaître",
+            "nextNode": "fuite_dirigee",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "combat_soldats": {
+        "id": "combat_soldats",
+        "type": "scene",
+        "text": "Vous avancez.\n\nVous ne réfléchissez pas. Réfléchir serait une autre façon de mourir. Vous avancez, parce que votre corps sait à présent faire ce qui, hier, lui était inconnu.\n\nLes soldats s’arrêtent. Ils étaient prêts à courir derrière quelqu’un qui fuit. Ils ne sont pas prêts pour quelqu’un qui vient au-devant.\n\nIls s’arrêtent, sauf un.\n\nUn jeune, trop zélé, trop inexpérimenté, qui charge en criant. Vous n’entendez pas ce qu’il crie. Peu importe. Vous levez la main, et quelque chose sort de vous. Pas du feu. Pas tout à fait. Une vague de chaleur très brève, très dense, qui le soulève et le retourne dans l’air comme si on avait donné un coup de pied à un jouet en paille.\n\nIl retombe dix pas plus loin. Il ne bouge plus.\n\nLes autres soldats se raidissent.\n\nUn capitaine crie un ordre. Les archers bandent.\n\nVous bougez avant les flèches.\n\nL’épée, ou votre corps, guide vos gestes. Si vous tenez la lame, elle chante. Un son étrange, bas, comme un chœur lointain. Les flèches glissent sur elle sans la toucher. Les armures s’ouvrent comme du pain trop cuit.\n\nSi vous ne tenez rien, votre propre sang répond. Le feu vous suit. Le feu vous obéit, avec une docilité qui vous serre le cœur, parce que vous savez, quelque part, que la docilité d’un feu n’est jamais sans prix.\n\nKaïs, à côté, ne fait presque rien. Il observe. De temps en temps, un soldat qui vous visait se plie en deux sans qu’on l’ait touché. Ses lèvres bougent à peine. Vous ignoriez qu’on pouvait tuer en murmurant.\n\nTout est très rapide. Tout est très brutal.\n\nTout est très silencieux, aussi, quand cela se termine.\n\nUne minute a peut-être passé. Ou dix. Il est difficile de juger, à travers la brume rouge qui, un moment, vous a recouvert l’esprit.\n\nLes soldats sont à terre.\n\nUn seul est vivant, à moitié. Il rampe vers un fourré. Kaïs le laisse partir.\n\n« Il est bien, celui-là », dit-il, presque à lui-même. « Il dira ce qu’il faut. »\n\nVous respirez. Difficilement.\n\nEt vous réalisez.\n\nVous venez de tuer.\n\nSans hésiter.",
+        "next": "conscience_tuee"
+      },
+      "conscience_tuee": {
+        "id": "conscience_tuee",
+        "type": "scene",
+        "text": "Le silence est lourd. Trop lourd.\n\nVous regardez vos mains. Elles tremblent. Pas de peur, pas vraiment. Quelque chose d’autre. Quelque chose qui ressemble à un vertige, mais en intérieur.\n\nVous regardez, surtout, l’homme le plus proche. Un soldat d’une trentaine d’années. Une alliance à son annulaire. Vous vous surprenez à imaginer, malgré vous, une femme qui attendra longtemps avant d’apprendre, si jamais on lui apprend.\n\nKaïs s’approche. Sans bruit. Il pose sa main sur votre épaule. Pas en ami. Pas en maître. Quelque part entre les deux.\n\n« Tu apprends vite. »\n\nVous ne répondez pas.\n\n« Tu ne devrais pas », ajoute-t-il. « Normalement, on apprend plus lentement. On hésite, on échoue, on recommence. Toi, tu avances directement. »\n\nIl enlève sa main.\n\n« Ce n’est pas forcément une bonne nouvelle. »\n\nAu loin, un cor retentit. Un cor profond. Un cor qui n’est pas un cor de chasse.\n\n« Ils ont envoyé plus d’hommes », dit-il. « Ou autre chose. Viens. »\n\nCette fois, vous ne discutez pas.\n\nVous le suivez. Vous laissez les corps derrière vous. Vous essayez, tout en marchant, de ne pas compter combien vous en avez fait tomber vous-même. Vous n’y arrivez pas. Sept. Huit. Peut-être neuf. Votre esprit a tenu le compte tout seul, pendant que vous croyiez ne pas le faire.\n\nVous comprenez, à ce moment, que vous ne serez plus jamais la même personne qu’avant cette nuit.\n\nEt que cette phrase-là, si vous l’aviez entendue la veille, vous aurait fait rire.",
+        "next": "camp"
+      },
+      "fuite_dirigee": {
+        "id": "fuite_dirigee",
+        "type": "scene",
+        "text": "« Par ici. »\n\nIl ne regarde même pas en arrière.\n\nVous le suivez. Vos pieds cherchent les siens, comme un enfant qui suit une piste dans la neige. Il est silencieux. Étrangement silencieux. Les feuilles semblent craquer moins sous ses pas que sous les vôtres.\n\nLa forêt se transforme.\n\nLes chemins disparaissent. Ou apparaissent. Impossible de savoir lequel des deux. Ce qui était un sentier devient un muret. Ce qui ressemblait à un arbre devient une arche en pierre à moitié engloutie. Il connaît cet endroit. Ou il le contrôle. Ou les deux. Vous n’êtes plus sûr·e qu’il existe une différence.\n\nDerrière vous, les torches des soldats oscillent un moment, perdues, puis s’éloignent.\n\nKaïs ne dit rien. Il marche. Ses épaules portent une fatigue qui n’est pas celle de la nuit. C’est une fatigue plus vieille, plus profonde, celle qui se dépose au fond d’un homme quand il a vu, trop souvent, le même malheur se répéter.\n\nAprès plusieurs minutes, ou peut-être des heures, vous débouchez dans une clairière.\n\nMais pas une clairière normale.\n\nDes ruines.\n\nAnciennes. Basses. Oubliées. Des murs qui ne montent plus qu’à mi-hauteur. Des colonnes effondrées. Un dallage usé par les racines, qui s’est déformé comme un visage qui a vu trop de peine.\n\nVous reconnaissez, au centre, ce qui devait être une fontaine. L’eau n’y coule plus. À la place, il y a un petit bassin de lumière bleue, très peu profond, qui semble respirer lentement.\n\nEt au-dessus de ce bassin, un feu bleu, suspendu, qui ne touche rien.\n\nIl n’éclaire pas comme un feu. Il éclaire comme une idée. Comme si sa lumière arrivait d’un autre endroit, d’une autre époque, et traversait ce monde en passant.\n\nAutour du feu, trois silhouettes. Trois visages.\n\nEt ces trois visages se tournent vers vous, à peu près en même temps.",
+        "next": "camp"
+      },
+      "camp": {
+        "id": "camp",
+        "type": "scene",
+        "text": "Le feu bleu ne brûle pas. Il éclaire. Il ne réchauffe rien, ne fait fondre aucune cire, ne réduit aucune bûche en cendres. Il simplement est. Comme on est, dans un rêve.\n\nAutour du feu, trois silhouettes.\n\nIls vous regardent. Pas avec peur. Avec reconnaissance. Comme si vous étiez une lettre qu’ils attendaient depuis trois cents ans et qui, enfin, arrive.\n\nLe premier s’avance.\n\n*Camille.*\n\nUne silhouette fine, une cape grise, un visage aux traits précis, aux yeux très sombres et très attentifs. Elle se tient un peu de côté, comme quelqu’un qui préfère observer les choses plutôt qu’y participer tout de suite. Chaque geste est économique. Chaque respiration, calculée.\n\nLe deuxième sourit largement, avec ce genre de sourire qui donne toujours l’impression d’une plaisanterie que vous ne comprenez pas complètement.\n\n*Léo.*\n\nGrand, musclé d’une manière souple, des cheveux clairs qui tombent sur les yeux, un rire facile, une démarche qui a connu trop de tavernes pour être honnête. Il croise les bras.\n\n« Enfin », dit-il. « On commençait à croire que t’existais pas. »\n\nLe troisième ne dit rien.\n\n*Guillaume.*\n\nPlus petit que les deux autres, une tresse très longue, un vêtement de couleur neutre, une expression calme qui ne semble jamais avoir appris à froncer les sourcils. Il vous fixe sans agressivité, sans courbette, juste avec une attention totale. Comme si rien, absolument rien, dans cette clairière n’était plus important que vous.\n\nKaïs, derrière vous, laisse tomber, presque à mi-voix :\n\n« Voilà ce qui reste. »\n\nIl fait un geste qui englobe les trois.\n\n« Pas grand-chose, tu admettras. »\n\nGuillaume tique. Un tout petit tique. Puis Guillaume se remet à vous fixer.\n\nCamille hoche la tête, comme si elle validait une ligne d’un livre qu’elle était en train d’écrire. Elle parle, enfin, d’une voix très basse, très posée :\n\n« Tu devrais t’asseoir. Le voyage a été long. »\n\nLéo éclate d’un rire un peu forcé.\n\n« \"Long\" », dit-il. « Six cents ans de retard, oui. Allez, approche, on va pas te manger. Pas tout de suite. »\n\nGuillaume, sans changer d’expression, ajoute :\n\n« Il plaisante. »\n\nPuis, plus bas :\n\n« La plupart du temps. »",
+        "next": "interaction_groupe"
+      },
+      "interaction_groupe": {
+        "id": "interaction_groupe",
+        "type": "choice",
+        "text": "Les trois vous observent. Kaïs, derrière, ne bouge pas.\n\nComment réagissez-vous ?",
+        "choices": [
+          {
+            "id": "mefiante",
+            "label": "Rester en retrait, méfiant·e",
+            "nextNode": "mefiance",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "soupcon_leo",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "dialoguer",
+            "label": "Essayer de les comprendre",
+            "nextNode": "dialogue_groupe",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "mefiance": {
+        "id": "mefiance",
+        "type": "scene",
+        "text": "Vous restez en retrait.\n\nVos yeux passent de l’un à l’autre. Vous cherchez les incohérences, les signes, les petits détails qui ne collent pas dans les visages trop parfaits.\n\nCamille le remarque immédiatement.\n\n« Bien », dit-elle.\n\nElle hoche légèrement la tête. Pas comme on félicite. Comme on constate.\n\n« Elle réfléchit. Cela nous épargne un discours. »\n\nLéo soupire.\n\n« Ou ça veut dire qu’on lui fait pas confiance. »\n\nIl se laisse tomber sur une pierre et pose les coudes sur les genoux.\n\n« Écoute. J’sais pas si t’as remarqué, mais on est quatre à être debout dans cette forêt, et trois d’entre nous on te veut du bien. C’est déjà mieux que la moyenne, non ? »\n\nGuillaume parle enfin.\n\n« Il a raison de se méfier. »\n\nIl se tourne vers vous, sans hostilité.\n\n« On te doit des réponses. Mais on ne te les doit pas tout de suite, et pas toutes à la fois. C’est à toi de choisir ce que tu veux d’abord. »\n\nUn silence s’installe.\n\nPuis Kaïs, derrière vous, ajoute d’une voix plate :\n\n« Ils sont comme toi. Ou comme ce que tu pourrais devenir. »\n\nCamille le fusille du regard.\n\n« Ne commence pas, Kaïs. »\n\n« Je ne commence pas. Je termine. »\n\nLe feu bleu crépite, ou plutôt émet un son qui ressemble à un crépitement, sans chaleur. Vous sentez, tout autour de cette clairière, une tension que personne n’exprime vraiment. Quelque chose de non-dit. Quelque chose de dangereux, qui n’attend qu’un mot pour se déclencher.\n\nLéo se lève, tape dans ses mains.\n\n« Bon. On lui raconte ou on l’envoie au lit ? »\n\nPersonne ne répond.\n\nIl prend cela pour un oui.",
+        "next": "revelation_groupe"
+      },
+      "dialogue_groupe": {
+        "id": "dialogue_groupe",
+        "type": "scene",
+        "text": "Vous avancez d’un pas.\n\n« Qui êtes-vous ? »\n\nLéo répond immédiatement, comme s’il attendait la question depuis des heures.\n\n« Les survivants. »\n\nCamille ajoute, plus bas :\n\n« Ceux qui ont compris. »\n\nGuillaume termine :\n\n« Trop tard. »\n\nLe feu bleu crépite. Vous sentez une tension. Quelque chose de non-dit. Quelque chose qui, s’il se disait, ferait tomber beaucoup de choses avec lui.\n\nVous vous asseyez, prudemment, sur une pierre. Vous gardez vos distances. Mais vous vous asseyez.\n\nCamille incline la tête, approbatrice.\n\n« Bien. »\n\nLéo vous tend une gourde. Vous hésitez. Il sourit.\n\n« C’est pas empoisonné. Pas aujourd’hui. »\n\nVous buvez. C’est de l’eau fraîche. Un peu sucrée. Avec un arrière-goût que vous ne sauriez pas nommer. Mais pas désagréable.\n\nKaïs s’assoit, enfin. À quelques pas du cercle. Pas dedans, pas dehors, sur la frontière.\n\n« Ils ont tous échoué. »\n\nSilence.\n\n« Comme moi. »\n\nIl fait ce sourire usé qui lui est si particulier.\n\nGuillaume vous observe longuement.\n\n« Nous étions neuf », dit Guillaume. « Kaïs inclus. Ce qu’il a ouvert, ce jour-là, a détruit les autres. Lentement. Chacun à sa manière. Chacun a cessé d’être, à sa manière. »\n\nIl baisse la voix.\n\n« Nous trois, ici, nous sommes ce qui en reste. Pas entiers. Pas vraiment. »\n\nLéo lève sa main droite. Il plie le petit doigt. Il ne se plie pas comme un vrai doigt. Il passe à travers les autres, comme de la fumée.\n\n« Manquent certains morceaux », dit-il avec un demi-sourire. « Mais bon, on fait avec. »",
+        "next": "revelation_groupe"
+      },
+      "revelation_groupe": {
+        "id": "revelation_groupe",
+        "type": "scene",
+        "text": "« Il y a eu d’autres avant toi », dit Camille.\n\nElle parle doucement, comme on parle à quelqu’un qui vient d’apprendre une mauvaise nouvelle et qu’on ne veut pas aggraver.\n\n« Avant toi, il y en a eu sept. »\n\nLéo se redresse.\n\n« Beaucoup. Chacun une version différente. Chacun avec ses propres forces, ses propres manques. L'un ne savait pas parler aux autres. L'un savait trop bien. L'un voulait sauver le monde tout seul. L'un ne voulait rien sauver du tout. »\n\nGuillaume complète :\n\n« Aucun n’a réussi. »\n\nLe poids des mots tombe lentement sur vos épaules. Vous vous sentez plus petit·e.\n\nKaïs reprend, à voix basse :\n\n« Le monde est déjà condamné. Il fuit. Il a commencé à fuir le jour où j’ai ouvert la porte. Il fuit plus vite chaque année. »\n\nIl vous regarde.\n\n« Tu ne peux plus le sauver complètement. C’est trop tard pour cela. »\n\nSilence.\n\n« Tu peux seulement choisir comment il finit. »\n\nLe feu bleu grandit. Pas beaucoup. Juste assez pour être remarqué. Comme s’il réagissait à votre présence. Ou à votre colère. Ou à la colère que les trois autres auraient aimé ressentir à la place de leur résignation.\n\nCamille se lève. Elle va vers le feu bleu. Elle passe la main à travers les flammes, sans précaution. Rien ne brûle.\n\n« Le feu bleu vient d’autre chose », dit Camille. « Il vient de l’Ordre, à son commencement. C’est ce que nous avons pu sauver. Quand tu étais dans la clairière, quand tu as rencontré la lame, c’est de cela que la lame parlait. »\n\nElle se tourne vers vous.\n\n« La lame, le feu, toi, nous. Tout cela est le même fil, brisé en morceaux. »\n\nElle marque une pause.\n\n« La question, maintenant, c’est ce que tu veux faire avec ce fil. »",
+        "next": "histoire_ancienne"
+      },
+      "histoire_ancienne": {
+        "id": "histoire_ancienne",
+        "type": "scene",
+        "text": "Guillaume se lève à son tour.\n\nIl fait un geste, presque un geste de danse, et le feu bleu change. Il s’étire. Il devient plat, comme un miroir posé à la verticale, entre vous et les autres.\n\nDans ce miroir, des images apparaissent.\n\nUne ville.\n\nPas celle de votre vision. Plus belle. Plus calme. Plus vieille. Des tours blanches. Des ponts de cristal sur lesquels des gens ordinaires marchent en parlant de choses ordinaires.\n\n« Elle s’appelait Astérial », dit Guillaume. « Astréa, ton village, en était le dernier souvenir. Le nom a été raccourci au fil des générations. »\n\nVous êtes sous le choc. Votre village, ce tas de chaume et de pierre, portait le même nom qu’une ville de cristal et de marbre ?\n\nCamille hoche la tête.\n\n« Les peuples oublient beaucoup de choses. Mais il y a des noms qui s’accrochent. Comme des épines. »\n\nL’image change.\n\nNeuf silhouettes apparaissent, vues de dos, sur une terrasse qui surplombe la ville. Vous ne distinguez pas leurs visages.\n\n« Nous étions neuf », dit Camille. « Chacun d’un domaine. L’eau. Le feu. La pierre. L’air. Le temps. La mémoire. L’oubli. La parole. Et le seuil. »\n\nLéo lève la main.\n\n« Le seuil. C’était Kaïs. Son pouvoir, c’était d’ouvrir. »\n\nKaïs, sur sa pierre, ne dit rien. Il regarde ses mains.\n\n« Nous gardions le monde debout », continue Camille. « C’était un vieux serment. Très vieux. Plus vieux que les humains. »\n\nL’image change encore.\n\nOn voit Kaïs, plus jeune, seul dans une pièce souterraine. Il trace des cercles sur le sol. Il lève les yeux vers quelque chose qu’on ne voit pas.\n\n« Et puis un jour », dit Guillaume, « quelqu’un parmi nous a voulu aller voir derrière. »\n\nL’image explose en une lumière blanche.\n\nQuand elle revient, la ville brûle. Les tours s’effondrent. Le ciel est fendu. Des silhouettes courent.\n\n« Derrière la magie », dit Camille, « il y a autre chose. Il y a ce que nous, nous appelons… »\n\nElle hésite.\n\n« La Faim. »\n\nLe mot tombe dans le silence. Vous le sentez dans vos os.\n\n« Ce n’est pas un dieu. Ce n’est pas un monstre. C’est une absence. Mais une absence qui a faim. Une absence qui mange ce qui est, pour qu’il reste un peu plus d’absence. »\n\n« Kaïs a ouvert la porte. La Faim a respiré par cette porte. Une seule respiration. Cela a suffi. »\n\nL’image s’efface.\n\nLe feu bleu redevient une flamme normale. Ou aussi normale qu’un feu bleu sans chaleur puisse l’être.\n\nKaïs lève enfin les yeux.\n\n« Je ne pensais pas que ça arriverait », dit-il. « C’est ce que tout le monde dit. Mais dans mon cas, c’est vrai. »\n\nIl sourit, amer.\n\n« Depuis, je passe mon temps à essayer de refermer la porte. Et à chaque tentative, je fais plus de dégâts. »\n\nIl vous regarde.\n\n« Mais toi, peut-être, tu as une chance. Parce que tu n’es pas de l’Ordre. Tu en es la fille, ou le fils, ou la descendante, je ne sais plus. Tu portes notre sang, sans porter nos fautes. »",
+        "next": "choix_direction"
+      },
+      "choix_direction": {
+        "id": "choix_direction",
+        "type": "choice",
+        "text": "Les quatre vous regardent. Personne ne parle. Le feu bleu vacille lentement.\n\nQue choisissez-vous ?",
+        "choices": [
+          {
+            "id": "sauver",
+            "label": "Chercher à sauver le monde",
+            "nextNode": "route_espoir",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "dominer",
+            "label": "Utiliser le pouvoir pour le contrôler",
+            "nextNode": "route_pouvoir",
+            "effects": [
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "fuir_tout",
+            "label": "Partir seul·e, refuser de choisir",
+            "nextNode": "route_solitaire",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "route_espoir": {
+        "id": "route_espoir",
+        "type": "scene",
+        "text": "« Il doit y avoir une autre solution. »\n\nVous le dites avant même d’y avoir réfléchi. Votre voix est plus ferme que vous ne le pensiez.\n\n« Je ne veux pas juste choisir comment ça finit. Je veux choisir comment ça recommence. »\n\nLéo sourit. Un vrai sourire, cette fois, qui cache quelque chose. Soit une joie, soit une moquerie, soit les deux.\n\n« Évidemment. »\n\nIl tape dans ses mains une fois.\n\n« C'est le bon mot. »\n\nCamille reste silencieuse. Elle vous observe, d’une attention nouvelle, comme si vous veniez, sans le savoir, de cocher une case qu’elle tenait en tête depuis longtemps.\n\nGuillaume vous fixe. Longtemps.\n\nPuis hoche doucement la tête.\n\n« Alors on va la trouver. »\n\nIl ajoute, plus bas :\n\n« Ou la crever, cette solution. »\n\nKaïs ne dit rien. Mais pour la première fois depuis le village, il doute. Cela se voit dans ses épaules, qui se relâchent un peu. Il n’avait pas l’air d’espérer que vous diriez cela.\n\n« Alors tu vas vouloir aller là-bas », murmure-t-il.\n\nIl fait un geste vague vers le nord.\n\n« À la Tour. »\n\nGuillaume hoche la tête.\n\n« C’est là que tout a commencé. C’est là que tout doit se fermer. »",
+        "next": "mission_1"
+      },
+      "route_pouvoir": {
+        "id": "route_pouvoir",
+        "type": "scene",
+        "text": "Vous ne répondez pas immédiatement.\n\nVous les regardez tous, un à un. Camille, Léo, Guillaume, Kaïs. Vous vous demandez ce qu’ils ont été, avant. Ce qu’ils auraient pu être, s’ils n’avaient pas tout gâché. Ce qu’ils ne seront jamais, maintenant.\n\nEt vous comprenez quelque chose de très froid.\n\nQuelque chose qui n’est peut-être pas entièrement vous.\n\n« Si le monde doit changer », dites-vous, « autant le contrôler. »\n\nUn silence.\n\n« Si je suis la dernière tentative, je ne serai pas la plus timide. »\n\nLéo sourit largement.\n\n« J’aime bien », dit-il. « Pragmatique. Efficace. Un peu effrayant. »\n\nCamille vous observe avec une intensité nouvelle. Elle ne sourit pas, elle ne se renfrogne pas. Elle note. Comme un scribe. Vous ne savez pas si c’est une bonne ou une mauvaise chose.\n\nGuillaume baisse légèrement les yeux.\n\n« C’est ce qu’ils disent toujours », murmure-t-il, pour lui-même plus que pour vous.\n\nVous ne relevez pas.\n\nKaïs, lui, sourit.\n\nPour la première fois depuis le village, il sourit vraiment. Un sourire large, sincère, presque triste.\n\n« Enfin. »\n\nIl se lève.\n\n« Alors c’est à la Tour que nous devons aller. Elle attend un maître. »\n\nCamille le regarde en silence. Elle n’est pas d’accord. Cela se voit. Mais elle ne conteste pas.\n\nPas encore.",
+        "next": "mission_1"
+      },
+      "route_solitaire": {
+        "id": "route_solitaire",
+        "type": "scene",
+        "text": "« Non. »\n\nLe mot sort de vous avant que vous ne l’ayez décidé.\n\nVous vous levez. Vous reculez de deux pas. Les quatre vous observent sans bouger.\n\n« Je n’ai rien demandé. Je n’ai pas demandé à naître de votre sang. Je n’ai pas demandé à voir mon village brûler. Je n’ai pas demandé vos sept échecs précédents. »\n\nVotre voix tremble. Pas de peur. De colère.\n\n« Je suis censé·e régler vos erreurs, et personne ne m’a jamais rien expliqué avant ce soir. »\n\nKaïs baisse les yeux.\n\nCamille hoche lentement la tête.\n\n« Elle a raison. »\n\nLéo ouvre la bouche pour plaisanter, puis la referme. C’est peut-être la première chose sage qu’il ait faite de la nuit.\n\nGuillaume s’avance vers vous, lentement. Il ne fait aucun geste pour vous retenir. Il pose simplement une question.\n\n« Où vas-tu aller ? »\n\nVous ne savez pas.\n\nC’est ce qui vous glace.\n\nVous n’avez nulle part où aller. Votre village n’existe plus. Le royaume vous traque. Kaïs, qui est peut-être le seul au monde à vous comprendre un peu, vient de vous avouer qu’il a ouvert une porte qui a condamné tout le monde.\n\nVous pourriez partir. Vous avez la force, peut-être, pour cela. Vous pourriez disparaître dans une contrée lointaine, changer de nom, laisser le monde finir tout seul.\n\nMais quelque chose en vous, plus profond que votre colère, sait que ce sera, à terme, une autre forme de défaite.\n\nVous inspirez.\n\nVous regardez Guillaume.\n\n« Donnez-moi jusqu’au matin pour décider. »\n\nIl hoche la tête.\n\n« Bien sûr. »\n\nLéo s’assoit, sort une petite flûte d’os de sa ceinture, et se met à jouer, doucement, un air lent. Camille et Guillaume se rassoient près du feu. Kaïs, lui, s’éloigne de quelques pas et s’immobilise, debout, tourné vers la forêt.\n\nVous vous asseyez, loin des autres.\n\nVous écoutez la flûte. Vous regardez les étoiles.\n\nVous ne dormez pas.",
+        "next": "reflexion_nuit"
+      },
+      "reflexion_nuit": {
+        "id": "reflexion_nuit",
+        "type": "scene",
+        "text": "Les heures passent.\n\nLéo s’est endormi en tenant sa flûte. Il ronfle, très légèrement. Il a l’air, en dormant, beaucoup plus vieux qu’il ne le laissait paraître éveillé. Des petites rides se creusent au coin de ses paupières qu’aucune personne jeune ne porte.\n\nCamille ne dort pas. Camille ne dort jamais, vous le comprenez progressivement. Elle reste assise, les yeux ouverts, immobile. Si vous n’étiez pas en train de respirer par vous-même, vous pourriez croire que Camille ne respire pas non plus.\n\nGuillaume, lui, s’est allongé sur un muret. Il dort. Ou médite. C’est difficile à dire.\n\nKaïs, toujours debout, n’a pas bougé. Il est un peu en retrait, dos tourné au feu, regardant une direction qui, pour vous, n’a rien de particulier.\n\nVous vous levez, au bout d’un long moment. Vous vous approchez de lui.\n\n« Tu ne dors pas. »\n\nCe n’est pas une question.\n\nIl secoue doucement la tête.\n\n« Je ne dors plus. Pas depuis la Rupture. »\n\nUn silence.\n\n« Au début, j’ai cru que c’était une punition. Maintenant, je sais que c’est un répit. Dormir, c’est se reposer un moment de ce qu’on est. Moi, je n’y ai plus droit. »\n\nVous vous tenez à côté de lui. Le vent léger fait danser les feuilles. Très loin, un oiseau crie. Un seul.\n\n« Pourquoi moi ? »\n\nIl réfléchit. Pas à la réponse. Au moyen de la formuler sans mentir.\n\n« Parce que tu es la huitième. Parce que les sept précédents n’ont pas tenu. Parce qu’il fallait bien qu’à un moment, quelqu’un tienne. »\n\nIl tourne la tête vers vous. Ses yeux gris, dans la nuit, ont pris la couleur exacte de l’eau sous la glace.\n\n« Et parce que la personne qui t’a portée neuf mois a eu, au dernier moment, la bonne idée de t’apprendre à oublier. »\n\nVous le fixez.\n\n« Ma mère ? »\n\n« Oui. »\n\nIl ne développe pas. Vous comprenez, à sa voix, qu’il la connaissait. Qu’il l’a peut-être aimée, ou perdue. Ou les deux.\n\nVous n’osez pas demander.\n\nVous restez là, ensemble, jusqu’à ce que l’aube commence à teindre le ciel en gris clair.\n\nAlors, sans le regarder, vous dites :\n\n« D’accord. Je viens avec vous. Au moins jusqu’à ce que je sache. »\n\nIl ne répond pas.\n\nIl sourit, à peine.\n\nEt il commence à marcher.",
+        "next": "mission_1"
+      },
+      "mission_1": {
+        "id": "mission_1",
+        "type": "scene",
+        "text": "« Il y a un lieu », dit Camille, au matin suivant.\n\nElle déplie un petit rouleau de cuir sur le sol. Une carte. Elle est ancienne. Le papier a jauni. Les noms sont écrits dans une langue que vous ne connaissez pas, mais que vous arrivez presque à lire, par moments, quand vos yeux se détendent.\n\n« Une ancienne tour. Elle est au nord-est, au-delà du défilé de l’Oubli, après la vallée des Trois Vents. »\n\n« Là-bas », ajoute Léo, en se pliant par-dessus l’épaule de Camille pour voir, « tout a commencé. »\n\nGuillaume termine :\n\n« Et peut-être, tout peut s’arrêter. »\n\nLe feu bleu, qui n’a pas faibli toute la nuit, s’intensifie soudain. Une lueur plus vive, qui traverse la clairière comme une respiration trop forte.\n\nKaïs hoche la tête.\n\n« Elle répond. »\n\nVous ne savez pas à quoi. Mais le feu, effectivement, semble acquiescer.\n\nVotre chemin est tracé. Pour l’instant.\n\nLa route sera longue. Plusieurs jours à pied. Peut-être une semaine. Des terres que vous ne connaissez pas, des villages que vous ne traverserez pas, des forêts dans lesquelles on ne marche que la nuit parce que le jour y devient traître.\n\nEt personne, pas même Kaïs, ne sait exactement ce qui vous attend à l’arrivée.\n\nMais une chose est sûre.\n\nVous n’êtes plus seul·e.\n\nEt c’est peut-être le plus dangereux.",
+        "next": "fin_acte_2_transition"
+      },
+      "fin_acte_2_transition": {
+        "id": "fin_acte_2_transition",
+        "type": "scene",
+        "text": "La nuit est tombée.\n\nLe feu bleu éclaire vos visages. Demain, vous partirez. Vers quelque chose que personne n’a jamais survécu. Vers quelque chose qu’il faudra, pour la première fois peut-être, survivre quand même.\n\nEt pourtant, vous avancez.\n\nParce qu’il n’y a plus d’autre choix.\n\nParce que maintenant, c’est votre histoire.\n\nVous vous allongez sur l’herbe, près du feu. Vous regardez les étoiles. Elles sont nombreuses, ce soir. Plus nombreuses que vous ne les avez jamais vues. Comme si, à mesure que le monde fuit, le ciel, lui, se rapprochait.\n\nGuillaume s’assoit à côté de vous. Il ne dit rien. Il reste là. C’est un geste plus réconfortant que tout ce que les autres auraient pu vous dire.\n\nVous finissez par fermer les yeux.\n\nPour la première fois depuis Astréa, vous dormez.\n\nEt vos rêves, pour la première fois depuis l’enfance, ne sont pas peuplés de flammes.",
+        "next": "voyage_nocturne"
+      },
+      "voyage_nocturne": {
+        "id": "voyage_nocturne",
+        "type": "scene",
+        "text": "Trois jours de marche.\n\nVous traversez des plaines que le vent a rendues blondes, des rivières qui hésitent entre plusieurs lits, des forêts où les arbres se parlent quand on croit ne pas écouter.\n\nVous apprenez, à force, à marcher avec les autres.\n\nCamille ouvre la route. Elle regarde peu le sol et beaucoup l’horizon, comme si elle cherchait quelque chose qui ne se dit pas. Elle parle rarement, mais chaque parole d’elle est un petit outil précis, qui tombe juste là où il faut.\n\nLéo ferme la marche. Il siffle. Il se plaint. Il raconte des anecdotes qui commencent toutes pareil : « J’ai un cousin qui… ». Vous ne savez pas s’il a vraiment un cousin. Il vous fait rire, parfois. Vous vous méfiez de cela. Les gens qui font rire en temps de guerre cachent souvent une vraie douleur.\n\nGuillaume marche au milieu. Il veille. Sur le groupe. Sur vous. Il arrive toujours, mystérieusement, à tendre une gourde juste avant que vous ne ressentiez la soif.\n\nKaïs, lui, change de place. Parfois devant, parfois derrière, parfois absent pendant une heure puis brusquement là, au coude de la rivière, en train de regarder un oiseau. Il parle peu avec le groupe. Avec vous, il parle plus. Il raconte, par bribes, l’ancien monde. Les noms des neuf. Des habitudes. Des plaisanteries que seuls eux comprenaient.\n\nIl vous apprend, aussi.\n\nComment fermer une flamme sans la tuer. Comment reconnaître une porte qu’on ne voit pas. Comment écouter le sol pour savoir s’il ment.\n\nVous apprenez vite. Trop vite, à ce qu’il dit.\n\nVous ne savez pas si c’est un compliment ou un avertissement.\n\nLe troisième soir, vous campez en haut d’une colline, face à un village que vous n’avez pas prévu de croiser.\n\nEn contrebas, des torches. Pas celles de soldats. Celles de paysans rassemblés. Quelque chose ne va pas.",
+        "next": "rencontre_village"
+      },
+      "rencontre_village": {
+        "id": "rencontre_village",
+        "type": "scene",
+        "text": "« On descend voir ? » demande Léo.\n\nCamille secoue la tête.\n\n« Non. Nous ne sommes pas là pour cela. La Tour nous attend. »\n\nGuillaume, qui jusqu’ici n’avait rien dit, s’avance jusqu’au bord de la colline. Il observe. Longuement.\n\n« Il y a un cercle au centre du village », dit-il. « De pierre. Je le reconnais. »\n\nKaïs se raidit. Visiblement.\n\n« Tu en es sûr ? »\n\n« Oui. »\n\nLéo et Camille se regardent.\n\n« Un quoi ? » demandez-vous.\n\nKaïs soupire.\n\n« Un ancien autel. Il y en a quelques-uns, encore, disséminés dans le royaume. Ils ne sont plus utilisés. Plus depuis la Rupture. »\n\nIl se tourne vers le village.\n\n« Mais les gens ont peur, parfois. Et quand les gens ont peur, ils essaient des choses qu’ils ne comprennent pas. »\n\nVous descendez, avec précaution, jusqu’en lisière du village. Vous vous cachez dans un bosquet.\n\nLes paysans sont réunis autour d’une vieille estrade de pierre. Sur l’estrade, un homme enchaîné. Les paysans crient. Ils ont peur. Ils ont faim. Leurs vêtements sont en lambeaux. Beaucoup ont des taches noires sur la peau, comme un début de pourriture qui aurait commencé trop tôt.\n\nUn vieux, sans doute le notable du village, lève un couteau.\n\n« Le mal, il est en lui ! Il parle une langue qu’on connaît pas ! Il regarde les étoiles au mauvais moment ! »\n\nL’homme enchaîné ne dit rien. Il est jeune. Il a peur. Ses yeux, très bleus, sont identiques à ceux de Camille.\n\nCamille, à côté de vous, se raidit.\n\n« Je le connais », souffle-t-elle.\n\n« Quoi ? » Léo.\n\n« Je l’ai vu hier. Dans un de mes rêves. »\n\nGuillaume lève une main pour qu’il se taise.\n\nLe vieux approche le couteau.\n\nVous avez quelques secondes.",
+        "next": "choix_village"
+      },
+      "choix_village": {
+        "id": "choix_village",
+        "type": "choice",
+        "text": "Les villageois brandissent leurs torches. Le couteau descend lentement. Votre groupe est assez nombreux pour intervenir, mais cela vous ferait perdre du temps, attirer l’attention, laisser une trace. Et vous n’êtes pas sûr·e que l’inconnu soit vraiment innocent.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "aider_village",
+            "label": "Intervenir pour sauver l’homme",
+            "nextNode": "aide_village",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "ignorer",
+            "label": "Continuer la route, ne pas s’en mêler",
+            "nextNode": "ignorer_village",
+            "effects": [
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "observer_village",
+            "label": "Observer encore, chercher à comprendre",
+            "nextNode": "observation_village",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          }
+        ]
+      },
+      "aide_village": {
+        "id": "aide_village",
+        "type": "scene",
+        "text": "« Non. »\n\nVous sortez du bosquet avant que votre raison n’ait le temps de vous rattraper.\n\nLes villageois se figent.\n\nVous avancez vers l’estrade. Vous levez une main. Ce n’est pas un geste d’autorité. C’est un geste de prière, presque, en même temps qu’un geste d’arrêt.\n\n« Posez ce couteau. »\n\nLe vieux vous dévisage. Sa main ne tremble pas, mais elle hésite.\n\n« Qui es-tu, toi ? »\n\nDerrière vous, Kaïs émet un très léger soupir, celui d’un adulte qui voit un enfant faire une bêtise mignonne. Puis il avance à son tour. Camille, Léo, Guillaume le suivent.\n\n« Je suis là pour regarder, » dites-vous. « Et je vois quelque chose qui me déplaît. »\n\nVous ne savez pas d’où vient cette voix. Elle est plus ferme que la vôtre d’habitude. Elle appartient à quelqu’un de plus vieux, de plus sûr. Vous vous demandez, brièvement, si elle est vraiment la vôtre.\n\nLe vieux serre le couteau.\n\n« Il a volé notre eau. »\n\n« J’ai bu à la fontaine ! » proteste le jeune homme, enchaîné. « J’ai bu parce que j’avais soif ! »\n\n« Il a parlé aux étoiles ! »\n\n« Je chantais une berceuse ! Ma mère me la chantait ! »\n\n« Il vient d’ailleurs ! »\n\nLes gens du village hochent la tête. Cette dernière accusation, vous le comprenez, est la seule qui tient pour eux. Tout le reste n’était qu’un prétexte.\n\nVous tournez la tête vers les paysans. Vous les regardez, un par un. Vous voyez leurs visages, leurs rides, leurs tâches noires, leurs enfants cachés derrière leurs jambes.\n\n« Vous avez peur », dites-vous.\n\nPersonne ne répond.\n\n« Vous avez peur, parce que vos terres sèchent. Parce que vos enfants maigrissent. Parce que vous ne comprenez plus les saisons. Je le sais. Je viens d’un endroit qui a eu peur, aussi. Jusqu’à ce qu’il brûle. »\n\nSilence.\n\n« Tuer cet homme ne fera pas pleuvoir. Tuer cet homme ne nourrira pas vos enfants. Tuer cet homme vous fera seulement un souvenir de plus dont vous aurez honte, et croyez-moi, les souvenirs dont on a honte, on finit par les déposer au mauvais endroit. »\n\nLe vieux vous fixe. Longtemps. Puis, d’un geste lent, il abaisse le couteau.\n\nIl se tourne vers ses concitoyens.\n\n« Libérez-le. »\n\nUn silence épais.\n\nPuis quelqu’un, dans la foule, obéit. Les chaînes tombent. Le jeune homme glisse de l’estrade, s’appuie contre la pierre, respire.\n\nCamille s’approche de lui. Elle touche sa joue. L’homme sursaute, puis se calme.\n\nElle se tourne vers vous.\n\n« C’est mon petit-cousin. Par le sang ancien. Un descendant d’un des neuf. Comme toi. »\n\nVous le saviez, sans le savoir.\n\nLe vieux, à l’estrade, s’est agenouillé sans trop comprendre pourquoi.\n\nVous quittez le village, avec le jeune homme en plus dans votre groupe. Il s’appelle Yorn. Il a vingt ans. Il parlera très peu les jours suivants. Mais son regard, sur vous, est celui d’une personne qui a vu la mort reculer, et qui sait à qui elle doit ce recul.",
+        "next": "ruines_anciennes"
+      },
+      "ignorer_village": {
+        "id": "ignorer_village",
+        "type": "scene",
+        "text": "Vous détournez le regard.\n\n« Continuons. »\n\nCamille vous regarde un moment, sans émotion apparente. Puis elle hoche la tête.\n\n« Bien. »\n\nLéo grogne quelque chose. Guillaume ne dit rien. Kaïs, étonnamment, non plus.\n\nVous redescendez la colline, de l’autre côté. Vous contournez le village. Derrière vous, les cris des paysans s’élèvent, puis s’interrompent brutalement.\n\nVous ne regardez pas.\n\nVous marchez.\n\nPendant longtemps, vous n’entendez que vos propres pas.\n\nGuillaume, après une heure, finit par parler. Sa voix est neutre. Sans reproche, sans approbation.\n\n« Tu apprends vite ce qu’il faut faire pour survivre. »\n\nVous ne répondez pas.\n\nKaïs, derrière, laisse tomber :\n\n« C’est une bonne chose. »\n\nMais plus tard dans la nuit, quand tout le monde s’est couché, vous ne dormez pas. Quelque chose s’est installé dans votre ventre. Un petit caillou. Pas douloureux. Juste présent.\n\nVous savez que ce caillou ne partira plus.\n\nIl y a des choix qui ne font pas mal tout de suite. Mais qui, à la longue, laissent dans votre sac une pierre en plus.\n\nVous finissez par vous endormir, très tard, et vous rêvez d’un jeune homme enchaîné que vous n’aviez jamais vu, et qui vous regardait sans haine, ce qui était pire.",
+        "next": "ruines_anciennes"
+      },
+      "observation_village": {
+        "id": "observation_village",
+        "type": "scene",
+        "text": "Vous restez dans le bosquet.\n\nVous retenez Léo, qui voulait charger. Vous retenez Kaïs, qui voulait intervenir à sa manière silencieuse. Vous voulez comprendre, avant.\n\nVous regardez.\n\nLe vieux, qui tient le couteau, a les mains qui tremblent. Il ne veut pas vraiment tuer ce jeune homme. Il ne sait simplement pas comment reculer sans perdre la face.\n\nLes villageois, derrière lui, ont des visages qui en disent plus que leurs cris. Certains détournent déjà les yeux. D’autres serrent leurs enfants contre eux. Trois ou quatre se regardent entre eux, avec gêne. La foule n’est pas soudée. La foule est un malentendu au bord de se dissiper.\n\nVous soufflez à Guillaume :\n\n« Si quelqu’un intervient maintenant, il va y avoir un massacre. Si on attend… »\n\nGuillaume hoche la tête, comprend.\n\nVous attendez.\n\nTrente secondes. Quarante. Une minute.\n\nEt, comme vous l’aviez pressenti, une femme se détache de la foule. Une femme jeune, le visage mangé par la fatigue. Elle fend les rangs, elle monte sur l’estrade, elle pose la main sur l’épaule du vieux.\n\n« Non. »\n\nUn seul mot.\n\nLe vieux la regarde. Il met deux secondes à la reconnaître. Puis il baisse le couteau.\n\nLa foule respire.\n\nLe jeune homme est libéré.\n\nVous quittez les lieux sans avoir été vu·e.\n\nCamille vous regarde avec une admiration qui n’appelle aucun commentaire.\n\n« Parfois la meilleure action, c’est celle qu’on ne fait pas. »\n\nKaïs, à côté, ajoute :\n\n« Parfois. Pas toujours. »\n\nVous marchez.\n\nUne demi-heure plus tard, Camille dit, pensive :\n\n« Ce garçon, tout à l’heure. Il portait le sang ancien. Comme toi. »\n\nVous vous arrêtez.\n\n« Tu veux dire… ? »\n\n« Il y a d’autres que toi. Moins forts. Moins centraux. Mais vivants. Ils sont disséminés. Beaucoup ne savent pas qui ils sont. »\n\nElle sourit, faiblement.\n\n« La Rupture a dispersé la graine. Le monde n’est peut-être pas aussi vide que Kaïs le dit. »\n\nKaïs ne répond pas à cette pique.\n\nMais sa marche, soudain, devient un peu plus lourde.",
+        "next": "ruines_anciennes"
+      },
+      "ruines_anciennes": {
+        "id": "ruines_anciennes",
+        "type": "scene",
+        "text": "Deux jours plus tard.\n\nVous arrivez au pied d’une falaise.\n\nDans la falaise, creusée à même la pierre, une entrée. Une arche. Des colonnes à moitié effondrées. Et, au-dessus de l’arche, un symbole : un cercle ouvert, fendu en deux par une ligne oblique.\n\n« Les ruines du Premier Seuil », dit Kaïs. « Nous y passerons. »\n\n« On est obligé·e·s ? » demande Léo.\n\n« Non », dit Kaïs. « On peut contourner. Mais ça rajoute quatre jours de marche. Et ici, nous pouvons apprendre. »\n\nGuillaume, silencieuse jusque-là, parle :\n\n« Tu veux dire : il peut apprendre. »\n\nIl vous désigne du menton.\n\nKaïs hoche la tête.\n\nVous les regardez tous, tour à tour. Vous sentez, sous la clarté de leurs visages, un dosage de tensions anciennes qui n’ont pas été réglées depuis très longtemps.\n\n« Il y a une épreuve là-dedans ? » demandez-vous.\n\n« Non », dit Camille.\n\n« Oui », dit Léo.\n\nGuillaume soupire.\n\n« Les deux. Il y a un miroir. Ce n’est pas une épreuve au sens habituel. Personne ne te mettra à mort. Mais tu en ressortiras, et la personne qui en sortira ne sera pas tout à fait la personne qui y est entrée. »\n\nUn silence.\n\n« À toi de décider. Nous pouvons attendre dehors. »\n\nVous hésitez.\n\nKaïs, doucement :\n\n« Ne réfléchis pas trop. Ce n’est pas une décision à prendre avec la tête. »\n\nVous regardez l’arche.\n\nUne légère brise en sort. Une brise qui sent une odeur particulière. Pas désagréable. Pas rassurante non plus. Juste : connue. Comme si, autrefois, quelqu’un qui était vous, mais qui n’était plus vous, avait déjà senti cette odeur-là.",
+        "next": "choix_ruines"
+      },
+      "choix_ruines": {
+        "id": "choix_ruines",
+        "type": "choice",
+        "text": "L’arche attend. Vos compagnons aussi.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "entrer_ruines",
+            "label": "Entrer dans les ruines",
+            "nextNode": "epreuve_miroir",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "contourner",
+            "label": "Contourner les ruines",
+            "nextNode": "contournement",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "epreuve_miroir": {
+        "id": "epreuve_miroir",
+        "type": "scene",
+        "text": "Vous entrez.\n\nLes autres ne vous suivent pas. Ils s’assoient près de l’arche, dans l’ombre. Kaïs, les yeux fermés. Camille, en train d’écrire quelque chose dans un petit carnet. Léo, distrait par un insecte. Guillaume, debout, un peu plus loin, regardant une étoile qu’on ne voit pas en plein jour et qui pourtant, si l’on sait où regarder, existe.\n\nLe couloir est long. Droit. Il s’enfonce dans la pierre.\n\nLes murs sont nus. Aucune sculpture. Aucun ornement. Seulement, au bout, une petite pièce carrée, éclairée par une source qu’on ne voit pas.\n\nAu centre de la pièce, un miroir.\n\nDebout, posé sur trois pieds de pierre. Sa surface est lisse, parfaite. Le cadre est fait de bois et d’os mélangés, d’une manière qui refuse de paraître horrible.\n\nVous vous approchez.\n\nVous vous regardez.\n\nVotre reflet est fidèle. D’abord. Puis quelque chose change. Très subtilement. Votre reflet vous sourit, alors que vous ne souriez pas. Puis votre reflet ne sourit plus, alors que vous, vous souriez un peu, sans le vouloir, par nervosité.\n\nLe reflet parle.\n\n« Tu es venu·e. »\n\nSa voix est la vôtre. Mais en plus calme. En plus assuré. Comme si elle avait eu le temps de tout expliquer avant.\n\n« Nous allons parler, toi et moi. »\n\nVous ne répondez pas.\n\n« Tu as peur de moi. C’est bien. Tu dois. Je suis toi, mais je suis toi sans les peurs. Et les peurs, ce sont peut-être les choses qui t’empêchent de faire le pire. »\n\nUn silence.\n\n« Je suis toi si tu gagnes. »\n\nLe reflet avance légèrement dans le miroir, comme s’il pouvait venir vers vous.\n\n« Et je suis toi si tu perds. »\n\nIl recule, dans le même geste, étrangement symétrique.\n\n« Regarde-moi. »\n\nEt vous voyez, alors, deux images superposées de vous-même. L’une claire, souriante, entourée d’une lumière dorée. L’autre plus sombre, plus grande, plus belle peut-être, entourée d’un feu bleu qui la dévore de l’intérieur sans qu’elle en souffre.\n\n« Laquelle est la bonne ? »\n\nVous ne savez pas.\n\n« Ne mens pas. »\n\nVous ne savez toujours pas.\n\nLe miroir sourit.\n\n« Bien. Les sept précédents, tous sans exception, m’ont répondu qu’ils savaient. Chaque fois, ils se trompaient. »\n\nUn silence.\n\n« Peut-être que, cette fois, ça marchera. »",
+        "next": "choix_miroir"
+      },
+      "choix_miroir": {
+        "id": "choix_miroir",
+        "type": "choice",
+        "text": "Les deux reflets de vous-même flottent, superposés, dans le miroir. L’un lumineux. L’autre brûlé. Lequel approcher ?",
+        "choices": [
+          {
+            "id": "face_claire",
+            "label": "S’approcher de la part lumineuse",
+            "nextNode": "face_claire",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "face_sombre",
+            "label": "S’approcher de la part sombre",
+            "nextNode": "face_sombre",
+            "effects": [
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 3
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "refuser_miroir",
+            "label": "Reculer, refuser le miroir",
+            "nextNode": "refus_miroir",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": -1
+              }
+            ]
+          }
+        ]
+      },
+      "face_claire": {
+        "id": "face_claire",
+        "type": "scene",
+        "text": "Vous avancez vers la part lumineuse.\n\nL’autre s’efface doucement, comme une bougie qu’on couvre. Votre reflet clair grandit, devient plus réel. Il sort, presque, du miroir.\n\nIl ne vous fait pas peur. Il vous fait un peu triste.\n\n« Tu as choisi le plus facile à vivre », dit-il. « Pas forcément le plus facile à faire. »\n\nIl pose la main contre la surface du miroir, de votre côté. Vous posez, sans y penser, la vôtre contre la sienne, de l’autre.\n\nLe verre ne résiste pas. Votre main passe à travers. Sa main sort à travers la vôtre.\n\nUne chaleur vous envahit. Pas brûlante. Tiède. Réparatrice. Une chaleur qui ressemble à ce qu’aurait dû être l’enfance, si personne ne l’avait abîmée.\n\nVous comprenez, tandis que cela se passe, que vous venez de sceller quelque chose. Pas un pacte. Pas un marché. Une fidélité. Vous serez, désormais, du côté de ce que ce reflet représente : ne pas céder. Ne pas dominer. Ne pas être consumé·e par votre propre force.\n\nCela ne veut pas dire que vous ne ferez pas d’erreurs.\n\nCela veut dire qu’elles auront un certain style.\n\nQuand la main se retire, le miroir redevient opaque. Votre reflet est, à nouveau, juste votre reflet.\n\nVous sortez de la pièce.\n\nLe couloir, à l’aller, vous avait paru long. Au retour, il est très court. Ou alors vous allez plus vite. Ou alors le temps, dans ce lieu, n’est pas tout à fait obligé d’être le même à l’aller et au retour.\n\nQuand vous retrouvez l’arche, les autres lèvent la tête.\n\nGuillaume sourit, pour la première fois vraiment depuis qu’il vous connaît.\n\n« Bien », dit-il.\n\nLéo émet un sifflement approbateur.\n\n« Tu as la tête d’une personne qui n’a pas cédé. Joli. »\n\nCamille hoche la tête en silence.\n\nKaïs, lui, vous regarde un moment. Il a l’air presque… déçu ? Ou peut-être soulagé ? Il est difficile à lire. Puis il se lève, sans rien dire.\n\n« En route. »",
+        "next": "trahison_indice"
+      },
+      "face_sombre": {
+        "id": "face_sombre",
+        "type": "scene",
+        "text": "Vous avancez vers la part sombre.\n\nLe reflet brûlé sourit.\n\n« Bien. Enfin quelqu’un d’honnête. »\n\nIl prend votre main, avant que vous n’ayez proposé de la tendre. Sa peau est sèche. Chaude. Pas douloureuse. Comme une braise qui aurait appris à ne plus consumer.\n\n« Tu n’as pas peur de ce qui a été brûlé. Tu sais que ce qui brûle peut, aussi, tenir. Beaucoup de choses, dans ce monde, sont tenues par la cendre. »\n\nIl vous attire, doucement, de son côté. Vous ne passez pas dans le miroir. Vous ne changez pas de place. Mais quelque chose, en vous, se déplace. Comme un mobilier qu’on aurait glissé d’une pièce à l’autre sans bruit.\n\nQuand vous retirez la main, le feu bleu de son poignet a laissé, sur le vôtre, une marque. Une fine spirale. Pas de la suie. Un tatouage qui n’existait pas il y a une seconde et qui semble avoir toujours été là.\n\n« Ça, c’est un signe », dit-il. « Un signe que tu es disposé·e à faire le nécessaire. »\n\nUn silence.\n\n« Rassure-toi. Je ne te rendrai pas cruel·le. Je te rendrai efficace. C’est différent. »\n\nIl sourit encore, et le miroir redevient lisse.\n\nQuand vous sortez, les autres se lèvent.\n\nGuillaume fronce les sourcils, un peu. Il regarde votre poignet, immédiatement. Il ne dit rien, mais son silence est lourd.\n\nCamille, elle, note quelque chose dans son carnet.\n\nLéo siffle.\n\n« Joli dessin. J’ai eu le même pendant trois jours, en 1392. Ça s’en va. Enfin, ça s’en est allé, chez moi. »\n\nKaïs, lui, sourit franchement.\n\n« Tu as bien fait », dit-il. « Tu comprends, maintenant, que tu ne peux pas être tendre. Pas là où nous allons. »\n\nVous ne dites rien.\n\nLe tatouage pulse faiblement. Comme un second cœur, plus petit, sur votre poignet.",
+        "next": "trahison_indice"
+      },
+      "refus_miroir": {
+        "id": "refus_miroir",
+        "type": "scene",
+        "text": "Vous reculez.\n\nLes deux reflets, superposés, se figent. Le miroir, pour la première fois, semble hésiter. Il attendait quelque chose que vous ne lui donnez pas.\n\n« Tu refuses ? »\n\n« Oui. »\n\n« Personne n’a refusé, avant toi. Pas même les sept. »\n\n« Eh bien, ce sera peut-être la différence. »\n\nLe miroir vacille. Puis, lentement, les deux reflets se fondent l’un dans l’autre. Ils redeviennent une seule image. Votre image, très ordinaire, très vous.\n\n« Tu as peut-être raison », dit le reflet, pour la première fois neutre. « Choisir trop tôt, c’est parfois perdre avant d’avoir compris. »\n\nLe miroir se brise, doucement, sans bruit. Une fissure le traverse du haut vers le bas. Mais il ne tombe pas. La fissure est là, comme un souvenir qu’il voudra garder pour les prochains.\n\nVous sortez.\n\nLes autres, dehors, vous regardent sans comprendre.\n\nGuillaume s’approche.\n\n« Tu es allé·e vite. »\n\n« Je n'y suis pas resté·e. J’ai refusé de choisir. »\n\nCamille lève un sourcil.\n\n« Intéressant. »\n\nKaïs, lui, ne dit rien tout de suite. Il vous observe un long moment. Puis, d’une voix basse :\n\n« Tu te rends compte que c’est, en soi, un choix ? »\n\n« Oui. Je l’assume. »\n\nIl hoche la tête. Mais ses yeux restent froids.",
+        "next": "trahison_indice"
+      },
+      "contournement": {
+        "id": "contournement",
+        "type": "scene",
+        "text": "« Non. On passe pas. On contourne. »\n\nLéo hausse les épaules.\n\n« Plus de marche, mais au moins pas de miroir bizarre. J’aime bien cette option, personnellement. »\n\nCamille vous observe sans hostilité. Guillaume non plus.\n\nKaïs, lui, a un geste contrarié. Très petit. Presque imperceptible. Il le réprime aussitôt.\n\n« Comme tu veux. »\n\nVous contournez.\n\nQuatre jours de marche supplémentaires. Des collines. Des rivières à traverser. Un loup qui suit le groupe de loin, pendant une nuit entière, sans oser approcher.\n\nVous apprenez à connaître les autres un peu mieux. Vous voyez Léo pleurer, une nuit, sans que vous sachiez pourquoi. Vous voyez Camille rire, pour la première fois, à une plaisanterie que Guillaume a faite et que personne d’autre n’a trouvée drôle. Vous voyez Kaïs assis au bord d’une rivière, à parler tout seul, en regardant ses propres mains comme si elles appartenaient à quelqu’un d’autre.\n\nVous n’avez pas affronté le miroir.\n\nVous sentez, parfois, en vous, une question qui aurait aimé recevoir une réponse et qui ne l’a pas reçue.\n\nCe n’est pas grave.\n\nIl y aura d’autres miroirs.",
+        "next": "trahison_indice"
+      },
+      "trahison_indice": {
+        "id": "trahison_indice",
+        "type": "scene",
+        "text": "Le soir, vous campez à découvert.\n\nPas de feu, cette fois. Léo a jugé plus prudent. Il y a trop de yeux dans les hauteurs, dit-il. Vous ne comprenez pas ce qu’il entend par là. Personne ne vous l’explique.\n\nVous mangez en silence. Du pain sec. Quelques baies.\n\nGuillaume monte la garde en premier. Camille lit, assise à l’écart, en tournant les pages d’un petit carnet qu’elle a toujours sur elle. Kaïs, comme d’habitude, ne dort pas. Il regarde le nord.\n\nLéo, lui, se couche et s’endort, en apparence, en moins d’une minute.\n\nVous attendez une demi-heure. Peut-être plus.\n\nPuis vous voyez Léo se lever, silencieusement.\n\nIl croyait tout le monde endormi. Vous, vous ne dormez pas. Vous avez eu du mal à dormir depuis le village incendié. Votre corps a appris à faire semblant.\n\nIl s’éloigne du camp. Vous vous redressez sur un coude. Vous hésitez. Puis vous le suivez, sans bruit.\n\nIl marche une centaine de pas. Il s’arrête au bord d’un ruisseau. Il sort, de sa besace, un petit oiseau de métal. Pas un jouet. Une sorte de figurine articulée, faite d’un alliage sombre. Il souffle dessus. L’oiseau bouge. Il bouge vraiment. Il ouvre un œil de verre rouge.\n\nLéo parle, tout bas.\n\n« Ils sont quatre maintenant. Plus un garçon ramassé dans un village. La tour dans trois jours, si rien ne change. »\n\nUn silence.\n\n« Oui. Plus fort·e que les précédents. Difficile à deviner vers quel côté basculera. Possiblement le bon. Possiblement le nôtre. »\n\nUn silence encore.\n\n« Compris. »\n\nL’oiseau se replie. Redevient figurine. Léo la range dans sa besace. Il reste un instant, assis au bord de l’eau. Il soupire. Puis il se retourne, comme s’il avait senti quelque chose.\n\nVous êtes déjà reparti·e. Vous avez glissé dans les hautes herbes avant qu’il ne tourne la tête.\n\nVous revenez au camp. Vous vous recouchez. Votre cœur bat trop vite.\n\nQuand Léo revient, vous respirez lentement, régulièrement. Vous faites l’endormi·e. Il passe à côté de vous sans rien remarquer.\n\nVous ne dormez pas, cette nuit.\n\nEt Léo, lui non plus, ne dort pas aussi profondément qu’il le prétend.",
+        "next": "reflexion_trahison"
+      },
+      "reflexion_trahison": {
+        "id": "reflexion_trahison",
+        "type": "scene",
+        "text": "Vous tournez les faits dans votre tête.\n\nUn oiseau de métal qui écoute. Quelqu’un, quelque part, à qui Léo rend des comptes. « Eux », « nous ». Un côté, un autre côté. Votre groupe, apparemment, n’est pas aussi uni que vous le pensiez.\n\nLa question est de savoir à qui parler.\n\nÀ Camille ? Elle semble honnête. Mais elle est aussi la plus réservée. Elle pourrait refuser de faire scandale avant d’avoir plus de preuves.\n\nÀ Guillaume ? Il est sincère, mais fragile. Si il apprend que Léo est un traître, il risque d’avoir une réaction trop rapide, trop entière.\n\nÀ Kaïs ? Lui aussi vous a menti, plus d’une fois. Vous ne savez pas si sa loyauté vaut mieux que celle de Léo. Elle est juste d’un autre style.\n\nOu peut-être à Léo lui-même.\n\nLe confronter. Voir ce qu’il répond.\n\nOu ne rien dire, pour l’instant, et utiliser cette information plus tard, quand elle sera utile.\n\nVous restez allongé·e, les yeux mi-clos. Les étoiles, au-dessus, tournent lentement. Elles ne vous donnent aucun conseil.\n\nVous finissez par vous endormir au petit matin.\n\nDemain, vous atteindrez la Tour.\n\nDemain, il faudra avoir décidé.",
+        "next": "choix_confrontation"
+      },
+      "choix_confrontation": {
+        "id": "choix_confrontation",
+        "type": "choice",
+        "text": "Le soleil se lève. Les autres se réveillent, un à un. Léo s’étire et sourit, comme chaque matin.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "confronter_leo",
+            "label": "Confronter Léo directement",
+            "nextNode": "confrontation_leo",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "soupcon_leo",
+                "op": "add",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "id": "prevenir_noa",
+            "label": "En parler discrètement à Camille",
+            "nextNode": "avertir_noa",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "soupcon_leo",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "attendre",
+            "label": "Ne rien dire, observer",
+            "nextNode": "silence_prudent",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "soupcon_leo",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "confrontation_leo": {
+        "id": "confrontation_leo",
+        "type": "scene",
+        "text": "Vous vous levez pendant que Léo, accroupi près de ses affaires, compte des pièces.\n\nVous vous approchez. Vous l’interpellez.\n\n« Léo. »\n\nIl lève la tête. Il sourit, comme toujours.\n\n« Oui, beauté ? »\n\n« On peut parler ? Seul à seul·e. »\n\nSon sourire reste, mais ses yeux se rétrécissent d’un millimètre. Un seul millimètre. S’il n’avait pas tant d’expérience à cacher ses réactions, vous n’auriez peut-être pas remarqué. Mais il en a trop, et parfois, trop, c’est reconnaissable.\n\n« Bien sûr. »\n\nVous vous éloignez de quelques pas. Guillaume, qui vous observait, ne dit rien. Kaïs non plus. Camille incline la tête d’un millimètre, elle aussi : elle a compris que quelque chose se passe.\n\nVous vous arrêtez derrière un rocher. Loin, mais pas trop. À portée de voix, si cela tourne mal.\n\n« L’oiseau de métal », dites-vous.\n\nIl ne répond pas tout de suite.\n\nPuis il rit. Doucement. D’un rire qui n’a rien à voir avec celui qu’il utilise d’habitude.\n\n« Ah. »\n\nIl s’assoit sur le rocher, sans plus faire semblant.\n\n« Depuis quand tu sais ? »\n\n« Cette nuit. »\n\n« Seul·e ? »\n\n« Oui. Pour l’instant. »\n\nIl hoche la tête.\n\n« Tu es plus intelligent·e que les sept précédents. »\n\n« À qui tu parles, dans cet oiseau ? »\n\nIl soupire.\n\n« Je n’ai pas vraiment envie de te répondre. »\n\n« Essaie quand même. »\n\nIl vous observe longuement. Puis il cède.\n\n« À un groupe. Une faction. Des gens qui, il y a très longtemps, ont décidé que Kaïs avait peut-être raison. Que la Faim, derrière la porte, n’était peut-être pas seulement une menace. Que c’était peut-être une chance. »\n\nVous blêmissez.\n\n« Tu travailles pour ce qui a détruit l’Ordre ? »\n\n« Je ne travaille pas *pour*. Je travaille *avec*. C’est différent. »\n\n« C’est pareil. »\n\n« C’est vraiment pas pareil. Écoute, » dit-il en se redressant, « je suis pas l’ennemi. Enfin, pas totalement. Tu es la huitième. On en a vu passer sept. Chaque fois qu’l'un d'entre vous arrive à la Tour, on hésite. Soit cette personne détruit tout. Soit elle prend tout. Les deux sont des gâchis. Nous, ce qu’on veut, c’est un·e huitième qui négocie. Qui ouvre, à nouveau, la porte, mais avec intelligence cette fois. Qui laisse entrer juste ce qu’il faut pour que le monde redevienne intéressant. »\n\n« Tu délires. »\n\nIl sourit, triste.\n\n« Peut-être. Peut-être pas. Mais je te dis ça parce que maintenant que tu sais, il faudra que tu choisisses. Me tuer. Ou m’écouter jusqu’au bout. »\n\nVous ne bougez pas.\n\nIl non plus.",
+        "next": "choix_sort_leo"
+      },
+      "choix_sort_leo": {
+        "id": "choix_sort_leo",
+        "type": "choice",
+        "text": "Léo attend. Sa main, dans sa manche, touche peut-être une lame. Vous ne savez pas. Il n’en donne pas l’impression, mais cela ne veut rien dire.",
+        "choices": [
+          {
+            "id": "tuer_leo",
+            "label": "L’attaquer maintenant",
+            "nextNode": "duel_leo",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "soupcon_leo",
+                "op": "add",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "id": "ecouter_leo",
+            "label": "L’écouter encore",
+            "nextNode": "revelation_leo",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "confiance_kais",
+                "op": "add",
+                "value": -1
+              }
+            ]
+          },
+          {
+            "id": "exposer_leo",
+            "label": "Appeler les autres, l’exposer",
+            "nextNode": "exposition_leo",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "duel_leo": {
+        "id": "duel_leo",
+        "type": "scene",
+        "text": "Vous bondissez.\n\nLéo n’a pas le temps de finir son sourire. Votre coup part sans que vous l’ayez réellement décidé. Une vague de chaleur, dense, brève, le frappe à la poitrine et le projette contre le rocher. Il s’écroule.\n\nIl ne meurt pas tout de suite. Il vous regarde, stupéfait.\n\n« Tu… »\n\nIl tousse.\n\n« Tu décides vite. »\n\nIl essaie de se relever. Une petite lame tombe de sa manche. Noire. Effilée. Une lame qu’il n’aurait jamais dû porter sur vous.\n\nIl la regarde, puis vous regarde. Il sourit, à moitié.\n\n« Je ne l’aurais pas utilisée. Enfin. Probablement. »\n\nIl meurt sans bruit, en haussant les épaules.\n\nLes autres accourent. Kaïs les premiers. Il voit le corps. Il voit la lame tombée. Il voit votre posture.\n\n« Explique. »\n\nVous expliquez.\n\nCamille hoche gravement la tête.\n\n« Je m’en doutais. Je n’ai jamais vraiment compris comment il avait traversé la Rupture sans perdre un morceau. »\n\nGuillaume, il, s’accroupit près du corps. Il lui ferme les yeux, délicatement.\n\n« Quand même », murmure-t-il. « Il jouait bien la flûte. »\n\nKaïs regarde loin, vers le nord.\n\n« Bien fait. Mais rappelle-toi que tu l’as fait. Et qu’il y en a d’autres, dans ce monde, qui pensent comme lui. Tu viens de te choisir aussi leur inimitié. »\n\nVous regardez la petite lame.\n\nVous ne répondez pas.\n\nVous venez de franchir une ligne que personne ne vous avait prévenu·e d’exister.",
+        "next": "acte3_depart"
+      },
+      "revelation_leo": {
+        "id": "revelation_leo",
+        "type": "scene",
+        "text": "Vous baissez la main.\n\n« Parle. »\n\nIl vous regarde. Il est surpris. Presque touché.\n\n« Merci. »\n\nIl s’assoit sur le rocher. Il retire son gilet de cuir et vous montre son torse. Sous la peau, des lignes noires courent, comme des veines qui auraient oublié leur rouge. Elles dessinent un motif. Une sorte de clé.\n\n« Moi aussi j’ai été un des neuf, tu sais. »\n\nVous restez muet·te.\n\n« Je ne suis pas juste un type sympathique qui traîne dans cette forêt. J’étais le huitième de l’Ordre. Celui de la Parole. Mon rôle, c’était de convaincre. De négocier. De transformer les ennemis en alliés. Et quand Kaïs a ouvert la porte, je suis le seul qui a essayé de discuter avec ce qui est passé à travers. »\n\n« Ce qui est passé… la Faim. »\n\n« Oui. »\n\nIl se tait un moment.\n\n« Elle parle. Personne ne te l’a dit parce que les autres ont trop peur pour l’admettre. Mais la Faim parle. Pas en mots. En images. En souvenirs. Pendant des années, je l’ai écoutée. Et je me suis rendu compte que ce n’est pas une simple monstruosité. C’est un être qui a été blessé, aussi. Qui a eu faim parce qu’on lui a retiré trop de choses. »\n\nIl vous regarde.\n\n« Et moi, j’ai cru qu’on pouvait la nourrir. Juste un peu. Juste ce qu’il faut. En échange, elle ralentirait. »\n\n« Ça ne marche pas comme ça. »\n\n« Ça n’a jamais marché. C’est vrai. Mais peut-être que la huitième tentative… »\n\nIl vous touche doucement la main.\n\n« Tu n’as pas à me croire. Mais comprends, au moins : je ne suis pas ton ennemi. Je suis juste quelqu’un qui pense différemment. Et qui se trompe peut-être. »\n\nVous retirez la main. Vous reculez.\n\nVous ne savez pas si vous devez le tuer, le dénoncer, ou faire semblant d’avoir tout oublié.\n\nMais une chose est sûre : vous avez besoin de temps.\n\nVous hochez la tête.\n\n« Je ne dirai rien aux autres. Pour l’instant. »\n\nIl sourit.\n\n« Merci. »\n\nIl se rhabille. Il enfile son gilet. Il retrouve son sourire de plaisantin.\n\nQuand vous rentrez au camp, vous avez, dans le ventre, le même caillou que dans le village que vous avez ignoré, s’il y avait lieu. Mais plus gros.",
+        "next": "acte3_depart"
+      },
+      "exposition_leo": {
+        "id": "exposition_leo",
+        "type": "scene",
+        "text": "Vous reculez d’un pas. Vous levez la voix.\n\n« Kaïs ! Camille ! Guillaume ! Venez voir ! »\n\nLéo se crispe. Il n’a pas le temps de faire un geste. Les trois autres arrivent en courant, armes dégainées. Ils s’arrêtent.\n\nVous pointez Léo.\n\n« Il a un oiseau de métal. Il parle à quelqu’un. »\n\nLéo soupire, presque avec soulagement.\n\n« Bien. »\n\nIl lève les mains. Il sort lui-même, très lentement, l’oiseau de métal de sa besace. Il le pose au sol.\n\n« C’est fini, alors. J’ai bien tenu, non ? »\n\nCamille s’approche. Elle prend l’oiseau, examine, hoche la tête.\n\n« C’est du travail de la Main Noire. »\n\nKaïs tressaille.\n\n« Depuis quand ? »\n\nLéo sourit, fatigué.\n\n« Depuis tout le temps, Kaïs. Tu le savais, au fond. Tu n’as jamais voulu regarder. »\n\nKaïs baisse les yeux.\n\nGuillaume, lui, regarde Léo avec une tristesse grave.\n\n« Tu sais ce que nous devons faire. »\n\nLéo hoche la tête.\n\n« Oui. Je sais. »\n\nKaïs lève la main.\n\n« Non. Pas ici. Pas tout de suite. »\n\nIl se tourne vers vous.\n\n« La huitième va décider. C’est il qui a mis le doigt dessus. C’est à il que revient le choix. »\n\nTout le monde se fige. Léo, le premier.\n\n« Ah. Je n’avais pas prévu ça. »\n\nIl rit, faiblement.\n\n« Bien joué, Kaïs. »",
+        "next": "choix_sort_leo_public"
+      },
+      "choix_sort_leo_public": {
+        "id": "choix_sort_leo_public",
+        "type": "choice",
+        "text": "Les trois attendent votre jugement. Léo, les mains levées, attend aussi. Il n’y a pas de bonne décision. Il n’y a que des décisions.",
+        "choices": [
+          {
+            "id": "executer",
+            "label": "L’exécuter pour trahison",
+            "nextNode": "execution_leo",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "soupcon_leo",
+                "op": "add",
+                "value": 3
+              }
+            ]
+          },
+          {
+            "id": "bannir",
+            "label": "L’épargner mais le bannir",
+            "nextNode": "bannissement_leo",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "reintegrer",
+            "label": "L’épargner et le garder (sous surveillance)",
+            "nextNode": "reintegration_leo",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 3
+              },
+              {
+                "variable": "confiance_kais",
+                "op": "add",
+                "value": -1
+              }
+            ]
+          }
+        ]
+      },
+      "execution_leo": {
+        "id": "execution_leo",
+        "type": "scene",
+        "text": "Vous hochez la tête.\n\n« On ne peut pas le laisser vivre. Il a passé trop d’informations déjà. »\n\nLéo baisse les yeux.\n\n« D’accord. »\n\nGuillaume s’approche. Il lui pose la main sur l’épaule.\n\n« Je le fais », dit-il à voix basse. « C’est ma responsabilité. Je suis ici pour cela. »\n\nVous ne comprenez pas tout à fait pourquoi Guillaume dit cela. Mais Kaïs hoche la tête, et vous sentez que vous ne devez pas interrompre.\n\nGuillaume pose une main sur le front de Léo. L’autre sur sa poitrine. Il ferme les yeux.\n\nRien ne se passe pendant trois secondes.\n\nPuis Léo expire, très longuement, comme quelqu’un qui finirait enfin de parler après un très long récit. Il sourit, un peu. Il ferme les yeux. Il se laisse glisser contre le rocher, et il ne bouge plus.\n\nPas de sang. Pas de douleur.\n\nUne mort qu’il aurait, peut-être, choisie lui-même.\n\nGuillaume se relève. Il a les yeux rouges.\n\n« Il a été beau, un jour », murmure-t-il.\n\nKaïs pose la main sur votre épaule.\n\n« Tu as bien fait. C’est dur. Ça ne doit pas être facile. »\n\nVous ne répondez pas.\n\nVous avancez.\n\nVous marchez pendant les heures suivantes sans parler.",
+        "next": "acte3_depart"
+      },
+      "bannissement_leo": {
+        "id": "bannissement_leo",
+        "type": "scene",
+        "text": "« Qu’il parte. Loin. Seul. Sans rien. »\n\nVous le regardez droit dans les yeux.\n\n« Si je te recroise, même dans dix ans, je te tuerai. »\n\nLéo hoche la tête.\n\n« Compris. »\n\nIl se lève. Il ne fait pas le malin. Il ramasse sa besace. Kaïs lui prend l’oiseau de métal.\n\n« Ceci reste avec nous. »\n\n« Évidemment. »\n\nIl vous regarde une dernière fois.\n\n« Merci », dit-il. « J’aurais fait pareil. Moins bien. »\n\nIl s’éloigne. Sans se retourner. Vous le regardez disparaître derrière la colline.\n\nGuillaume laisse échapper une larme. Camille hoche la tête, comme s’il avait compris quelque chose de fondamental. Kaïs, lui, reste muet.\n\nVous marchez.\n\nVous savez qu’il est possible que Léo réapparaisse, un jour, sous une autre forme.\n\nMais vous savez aussi que vous n’aviez pas envie de tuer.\n\nEt que, dans un monde qui brûle, c’est déjà beaucoup.",
+        "next": "acte3_depart"
+      },
+      "reintegration_leo": {
+        "id": "reintegration_leo",
+        "type": "scene",
+        "text": "« Il reste. »\n\nTous se figent.\n\n« Il nous connaît. Il peut nous aider, ou nous trahir. Je veux qu’il choisisse sous nos yeux. Tant qu’il est avec nous, il ne peut pas faire passer d’informations. Et si ceux pour qui il travaille apprennent qu’il est démasqué, ils vont changer leurs plans. Nous, on saura qu’ils savent. »\n\nCamille hoche lentement la tête.\n\n« Logique. »\n\nGuillaume n’est pas convaincu·e. Kaïs non plus, visiblement.\n\nLéo, lui, vous dévisage avec une stupeur qui se transforme, lentement, en respect.\n\n« Tu ne veux pas me tuer. »\n\n« Non. Je veux que tu me sois utile. Je veux, aussi, te donner une dernière chance de choisir autre chose. »\n\nIl hoche la tête.\n\n« D’accord. Je te suis. Je promets rien. Mais je te suis. »\n\nKaïs soupire.\n\n« Je ne suis pas d’accord. Mais c’est ton choix. »\n\nVous marchez.\n\nLéo marche derrière vous, pour une fois sans siffler. Il regarde le sol. Il semble, pour la première fois depuis qu’il vous connaît, chercher vraiment ce qu’il veut.\n\nVous ne saurez, que plus tard, si ce pari était le bon.",
+        "next": "acte3_depart"
+      },
+      "avertir_noa": {
+        "id": "avertir_noa",
+        "type": "scene",
+        "text": "Au petit matin, vous vous approchez de Camille, qui prépare une tisane sur un petit brasero portatif.\n\n« Camille. Il faut qu’on parle. »\n\nElle vous regarde, sans surprise.\n\n« Je t’écoute. »\n\nVous lui racontez. L’oiseau. La voix. Les mots de Léo dans la nuit.\n\nElle écoute sans vous interrompre. Puis elle hoche lentement la tête.\n\n« Je m’en doutais. »\n\n« Quoi ? »\n\n« Pas de lui en particulier. Mais de quelque chose. Depuis toujours, Léo a une façon de rire qui ne colle pas avec son histoire. Personne ne rit comme ça quand on a perdu ce qu’il a perdu. »\n\nElle éteint le brasero. Elle se lève.\n\n« Laisse-moi m’en occuper. »\n\n« Quoi ? Tu ne veux pas m’écouter d’abord ? »\n\n« J’ai écouté. Je sais. Tu m’as donné un outil très précieux, que Léo ne sait pas que j’ai. Ne lui dis rien. Ne change pas ta façon de te comporter avec lui. À la Tour, je le contrôlerai. »\n\nElle pose sa main sur votre épaule.\n\n« Tu as bien fait de venir me voir. »\n\nVous hochez la tête.\n\nPendant la journée, vous observez. Camille reste pareille. Léo reste pareil. Guillaume reste pareil. Kaïs reste pareil. Personne ne laisse rien paraître.\n\nC’est peut-être mieux ainsi.\n\nC’est peut-être beaucoup plus dangereux.",
+        "next": "acte3_depart"
+      },
+      "silence_prudent": {
+        "id": "silence_prudent",
+        "type": "scene",
+        "text": "Vous ne dites rien.\n\nToute la journée, vous observez Léo. Il reste parfaitement égal à lui-même. Sa démarche. Ses plaisanteries. Ses silences. Rien ne trahit ce que vous savez qu’il cache.\n\nVous comprenez, en l’observant, combien il est bon·ne pour ce qu’il fait. S’il n’y avait pas eu cette nuit, vous n’auriez jamais deviné.\n\nVous attendez. Vous laissez l’information reposer dans votre esprit.\n\nVous n’aviez jamais été quelqu’un de calculateur. Mais vous apprenez, vite, et peut-être trop vite, à l’être.\n\nLe soir, vous installez votre couchage un peu plus loin du sien. Vous fermez les yeux. Vous restez, une fois de plus, à moitié éveillé·e.\n\nEt vous vous préparez, intérieurement, à ce qui va venir.\n\nQuel que soit ce que cela sera.",
+        "next": "acte3_depart"
+      },
+      "acte3_depart": {
+        "id": "acte3_depart",
+        "type": "scene",
+        "text": "Au matin du cinquième jour, vous la voyez.\n\nLa Tour.\n\nElle se dresse dans une plaine battue par le vent, isolée comme une dent qui aurait refusé de tomber. Elle est noire. Pas d’une noirceur peinte. D’une noirceur qui appartient à la pierre elle-même, comme si cette pierre avait été cuite dans un four trop chaud, il y a très longtemps, et n’avait jamais réussi à redevenir grise.\n\nElle est brisée. Pas en bas. Au sommet. Comme si une main gigantesque l’avait pincée et avait arraché son chapeau. La cassure est nette. Trop nette. Pas naturelle.\n\nMais elle est toujours debout.\n\nComme si le monde lui-même refusait qu’elle tombe.\n\nAutour, rien. Pas de forêt. Pas de village. Pas de route. Comme si, des décennies auparavant, les gens avaient compris qu’il valait mieux oublier qu’elle existait.\n\n« Voilà », murmure Camille.\n\nLéo, s’il est encore parmi vous, siffle longuement.\n\n« Charmant. »\n\nGuillaume ne dit rien. Il a les yeux brillants, comme si il retrouvait un membre de sa famille.\n\nVous, vous sentez quelque chose. Un appel. Ou un avertissement.\n\nCe n’est pas agréable. Ce n’est pas désagréable non plus. C’est familier. Comme si une partie de vous, plus ancienne que vous, avait toujours su que vous viendriez ici.\n\nPlus vous approchez, plus le monde semble faux. Instable. Les couleurs vacillent légèrement. L’herbe, par moments, prend une teinte qu’elle n’a pas dans la nature. Le vent souffle dans plusieurs directions à la fois.\n\nComme si le monde se souvenait, autour de la Tour, de ce qu’il a été.\n\nEt de ce qu’il pourrait redevenir.",
+        "next": "entree_tour"
+      },
+      "entree_tour": {
+        "id": "entree_tour",
+        "type": "scene",
+        "text": "L’entrée est ouverte.\n\nUne porte de pierre noire, trois fois votre taille, entrouverte d’un bon mètre. Personne ne la garde. Personne, sans doute, depuis très longtemps.\n\n« Personne ne garde les lieux », dit Camille. « Personne n’oserait. »\n\nKaïs s’avance. Il pose la main contre la pierre. Il ferme les yeux un instant.\n\n« C’est ici que tout a commencé », dit-il. « Et c’est ici que ça finira. »\n\nIl se tourne vers vous.\n\n« Tu peux encore reculer. »\n\nVous secouez la tête.\n\n« Non. »\n\nIl hoche la tête. Il semble, pour la première fois depuis que vous le connaissez, avoir peur.\n\nVous franchissez le seuil.\n\nEt immédiatement, vous comprenez.\n\nCe lieu n’est pas une ruine. C’est une cicatrice. Une blessure qu’on a refermée il y a six cents ans et qui, depuis, n’a jamais vraiment cicatrisé.\n\nÀ l’intérieur, l’air est plus frais. Il y a, dans l’air, une odeur de pierre mouillée, d’ozone, de neige avant la tempête. Les murs sont couverts de fresques à moitié effacées. Vous distinguez des silhouettes. Neuf silhouettes. Tenues par la main. Un cercle.\n\nEt au-dessus d’elles, une dixième silhouette.\n\nMais cette dixième, elle, n’a pas de visage. C’est juste une forme. Une forme qui tend les doigts vers le cercle.\n\nKaïs détourne les yeux. Guillaume touche la fresque avec une tendresse qui vous surprend. Camille fait une révérence, très rapide, presque imperceptible. Vers qui ? Vers quoi ? Vers le temps lui-même, peut-être.\n\n« En avant », dit Kaïs.\n\nVous avancez dans le couloir.\n\nIl ne descend pas en spirale, comme on s’y attendrait. Il descend en ligne droite, mais d’une manière qui ne devrait pas être physiquement possible. La Tour vous avale sur des dizaines de mètres, alors que, de l’extérieur, elle ne faisait pas plus de vingt mètres de haut.\n\n« Ici, les dimensions se souviennent », murmure Camille. « Elles font ce qu’elles faisaient avant. »",
+        "next": "echos_passe"
+      },
+      "echos_passe": {
+        "id": "echos_passe",
+        "type": "scene",
+        "text": "Le couloir débouche sur une grande salle circulaire.\n\nAu centre, une table de pierre. Neuf chaises. Huit sont vides. Sur la neuvième, une silhouette assise. Immobile. Couverte d’une poussière si fine qu’on dirait une brume.\n\nVous vous approchez.\n\nLa silhouette est une statue. Ou un corps pétrifié. Vous ne savez pas. Elle a le visage d’un homme âgé, calme, avec une longue barbe. Ses mains sont posées sur la table, paumes vers le ciel.\n\nKaïs, derrière vous, dit :\n\n« C’est Oren. Le gardien de la Pierre. Il ne voulait pas partir. Il a choisi de rester ici, à la fin, pour tenir. »\n\nIl pose la main sur l’épaule de la statue.\n\n« Tu as bien tenu, vieil ami. »\n\nLa poussière, à ce contact, se lève. Un peu. Comme un souffle.\n\nDans le reste de la salle, des échos.\n\nVous les voyez. Pas des fantômes. Pas exactement. Des souvenirs visibles. Les neuf de l’Ordre, autour de la table, en train de discuter. Ils ne vous voient pas. Ils ne voient pas non plus Kaïs, ni les autres. Ils sont enfermés dans leur propre instant, qui se rejoue en boucle depuis six cents ans.\n\nVous reconnaissez Léo. Il est plus jeune, ou peut-être simplement plus vrai. Il rit. Les autres le regardent avec affection.\n\nVous reconnaissez Camille. Camille est sur la chaise qui, aujourd’hui, est vide. Mais Camille est là. Camille parle. Les autres l’écoutent. Camille a le même visage que maintenant. Camille n’a pas vieilli.\n\n« Attends », murmurez-vous. « Camille ? »\n\nCamille, près de vous, dans le présent, sourit tristement.\n\n« Oui. J’étais là. J’étais la gardienne de la Mémoire. »\n\n« Mais tu n’as pas… »\n\n« Je n’ai pas vieilli. Non. C’est le prix. La mémoire qui se souvient de tout ne peut plus laisser le temps passer sur elle-même. Je vis dans six cents ans à la fois. C’est fatigant. C’est pourquoi je parle peu. »\n\nVous la regardez. Différemment, maintenant.\n\n« Et Guillaume ? »\n\nGuillaume se tourne vers vous.\n\n« Moi, j’étais le gardien de l’Oubli. Je faisais le contraire de Camille. Je défaisais. Je choisissais ce qu’il fallait laisser partir. Sans moi, le monde aurait pesé trop lourd pour rester debout. »\n\n« Et Léo ? »\n\n« La Parole », dit Camille, à voix basse. « Il convainquait. Il traduisait. Il était la langue de l’Ordre. »\n\n« Et Kaïs ? »\n\nKaïs, plus loin, vous entend. Il se retourne.\n\n« Le Seuil. J’ouvrais et je fermais. Les portes, dans les deux sens. Mon pouvoir, c’était d’être entre. »\n\nIl regarde la silhouette d’Oren.\n\n« Et un jour, j’ai voulu être au-delà. »\n\nIl soupire.\n\n« On connaît la suite. »",
+        "next": "gardien_tour"
+      },
+      "gardien_tour": {
+        "id": "gardien_tour",
+        "type": "scene",
+        "text": "Au bout de la salle, une porte. Plus petite que celle de l’entrée, mais plus ouvragée. Sur le linteau, une inscription dans la même langue qu’on trouve sur la lame.\n\n« À la dernière main. »\n\nKaïs pose le doigt sur les lettres.\n\n« C’est là. Derrière cette porte. »\n\nMais il ne la franchit pas. Il s’écarte.\n\n« La Tour reconnaîtra celui ou celle qui entre. Elle vous testera. Vous seul·e pouvez passer. »\n\n« Et vous ? »\n\n« Nous attendrons ici. C’est la règle. »\n\nVous regardez les trois (ou quatre, si Léo est encore là). Aucun d’eux ne vous regarde avec encouragement. Ils vous regardent avec la gravité qu’on a avant les séparations.\n\nVous poussez la porte.\n\nElle s’ouvre sans résistance.\n\nLa pièce derrière est plus petite. Ronde. Au centre, une seule chaise. Face à la chaise, une autre chaise. Entre les deux, rien. Et pourtant, sur la chaise d’en face, quelque chose se forme.\n\nUne silhouette.\n\nPas tout à fait humaine. Pas tout à fait autre chose.\n\nElle prend la forme, lentement, d’un vieil homme au visage usé. Il vous regarde. Il vous sourit.\n\n« Assieds-toi. »\n\nVous vous asseyez.\n\nIl vous observe.\n\n« Je suis le Gardien. Ce qui reste de nous, après. On m’a laissé ici pour poser une seule question. Une seule. Tu as droit à une seule réponse. Et selon ce que tu me réponds, la Tour te laissera descendre, ou t’éjectera. »\n\nUn silence.\n\n« Tu es prêt·e ? »\n\nVous hochez la tête.\n\nIl se penche en avant.\n\n« Pourquoi es-tu venu·e ? »",
+        "next": "choix_gardien"
+      },
+      "choix_gardien": {
+        "id": "choix_gardien",
+        "type": "choice",
+        "text": "Le Gardien attend. Son regard est doux, mais ne laisse aucune place à la triche.",
+        "choices": [
+          {
+            "id": "repondre_sauver",
+            "label": "« Pour sauver ce qui peut l’être. »",
+            "nextNode": "gardien_sauver",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "repondre_pouvoir",
+            "label": "« Pour prendre ce qui me revient. »",
+            "nextNode": "gardien_pouvoir",
+            "effects": [
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 2
+              },
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "repondre_comprendre",
+            "label": "« Pour comprendre. »",
+            "nextNode": "gardien_comprendre",
+            "effects": [
+              {
+                "variable": "destin",
+                "op": "add",
+                "value": 3
+              },
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "id": "repondre_finir",
+            "label": "« Pour en finir. »",
+            "nextNode": "gardien_finir",
+            "effects": [
+              {
+                "variable": "courage",
+                "op": "add",
+                "value": 1
+              },
+              {
+                "variable": "magie",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gardien_sauver": {
+        "id": "gardien_sauver",
+        "type": "scene",
+        "text": "« Pour sauver ce qui peut l’être. »\n\nLe Gardien hoche lentement la tête.\n\n« Bonne réponse. Ce n’est pas la plus honnête, peut-être. Mais c’est une réponse qui a le mérite de se tromper dans la bonne direction. »\n\nIl fait un geste de la main.\n\nUne trappe s’ouvre sous votre chaise.\n\nVous ne tombez pas. Vous descendez, doucement, comme si quelqu’un vous faisait glisser dans un rêve. La chaise flotte. La pièce reste au-dessus.\n\nVous atterrissez, debout, dans un couloir souterrain. Le Gardien, au-dessus, vous fait un petit salut de la main, puis disparaît.\n\nVous avancez.",
+        "next": "salle_coeur"
+      },
+      "gardien_pouvoir": {
+        "id": "gardien_pouvoir",
+        "type": "scene",
+        "text": "« Pour prendre ce qui me revient. »\n\nLe Gardien ne sourit plus. Il penche la tête.\n\n« Ah. »\n\nUn silence. Long.\n\n« Dangereux. Mais sincère, au moins. »\n\nIl fait un geste.\n\n« Je vais te laisser passer. Mais avec un poids de plus. »\n\nUne chaleur traverse votre poitrine. Brève. Intense. Vous avez la sensation, un instant, que quelque chose de très ancien vient de s’installer en vous, comme un locataire qui n’aurait pas demandé la permission.\n\n« Ce poids, c’est ce que tu portes déjà. Je ne fais que le rendre visible. »\n\nLa trappe s’ouvre.\n\nVous descendez. Plus vite que précédemment. La pièce, au-dessus, tourne un peu.",
+        "next": "salle_coeur"
+      },
+      "gardien_comprendre": {
+        "id": "gardien_comprendre",
+        "type": "scene",
+        "text": "« Pour comprendre. »\n\nLe Gardien sourit, largement.\n\n« Ah. La meilleure réponse. »\n\nIl se redresse.\n\n« Peu de gens la choisissent. Elle paraît faible. Elle est, en fait, la plus forte. Comprendre précède sauver. Comprendre précède dominer. Comprendre précède fuir. Sans comprendre, on ne fait que répéter. »\n\nIl incline légèrement la tête.\n\n« Les sept précédents n’ont jamais choisi cette réponse. Elle ne leur venait pas. Elles et ils voulaient agir, pas savoir. »\n\nIl tend la main.\n\n« Prends. »\n\nVous tendez la vôtre. Il y dépose une petite clé de cuivre. Elle est chaude.\n\n« Ce n’est pas un objet magique. C’est juste une clé. Mais à la Tour, elle ouvrira la dernière porte. Ne l’utilise que si tu es sûr·e. »\n\nLa trappe s’ouvre.\n\nVous descendez. Calmement.",
+        "next": "salle_coeur"
+      },
+      "gardien_finir": {
+        "id": "gardien_finir",
+        "type": "scene",
+        "text": "« Pour en finir. »\n\nLe Gardien fronce les sourcils.\n\n« Honnête. »\n\nIl hoche la tête, gravement.\n\n« Certains sont venus avec cette réponse. Peu. Deux, je crois. Les plus fatigués. Ce n’est pas une mauvaise réponse. C’est juste une réponse qui aura des conséquences précises. »\n\nIl se lève, péniblement, comme s’il était vieux pour de vrai.\n\n« Je te laisse passer. Mais sache, à partir de maintenant, que tout ce que tu feras portera cette phrase. \"Pour en finir.\" Et qu’une fois passé, tu ne pourras plus ajouter \"mais bien\". Tu peux finir. Tu peux finir vite. Tu ne peux plus bien finir. »\n\nIl tape de la main sur le sol.\n\nLa trappe s’ouvre.\n\nVous descendez.\n\nPlus lentement que les autres.\n\nComme si la Tour, elle-même, hésitait à vous laisser faire.",
+        "next": "salle_coeur"
+      },
+      "salle_coeur": {
+        "id": "salle_coeur",
+        "type": "scene",
+        "text": "Le couloir débouche sur une salle immense.\n\nCirculaire. Sombre. Les murs sont lisses, sans aucune gravure. Mais, à hauteur de vos yeux, tout autour, une série de petits miroirs. Des centaines. Des milliers peut-être. Chacun de la taille d’une paume. Chacun reflète un visage qui n’est pas le vôtre. Des visages humains. Des visages d’enfants. Des visages de vieux. Des visages de personnes qui, comprenez-vous, ont été sur le chemin avant vous.\n\nLes sept autres. Et plus encore. Les générations qui ont essayé.\n\nTous vous regardent. Aucun ne sourit. Aucun ne pleure. Ils vous regardent, simplement, comme on regarde quelqu’un qui arrive en retard à un rendez-vous.\n\nAu centre de la salle, un socle.\n\nSur le socle, le Cœur.\n\nPas un cœur humain.\n\nUn noyau de lumière fissuré.\n\nIl flotte, à un pouce au-dessus du socle. Il bat. Lentement. Chaque pulsation déforme la réalité autour de lui, un peu. Comme si le monde lui-même refusait, à chaque battement, de le contenir.\n\nIl est beau.\n\nIl est horrible.\n\nIl est à la fois.\n\nVous avancez. Les miroirs, sur les murs, vous accompagnent du regard. Des milliers d’yeux qui, en silence, vous jugent, vous soutiennent, vous abandonnent à la fois.\n\nAu pied du socle, quelque chose que vous ne vous attendiez pas à voir.\n\nUne silhouette.\n\nElle n’est pas de chair. Elle n’est pas de lumière. Elle est quelque part entre les deux. Elle a une forme humaine. Un visage que, par moments, vous reconnaissez. Votre mère. Puis Luna. Puis Kaïs. Puis vous-même. Puis personne.\n\nElle lève la main.\n\n« Tu es venu·e. »\n\nVous reconnaissez la voix. C’est celle qui vous parlait dans la forêt, avant la lame. C’est celle qui vous a appelé·e « dernière ».\n\n« J’ai beaucoup attendu. »",
+        "next": "coeur_tour"
+      },
+      "coeur_tour": {
+        "id": "coeur_tour",
+        "type": "scene",
+        "text": "« Qui es-tu ? »\n\nLa silhouette penche la tête.\n\n« Moi ? Je suis peu de choses. Je suis ce qui reste de l’Ordre, quand tout le monde a tenté quelque chose et a échoué. Je suis la concierge de ce qui n’a pas été fait. »\n\nElle fait un geste vers le Cœur.\n\n« Ceci est le Cœur du monde. Ou, plus exactement, c’est ce qui le tient en vie. C’est ce que Kaïs a presque brisé, il y a six cents ans, quand il a ouvert la porte. Depuis, il fuit. Goutte à goutte. Et quand il sera complètement fui, le monde s’effondrera. »\n\n« Comment arrêter cela ? »\n\n« Il y a plusieurs façons. Aucune n’est parfaite. »\n\nElle lève un doigt.\n\n« On peut le détruire. Tuer le Cœur, c’est tuer ce qui fuit. Plus de fuite. Mais aussi, plus de magie. Plus de rêve. Plus de couleurs étranges dans les yeux des enfants au crépuscule. Le monde devient plat, mais il tient. »\n\nDeux doigts.\n\n« On peut le prendre. L’absorber. Devenir le Cœur, à sa place. Plus de fuite. Mais tu deviens l’axe du monde. Tu ne meurs plus, tu ne changes plus, tu es. C’est une forme de solitude que peu de gens imaginent correctement. »\n\nTrois doigts.\n\n« On peut le stabiliser. Pour cela, il faut y laisser quelque chose d’aussi précieux que lui. Une vie qui valait la peine. Le coût, c’est toi. »\n\nQuatre doigts.\n\n« On peut, aussi, faire quelque chose de différent. Quelque chose que personne n’a essayé avant. »\n\nElle sourit, un peu.\n\n« Mais pour cela, il faut une combinaison particulière. Du courage. De la magie. Une certaine attention au destin. Et une preuve que tu as vraiment compris. »\n\nElle tend la main.\n\n« Choisis. »",
+        "next": "kais_dernier"
+      },
+      "kais_dernier": {
+        "id": "kais_dernier",
+        "type": "scene",
+        "text": "Au moment où vous allez parler, une voix derrière vous dit :\n\n« Attends. »\n\nKaïs.\n\nVous vous retournez. Il est là. Seul. Les autres, vous ne savez pas comment, n’ont pas pu le suivre. Peut-être que la Tour, en silence, a décidé qu’il avait, lui, le droit.\n\nIl avance dans la salle. Ses épaules semblent moins lourdes, comme s’il avait laissé, en haut, un manteau qu’il ne voulait plus porter.\n\nIl s’arrête à quelques pas de vous.\n\n« Je voulais te dire quelque chose. Avant. »\n\nIl prend une grande inspiration.\n\n« Je n’ai pas ouvert la porte par orgueil. J’avais perdu quelqu’un. Pas de la même manière que toi avec ta mère. Différemment. J’avais perdu une personne que j’aimais, et qui ne pouvait plus revenir. Et j’ai cru que, peut-être, si je regardais derrière la magie, j’y trouverais la bonne sortie de secours. »\n\nIl sourit, très doucement.\n\n« J’étais jeune. J’étais amoureux. C’est la combinaison la plus dangereuse qui existe. »\n\nIl vous regarde.\n\n« Je te le dis parce que tu vas choisir. Et je veux que tu saches que tout n’est pas orgueil. Parfois, c’est juste de la douleur qui cherche une porte. »\n\nIl recule d’un pas.\n\n« À toi. »\n\nLa silhouette près du Cœur incline la tête.\n\n« Le Seuil a parlé. Maintenant, c’est ton tour. »",
+        "next": "choix_final"
+      },
+      "choix_final": {
+        "id": "choix_final",
+        "type": "choice",
+        "text": "La silhouette près du Cœur attend. Le Cœur bat, lentement. Chacune de ses pulsations fait trembler vos os. Le temps lui-même semble suspendu à votre décision.\n\nKaïs, Camille, Guillaume, et peut-être Léo, attendent quelque part au-dessus. Les sept visages dans les miroirs vous fixent en silence.\n\nQue faites-vous ?",
+        "choices": [
+          {
+            "id": "detruire",
+            "label": "Détruire le Cœur",
+            "nextNode": "fin_destruction"
+          },
+          {
+            "id": "fusionner",
+            "label": "Fusionner avec lui, prendre son pouvoir",
+            "nextNode": "fin_pouvoir"
+          },
+          {
+            "id": "sacrifier",
+            "label": "Vous sacrifier pour le stabiliser",
+            "nextNode": "fin_sacrifice"
+          },
+          {
+            "id": "equilibre",
+            "label": "Chercher un équilibre nouveau",
+            "nextNode": "fin_equilibre",
+            "condition": {
+              "variable": "courage",
+              "op": "gte",
+              "value": 5
+            }
+          },
+          {
+            "id": "refonder",
+            "label": "Tout refaire avec l’épée",
+            "nextNode": "fin_refondation",
+            "condition": {
+              "variable": "epee",
+              "op": "gte",
+              "value": 1
+            }
+          },
+          {
+            "id": "allier_faim",
+            "label": "Laisser entrer la Faim, régner avec elle",
+            "nextNode": "fin_alliance_sombre",
+            "condition": {
+              "variable": "magie",
+              "op": "gte",
+              "value": 6
+            }
+          },
+          {
+            "id": "devenir_gardien",
+            "label": "Prendre la place du Gardien, devenir éternel·le",
+            "nextNode": "fin_cercle",
+            "condition": {
+              "variable": "destin",
+              "op": "gte",
+              "value": 7
+            }
+          },
+          {
+            "id": "transmettre",
+            "label": "Léguer votre héritage à un·e autre",
+            "nextNode": "fin_heritage",
+            "condition": {
+              "variable": "destin",
+              "op": "gte",
+              "value": 5
+            }
+          },
+          {
+            "id": "partir",
+            "label": "Tourner le dos et partir sans rien faire",
+            "nextNode": "fin_solitude"
+          },
+          {
+            "id": "laisser_agir_leo",
+            "label": "Laisser Léo choisir à votre place",
+            "nextNode": "fin_trahison_victime",
+            "condition": {
+              "variable": "soupcon_leo",
+              "op": "lte",
+              "value": 0
+            }
+          }
+        ]
+      },
+      "fin_destruction": {
+        "id": "fin_destruction",
+        "type": "ending",
+        "text": "Vous frappez.\n\nSans hésiter.\n\nLe geste est simple. Tellement simple que vous vous demanderez, plus tard, pourquoi personne, avant vous, ne l’avait fait. Vous soulevez la main. Vous concentrez, en vous, tout ce que vous avez appris à concentrer. Et vous frappez.\n\nLe Cœur explose.\n\nLa lumière dévore tout. Les miroirs sur les murs éclatent, les visages disparaissent les uns après les autres, comme on souffle des bougies. La silhouette près du socle s’efface avec un cri bref, pas douloureux, plutôt comme un soulagement tardif.\n\nLe monde hurle.\n\nVous entendez, pour la seconde d’après, toutes les voix de toutes les créatures vivantes. Vous les entendez perdre, exactement en même temps, quelque chose qu’elles ignoraient posséder. Les oiseaux perdent leurs chants compliqués. Les loups perdent leur dignité. Les humains perdent, pour la plupart d’entre eux, une petite lueur au fond de l’œil qui les rendait plus beaux qu’ils ne le savaient.\n\nPuis, le silence.\n\nQuand vous rouvrez les yeux, il n’y a plus rien. Pas de cœur. Pas de fuite. Pas de magie.\n\nLa Tour, autour de vous, craque.\n\nElle va tomber.\n\nVous sortez, en courant. Le couloir vous recrache. Vous retrouvez la salle ronde, puis le couloir de l’entrée, puis l’arche.\n\nDehors, vos compagnons vous attendent.\n\nIls ont changé. Camille a soudain vieilli. Des rides sont apparues sur son visage. Elle ne vivra plus six cents ans en simultané. Elle vivra maintenant dans l’ordre, comme tout le monde. Elle sourit, pour la première fois vraiment, libre.\n\nGuillaume a pleuré. Il a beaucoup pleuré. Il ne sait plus pourquoi. Son pouvoir d’oubli, soudain, est devenu un oubli ordinaire. Il oublie beaucoup de choses. Il sera, désormais, un être humain comme les autres. Il trouve cela doux.\n\nLéo, s’il est avec vous, est mort. Il s’est éteint au même moment que le Cœur. Sa part de magie, lui, ne pouvait plus le tenir debout.\n\nKaïs est resté, lui, à l’entrée. Vivant. Mortel, enfin. Il ne comprend pas tout de suite. Puis il se met à rire, d’un rire vrai, épuisé, qu’il n’avait pas ri depuis six cents ans.\n\nVous avez sauvé le monde.\n\nEn le vidant de tout ce qu’il était.\n\nPlus jamais d’éclair qui obéit à personne. Plus jamais de voix dans la tête des enfants la nuit. Plus jamais de cerfs blancs traversant les clairières.\n\nLes humains ne sauront jamais ce qu’ils ont perdu. Pour eux, il n’y aura rien à perdre. La magie aura disparu avant qu’ils n’aient appris à la croire.\n\nEt le monde, maintenant, doit réapprendre à exister.\n\nSans vous.\n\nParce que vous, vous êtes resté·e au centre, dans le souffle de l’explosion, et ce qui sort de la Tour, ce n’est plus vraiment vous.\n\nC’est votre silence.\n\nUn silence qui fait du bien, enfin, à un monde qui n’avait plus entendu que sa propre fuite."
+      },
+      "fin_pouvoir": {
+        "id": "fin_pouvoir",
+        "type": "ending",
+        "text": "Vous tendez la main.\n\nVous acceptez.\n\nLe Cœur vous absorbe. Ou vous l’absorbez. Impossible de savoir. Il n’y a plus de distance entre vous. Il n’y a plus de « vous » et « lui ». Il y a juste, désormais, quelque chose qui bat plus lentement que tout le reste et qui tient.\n\nLa salle, autour de vous, s’illumine.\n\nLes miroirs sur les murs, un à un, changent de visage. Tous ne montrent plus que le vôtre. Mais votre visage, dans chacun, est un peu différent. Plus calme. Plus triste. Plus vieux. Plus ancien que votre âge.\n\nQuand tout s’arrête, le monde est différent.\n\nStable. Parfait. Sous votre contrôle.\n\nVous sortez de la Tour sans vraiment la quitter. Une partie de vous reste dans la salle, à jamais, contre le socle. L’autre partie marche. Elle parle. Elle salue vos compagnons, qui s’agenouillent presque automatiquement, sans même réaliser qu’ils le font.\n\nCamille s’agenouille en tremblant. Elle sait ce que cela veut dire. Elle sait qu’elle vient de perdre quelqu’un, même si cette personne est debout devant elle.\n\nLéo, s’il vit encore, sourit largement. Il hoche la tête. Il est satisfait. Ses associés vont être contents.\n\nGuillaume détourne le regard. Il ne peut pas supporter ce qu’il voit.\n\nKaïs, lui, vous regarde longuement. Il se relève, s’approche. Il pose la main sur votre joue.\n\n« Pardon », dit-il. « Je n’aurais pas dû t’apprendre tout cela. »\n\nVous ne répondez pas.\n\nVous n’êtes plus vraiment capable de regretter. Vous n’êtes plus vraiment capable de rire. Vous n’êtes plus vraiment capable de quoi que ce soit qui ressemble à une vie.\n\nVous êtes l’axe.\n\nVous n’avez plus le droit de bouger trop.\n\nLes décennies passent.\n\nLes saisons vont et viennent. Les humains ont d’autres guerres, d’autres récoltes, d’autres chansons. Vous n’avez plus d’âge. Les miroirs, dans la Tour, se sont remplis. Un nouveau visage parmi les sept. Le vôtre.\n\nVous n’avez pas sauvé le monde.\n\nVous êtes devenu·e ce qui le contrôle.\n\nEt ce que personne ne vous avait dit, c’est que c’est, peut-être, la plus grande solitude qui existe.\n\nMais vous comprenez, enfin, pourquoi votre mère avait serré votre main si fort, cette nuit-là.\n\nElle avait su. Elle avait espéré que vous feriez mieux.\n\nVous n’avez pas fait pire. Mais vous n’avez pas fait mieux non plus.\n\nVous avez, simplement, pris la place."
+      },
+      "fin_sacrifice": {
+        "id": "fin_sacrifice",
+        "type": "ending",
+        "text": "Vous vous approchez.\n\nVous comprenez.\n\nIl faut un équilibre. Pas une destruction. Pas un contrôle. Un prix.\n\nIl faut que quelque chose s’y pose, s’y dissolve, s’y offre sans rien demander en retour. Il faut une vie qui accepte, vraiment, de devenir l’agrafe qui tiendra le monde.\n\nVous posez la main sur le Cœur.\n\nLa douleur est immédiate. Totale. Elle n’a rien à voir avec le feu, avec le couteau, avec ce que vous connaissiez de la souffrance. C’est une douleur qui ne cherche pas à vous faire mal. C’est une douleur qui cherche, simplement, à prendre la place qu’elle doit prendre.\n\nVous tenez.\n\nVous pensez à votre mère. À ses mains serrées dans la nuit. Vous comprenez, enfin, ce qu’elle avait voulu dire. « Cours. Cache-toi. Oublie. » Elle n’avait pas voulu vous sauver la vie. Elle avait voulu vous sauver d’un destin. De celui-ci. Celui que vous avez choisi quand même.\n\nVous pardonnez, à elle et à vous.\n\nVous tenez.\n\nLe monde se stabilise. Les fissures, dans le Cœur, disparaissent. La lumière s’apaise, devient plus égale. Moins belle, peut-être. Mais plus tenue. Plus digne de durer.\n\nQuand tout s’arrête, vous n’êtes plus là.\n\nIl n’y a plus, sur le socle, qu’une petite trace. Une empreinte de main, très légère, dans la pierre elle-même. Comme un souvenir qu’on aurait laissé sans le vouloir.\n\nAu-dessus, vos compagnons entendent. Ils sentent. Le sol, sous leurs pieds, cesse de trembler. L’air, autour d’eux, redevient un air d’air. Les couleurs, enfin, redeviennent stables.\n\nKaïs tombe à genoux. Il pleure. C’est la première fois qu’il pleure depuis très longtemps. Depuis celui ou celle qu’il avait perdu, il y a six cents ans.\n\nCamille ferme les yeux. Elle écrit dans son carnet, une dernière fois, un nom. Le vôtre.\n\nGuillaume, il, sourit doucement. Il savait, depuis le début. Il savait que cela finirait ainsi. Il ne vous l’a pas dit parce qu’il voulait que vous choisissiez seul·e.\n\nLéo, s’il vit encore, regarde par terre. Il n’a rien à dire.\n\nLe monde, lui, continue.\n\nLes récoltes redeviennent jaunes. Les enfants naissent à un rythme normal. Les bêtes retrouvent certains de leurs chants. Personne ne saura, vraiment, ce qui a eu lieu cette nuit-là dans la Tour.\n\nMais quelque part, dans les villages, au crépuscule, quand les anciens racontent les histoires et que les enfants les écoutent sans tout comprendre, il y aura parfois une pause. Un silence. Un frisson.\n\nEt dans ce frisson, on se souviendra. Sans savoir. Sans nom.\n\nDe vous."
+      },
+      "fin_equilibre": {
+        "id": "fin_equilibre",
+        "type": "ending",
+        "text": "Vous avancez lentement.\n\nVous êtes fatigué·e. Vous avez, aussi, beaucoup appris. Le village. La forêt. Les ruines. Le miroir. Le voyage avec les trois. Chacune de ces étapes a laissé en vous un petit outil, que vous ne saviez pas identifier sur le moment.\n\nAujourd’hui, à cette seconde précise, vous comprenez que ces outils, tous réunis, forment quelque chose que personne n’a jamais tenté avant vous.\n\nVous tendez la main.\n\nPas pour prendre. Pas pour détruire. Pas pour vous offrir.\n\nPour parler.\n\n« Je ne suis pas venu·e te tuer. Je ne suis pas venu·e te prendre. Je ne suis pas venu·e mourir. »\n\nLa silhouette près du socle se fige.\n\nLe Cœur, dans l’air, ralentit encore.\n\n« Je suis venu·e négocier. »\n\nUn silence.\n\n« Tu as fui pendant six cents ans. Tu es fatigué. Tout le monde ici est fatigué. Kaïs. Les trois. Moi. Toi. Les sept que tu as effacé·e·s. »\n\nVous avancez d’un pas.\n\n« Je te propose un nouveau pacte. Pas une porte fermée. Pas une porte ouverte. Une porte entrebâillée. Assez pour que la magie respire. Pas assez pour que la Faim entre. »\n\nLa silhouette penche la tête.\n\n« C’est impossible. »\n\n« Toutes les choses qui existent aujourd’hui étaient impossibles un jour. »\n\nVous tendez les deux mains.\n\nLa lame, à votre ceinture, sort seule. Elle vole jusqu’à vos paumes. Elle se fend en deux, dans le sens de la longueur. Chaque moitié vibre d’une couleur différente. L’une bleue. L’autre or.\n\nVous tendez la bleue vers le Cœur.\n\nL’or vers la silhouette.\n\nUn silence très long.\n\nPuis la silhouette, enfin, sourit.\n\n« Tu es la huitième », dit-elle. « Et tu es la première à ne pas vouloir finir. »\n\nElle accepte l’or.\n\nLe Cœur accepte le bleu.\n\nLe monde, autour de vous, bascule. Pas dans la destruction. Pas dans la soumission. Dans un équilibre nouveau.\n\nLes couleurs se stabilisent. Les fuites ralentissent, sans s’arrêter complètement. La magie reste, mais plus douce, plus rare, plus précieuse. Les rêves des enfants deviennent, à nouveau, un peu dangereux, un peu magnifiques.\n\nQuand vous sortez de la Tour, vos compagnons ne sont plus agenouillés.\n\nIls sont debout. Ils sourient. Ils ont l’air, pour la première fois depuis que vous les connaissez, vivants.\n\nCamille s’approche de vous. Elle vous prend la main. Elle dit :\n\n« C’était ça. Personne n’avait pensé à négocier. »\n\nKaïs, un peu plus loin, hoche la tête. Il ne sourit pas. Mais pour la première fois, il n’a plus l’air coupable. Juste ancien. Juste humain.\n\nLa Tour, derrière vous, ne tombe pas.\n\nElle reste, à peu près comme elle était, mais un peu moins noire. Comme si un très long deuil, enfin, s’allégeait.\n\nVous rentrez chez vous.\n\nPas à Astréa. Il n’y a plus d’Astréa. Mais quelque part. Avec les autres. Avec ce que vous avez inventé.\n\nEt le monde, pour la première fois depuis six cents ans, recommence à respirer à son rythme naturel.\n\nUn rythme légèrement plus lent qu’avant.\n\nMais un rythme à lui."
+      },
+      "fin_refondation": {
+        "id": "fin_refondation",
+        "type": "ending",
+        "text": "Vous regardez la lame, dans votre main. Elle vibre. Elle sait ce que vous allez faire.\n\n« Elle attendait cela », dit la silhouette. « Depuis le premier jour. »\n\nVous levez la lame à deux mains.\n\nPas pour détruire. Pas pour tuer.\n\nPour inscrire.\n\nVous entaillez l’air devant vous. Une fois. Deux fois. Trois fois. Des runes. Des signes. Des mots que vous ne connaissez pas, mais que vos mains connaissent.\n\nChaque signe, en touchant l’air, se fixe dans la réalité. Devient une ligne de lumière. Se stabilise.\n\nAutour du Cœur, peu à peu, un cercle apparaît. Puis un deuxième, plus large. Puis un troisième, plus large encore. Trois cercles concentriques, inscrits dans l’espace lui-même.\n\nLe Cœur, au centre, cesse de fuir.\n\nNon pas parce que vous l’avez vidé.\n\nParce que vous lui avez donné, pour la première fois depuis la Rupture, un contenant à sa taille.\n\nVous avez refondé ce que Kaïs avait détruit. Pas à l’identique. Autrement. Plus simple. Plus fragile. Plus humble.\n\nVous tombez à genoux. La lame, dans vos mains, se brise en poussière dorée qui s’envole dans l’air et disparaît.\n\nVous avez perdu l’arme. Vous avez gagné autre chose.\n\nLa silhouette s’approche. Elle vous aide à vous relever.\n\n« C’est fait. Tu as récrit le serment. »\n\n« Il tiendra ? »\n\n« Tant qu’il y aura, dans ce monde, des mains pour le redire. Tu es, en ce moment, la dernière main. Demain, tu devras en trouver d’autres. »\n\nElle vous sourit.\n\n« Tu vas avoir beaucoup de travail. »\n\nVous sortez de la Tour. Vos compagnons vous attendent. Ils ne se sont pas agenouillés. Ils vous ont attendu·e, simplement.\n\nGuillaume vous prend dans ses bras. Il pleure.\n\nCamille hoche la tête, approbatrice.\n\nKaïs vous regarde un long moment, puis s’agenouille. Pas devant vous. Devant le sol. Il embrasse la terre. Il fait cela sans pudeur. Il n’est plus coupable. Il est, maintenant, reconnaissant.\n\nLes années qui suivent seront longues. Il faudra trouver les descendants des neuf, un par un, partout dans le monde. Il faudra leur apprendre, doucement, à tenir leur part du cercle. Il faudra, aussi, tenir votre part à vous, tant qu’ils ne sont pas prêts.\n\nMais, pour la première fois depuis six cents ans, il y a un monde qui s’ouvre, au lieu d’un monde qui se ferme.\n\nEt votre nom, plus tard, sera enseigné aux enfants. Pas comme un héros. Comme quelqu’un qui a accepté de travailler beaucoup, très longtemps, sans trop se plaindre.\n\nC’est peut-être la plus belle fin qu’une vie puisse espérer."
+      },
+      "fin_alliance_sombre": {
+        "id": "fin_alliance_sombre",
+        "type": "ending",
+        "text": "Vous levez la main.\n\nPas pour frapper. Pour inviter.\n\n« Viens. »\n\nLa silhouette, près du socle, se raidit. Le Cœur, lui, accélère son battement.\n\n« Non. »\n\n« Si. »\n\nVous avancez. Vos pas ne font pas de bruit. La magie, autour de vous, s’épaissit.\n\n« Je sais ce que tu crois savoir », dites-vous. « Tu crois que la Faim est un ennemi. Tu te trompes. C’est quelque chose de plus ancien que la peur. C’est ce qui reste, quand tout le reste est parti. Et elle ne demande qu’à entrer pour de vrai. Pas en voleuse. En invitée. »\n\n« Tu vas détruire ce monde. »\n\n« Je vais le remplacer. »\n\nVous touchez le Cœur.\n\nVous ne le prenez pas. Vous l’ouvrez.\n\nCe n’est pas la même chose.\n\nQuelque chose, au-delà, respire. Une odeur. Une couleur qui n’existe pas dans le prisme humain. Une sensation de présence immense, qui aurait attendu depuis toujours une main qui ne la refuserait pas.\n\nVous ne la refusez pas.\n\nElle entre.\n\nPas d’un coup. Poliment. Vous apprenez, tous les deux, à cohabiter. Vous, en hôte·sse. Elle, en convive.\n\nLe monde, autour, change. Pas en ruines. En quelque chose d’autre. Les couleurs sont plus nombreuses. Les sons ont des notes qu’aucun instrument humain ne pouvait atteindre. Les humains, en vous croisant, pleurent sans comprendre pourquoi, et se relèvent plus grands que leur jeunesse.\n\nKaïs, en dehors de la Tour, comprend avant les autres.\n\nIl s’agenouille. Il ne se relève pas.\n\n« Tu as fini ce que j’ai commencé. »\n\n« Oui. Mais mieux. »\n\nIl hoche la tête. Il sourit, pour la première fois, d’un sourire qu’il n’a jamais osé sourire.\n\n« Je t’attendrai. »\n\nPuis il se dissout, doucement, dans la nouvelle lumière. Il n’avait plus de raison de tenir. Le Seuil ouvert, il pouvait enfin passer. Il passe.\n\nCamille s’enfuit. Guillaume reste. Il tremble. Il ne sait pas ce qu’il va devenir. Il finit par s’asseoir, par pleurer, par accepter.\n\nLéo, s’il vit encore, sourit d’un sourire hideux, à demi fier, à demi déçu. Ses patrons étaient pour un entrebâillement. Vous avez ouvert la porte en grand. Il n’aura pas ce qu’il voulait, mais il aura mieux, ou pire, selon la définition qu’on donne à ces mots.\n\nVous devenez, désormais, quelque chose que ce monde ne connaissait pas.\n\nNi humaine, ni divine. Une troisième catégorie.\n\nLes humains vont vous appeler, pendant des siècles, de noms différents. Certains vous haïront. Certains vous adoreront. Aucun ne vous comprendra tout à fait.\n\nVous, vous comprenez, enfin, ce que Kaïs cherchait.\n\nPas à fuir. Pas à dominer. À être enfin, à votre juste taille.\n\nMais au prix, peut-être, de ne plus jamais être vraiment seul·e.\n\nEt surtout, au prix, peut-être, de ne plus jamais savoir où vous finissez et où commence l’autre chose."
+      },
+      "fin_cercle": {
+        "id": "fin_cercle",
+        "type": "ending",
+        "text": "Vous vous asseyez sur le socle.\n\nLa silhouette, près du Cœur, comprend avant vous. Elle ouvre les yeux grand.\n\n« Tu veux… ? »\n\n« Oui. »\n\n« Tu sais ce que ça implique ? »\n\n« Je crois. »\n\n« Tu ne sais pas. »\n\n« Alors apprends-moi. »\n\nElle vous explique. D’une voix qui, en parlant, commence à s’essouffler.\n\nElle vous explique que chaque Tour a son Gardien. Que le Gardien est celui ou celle qui reste, pour poser la question à tous ceux et celles qui viendront. Que le Gardien ne meurt pas, ne vieillit pas, ne part jamais. Que le Gardien a juste une tâche : choisir, avec la plus grande honnêteté possible, qui peut descendre et qui doit repartir.\n\n« L’ancien Gardien, c’était toi. »\n\n« Oui. »\n\n« Et tu es fatigué. »\n\n« Oui. »\n\n« Je te remplace. »\n\nElle vous regarde longuement.\n\n« D’accord. »\n\nElle vous tend la main. Vous la prenez. Un contact bref. Quelque chose passe. Vous sentez, très vite, des milliers de conversations antérieures. Avec les sept précédents. Avec d’autres, plus anciens, qui venaient pour des raisons que vous n’avez pas le temps d’examiner.\n\nVous héritez.\n\nLa silhouette, en face, se dissout lentement, comme une brume qui s’évapore au soleil du matin. Elle a l’air en paix.\n\nVous prenez place.\n\nVos amis, au-dessus, attendent.\n\nVous ne les rejoignez pas.\n\nAprès quelques heures, Kaïs descend. Il s’arrête dans la salle aux miroirs, comprend, cherche votre regard.\n\nVous le fixez, à travers la nouvelle forme que vous avez prise. Il vous voit. Il comprend.\n\nIl s’agenouille.\n\n« Tu l’as fait. »\n\n« Oui. »\n\n« Tu seras bien. »\n\n« Je crois. »\n\n« Tu me manqueras. »\n\n« Reviens de temps en temps. Poser une question. Je serai là. »\n\nIl sourit. Il remonte.\n\nLes années passent. Les siècles. Le monde continue à fuir, mais doucement. Chaque fois qu’un nouveau vient frapper à la porte de la Tour, vous ouvrez. Vous posez la question. Vous évaluez. Vous laissez descendre ceux et celles qui le méritent. Vous éconduisez les autres, gentiment.\n\nUn jour, vous trouverez votre successeur·e.\n\nUn jour, vous poserez la main sur la sienne, vous direz « d’accord », vous vous dissoudrez à votre tour.\n\nMais ce ne sera pas avant très, très longtemps.\n\nD’ici là, vous êtes le Seuil. Vous êtes l’Attente. Vous êtes la dernière voix honnête dans un monde fatigué.\n\nEt ce n’est peut-être pas une mauvaise vie.\n\nC’est juste une vie très longue."
+      },
+      "fin_heritage": {
+        "id": "fin_heritage",
+        "type": "ending",
+        "text": "Vous regardez la silhouette. Vous regardez le Cœur.\n\nVous regardez, surtout, les miroirs autour de vous.\n\nSept visages. Sept tentatives. Sept échecs.\n\n« Je suis la huitième », dites-vous. « Mais je ne serai pas la dernière. »\n\nLa silhouette penche la tête.\n\n« Tu ne veux pas décider ? »\n\n« Si. Je veux décider qu’il y en aura une neuvième. Ou une dixième. Ou une vingtième. »\n\n« Ce n’est pas comme cela que cela fonctionne. »\n\n« Alors on va changer la façon dont ça fonctionne. »\n\nVous fouillez dans votre besace. Vous en sortez la pierre noire de Kaïs. Elle a voyagé avec vous depuis la première nuit. Elle pulse doucement.\n\nVous la posez sur le socle, à côté du Cœur.\n\n« Cette pierre contient une part de Kaïs. Une part de ce qu’il a ouvert. Je la laisse ici. Elle sera un morceau de moi aussi, si je la laisse avec mon sang. »\n\nVous vous entaillez la paume. Votre sang coule sur la pierre. Elle devient plus sombre, plus lourde.\n\n« Maintenant, la pierre cherchera d’autres main. Elle les trouvera. Elle ne fera rien d’autre que leur rappeler qu’elles existent. »\n\nLa silhouette vous regarde, fascinée.\n\n« Tu dilues la responsabilité ? »\n\n« Non. Je la partage. »\n\nUn silence.\n\n« Ce n’est pas la même chose. »\n\n« Je sais. »\n\nLa silhouette sourit, enfin. Un sourire sincère.\n\n« Tu viens de créer quelque chose de nouveau. »\n\nVous hochez la tête.\n\n« C’était le moment. »\n\nVous remontez. Le Cœur continue de fuir, oui, un peu. Mais plus lentement. Beaucoup plus lentement. Comme si, désormais, des dizaines de petites mains partout dans le monde, sans le savoir, posaient chacune un doigt contre la fuite.\n\nQuand vous sortez de la Tour, vos compagnons se lèvent.\n\nIls ne comprennent pas tout de suite.\n\n« C’est fini ? »\n\n« Non. C’est commencé. »\n\nVous leur expliquez. La pierre. Le sang. La diffusion.\n\nCamille sourit.\n\n« C’est une des plus belles choses que j’aie entendues depuis que je suis en vie. »\n\nLéo, s’il est avec vous, vous regarde avec un mélange de respect et d’inquiétude.\n\n« Tu viens de priver beaucoup de gens, en haut lieu, d’un ennemi identifiable. »\n\n« Bien. »\n\nGuillaume, il, pleure doucement. De soulagement.\n\nVous rentrez dans le monde. Vous vivez votre vie. Vous trouvez un nouveau village. Vous y plantez des choses. Des légumes. Des amitiés. Des histoires.\n\nDe temps en temps, des inconnus apparaissent. Ils vous regardent bizarrement, comme s’ils vous reconnaissaient sans pouvoir dire d’où. Ils reprennent leur chemin. Quelque part, en elles et eux, une petite lueur s’est allumée qu’ils ne comprennent pas.\n\nCe n’est peut-être pas une fin glorieuse.\n\nC’est une fin tendue.\n\nEt le monde, sans vous le savoir, vit un peu mieux grâce à vous."
+      },
+      "fin_solitude": {
+        "id": "fin_solitude",
+        "type": "ending",
+        "text": "Vous regardez le Cœur. Vous regardez la silhouette. Vous regardez les miroirs.\n\nVous faites demi-tour.\n\nVous sortez de la salle.\n\nVous remontez le couloir. Vous traversez la salle ronde. Vous passez devant la statue d’Oren. Vous franchissez la porte.\n\nVous sortez de la Tour.\n\nVos compagnons vous dévisagent.\n\n« Quoi ? » souffle Léo.\n\n« Je ne le ferai pas. »\n\nKaïs se redresse, stupéfait.\n\n« Tu… tu ne vas pas le faire ? »\n\n« Non. »\n\n« Mais… »\n\n« Tu as dit, toi-même, que le monde fuyait depuis six cents ans. Il peut continuer à fuir encore quelques décennies sans que je m’en mêle. Moi, j’ai vécu une journée dans cette histoire. Une seule. Et je refuse qu’une journée dans ma vie décide de tout le reste. »\n\n« C’est ton rôle ! »\n\n« C’est le rôle que vous m’avez donné. Ce n’est pas le même. »\n\nVous passez devant les quatre. Vous marchez sur la plaine.\n\nKaïs vous rattrape. Il est en colère. Il est, aussi, perdu.\n\n« Tu ne comprends pas ? Le monde va mourir. »\n\n« Si. J’ai compris. Mais pas aujourd’hui. Et pas par moi. »\n\nVous le regardez dans les yeux.\n\n« Je ne suis pas la seule personne sur cette terre qui peut faire quelque chose. Tu as dit qu’il y avait, partout, des descendants de l’Ordre. Dispersés. Va les chercher. Explique-leur. Donne-leur le choix que vous ne m’avez pas laissé. Moi, je pars. »\n\nIl serre les poings.\n\n« Tu es lâche. »\n\n« Peut-être. »\n\nVous marchez. Il ne vous suit pas.\n\nVous marchez pendant des jours. Vous finissez par arriver dans une ville que vous ne connaissez pas. Vous y trouvez un petit logement, au-dessus d’une boulangerie. Vous apprenez à faire du pain. Vous apprenez, aussi, à vivre sans chercher votre destin.\n\nLe monde continue à fuir. Pas plus vite. Pas moins vite.\n\nDe temps en temps, des rumeurs arrivent. Une Tour a été approchée par une neuvième personne. Elle a pris le pouvoir. Elle a été détruite. Elle a été oubliée. Vous n’êtes pas sûr·e.\n\nVous ne cherchez pas à savoir.\n\nVous vieillissez.\n\nVous mourez un jour, de vieillesse, dans votre lit, au-dessus d’une boulangerie, dans une ville dont personne ne retient le nom.\n\nC’est, peut-être, la seule vraie petite victoire de votre vie.\n\nVous n’avez pas sauvé le monde.\n\nMais vous n’avez laissé personne vous sauver à votre place."
+      },
+      "fin_trahison_victime": {
+        "id": "fin_trahison_victime",
+        "type": "ending",
+        "text": "Vous hésitez.\n\nVous regardez la silhouette. Vous regardez le Cœur. Vous regardez les miroirs.\n\nVous vous retournez pour demander conseil.\n\nDerrière vous, Léo se tient debout. Vous ne l’avez pas entendu descendre. Vous n’auriez pas dû pouvoir l’entendre, de toute façon. Il est silencieux depuis le premier jour.\n\nIl sourit.\n\n« Laisse-moi faire. »\n\nIl avance. Il pose la main sur votre épaule. Un geste amical.\n\nVous sentez, trop tard, la lame.\n\nElle entre à la base de votre dos. Courte. Précise. La lame qu’il portait dans sa manche depuis, sans doute, Astréa.\n\nVous vous écroulez sans un cri.\n\nLéo, au-dessus de vous, vous regarde avec une expression qui ressemble, presque, à de la tendresse.\n\n« Désolé. Tu étais attachant·e. Mais j’avais des consignes très claires, et tu n’allais pas dans la bonne direction. »\n\nIl enjambe votre corps.\n\nIl s’approche du Cœur.\n\nIl tend la main.\n\nIl ne fait pas ce que vous auriez fait. Il ne détruit pas. Il n’absorbe pas. Il ne se sacrifie pas. Il entrebâille. Il glisse deux doigts dans la fente du Cœur. Il élargit la fissure de quelques millimètres. Pas plus.\n\n« Voilà. »\n\nIl sort une petite fiole de sa ceinture. Il y fait couler, avec patience, la lumière qui s’échappe. Goutte à goutte.\n\n« Mes patrons vont être contents. »\n\nIl vous regarde, encore.\n\n« Tu peux encore me regarder, en fait. La mort que je t’ai donnée, c’est une mort patiente. Tu as quelques minutes. »\n\nIl s’accroupit près de vous.\n\n« Je voulais juste te dire : merci. Tu as fait beaucoup de chemin pour moi. Sans toi, on aurait jamais pu arriver ici. »\n\nLa silhouette, près du Cœur, hurle. Mais elle n’a pas de corps pour empêcher quoi que ce soit.\n\nAu-dessus, Kaïs descend en courant. Il est trop tard. Il arrive au moment où Léo, fiole remplie, traverse le mur de la salle comme s’il n’existait pas. Il disparaît.\n\nVos derniers instants, vous les passez avec Kaïs qui vous tient la main.\n\nIl pleure. Il était en colère, il y a quelques heures, contre votre confiance aveugle. Maintenant, il est juste triste.\n\n« Pardon », dit-il. « Je n’ai pas vu. »\n\n« Moi non plus. »\n\nVous mourez en regardant la fissure du Cœur. Elle s’élargit, lentement, de quelques millimètres.\n\nQuelques millimètres. C’est presque rien.\n\nMais en six cents ans, cela aura fait toute la différence.\n\nLe monde ne s’effondrera pas cette nuit.\n\nMais il s’effondrera. Plus vite qu’avant.\n\nEt vous ne serez plus là pour voir."
+      }
+    }
+  }
+}
