@@ -23,22 +23,22 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://intrigue.app'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Intrigue — Des livres qui vous répondent',
-    template: '%s · Intrigue',
+    default: 'Intrig — Des livres qui vous répondent',
+    template: '%s · Intrig',
   },
   description:
     'Des romans interactifs à lire en une soirée. Chaque choix oriente l’histoire vers l’une de ses fins.',
   openGraph: {
-    title: 'Intrigue — Des livres qui vous répondent',
+    title: 'Intrig — Des livres qui vous répondent',
     description:
       'Des romans interactifs à lire en une soirée. Chaque choix oriente l’histoire vers l’une de ses fins.',
     locale: 'fr_FR',
     type: 'website',
-    siteName: 'Intrigue',
+    siteName: 'Intrig',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Intrigue — Des livres qui vous répondent',
+    title: 'Intrig — Des livres qui vous répondent',
   },
 }
 

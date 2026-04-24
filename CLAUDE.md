@@ -1,4 +1,4 @@
-# Intrigue — Contexte projet pour Claude Code
+# Intrig — Contexte projet pour Claude Code
 
 > Ce fichier est ma mémoire projet. Relis-le au début de chaque session. Si tu fais un changement de direction important, propose de le mettre à jour.
 
@@ -83,8 +83,8 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
   - `app/(marketing)/layout.tsx` → header + footer (pages publiques).
   - `app/(app)/(chrome)/layout.tsx` → header + footer (pages authentifiees classiques : account, dashboard, create, edit).
   - `app/(app)/books/[slug]/read/page.tsx` → hors du sous-groupe `(chrome)`, hérite uniquement du root layout. C'est le seul moyen propre en App Router de ne pas hériter du chrome.
-- **Landing** : hero + CTA catalogue + aperçu des 5 derniers livres publiés (plus récent en haut, liste alimentée par `listPublishedSummaries` déjà triée `publishedAt DESC`) sous le libellé « Dernières sorties ». Dans le paragraphe d'intro, « Intrigue » est mis en `<em>` serif pour marquer que c'est le nom du produit.
-- **Catalogue** : layout en deux colonnes sur `md+` — sidebar de filtres à gauche (`minmax(220px, 1fr)`, sticky) et liste de livres à droite (`3fr`). Sur mobile, la sidebar passe au-dessus de la liste. Filtres client (titre, genre, auteur, tag, durée) implémentés dans `app/(marketing)/books/_components/catalog-browser.tsx`. Chaque entrée affiche le **genre sous le titre** et une **miniature de couverture** à droite du bloc texte (placeholder si `coverImage` est nul).
+- **Landing** : hero + CTA catalogue + aperçu des 5 derniers livres publiés (plus récent en haut, liste alimentée par `listPublishedSummaries` déjà triée `publishedAt DESC`) sous le libellé « Dernières sorties ». Dans le paragraphe d'intro, « Intrig » est mis en `<em>` serif pour marquer que c'est le nom du produit.
+- **Catalogue** : la page `/books` est un **panneau à hauteur fixe** (`h-[calc(100dvh-4.5rem)]`) — titre et filtres restent figés, **seule la colonne livres scrolle**. Layout en deux colonnes sur `md+` (`grid-cols-[minmax(220px,1fr)_3fr]`), en deux lignes sur mobile (`grid-rows-[auto_minmax(0,1fr)]`). Filtres client (titre, genre, auteur, tag, durée) implémentés dans `app/(marketing)/books/_components/catalog-browser.tsx`. Chaque carte affiche le **genre sous le titre**, un **synopsis tronqué à ~150 caractères** avec `…`, et une **couverture à droite qui s'étire sur toute la hauteur de la carte** (`items-stretch`, largeur fixe, placeholder grisé si `coverImage` est nul).
 - **Couvertures** : trois tailles selon la page — miniature dans le dashboard (h-16 w-12), thumbnail catalog (h-28 w-20 / sm:h-32 w-24), cover large sur la fiche détail (h-64 w-44 / sm:h-72 w-48). Les images se chargent en `loading="lazy"` et tombent sur un placeholder grisé quand `coverImage` est nul.
 - **Fond du site** : `#f8f3e4` (cream légèrement jauni) défini dans `app/globals.css` via `--color-background`, complémentaire de `--color-foreground: #1a1a17`.
 - **Boutons cliquables** : `cursor: pointer` restauré globalement dans `app/globals.css` (`button:not(:disabled)`) parce que le preflight Tailwind le retire par défaut. `disabled` → `cursor: not-allowed`.

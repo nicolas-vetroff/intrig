@@ -1,4 +1,4 @@
-# Intrigue
+# Intrig
 
 Romans interactifs modernes pour le marché francophone. Web app mobile-first, lecture courte, mécanique de choix qui modifient l'histoire.
 
@@ -140,7 +140,7 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 
 ## Catalogue public
 
-`/books` affiche les livres publiés dans une mise en page à deux colonnes (desktop) : **sidebar de filtres à gauche**, **liste des livres à droite**. Sur mobile, la sidebar passe au-dessus de la liste. Filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
+`/books` est un **panneau à hauteur fixe** (100dvh moins le header) : le titre et les filtres restent figés, **seule la colonne livres scrolle**. Mise en page à deux colonnes sur desktop (**filtres à gauche**, **livres à droite**), deux lignes sur mobile. Chaque carte affiche le titre, le genre, l'auteur, un synopsis **tronqué à ~150 caractères** avec `…`, et une **couverture à droite qui s'étire sur toute la hauteur de la carte**. Filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
 
 - recherche par titre,
 - sélecteur de genre, d'auteur, de tag,
