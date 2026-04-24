@@ -116,14 +116,22 @@ export function BookForm({ action, initial, authorDisplay, submitLabel }: Props)
 
   // Debounce the remote slug check: only fire when the sync validation
   // passes, and only once per input settle (350 ms). setState calls are
-  // all inside the async callback, never in the effect body.
+  // all inside the async callback, never in the effect body. Swallow
+  // server errors (e.g. stale action hash during dev hot-reload) so the
+  // form stays usable — the DB UNIQUE constraint is the final lock.
   useEffect(() => {
     if (syncSlugStatus) return
     let cancelled = false
     const handle = setTimeout(async () => {
-      const { available } = await checkSlugAvailable(normalizedSlug, initial?.id)
-      if (cancelled) return
-      setRemoteResult({ slug: normalizedSlug, available })
+      try {
+        const { available } = await checkSlugAvailable(normalizedSlug, initial?.id)
+        if (cancelled) return
+        setRemoteResult({ slug: normalizedSlug, available })
+      } catch (err) {
+        if (cancelled) return
+        console.error('[BookForm] slug availability check failed', err)
+        setRemoteResult({ slug: normalizedSlug, available: true })
+      }
     }, 350)
     return () => {
       cancelled = true

@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --color-background: #fbfaf7;
+  --color-background: #f8f3e4;
   --color-foreground: #1a1a17;
   --color-muted: #6b6962;
   --color-subtle: #efece5;
@@ -21,4 +21,15 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Tailwind's preflight removes the default pointer cursor on buttons.
+   Restore it for every enabled button so clickable controls feel
+   clickable. Disabled buttons keep their browser default. */
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }

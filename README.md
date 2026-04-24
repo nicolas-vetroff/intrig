@@ -119,7 +119,7 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 - **Magic link uniquement** : pas de mot de passe. `/login` envoie un lien par email, cliquer connecte.
 - **Lecture = auth obligatoire + pseudo obligatoire**. `/books/[slug]/read` redirige vers `/login` si déconnecté ; si connecté mais sans pseudo, redirige vers `/account/choose-username`. Le catalogue `/books` et la fiche détail `/books/[slug]` restent publics.
 - **Table `profiles`** synchronisée avec `auth.users` via trigger `on_auth_user_created` (migration `0002_profiles_sync.sql`). Chaque nouveau compte a automatiquement une ligne `profiles` avec `username` nul — à choisir au premier login.
-- **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule). Unique. Modifiable depuis `/account`.
+- **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule). Unique. Modifiable depuis `/account`. Le formulaire vérifie la disponibilité en direct (server action `checkUsernameAvailable`, debounce 350 ms) ; pas d'erreur si tu ressaisies ton propre pseudo actuel.
 - **Progression** (`user_progress.user_id`) est indexée sur l'`auth.users.id` Supabase. Un utilisateur retrouve ses parties, ses variables et ses fins à chaque connexion.
 
 ## Admin — créer / modifier des livres
@@ -138,12 +138,14 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 
 ## Catalogue public
 
-`/books` affiche les livres publiés avec des filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
+`/books` affiche les livres publiés dans une mise en page à deux colonnes (desktop) : **sidebar de filtres à gauche**, **liste des livres à droite**. Sur mobile, la sidebar passe au-dessus de la liste. Filtres côté client (`app/(marketing)/books/_components/catalog-browser.tsx`) :
 
 - recherche par titre,
 - sélecteur de genre, d'auteur, de tag,
 - filtre de durée (court ≤ 30 min, moyen 30-90 min, long > 90 min),
 - bouton « Réinitialiser les filtres » quand au moins un est actif.
+
+La landing affiche les **5 dernières sorties** (plus récent en haut).
 
 ## Déploiement sur Vercel
 

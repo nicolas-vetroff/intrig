@@ -57,6 +57,7 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 - Helpers profil (`lib/supabase/profile.ts`) : `getCurrentProfile()` lit, `requireProfile(next)` compose `requireUser` + redirect vers `/account/choose-username` si `username` nul.
 - Callback magic link : `/api/auth/confirm?code=...&next=...` (PKCE par défaut) ou `?token_hash=...&type=...` (legacy OTP). Le `next` passe par `sanitizeNext` pour empêcher les open redirects.
 - **Format pseudo** : 3-32 caractères, `[a-z0-9_-]` (tout minuscule après normalisation). Unique. Validation pure dans `lib/utils/username.ts` (testée).
+- **Disponibilité en live** : le formulaire `choose-username` appelle `checkUsernameAvailable` (server action dans `_actions/update-username.ts`) avec un debounce de 350 ms. Si la valeur tapée est identique au pseudo courant de l'utilisateur, aucun check n'est fait (sinon « déjà pris » alors que c'est le sien). La contrainte UNIQUE en DB reste le verrou final.
 
 ## Admin et gestion du catalogue
 
@@ -81,8 +82,11 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
   - `app/(marketing)/layout.tsx` → header + footer (pages publiques).
   - `app/(app)/(chrome)/layout.tsx` → header + footer (pages authentifiees classiques : account, dashboard, create, edit).
   - `app/(app)/books/[slug]/read/page.tsx` → hors du sous-groupe `(chrome)`, hérite uniquement du root layout. C'est le seul moyen propre en App Router de ne pas hériter du chrome.
-- **Landing** : hero + CTA catalogue + aperçu des 3 derniers livres publiés sous le libellé « Dernières sorties ».
-- **Catalogue** : filtres client (titre, genre, auteur, tag, durée) implémentés dans `app/(marketing)/books/_components/catalog-browser.tsx`.
+- **Landing** : hero + CTA catalogue + aperçu des 5 derniers livres publiés (plus récent en haut, liste alimentée par `listPublishedSummaries` déjà triée `publishedAt DESC`) sous le libellé « Dernières sorties ». Dans le paragraphe d'intro, « Intrigue » est mis en `<em>` serif pour marquer que c'est le nom du produit.
+- **Catalogue** : layout en deux colonnes sur `md+` — sidebar de filtres à gauche (`minmax(220px, 1fr)`, sticky) et liste de livres à droite (`3fr`). Sur mobile, la sidebar passe au-dessus de la liste. Filtres client (titre, genre, auteur, tag, durée) implémentés dans `app/(marketing)/books/_components/catalog-browser.tsx`.
+- **Fond du site** : `#f8f3e4` (cream légèrement jauni) défini dans `app/globals.css` via `--color-background`, complémentaire de `--color-foreground: #1a1a17`.
+- **Boutons cliquables** : `cursor: pointer` restauré globalement dans `app/globals.css` (`button:not(:disabled)`) parce que le preflight Tailwind le retire par défaut. `disabled` → `cursor: not-allowed`.
+- **Padding de page unifié** : account, dashboard et catalogue utilisent `px-6 py-16 sm:px-10 sm:py-20`. Les `max-w` diffèrent selon le contenu (form étroit vs liste large vs catalogue 2-col).
 - **Pas de waitlist** : retirée au passage en v1 (migration `0003_drop_waitlist.sql`).
 
 ## Structure de dossiers

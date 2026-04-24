@@ -7,7 +7,9 @@ export const dynamic = 'force-dynamic'
 export default async function LandingPage() {
   const [user, catalog] = await Promise.all([getCurrentUser(), listPublishedSummaries()])
 
-  const featured = catalog.slice(0, 3)
+  // Catalog is ordered by publishedAt desc in listPublishedSummaries,
+  // so slicing the top N keeps the most recent first.
+  const featured = catalog.slice(0, 5)
   const catalogHref = user ? '/books' : '/login?next=/books'
 
   return (
@@ -18,9 +20,9 @@ export default async function LandingPage() {
         </h1>
 
         <p className="text-muted max-w-xl text-lg leading-relaxed sm:text-xl">
-          Intrigue publie des romans interactifs à lire en une soirée. À chaque tournant, vos choix
-          orientent l’histoire vers l’une de ses fins — certaines ne se laissent pas trouver du
-          premier coup.
+          <em className="font-serif italic">Intrigue</em> publie des romans interactifs à
+          lire en une soirée. À chaque tournant, vos choix orientent l’histoire vers l’une de ses
+          fins — certaines ne se laissent pas trouver du premier coup.
         </p>
 
         <div className="flex flex-wrap gap-3">

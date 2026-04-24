@@ -61,81 +61,79 @@ export function CatalogBrowser({ books }: Props) {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <section
+    <div className="grid gap-8 md:grid-cols-[minmax(220px,1fr)_3fr] md:items-start md:gap-10">
+      <aside
         aria-label="Filtres du catalogue"
-        className="border-border flex flex-col gap-4 rounded-md border bg-white p-4 sm:p-6"
+        className="border-border flex flex-col gap-4 rounded-md border bg-white p-4 sm:p-5 md:sticky md:top-24"
       >
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className="flex flex-col gap-1.5 text-sm">
-            <span className="text-muted text-xs tracking-widest uppercase">Titre</span>
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Rechercher par titre…"
-              className="border-border rounded-md border bg-white px-3 py-2 text-base"
-            />
-          </label>
-          <label className="flex flex-col gap-1.5 text-sm">
-            <span className="text-muted text-xs tracking-widest uppercase">Genre</span>
-            <select
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-              className="border-border rounded-md border bg-white px-3 py-2 text-base"
-            >
-              <option value="">Tous les genres</option>
-              {genres.map((g) => (
-                <option key={g} value={g}>
-                  {g}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-1.5 text-sm">
-            <span className="text-muted text-xs tracking-widest uppercase">Auteur</span>
-            <select
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              className="border-border rounded-md border bg-white px-3 py-2 text-base"
-            >
-              <option value="">Tous les auteurs</option>
-              {authors.map((a) => (
-                <option key={a} value={a}>
-                  {a}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-1.5 text-sm">
-            <span className="text-muted text-xs tracking-widest uppercase">Tag</span>
-            <select
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
-              className="border-border rounded-md border bg-white px-3 py-2 text-base"
-            >
-              <option value="">Tous les tags</option>
-              {tags.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex flex-col gap-1.5 text-sm sm:col-span-2">
-            <span className="text-muted text-xs tracking-widest uppercase">Durée</span>
-            <select
-              value={duration}
-              onChange={(e) => setDuration(e.target.value as DurationBucket)}
-              className="border-border rounded-md border bg-white px-3 py-2 text-base"
-            >
-              <option value="any">Toutes durées</option>
-              <option value="short">Court (≤ 30 min)</option>
-              <option value="medium">Moyen (30–90 min)</option>
-              <option value="long">Long (&gt; 90 min)</option>
-            </select>
-          </label>
-        </div>
+        <label className="flex flex-col gap-1.5 text-sm">
+          <span className="text-muted text-xs tracking-widest uppercase">Titre</span>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Rechercher…"
+            className="border-border rounded-md border bg-white px-3 py-2 text-base"
+          />
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm">
+          <span className="text-muted text-xs tracking-widest uppercase">Genre</span>
+          <select
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            className="border-border rounded-md border bg-white px-3 py-2 text-base"
+          >
+            <option value="">Tous les genres</option>
+            {genres.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm">
+          <span className="text-muted text-xs tracking-widest uppercase">Auteur</span>
+          <select
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className="border-border rounded-md border bg-white px-3 py-2 text-base"
+          >
+            <option value="">Tous les auteurs</option>
+            {authors.map((a) => (
+              <option key={a} value={a}>
+                {a}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm">
+          <span className="text-muted text-xs tracking-widest uppercase">Tag</span>
+          <select
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            className="border-border rounded-md border bg-white px-3 py-2 text-base"
+          >
+            <option value="">Tous les tags</option>
+            {tags.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="flex flex-col gap-1.5 text-sm">
+          <span className="text-muted text-xs tracking-widest uppercase">Durée</span>
+          <select
+            value={duration}
+            onChange={(e) => setDuration(e.target.value as DurationBucket)}
+            className="border-border rounded-md border bg-white px-3 py-2 text-base"
+          >
+            <option value="any">Toutes durées</option>
+            <option value="short">Court (≤ 30 min)</option>
+            <option value="medium">Moyen (30–90 min)</option>
+            <option value="long">Long (&gt; 90 min)</option>
+          </select>
+        </label>
         {activeFilters ? (
           <button
             type="button"
@@ -145,29 +143,31 @@ export function CatalogBrowser({ books }: Props) {
             Réinitialiser les filtres
           </button>
         ) : null}
-      </section>
+      </aside>
 
-      {filtered.length === 0 ? (
-        <p className="text-muted">Aucun livre ne correspond à ces filtres.</p>
-      ) : (
-        <ul className="divide-border flex flex-col divide-y">
-          {filtered.map((book) => (
-            <li key={book.slug} className="py-6 first:pt-0">
-              <Link href={`/books/${book.slug}`} className="group block">
-                <h2 className="group-hover:text-muted font-serif text-2xl transition-colors sm:text-3xl">
-                  {book.title}
-                </h2>
-                <p className="text-muted mt-1 text-xs tracking-widest uppercase">
-                  {book.author}
-                  {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
-                  {book.tier === 'premium' ? ' · premium' : ''}
-                </p>
-                {book.synopsis ? <p className="mt-3 leading-relaxed">{book.synopsis}</p> : null}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="min-w-0">
+        {filtered.length === 0 ? (
+          <p className="text-muted">Aucun livre ne correspond à ces filtres.</p>
+        ) : (
+          <ul className="divide-border flex flex-col divide-y">
+            {filtered.map((book) => (
+              <li key={book.slug} className="py-6 first:pt-0">
+                <Link href={`/books/${book.slug}`} className="group block">
+                  <h2 className="group-hover:text-muted font-serif text-2xl transition-colors sm:text-3xl">
+                    {book.title}
+                  </h2>
+                  <p className="text-muted mt-1 text-xs tracking-widest uppercase">
+                    {book.author}
+                    {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
+                    {book.tier === 'premium' ? ' · premium' : ''}
+                  </p>
+                  {book.synopsis ? <p className="mt-3 leading-relaxed">{book.synopsis}</p> : null}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }

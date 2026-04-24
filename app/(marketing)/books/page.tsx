@@ -13,7 +13,7 @@ export default async function BooksPage() {
 
   if (catalog.length === 0) {
     return (
-      <section className="mx-auto max-w-2xl px-6 py-24 text-center sm:px-10">
+      <section className="mx-auto max-w-2xl px-6 py-16 text-center sm:px-10 sm:py-20">
         <h1 className="mb-4 font-serif text-3xl sm:text-4xl">Catalogue bientôt disponible</h1>
         <p className="text-muted">Les premiers livres arrivent très prochainement.</p>
       </section>
@@ -21,7 +21,7 @@ export default async function BooksPage() {
   }
 
   return (
-    <section className="mx-auto max-w-2xl px-6 py-16 sm:px-10 sm:py-20">
+    <section className="mx-auto max-w-5xl px-6 py-16 sm:px-10 sm:py-20">
       <header className="mb-10 flex flex-col gap-2">
         <p className="text-muted text-xs tracking-widest uppercase">Catalogue</p>
         <h1 className="font-serif text-3xl sm:text-4xl">

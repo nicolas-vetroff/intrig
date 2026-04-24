@@ -16,7 +16,7 @@ export default async function AccountPage() {
   const isAdmin = isAdminEmail(user.email)
 
   return (
-    <section className="mx-auto flex max-w-2xl flex-col gap-8 px-6 py-20 sm:px-10">
+    <section className="mx-auto flex max-w-2xl flex-col gap-8 px-6 py-16 sm:px-10 sm:py-20">
       <header className="flex flex-col gap-2">
         <p className="text-muted text-xs tracking-widest uppercase">Mon compte</p>
         <h1 className="font-serif text-4xl">

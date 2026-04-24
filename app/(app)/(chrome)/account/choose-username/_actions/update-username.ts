@@ -12,6 +12,27 @@ import { validateUsername } from '@/lib/utils/username'
 // off before returning to the client.
 export type UpdateUsernameResult = { status: 'error'; message: string } | { status: 'ok' }
 
+// Live UX check. Ignores the caller's own row so that editing a
+// username without changing it does not flag it as "taken". Invalid
+// usernames short-circuit to { available: true } so the form surfaces
+// the format error instead of an availability answer.
+export async function checkUsernameAvailable(
+  username: string,
+): Promise<{ available: boolean }> {
+  const user = await requireUser('/account/choose-username')
+  const validation = validateUsername(username)
+  if (!validation.ok) return { available: true }
+
+  const rows = await db
+    .select({ id: profiles.id })
+    .from(profiles)
+    .where(eq(profiles.username, validation.value))
+    .limit(1)
+
+  const clashWithOther = rows[0] && rows[0].id !== user.id
+  return { available: !clashWithOther }
+}
+
 export async function updateUsername(
   _prevState: UpdateUsernameResult | null,
   formData: FormData,
