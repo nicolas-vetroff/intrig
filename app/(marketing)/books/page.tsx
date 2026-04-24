@@ -26,14 +26,14 @@ export default async function BooksPage() {
   // in the arbitrary value are Tailwind's way to emit `calc(100dvh -
   // 4.5rem)` with the spaces CSS calc requires.
   return (
-    <section className="mx-auto flex max-w-5xl flex-col px-6 sm:px-10 md:h-[calc(100dvh_-_4.5rem)]">
-      <header className="flex flex-col gap-2 py-8 sm:py-10 md:shrink-0">
+    <section className="mx-auto flex max-w-5xl flex-col px-6 sm:px-10">
+      <header className="flex flex-col gap-2 py-8 sm:py-10 md:shrink-0 md:fixed w-full bg-[#f8f3e4] bg-background/80 backdrop-blur">
         <p className="text-muted text-xs tracking-widest uppercase">Catalogue</p>
         <h1 className="font-serif text-3xl sm:text-4xl">
           {catalog.length === 1 ? 'Un livre disponible' : `${catalog.length} livres disponibles`}
         </h1>
       </header>
-      <div className="pb-8 sm:pb-10 md:flex md:min-h-0 md:flex-1 md:flex-col">
+      <div className="md:flex md:min-h-0 md:flex-col mt-5">
         <CatalogBrowser books={catalog} />
       </div>
     </section>
