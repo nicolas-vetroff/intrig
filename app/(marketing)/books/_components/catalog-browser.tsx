@@ -38,10 +38,10 @@ function truncate(text: string, max: number): string {
 }
 
 function CatalogCover({ book }: { book: BookSummary }) {
-  // No fixed height: the parent flex row is `items-stretch`, so the
-  // cover fills the card. w-20 / sm:w-24 keeps a book-like width.
+  // Fixed size with a 2:3 book-cover ratio — every catalog card shows
+  // the exact same cover footprint regardless of the synopsis length.
   const className =
-    'border-border bg-subtle/60 flex w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border sm:w-24'
+    'border-border bg-subtle/60 flex w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border aspect-[2/3] sm:w-24'
   if (!book.coverImage) {
     return (
       <div className={className} aria-hidden>
@@ -187,7 +187,7 @@ export function CatalogBrowser({ books }: Props) {
           <ul className="divide-border flex flex-col divide-y">
             {filtered.map((book) => (
               <li key={book.slug} className="py-6 first:pt-0">
-                <Link href={`/books/${book.slug}`} className="group flex items-stretch gap-5">
+                <Link href={`/books/${book.slug}`} className="group flex items-start gap-5">
                   <div className="min-w-0 flex-1">
                     <h2 className="group-hover:text-muted font-serif text-2xl transition-colors sm:text-3xl">
                       {book.title}

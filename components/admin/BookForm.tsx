@@ -485,7 +485,7 @@ function CoverField({
         Couverture
       </label>
       <div className="flex items-start gap-4">
-        <div className="border-border bg-subtle/60 flex h-24 w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border">
+        <div className="border-border bg-subtle/60 flex aspect-[2/3] w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border">
           {value ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img

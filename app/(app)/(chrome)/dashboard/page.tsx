@@ -41,7 +41,7 @@ export default async function DashboardPage() {
           {books.map((book) => (
             <li key={book.id} className="flex items-center justify-between gap-4 py-4">
               <div className="flex min-w-0 flex-1 items-center gap-4">
-                <div className="border-border bg-subtle/60 flex h-16 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md border">
+                <div className="border-border bg-subtle/60 flex aspect-[2/3] w-12 shrink-0 items-center justify-center overflow-hidden rounded-md border">
                   {book.coverImage ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
