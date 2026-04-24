@@ -111,12 +111,14 @@ enabled = true
 # The maximum file size allowed (e.g. "5MB", "500KB").
 file_size_limit = "50MiB"
 
-# Uncomment to configure local storage buckets
-# [storage.buckets.images]
-# public = false
-# file_size_limit = "50MiB"
-# allowed_mime_types = ["image/png", "image/jpeg"]
-# objects_path = "./images"
+# Book cover images. Public so the <img> src can be consumed without
+# signed URLs. 5 MiB cap and a narrow MIME whitelist keep abuse in check.
+# Declarative buckets only apply to the local dev stack — in prod,
+# re-create this bucket via the Supabase dashboard.
+[storage.buckets.book-covers]
+public = true
+file_size_limit = "5MiB"
+allowed_mime_types = ["image/png", "image/jpeg", "image/webp"]
 
 # Allow connections via S3 compatible clients
 [storage.s3_protocol]

@@ -27,6 +27,29 @@ function uniqueSorted(values: (string | null | undefined)[]): string[] {
   return Array.from(set).sort((a, b) => a.localeCompare(b, 'fr'))
 }
 
+function CatalogCover({ book }: { book: BookSummary }) {
+  const className =
+    'border-border bg-subtle/60 flex h-28 w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border sm:h-32 sm:w-24'
+  if (!book.coverImage) {
+    return (
+      <div className={className} aria-hidden>
+        <span className="text-muted text-[10px] tracking-widest uppercase">—</span>
+      </div>
+    )
+  }
+  return (
+    <div className={className}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={book.coverImage}
+        alt={`Couverture de ${book.title}`}
+        loading="lazy"
+        className="h-full w-full object-cover"
+      />
+    </div>
+  )
+}
+
 export function CatalogBrowser({ books }: Props) {
   const [query, setQuery] = useState('')
   const [genre, setGenre] = useState('')
@@ -152,16 +175,26 @@ export function CatalogBrowser({ books }: Props) {
           <ul className="divide-border flex flex-col divide-y">
             {filtered.map((book) => (
               <li key={book.slug} className="py-6 first:pt-0">
-                <Link href={`/books/${book.slug}`} className="group block">
-                  <h2 className="group-hover:text-muted font-serif text-2xl transition-colors sm:text-3xl">
-                    {book.title}
-                  </h2>
-                  <p className="text-muted mt-1 text-xs tracking-widest uppercase">
-                    {book.author}
-                    {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
-                    {book.tier === 'premium' ? ' · premium' : ''}
-                  </p>
-                  {book.synopsis ? <p className="mt-3 leading-relaxed">{book.synopsis}</p> : null}
+                <Link href={`/books/${book.slug}`} className="group flex gap-5">
+                  <div className="min-w-0 flex-1">
+                    <h2 className="group-hover:text-muted font-serif text-2xl transition-colors sm:text-3xl">
+                      {book.title}
+                    </h2>
+                    {book.genre ? (
+                      <p className="text-muted mt-1 text-xs tracking-widest uppercase">
+                        {book.genre}
+                      </p>
+                    ) : null}
+                    <p className="text-muted mt-1 text-xs tracking-widest uppercase">
+                      {book.author}
+                      {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
+                      {book.tier === 'premium' ? ' · premium' : ''}
+                    </p>
+                    {book.synopsis ? (
+                      <p className="mt-3 leading-relaxed">{book.synopsis}</p>
+                    ) : null}
+                  </div>
+                  <CatalogCover book={book} />
                 </Link>
               </li>
             ))}

@@ -34,13 +34,27 @@ export default async function BookDetailPage({ params }: { params: Promise<{ slu
 
   return (
     <article className="mx-auto flex max-w-2xl flex-col gap-10 px-6 py-16 sm:px-10 sm:py-20">
-      <header className="flex flex-col gap-3">
-        <p className="text-muted text-xs tracking-widest uppercase">
-          {book.author}
-          {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
-          {book.tier === 'premium' ? ' · premium' : ''}
-        </p>
-        <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{book.title}</h1>
+      <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+        <div className="border-border bg-subtle/60 flex h-64 w-44 shrink-0 items-center justify-center overflow-hidden rounded-md border sm:h-72 sm:w-48">
+          {book.coverImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={book.coverImage}
+              alt={`Couverture de ${book.title}`}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span className="text-muted text-xs tracking-widest uppercase">Sans couverture</span>
+          )}
+        </div>
+        <div className="flex flex-col gap-3">
+          <p className="text-muted text-xs tracking-widest uppercase">
+            {book.author}
+            {book.estimatedMinutes ? ` · ${book.estimatedMinutes} min` : ''}
+            {book.tier === 'premium' ? ' · premium' : ''}
+          </p>
+          <h1 className="font-serif text-4xl leading-tight sm:text-5xl">{book.title}</h1>
+        </div>
       </header>
 
       {book.synopsis ? (

@@ -125,16 +125,18 @@ Pour arrêter : `npx supabase stop` (données gardées). `npx supabase stop --no
 ## Admin — créer / modifier des livres
 
 - Mets ton email dans `ADMIN_EMAILS` (`.env.local`), format CSV, puis redémarre `npm run dev`.
-- `/dashboard` (« Mes créations ») liste tous les livres (publiés + brouillons) avec lien vers `/books/[slug]/edit`.
+- `/dashboard` (« Mes créations ») liste tous les livres (publiés + brouillons) avec une miniature de couverture, l'auteur, et un lien vers `/books/[slug]/edit`.
 - `/books/create` : formulaire métadonnées + textarea JSON pour le `content`.
   - Le champ **Slug** interroge automatiquement la base (server action `checkSlugAvailable`) pour signaler les collisions immédiatement.
   - Le champ **Genre** est un select fermé (Mystère, Thriller, Romance, Science-fiction, Fantasy, Horreur, Aventure, Historique).
+  - Le champ **Couverture** accepte une URL ou un fichier PNG/JPEG/WebP (max 5 Mo). Le fichier est uploadé sur le bucket public Supabase `book-covers` via la server action `uploadBookCover`, et l'URL publique retournée remplit automatiquement le champ.
   - Le bouton **Importer un fichier .json** pré-remplit automatiquement les champs à partir d'un export (`Book` complet → tout est rempli, `BookContent` seul → seul le content est rempli).
 - Validation côté serveur : `lib/reader/validation.ts` (intégrité du graphe) + `lib/db/books-form.ts` (métadonnées). Les erreurs sont affichées en bloc sous le formulaire.
 - Un livre sans `publishedAt` reste brouillon, invisible du catalogue public mais accessible depuis `/dashboard`.
 - Les routes admin (`/dashboard`, `/books/create`, `/books/[slug]/edit`) seront plus tard ouvertes à tous les utilisateurs connectés — c'est pour ça qu'elles ne sont pas sous `/admin/*`. Il suffira de remplacer `requireAdmin` par `requireProfile` dans ces pages.
 - En dev, tous les mails partent dans **Inbucket** (<http://127.0.0.1:54324>) — pas de vraie boîte à configurer.
 - En prod, configurer un SMTP dans Supabase (dashboard → Auth → SMTP Settings).
+- En prod, **créer le bucket de stockage** `book-covers` dans le dashboard Supabase (Storage → New bucket) : `public` coché, file size limit 5 MB, MIME types autorisés `image/png, image/jpeg, image/webp`. En local le bucket est déclaré dans `supabase/config.toml` et créé au démarrage du stack.
 
 ## Catalogue public
 

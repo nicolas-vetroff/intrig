@@ -3,6 +3,7 @@
 import { useActionState, useEffect, useRef, useState, type ChangeEvent } from 'react'
 import {
   checkSlugAvailable,
+  uploadBookCover,
   type BookFormResult,
   type createBook,
   type updateBook,
@@ -87,6 +88,9 @@ export function BookForm({ action, initial, authorDisplay, submitLabel }: Props)
     initial ? JSON.stringify(initial.content, null, 2) : '',
   )
   const [importWarn, setImportWarn] = useState<string | null>(null)
+  const [coverUpload, setCoverUpload] = useState<{ status: 'idle' | 'uploading' } | { status: 'error'; message: string }>(
+    { status: 'idle' },
+  )
   // Latest server verdict, tagged with the slug it applies to so we
   // can ignore a stale response when the input has changed since.
   const [remoteResult, setRemoteResult] = useState<{
@@ -94,6 +98,7 @@ export function BookForm({ action, initial, authorDisplay, submitLabel }: Props)
     available: boolean
   } | null>(null)
   const fileRef = useRef<HTMLInputElement | null>(null)
+  const coverRef = useRef<HTMLInputElement | null>(null)
 
   function patchMetadata(patch: Partial<DraftMetadata>) {
     setMetadata((m) => ({ ...m, ...patch }))
@@ -138,6 +143,28 @@ export function BookForm({ action, initial, authorDisplay, submitLabel }: Props)
       clearTimeout(handle)
     }
   }, [normalizedSlug, initial, syncSlugStatus])
+
+  async function onCoverSelected(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setCoverUpload({ status: 'uploading' })
+    try {
+      const fd = new FormData()
+      fd.append('cover', file)
+      const result = await uploadBookCover(fd)
+      if (result.status === 'ok') {
+        patchMetadata({ coverImage: result.url })
+        setCoverUpload({ status: 'idle' })
+      } else {
+        setCoverUpload({ status: 'error', message: result.message })
+      }
+    } catch (err) {
+      console.error('[BookForm] cover upload failed', err)
+      setCoverUpload({ status: 'error', message: 'Upload impossible. Réessayer.' })
+    } finally {
+      if (coverRef.current) coverRef.current.value = ''
+    }
+  }
 
   async function onFileSelected(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -241,12 +268,12 @@ export function BookForm({ action, initial, authorDisplay, submitLabel }: Props)
             ))}
           </select>
         </div>
-        <Field
-          label="Cover (URL)"
-          name="coverImage"
+        <CoverField
           value={metadata.coverImage}
           onChange={(v) => patchMetadata({ coverImage: v })}
-          placeholder="https://…"
+          onFileSelected={onCoverSelected}
+          fileInputRef={coverRef}
+          uploadState={coverUpload}
         />
         <Field
           label="Durée estimée (min)"
@@ -333,7 +360,7 @@ export function BookForm({ action, initial, authorDisplay, submitLabel }: Props)
       <div>
         <button
           type="submit"
-          disabled={isPending}
+          disabled={isPending || coverUpload.status === 'uploading'}
           className="bg-foreground text-background rounded-md px-6 py-3 text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-60"
         >
           {isPending ? 'Enregistrement…' : submitLabel}
@@ -432,6 +459,84 @@ function SlugStatusMessage({ status }: { status: SlugStatus }) {
     <p id="slug-status" role="alert" className="text-xs text-red-700">
       {status.message}
     </p>
+  )
+}
+
+type CoverUploadState =
+  | { status: 'idle' | 'uploading' }
+  | { status: 'error'; message: string }
+
+function CoverField({
+  value,
+  onChange,
+  onFileSelected,
+  fileInputRef,
+  uploadState,
+}: {
+  value: string
+  onChange: (v: string) => void
+  onFileSelected: (e: ChangeEvent<HTMLInputElement>) => void
+  fileInputRef: React.RefObject<HTMLInputElement | null>
+  uploadState: CoverUploadState
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor="field-coverImage" className="text-muted text-xs tracking-widest uppercase">
+        Couverture
+      </label>
+      <div className="flex items-start gap-4">
+        <div className="border-border bg-subtle/60 flex h-24 w-20 shrink-0 items-center justify-center overflow-hidden rounded-md border">
+          {value ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={value}
+              alt="Aperçu de la couverture"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span className="text-muted text-xs">Aucune</span>
+          )}
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <input
+            id="field-coverImage"
+            name="coverImage"
+            type="text"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="https://… ou uploade un fichier"
+            className="border-border rounded-md border bg-white px-4 py-3 text-base"
+          />
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              onChange={onFileSelected}
+              disabled={uploadState.status === 'uploading'}
+              className="text-sm"
+            />
+            {value ? (
+              <button
+                type="button"
+                onClick={() => onChange('')}
+                className="text-muted hover:text-foreground text-xs underline underline-offset-4 hover:no-underline"
+              >
+                Retirer
+              </button>
+            ) : null}
+          </div>
+          {uploadState.status === 'uploading' ? (
+            <p className="text-muted text-xs">Upload en cours…</p>
+          ) : null}
+          {uploadState.status === 'error' ? (
+            <p role="alert" className="text-xs text-red-700">
+              {uploadState.message}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </div>
   )
 }
 

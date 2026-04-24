@@ -26,6 +26,12 @@ export function BookReader({ book, initialState }: Props) {
 
   function persist(next: ReaderState) {
     setState(next)
+    // After every node transition (scene continue, choice, restart),
+    // scroll to the top of the page so the reader always starts at the
+    // beginning of the next passage.
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
     startTransition(async () => {
       await saveProgress(book.id, next)
     })
@@ -202,7 +208,9 @@ function EndingView({
         <p className="text-muted text-xs tracking-widest uppercase">Fin</p>
         <h2 className="font-serif text-3xl">{ending?.title ?? 'Fin'}</h2>
       </div>
-      <p className="font-serif text-lg leading-relaxed sm:text-xl">{ending?.text ?? '…'}</p>
+      <p className="font-serif text-xl leading-[1.7] sm:text-2xl sm:leading-[1.65]">
+        {ending?.text ?? '…'}
+      </p>
       <p className="text-muted text-sm">
         {reachedEndings} / {totalEndings} fins découvertes.
       </p>

@@ -40,15 +40,30 @@ export default async function DashboardPage() {
         <ul className="divide-border flex flex-col divide-y">
           {books.map((book) => (
             <li key={book.id} className="flex items-center justify-between gap-4 py-4">
-              <div className="flex flex-col gap-1">
-                <Link href={`/books/${book.slug}`} className="font-serif text-lg hover:underline">
-                  {book.title}
-                </Link>
-                <p className="text-muted text-xs tracking-widest uppercase">
-                  {book.author}
-                  {book.tier === 'premium' ? ' · premium' : ' · gratuit'}
-                  {book.publishedAt ? ' · publié' : ' · brouillon'}
-                </p>
+              <div className="flex min-w-0 flex-1 items-center gap-4">
+                <div className="border-border bg-subtle/60 flex h-16 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md border">
+                  {book.coverImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={book.coverImage}
+                      alt=""
+                      aria-hidden
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-muted text-[10px] tracking-widest uppercase">—</span>
+                  )}
+                </div>
+                <div className="flex min-w-0 flex-col gap-1">
+                  <Link href={`/books/${book.slug}`} className="font-serif text-lg hover:underline">
+                    {book.title}
+                  </Link>
+                  <p className="text-muted text-xs tracking-widest uppercase">
+                    {book.author}
+                    {book.tier === 'premium' ? ' · premium' : ' · gratuit'}
+                    {book.publishedAt ? ' · publié' : ' · brouillon'}
+                  </p>
+                </div>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Link

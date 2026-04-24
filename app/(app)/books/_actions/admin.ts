@@ -7,6 +7,11 @@ import { books } from '@/lib/db/schema'
 import { parseBookForm } from '@/lib/db/books-form'
 import { requireAdmin } from '@/lib/supabase/admin'
 import { getCurrentProfile } from '@/lib/supabase/profile'
+import { createServiceClient } from '@/lib/supabase/service'
+
+const COVER_BUCKET = 'book-covers'
+const COVER_MAX_BYTES = 5 * 1024 * 1024
+const COVER_ALLOWED_TYPES = new Set(['image/png', 'image/jpeg', 'image/webp'])
 
 export type BookFormResult =
   | { status: 'error'; errors: string[] }
@@ -40,6 +45,42 @@ export async function checkSlugAvailable(
 
   const rows = await db.select({ id: books.id }).from(books).where(whereClause).limit(1)
   return { available: rows.length === 0 }
+}
+
+export type UploadCoverResult = { status: 'ok'; url: string } | { status: 'error'; message: string }
+
+// Uploads a cover image to the `book-covers` Supabase bucket and returns
+// its public URL. Admin-only. The bucket is expected to be public so
+// <img src> can resolve without signed URLs.
+export async function uploadBookCover(formData: FormData): Promise<UploadCoverResult> {
+  await requireAdmin('/books/create')
+
+  const file = formData.get('cover')
+  if (!(file instanceof File) || file.size === 0) {
+    return { status: 'error', message: 'Aucun fichier sélectionné.' }
+  }
+  if (file.size > COVER_MAX_BYTES) {
+    return { status: 'error', message: 'Fichier trop lourd (max 5 Mo).' }
+  }
+  if (!COVER_ALLOWED_TYPES.has(file.type)) {
+    return { status: 'error', message: 'Format non supporté (PNG, JPEG ou WebP).' }
+  }
+
+  const extension = file.name.includes('.') ? file.name.split('.').pop() : 'bin'
+  const path = `${crypto.randomUUID()}.${extension}`
+
+  const supabase = createServiceClient()
+  const { error } = await supabase.storage
+    .from(COVER_BUCKET)
+    .upload(path, file, { contentType: file.type, upsert: false })
+
+  if (error) {
+    console.error('[admin] cover upload failed', error)
+    return { status: 'error', message: 'Upload impossible. Réessayer.' }
+  }
+
+  const { data } = supabase.storage.from(COVER_BUCKET).getPublicUrl(path)
+  return { status: 'ok', url: data.publicUrl }
 }
 
 export async function createBook(
