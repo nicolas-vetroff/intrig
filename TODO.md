@@ -38,11 +38,12 @@
 *PWA / offline, cookie banner, admin ouvert aux auteurs tiers.*
 > Tous hors scope MVP, gardent leur place dans la roadmap.
 
+Session 9 :
+- Revoir le système de tags
+
 ---
 AVANT D'ALLER PLUS LOIN : régler bugs, améliorer style existant, Faire tester (étude de marché)
 ---
-
-- Revoir le système de tag
 
 - Le "Publier" sera un bouton et non une checkbox. Une fois publié, il est impossible de modifier le livre ou de le supprimer
 - Tous les champs sont obligatoires pour pouvoir publier le livre
