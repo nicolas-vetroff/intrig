@@ -149,6 +149,10 @@ Sur **desktop**, `/books` épingle la barre de titre et l'aside de filtres en `p
 
 La landing affiche les **5 dernières sorties** (plus récent en haut).
 
+## Feedback
+
+Un lien « Feedback » apparaît dans le footer et en bas de la landing quand la variable d'env `NEXT_PUBLIC_FEEDBACK_EMAIL` est définie. Il ouvre le client mail de l'utilisateur en pré-remplissant le destinataire et le sujet `[FEEDBACK]`. Rien n'est envoyé server-side : c'est juste un `mailto:`. Pour désactiver, laisser la variable vide.
+
 ## Déploiement sur Vercel
 
 1. **Pousser le repo** sur GitHub / GitLab.

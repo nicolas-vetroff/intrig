@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { listPublishedSummaries } from '@/lib/db/books'
 import { getCurrentUser } from '@/lib/supabase/auth'
+import { getFeedbackMailto } from '@/lib/utils/feedback'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,6 +12,7 @@ export default async function LandingPage() {
   // so slicing the top N keeps the most recent first.
   const featured = catalog.slice(0, 5)
   const catalogHref = user ? '/books' : '/login?next=/books'
+  const feedbackHref = getFeedbackMailto()
 
   return (
     <div className="flex flex-col">
@@ -44,7 +46,7 @@ export default async function LandingPage() {
       </section>
 
       {featured.length > 0 ? (
-        <section className="mx-auto w-full max-w-3xl px-6 pb-24 sm:px-10">
+        <section className="mx-auto w-full max-w-3xl px-6 pb-16 sm:px-10">
           <p className="text-muted mb-6 text-xs tracking-widest uppercase">Dernières sorties</p>
           <ul className="divide-border flex flex-col divide-y">
             {featured.map((book) => (
@@ -63,6 +65,18 @@ export default async function LandingPage() {
               </li>
             ))}
           </ul>
+        </section>
+      ) : null}
+
+      {feedbackHref ? (
+        <section className="mx-auto w-full max-w-3xl px-6 pb-24 sm:px-10">
+          <p className="text-muted text-sm">
+            Une idée, un bug, un retour à chaud ?{' '}
+            <a href={feedbackHref} className="text-foreground underline underline-offset-4 hover:no-underline">
+              Écrivez-nous
+            </a>
+            .
+          </p>
         </section>
       ) : null}
     </div>

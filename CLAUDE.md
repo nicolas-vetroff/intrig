@@ -62,6 +62,7 @@ Modèle économique : freemium. Gratuit avec pub + 1-2 livres complets gratuits.
 ## Admin et gestion du catalogue
 
 - **Gating admin** : env var `ADMIN_EMAILS` (liste d'emails séparés par virgule). Helpers `isAdminEmail(email)` et `requireAdmin(next)` dans `lib/supabase/admin.ts`. Pas de colonne DB : quand la création sera ouverte aux lecteurs, on retirera juste `requireAdmin` des pages concernées — sans migration.
+- **Canal de feedback** : env var `NEXT_PUBLIC_FEEDBACK_EMAIL` (publique car lue côté client). Un helper `getFeedbackMailto()` dans `lib/utils/feedback.ts` construit un `mailto:` avec sujet `[FEEDBACK]` — utilisé dans `SiteFooter` et sur la landing. Si la var est vide, les liens sont masqués.
 - **Arborescence `/books/*`** :
   - `/books` (publique, `(marketing)`) : catalogue des livres publiés, avec filtres (titre, genre, auteur, tag, durée)
   - `/books/[slug]` (publique, `(marketing)`) : page détail / pitch avec CTA "Lire"
