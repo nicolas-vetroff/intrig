@@ -18,7 +18,7 @@ export async function SiteHeader() {
           href="/"
           className="font-serif text-xl tracking-tight transition-opacity hover:opacity-80 sm:text-2xl"
         >
-          Intrigue
+          Intrig
         </Link>
 
         <nav className="flex items-center gap-4 text-sm sm:gap-6">

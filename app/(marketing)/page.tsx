@@ -20,7 +20,7 @@ export default async function LandingPage() {
         </h1>
 
         <p className="text-muted max-w-xl text-lg leading-relaxed sm:text-xl">
-          <em className="font-serif italic">Intrigue</em> publie des romans interactifs à
+          <em className="font-serif italic">Intrig</em> publie des romans interactifs à
           lire en une soirée. À chaque tournant, vos choix orientent l’histoire vers l’une de ses
           fins — certaines ne se laissent pas trouver du premier coup.
         </p>
